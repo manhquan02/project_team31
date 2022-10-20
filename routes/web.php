@@ -17,10 +17,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/admin', function () {
-    return view('layouts.backend.master');
-});
+
 
 Route::get('/list-user', function () {
     return view('screens.backend.user.list-user');
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('', function () {
+        return view('layouts.backend.master');
+    });
+    Route::prefix('subject')->name('subject.')->group(function () {
+        Route::get('', [\App\Http\Controllers\Admin\SubjectController::class, 'index'])->name('index');
+        Route::get('create', [\App\Http\Controllers\Admin\SubjectController::class, 'create'])->name('create');
+        Route::post('create', [\App\Http\Controllers\Admin\SubjectController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'edit'])->name('edit');
+        Route::put('edit/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'update'])->name('update');
+        Route::get('sort', [\App\Http\Controllers\Admin\SubjectController::class, 'sort'])->name('sort');
+    });
 });

@@ -8,5 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     use HasFactory;
+
     protected $table = 'subjects';
+
+    public function get_all()
+    {
+        $subjects = Subject::all();
+        return $subjects;
+    }
+
+    public function sort($keyword, $row, $orderby)
+    {
+        if ($keyword != '') {
+            $subjects = Subject::select('subjects.*')
+                ->where('subject_name', 'like', '%' . $keyword . '%')
+                ->orWhere('description', 'like', '%' . $keyword . '%')
+                ->orWhere('id', $keyword)
+                ->orderBy($row, $orderby)->get();
+        } else {
+            $subjects = Subject::select('subjects.*')
+                ->orderBy($row, $orderby)->get();
+        }
+        return $subjects;
+    }
 }
