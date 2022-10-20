@@ -53,4 +53,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function body(){
+        return $this->hasOne(Bodybmi::class, 'user_id','id');
+    }
 }
