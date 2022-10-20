@@ -26,7 +26,9 @@ class UserFactory extends Factory
             'phone' => rand(1000000000,9999999999),
             'avatar' => fake()->imageUrl(),
             'email_verified_at' => '2022-09-08 15:00:14',
+            'address' => 'Hà nội',
             'status' => 1,
+
             // 'remember_token' => Str::random(10),
         ];
     }

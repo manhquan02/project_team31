@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('gender');
             $table->unsignedBigInteger('phone');
             $table->string('avatar')->nullable();
+            $table->string('address');
             $table->unsignedInteger('status');
             $table->rememberToken();
             $table->timestamps();
