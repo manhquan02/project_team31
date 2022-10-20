@@ -78,7 +78,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="" class="btn btn-primary font-weight-bolder">
+                <a href="{{route('admin.user.create')}}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -89,7 +89,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>New Record</a>
+                </span>Thêm hội viên</a>
                 <!--end::Button-->
             </div>
         </div>
@@ -155,7 +155,6 @@
                         <th>Email</th>
                         <th>Avatar</th>
                         <th>Role</th>
-                        <th>Create at</th>
                         <th>Status</th>
                         <th>Actions</th>
                         <th>Edit Role</th>
@@ -163,38 +162,34 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($users as $user)
+                        
                     
                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{$user->id}}</td>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->email}}</td>
                         <td>
-                            <img width="180px" src=""  alt="">
+                            <img src="{{$user->Avatar}}" width="200px" alt="">
                         </td>
                         <td>
-                            
+                            {{ $user->getRoleNames() }}
                         </td>
-                        <td></td>
                         <td>
-                            
+                            @if ($user->status == 1)
+                            <span
+                                class="label label-inline label-light-primary font-weight-bold">Hiện</span>
+                        @else
+                            <span class="label label-inline label-light-danger font-weight-bold">Khoá</span>
+                        @endif
                         </td>
                         <td nowrap="nowrap">
-                            
-                                
-                            
                             <a class="btn btn-light  btn-sm mr-2"
                                 id="change_status" >
                                 <i class="ki ki-reload text-warning"></i>
                             </a>
-    
-    
-                            
                         </td>
-    
-                        <td>
-                            
-    
-    
+                            <td>
                             <button
     
                                 
@@ -208,7 +203,7 @@
                         </td>
                     </tr>
                     
-    
+                    @endforeach
     
     
                 </tbody>
