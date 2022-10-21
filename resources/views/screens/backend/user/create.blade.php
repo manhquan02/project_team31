@@ -18,33 +18,48 @@
       <div class="form-group row">
        <label  class="col-2 col-form-label">Tên người dùng</label>
        <div class="col-10">
-        <input class="form-control" name="name" type="text" placeholder="Artisanal kale" id="example-text-input"/>
+        <input class="form-control @error('name') is-invalid @enderror" name="name"  type="text" value="{{ old('name') }}" placeholder="Artisanal kale" id="example-text-input"/>
+        @error('name')
+            <span class="text-danger">{{ $message }}</span>    
+        @enderror
        </div>
       </div>
 
       <div class="form-group row">
        <label for="example-email-input" class="col-2 col-form-label">Email</label>
        <div class="col-10">
-        <input class="form-control" name="email" type="email" placeholder="bootstrap@example.com" id="example-email-input"/>
+        <input class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{ old('email') }}" placeholder="bootstrap@example.com" id="example-email-input"/>
+        @error('email')
+            <span class="text-danger">{{ $message }}</span>    
+        @enderror
        </div>
       </div>
       
       <div class="form-group row">
        <label for="example-tel-input" class="col-2 col-form-label">Telephone</label>
        <div class="col-10">
-        <input class="form-control" name="phone" type="tel" placeholder="0383869999" id="example-tel-input"/>
+        <input class="form-control @error('phone') is-invalid @enderror" name="phone" type="tel" {{ old('phone') }} placeholder="0383869999" id="example-tel-input"/>
+        @error('phone')
+            <span class="text-danger">{{ $message }}</span>    
+        @enderror
        </div>
       </div>
       <div class="form-group row">
        <label for="example-password-input" class="col-2 col-form-label">Password</label>
        <div class="col-10">
-        <input class="form-control" name="password" type="password" placeholder="hunter2" id="example-password-input"/>
+        <input class="form-control @error('password') is-invalid @enderror" name="password" type="password"  placeholder="hunter2" id="example-password-input"/>
+        @error('password')
+            <span class="text-danger">{{ $message }}</span>    
+        @enderror
        </div>
       </div>
       <div class="form-group row">
         <label for="example-password-input" class="col-2 col-form-label">Confirm Password</label>
         <div class="col-10">
-         <input class="form-control" name="confirm_password" type="password" placeholder="hunter2" id="example-password-input"/>
+         <input class="form-control @error('confirm_password') is-invalid @enderror" name="confirm_password" type="password" placeholder="hunter2" id="example-password-input"/>
+         @error('confirm_password')
+            <span class="text-danger">{{ $message }}</span>    
+        @enderror
         </div>
        </div>
        <div class="form-group row">
@@ -69,7 +84,10 @@
     <div class="form-group row">
         <label  class="col-2 col-form-label">Địa chỉ</label>
         <div class="col-10">
-         <input class="form-control" name="address" type="text" placeholder="" id="example-text-input"/>
+         <input class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" type="text" placeholder="" id="example-text-input"/>
+         @error('address')
+            <span class="text-danger">{{ $message }}</span>    
+         @enderror
         </div>
     </div>
  

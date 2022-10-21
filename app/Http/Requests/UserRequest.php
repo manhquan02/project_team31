@@ -30,6 +30,7 @@ class UserRequest extends FormRequest
             'password_confirm' => 'required|same:password',
             // 'avatar' => [ 'mimes:jpeg,jpg,png,gif','required','image','max:5120'],
             'gender' => ['required','integer'],
+            'phone' => ['required','integer'],
             
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -41,14 +42,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $user = new User();
         if($request->hasFile('avatar')){
             // dd($request->avatar);
             $file = $request->avatar;
             $file_name = UploadImgService::uploadImg($request->avatar,'images/user');
-            
+
         }
         else{
             $file_name = 'one.jpg';
