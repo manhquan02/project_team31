@@ -2064,6 +2064,7 @@
 <script src="/backend/js/pages/widgets.js"></script>
 <!--sweet alert 2-->
 <script src="/backend/js/pages/features/miscellaneous/sweetalert2.js"></script>
+<script src="/backend/js/pages/crud/forms/editors/confirm-delete"></script>
 {{-- <script src="/backend/js/pages/crud/forms/widgets/select2.js"></script> --}}
 <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"

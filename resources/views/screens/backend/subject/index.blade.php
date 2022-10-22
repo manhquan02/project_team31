@@ -2,7 +2,11 @@
 @section('title', 'Quản lý môn tập')
 @section('content')
     <div>
-
+        @if(session()->has('success'))
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <span class="text-success">{{ session()->get('success') }}</span>
+            </div>
+        @endif
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
@@ -90,12 +94,12 @@
                                 <td>{{$item->id}}</td>
                                 <td>{{$item->subject_name}}</td>
                                 <td>
-                                    <img width="100px" src="{{asset($item->image)}}" alt="">
+                                    <img width="100px" height="100px" src="{{asset($item->image)}}" alt="">
                                 </td>
                                 <td>{{$item->description}}</td>
                                 <td>
-                                    <a href=""><i class="flaticon2-pen text-warning"></i></a>
-                                    <a href="" style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
+                                    <a  href="{{route('admin.subject.edit', $item->id)}}"><i class="flaticon2-pen text-warning"></i></a>
+                                    <a id="btn-del" href="{{route('admin.subject.delete', $item->id)}}" style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -110,6 +114,19 @@
 @section('script')
     <script>
         $(function (){
+            function confirm_del(){
+                var del = document.querySelectorAll('#btn-del');
+                del.forEach(function(item){
+                    item.onclick = function () {
+                        var cfm = confirm("Bạn có chắc chắn muốn xóa ?");
+                        if (cfm == true) {
+                            return true;
+                        }
+                        else return false;
+                    }
+                });
+            };
+            confirm_del();
             $(document).on('click', '#sort', function(){
                 const orderby = $('#orderby').val();
                 const row = $('#row').val();
@@ -132,22 +149,24 @@
 
            function HandleData(data){
                 let url = window.location.origin;
+
                 let html = data.map(function(value, key) {
                     return `
                  <tr>
                                 <td>${value.id}</td>
                                 <td>${value.subject_name}</td>
                                 <td>
-                                    <img width="100px" src="${value.image}" alt="">
+                                    <img width="100px" height="100px" src="${url + '/' + value.image}" alt="">
                                 </td>
                                 <td>${value.description}</td>
                                 <td>
-                                    <a href=""><i class="flaticon2-pen text-warning"></i></a>
-                                    <a href="" style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
+                                    <a href="${url + '/admin/subject/edit/' + value.id}"><i class="flaticon2-pen text-warning"></i></a>
+                                    <a id="btn-del" href="${url + '/admin/subject/delete/' + value.id}" style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
                                 </td>
                             </tr>`
                 })
                 $('#tbody').html(html)
+               confirm_del();
             }
         })
     </script>
