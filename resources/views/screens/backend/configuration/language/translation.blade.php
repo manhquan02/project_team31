@@ -1,5 +1,5 @@
 @extends('layouts.backend.master')
-@section('title', 'Quản lý môn tập')
+@section('title', 'Cấu hình ngôn ngữ')
 @section('content')
     @php
         $translate = new \App\Models\Translation();
@@ -13,12 +13,12 @@
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ $translate->translate('Course Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ $translate->translate('List') }}</span></h3>
+                    <h3 class="card-label">{{ $translate->translate('Configuration') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ $translate->translate('Language') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    <a href="{{route('admin.subject.create')}}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{route('admin.language.create')}}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -32,51 +32,9 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{$translate->translate('Add subject')}}</a>
+                </span>{{$translate->translate('Add language')}}</a>
                     <!--end::Button-->
                 </div>
-            </div>
-            <div class="card-body">
-                <!--begin::Search Form-->
-                <div class="mb-7">
-                    <div class="row align-items-center">
-                        <div class="col-lg-9 col-xl-8">
-                            <div class="row align-items-center">
-                                <div class="col-md-4 my-2 my-md-0">
-                                    <div class="input-icon">
-                                        <input id="keyword" type="text" class="form-control"
-                                               placeholder="{{$translate->translate('Search ...')}}"/>
-                                        <span>
-                                        <i class="flaticon2-search-1 text-muted"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 my-2 my-md-0">
-                                    <div class="d-flex align-items-center">
-                                        <label class="mr-3 mb-0 d-none d-md-block">{{$translate->translate('OrderBy')}}</label>
-                                        <select class="form-control" id="orderby">
-                                            <option value="asc">Asc</option>
-                                            <option value="desc">Desc</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 my-2 my-md-0">
-                                    <div class="d-flex align-items-center">
-                                        <label class="mr-3 mb-0 d-none d-md-block">{{$translate->translate('Row')}}</label>
-                                        <select class="form-control" id="row">
-                                            <option value="id">ID</option>
-                                            <option value="subject_name">{{$translate->translate('Tên môn tập')}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                            <a id="sort" class="btn btn-light-primary px-6 font-weight-bold">{{$translate->translate('Search')}}</a>
-                        </div>
-                    </div>
-                </div>
-                <!--end::Search Form-->
             </div>
             <div class="card-body">
                 <!--begin: Datatable-->
@@ -84,31 +42,23 @@
                     <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>{{$translate->translate('Subject name')}}</th>
-                        <th>{{$translate->translate('Image')}}</th>
-                        <th>{{$translate->translate('Description')}}</th>
-                        <th>{{$translate->translate('Actions')}}</th>
+                        <th>{{$translate->translate('KeyWord')}}</th>
+                        <th>{{$translate->translate('Value')}}</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
-                    @if($subjects != null)
-                        @foreach($subjects as $key=>$item)
+                    @if($translations != null)
+                        @foreach($translations as $item)
                             <tr>
                                 <td>{{$item->id}}</td>
-                                <td>{{$item->subject_name}}</td>
-                                <td>
-                                    <img width="100px" height="100px" src="{{asset($item->image)}}" alt="">
-                                </td>
-                                <td>{!! $item->description !!}</td>
-                                <td>
-                                    <a  href="{{route('admin.subject.edit', $item->id)}}"><i class="flaticon2-pen text-warning"></i></a>
-                                    <a id="btn-del" href="{{route('admin.subject.delete', $item->id)}}" style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
-                                </td>
+                                <td>{{$item->lang_in}}</td>
+                                <td><input type="text" class="form-control" value="{{$item->lang_value}}"></td>
                             </tr>
                         @endforeach
                     @endif
                     </tbody>
                 </table>
+                <button type="submit" class="btn btn-success mr-2">{{ $translate->translate('Save') }}</button>
                 <!--end: Datatable-->
             </div>
         </div>
@@ -150,7 +100,7 @@
                 })
             });
 
-           function HandleData(data){
+            function HandleData(data){
                 let url = window.location.origin;
 
                 let html = data.map(function(value, key) {
@@ -169,7 +119,7 @@
                             </tr>`
                 })
                 $('#tbody').html(html)
-               confirm_del();
+                confirm_del();
             }
         })
     </script>

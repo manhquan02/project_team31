@@ -6,49 +6,55 @@
         <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
         </div>
         <!--end::Header Menu Wrapper-->
-
-        <!--begin::Topbar-->
+        @php
+            $language = \App\Models\Language::where('status', 1)->first();
+            $language_other = \App\Models\Language::where('status', 0)->get();
+        @endphp
+            <!--begin::Topbar-->
         <div class="topbar">
             <!--begin::User-->
             <div class="dropdown">
                 <!--begin::Toggle-->
                 <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
                     <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
-                        <img class="h-20px w-20px rounded-sm" src="{{asset('backend/media/svg/flags/226-united-states.svg')}}" alt="" />
+                        @if($language != null)
+                            <img class="h-20px w-20px rounded-sm"
+                                 src="{{asset($language->flag)}}" alt=""/>
+                        @else
+                            <img class="h-20px w-20px rounded-sm"
+                                 src="{{asset('backend/media/svg/flags/226-united-states.svg')}}" alt=""/>
+                        @endif
                     </div>
                 </div>
                 <!--end::Toggle-->
                 <!--begin::Dropdown-->
+                @if(count($language_other) > 0)
                 <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
                     <!--begin::Nav-->
                     <ul class="navi navi-hover py-4">
                         <!--begin::Item-->
+                        @foreach($language_other as $lang)
                         <li class="navi-item">
-                            <a href="#" class="navi-link">
+                            <a href="{{route('admin.index', ['language'=> $lang->code])}}" class="navi-link">
 													<span class="symbol symbol-20 mr-3">
-														<img src="{{asset('backend/media/svg/flags/226-united-states.svg')}}" alt="" />
+														<img
+                                                            src="{{$lang->flag}}"
+                                                            alt=""/>
 													</span>
-                                <span class="navi-text">English</span>
+                                <span class="navi-text">{{$lang->name}}</span>
                             </a>
                         </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-													<span class="symbol symbol-20 mr-3">
-														<img src="{{asset('backend/media/svg/flags/220-vietnam.svg')}}" alt="" />
-													</span>
-                                <span class="navi-text">Việt Nam</span>
-                            </a>
-                        </li>
+                        @endforeach
                         <!--end::Item-->
                     </ul>
                     <!--end::Nav-->
                 </div>
+                @endif
                 <!--end::Dropdown-->
             </div>
             <div class="topbar-item">
-                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
+                     id="kt_quick_user_toggle">
                     <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                     <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Admin</span>
                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">

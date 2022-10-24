@@ -2,7 +2,7 @@
 @section('title', 'Quản lý môn tập')
 @section('content')
     @php
-    $translate = new \App\Models\Translation();
+        $translate = new \App\Models\Translation();
     @endphp
     <div>
         @if(session()->has('success'))
@@ -15,7 +15,7 @@
 
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ $translate->translate('tcc') }}
+                    <h3 class="card-label">{{ $translate->translate('hhh') }}
                         <span class="d-block text-muted pt-2 font-size-sm">Thêm mới</span></h3>
                 </div>
                 <div class="card-toolbar">

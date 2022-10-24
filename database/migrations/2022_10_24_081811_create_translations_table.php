@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('translations', function (Blueprint $table) {
             $table->id();
             $table->string('lang');
+            $table->string('lang_in');
             $table->string('lang_key');
             $table->string('lang_value')->nullable();
             $table->timestamp('created_at')->useCurrent();

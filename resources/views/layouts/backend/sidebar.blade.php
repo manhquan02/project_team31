@@ -1,4 +1,7 @@
 <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
+    @php
+        $translate = new \App\Models\Translation();
+    @endphp
     <!--begin::Menu Container-->
     <div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
         <!--begin::Menu Nav-->
@@ -1952,33 +1955,34 @@
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <span class="svg-icon menu-icon">
-                        <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Box2.svg-->
+                        <!--begin::Svg Icon | path:assets/media/svg/icons/Home/Book-open.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <rect x="0" y="0" width="24" height="24" />
-                                <path d="M4,9.67471899 L10.880262,13.6470401 C10.9543486,13.689814 11.0320333,13.7207107 11.1111111,13.740321 L11.1111111,21.4444444 L4.49070127,17.526473 C4.18655139,17.3464765 4,17.0193034 4,16.6658832 L4,9.67471899 Z M20,9.56911707 L20,16.6658832 C20,17.0193034 19.8134486,17.3464765 19.5092987,17.526473 L12.8888889,21.4444444 L12.8888889,13.6728275 C12.9050191,13.6647696 12.9210067,13.6561758 12.9368301,13.6470401 L20,9.56911707 Z" fill="#000000" />
-                                <path d="M4.21611835,7.74669402 C4.30015839,7.64056877 4.40623188,7.55087574 4.5299008,7.48500698 L11.5299008,3.75665466 C11.8237589,3.60013944 12.1762411,3.60013944 12.4700992,3.75665466 L19.4700992,7.48500698 C19.5654307,7.53578262 19.6503066,7.60071528 19.7226939,7.67641889 L12.0479413,12.1074394 C11.9974761,12.1365754 11.9509488,12.1699127 11.9085461,12.2067543 C11.8661433,12.1699127 11.819616,12.1365754 11.7691509,12.1074394 L4.21611835,7.74669402 Z" fill="#000000" opacity="0.3" />
+                                <path d="M13.6855025,18.7082217 C15.9113859,17.8189707 18.682885,17.2495635 22,17 C22,16.9325178 22,13.1012863 22,5.50630526 L21.9999762,5.50630526 C21.9999762,5.23017604 21.7761292,5.00632908 21.5,5.00632908 C21.4957817,5.00632908 21.4915635,5.00638247 21.4873465,5.00648922 C18.658231,5.07811173 15.8291155,5.74261533 13,7 C13,7.04449645 13,10.79246 13,18.2438906 L12.9999854,18.2438906 C12.9999854,18.520041 13.2238496,18.7439052 13.5,18.7439052 C13.5635398,18.7439052 13.6264972,18.7317946 13.6855025,18.7082217 Z" fill="#000000" />
+                                <path d="M10.3144829,18.7082217 C8.08859955,17.8189707 5.31710038,17.2495635 1.99998542,17 C1.99998542,16.9325178 1.99998542,13.1012863 1.99998542,5.50630526 L2.00000925,5.50630526 C2.00000925,5.23017604 2.22385621,5.00632908 2.49998542,5.00632908 C2.50420375,5.00632908 2.5084219,5.00638247 2.51263888,5.00648922 C5.34175439,5.07811173 8.17086991,5.74261533 10.9999854,7 C10.9999854,7.04449645 10.9999854,10.79246 10.9999854,18.2438906 L11,18.2438906 C11,18.520041 10.7761358,18.7439052 10.4999854,18.7439052 C10.4364457,18.7439052 10.3734882,18.7317946 10.3144829,18.7082217 Z" fill="#000000" opacity="0.3" />
                             </g>
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">Bootstrap</span>
+                    <span class="menu-text">{{$translate->translate('Configuration')}}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="menu-submenu">
                     <i class="menu-arrow"></i>
+
                     <ul class="menu-subnav">
                         <li class="menu-item menu-item-parent" aria-haspopup="true">
                             <span class="menu-link">
-                                <span class="menu-text">Bootstrap</span>
+                                <span class="menu-text">{{$translate->translate('Configuration')}}</span>
                             </span>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
-                            <a href="features/bootstrap/typography.html" class="menu-link">
+                            <a href="{{route('admin.language.index')}}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">Typography</span>
+                                <span class="menu-text">{{$translate->translate('Languages')}}</span>
                             </a>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -1986,79 +1990,7 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">Buttons</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/bootstrap/button-group.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Button Group</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/bootstrap/dropdown.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Dropdown</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/bootstrap/navs.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Navs</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/bootstrap/tables.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Tables</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/bootstrap/progress.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Progress</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/bootstrap/modal.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Modal</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/bootstrap/alerts.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Alerts</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/bootstrap/popover.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Popover</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/bootstrap/tooltip.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Tooltip</span>
+                                <span class="menu-text">{{$translate->translate('General configuration')}}</span>
                             </a>
                         </li>
                     </ul>
@@ -2628,37 +2560,7 @@
                 </a>
                 <div class="menu-submenu">
                     <i class="menu-arrow"></i>
-                    <ul class="menu-subnav">
-                        <li class="menu-item menu-item-parent" aria-haspopup="true">
-                            <span class="menu-link">
-                                <span class="menu-text">Maps</span>
-                            </span>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/maps/google-maps.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Google Maps</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/maps/leaflet.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Leaflet</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/maps/jqvmap.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">JQVMap</span>
-                            </a>
-                        </li>
-                    </ul>
+
                 </div>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">

@@ -11,8 +11,7 @@ class SubjectController extends Controller
 {
     public function index()
     {
-        $new_subject = new Subject();
-        $subjects = $new_subject->get_all();
+        $subjects = Subject::all();
         return view('screens.backend.subject.index', compact('subjects'));
     }
 
@@ -34,15 +33,22 @@ class SubjectController extends Controller
     public function store(SubjectRequest $request)
     {
         $new_subject = new Subject();
-        $new_subject->store($new_subject, $request);
-        return redirect()->route('admin.subject.create')->with('success', 'Thêm mới môn tập thành công !');
+        $new_subject->subject_name = $request->subject_name;
+        if($request->image){
+            $image = $request->image;
+            $imageName = $image->hashName();
+            $new_subject->image = $image->storeAs('images/subject', $imageName);
+        }
+        $new_subject->description = $request->description;
+        $new_subject->save();
+        return redirect()->route('admin.subject.create')->with('success', 'Add new subject successfully !');
     }
 
     public function delete($id){
         $subject = Subject::where('id', $id)->first();
         if($subject != null){
             $subject->delete();
-            return redirect()->route('admin.subject.index')->with('success', 'Xóa môn tập thành công !');
+            return redirect()->route('admin.subject.index')->with('success', 'Delete subject successfully !');
         }
         return redirect()->route('admin.subject.index');
     }
@@ -56,9 +62,15 @@ class SubjectController extends Controller
     }
 
     public function update(Request $request, $id){
-        $new_subject = new Subject();
         $subject = Subject::where('id', $id)->first();
-        $new_subject->update_item($subject, $request);
-        return redirect()->route('admin.subject.edit', $id)->with('success', 'Cập nhật môn tập thành công !');
+        $subject->subject_name = $request->subject_name;
+        $subject->description = $request->description;
+        if ($request->image) {
+            $image = $request->image;
+            $imageName = $image->hashName();
+            $subject->image = $image->storeAs('images/subject', $imageName);
+        }
+        $subject->save();
+        return redirect()->route('admin.subject.edit', $id)->with('success', 'Update subject successfully !');
     }
 }

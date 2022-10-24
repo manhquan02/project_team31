@@ -11,7 +11,7 @@ class Translation extends Model
 
     protected $table = 'translations';
 
-    function translate($keyword, $default_lang = null)
+    function translate($keyword)
     {
         $result = $keyword;
 
@@ -21,11 +21,10 @@ class Translation extends Model
             $new_lang = new Language();
             $new_lang->name = 'English';
             $new_lang->code = 'en';
-            $new_lang->app_lang_code = 'en';
             $new_lang->status = 1;
             $new_lang->save();
         } else {
-            $translate_current = Translation::where('lang_key', $lang_key)->where('lang', $default_lang->code)->first();
+            $translate_current = Translation::where('lang_key', $lang_key)->where('lang', $default_lang->code)->where('lang_value', '!=' , null)->first();
         }
 
 
@@ -46,6 +45,7 @@ class Translation extends Model
             $ex_translate = Translation::where('lang', $lang->code)->where('lang_key', $lang_key)->exists();
             if ($ex_translate == false) {
                 $new_translation->lang = $lang->code;
+                $new_translation->lang_in = $keyword;
                 if ($lang->code == env('DEFAULT_LANGUAGE')) {
                     $new_translation->lang_value = $keyword;
                 }

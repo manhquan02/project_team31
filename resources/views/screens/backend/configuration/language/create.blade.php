@@ -15,12 +15,12 @@
 
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ $translate->translate('Course Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ $translate->translate('Update') }}</span></h3>
+                    <h3 class="card-label">{{ $translate->translate('Language') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ $translate->translate('Add new') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    <a href="{{route('admin.subject.index')}}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{route('admin.language.index')}}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -34,39 +34,43 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{$translate->translate('List of subjects')}}</a>
+                </span>{{ $translate->translate('List language') }} </a>
                     <!--end::Button-->
                 </div>
             </div>
-            <form action="{{route('admin.subject.update', $subject->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.language.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PATCH')
+                @method('POST')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ $translate->translate('Course name') }} <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">{{ $translate->translate('Language') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
-                            <input class="form-control" name="subject_name" type="text"
-                                   value="{{old('subject_name') ? old('subject_name') : $subject->subject_name}}"/>
-                            @error('subject_name')
+                            <input class="form-control" name="name" type="text"
+                                   value="{{old('name')}}"/>
+                            @error('name')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
+
                     <div class="form-group row">
-                        <label for="example-tel-input" class="col-2 col-form-label">{{ $translate->translate('Image') }}</label>
+                        <label for="example-tel-input" class="col-2 col-form-label">{{ $translate->translate('Flag') }} </label>
                         <div class="col-10">
-                            <input type="file" class="form-control" name="image"
-                                   value="{{old('image') ? old('image') : $subject->image}} "/>
-                            <img id="image" src="{{asset($subject->image)}}" width="60px" height="60px">
+                            <input type="file" class="form-control" name="flag" value="{{old('flag')}}"/>
+                            <img id="image" src="" width="60px" height="60px">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">{{ $translate->translate('Description') }} <span class="text-danger">*</span></label>
+                        <label for="example-password-input" class="col-2 col-form-label">{{ $translate->translate('Language code') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
-                            <textarea placeholder="{{ $translate->translate('Content ...') }}" id="editor1" class="form-control" name="description">{{old('description') ? old('description') : $subject->description}}</textarea>
-                            @error('description')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            <input class="form-control" name="code" type="text"
+                                   value="{{old('code')}}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-password-input" class="col-2 col-form-label">{{ $translate->translate('Default') }} </label>
+                        <div class="col-10">
+                            <input class="form-group" name="status" type="checkbox"/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -84,7 +88,7 @@
 @section('script')
     <script>
         $(function () {
-            $("input[name = 'image']").on('change', function (e) {
+            $("input[name = 'flag']").on('change', function (e) {
                 e.preventDefault();
                 var input = e.target;
                 var reader = new FileReader();
@@ -98,4 +102,5 @@
 
     </script>
 @endsection
+
 
