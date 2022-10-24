@@ -20,7 +20,8 @@ return new class extends Migration
             $table->unsignedInteger('height');
             $table->unsignedDouble('bmi', 8, 2);
             $table->string('health');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

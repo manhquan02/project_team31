@@ -8,21 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
+
     protected $table = 'packages';
-    protected $fillable = [
-        'packages_name',
-        'subject_id',
-        'price',
-        'price_sale',
-        'into_price',
-        'description',
-        'start_date',
-        'end_date',
-        'status'
 
-    ];
-
-    protected $attributes = [
-        'status' => 1
-    ];
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 }

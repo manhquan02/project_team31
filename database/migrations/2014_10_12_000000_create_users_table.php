@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('address');
             $table->unsignedInteger('status');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

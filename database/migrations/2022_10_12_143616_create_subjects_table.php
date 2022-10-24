@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('subject_name');
-            $table->string('image');
-            $table->string('description');
-            // $table->unsignedBigInteger('status');
-            $table->timestamps();
+            $table->string('image')->nullable();
+            $table->string('description', 1000);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

@@ -17,15 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('package_name');
             $table->unsignedBigInteger('subject_id');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->unsignedBigInteger('price');
             $table->unsignedBigInteger('price_sale');
             $table->unsignedBigInteger('into_price');
-            $table->string('description');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->unsignedInteger('status');
-            $table->timestamps();
+            $table->string('description', 1000);
+            $table->string('month_package')->nullable();
+            $table->unsignedInteger('status')->default(1);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

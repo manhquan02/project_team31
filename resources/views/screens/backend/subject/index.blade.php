@@ -96,7 +96,7 @@
                                 <td>
                                     <img width="100px" height="100px" src="{{asset($item->image)}}" alt="">
                                 </td>
-                                <td>{{$item->description}}</td>
+                                <td>{!! $item->description !!}</td>
                                 <td>
                                     <a  href="{{route('admin.subject.edit', $item->id)}}"><i class="flaticon2-pen text-warning"></i></a>
                                     <a id="btn-del" href="{{route('admin.subject.delete', $item->id)}}" style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>

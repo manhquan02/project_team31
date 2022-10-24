@@ -1,8 +1,10 @@
 @extends('layouts.backend.master')
 @section('title', 'Quản lý môn tập')
 @section('content')
+    @php
+    $translate = new \App\Models\Translation();
+    @endphp
     <div>
-
         @if(session()->has('success'))
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <span class="text-success">{{ session()->get('success') }}</span>
@@ -13,7 +15,7 @@
 
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">Quản lý môn tập
+                    <h3 class="card-label">{{ $translate->translate('tcc') }}
                         <span class="d-block text-muted pt-2 font-size-sm">Thêm mới</span></h3>
                 </div>
                 <div class="card-toolbar">
@@ -60,10 +62,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">Mô tả <span
-                                class="text-danger">*</span></label>
+                        <label for="example-password-input" class="col-2 col-form-label">Mô tả </label>
                         <div class="col-10">
-                            <textarea class="form-control" name="description">{{old('description')}}</textarea>
+                            <textarea id="editor1" class="form-control" name="description">{{ old('description')}}</textarea>
                             @error('description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -95,6 +96,8 @@
                 reader.readAsDataURL(input.files[0]);
             })
         })
+
     </script>
 @endsection
+
 

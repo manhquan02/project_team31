@@ -59,11 +59,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">Mô tả <span
-                                class="text-danger">*</span></label>
+                        <label for="example-password-input" class="col-2 col-form-label">Mô tả</label>
                         <div class="col-10">
-                            <textarea class="form-control"
-                                      name="description">{{old('description') ? old('description') : $subject->description}}</textarea>
+                            <textarea id="editor1" class="form-control" name="description">{{old('description') ? old('description') : $subject->description}}</textarea>
                             @error('description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -95,6 +93,7 @@
                 reader.readAsDataURL(input.files[0]);
             })
         })
+
     </script>
 @endsection
 
