@@ -13,7 +13,7 @@
             </div>
             <div class="card-toolbar">
                 <!--begin::Dropdown-->
-                <div wire:click="exportUser()" class="dropdown dropdown-inline mr-2">
+                <div  class="dropdown dropdown-inline mr-2">
                     <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
@@ -103,7 +103,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="input-icon">
-                                    <input type="text" wire:model="search" class="form-control" placeholder="Search..."  />
+                                    <input type="text" name="search" id="txtSearch" class="form-control" placeholder="Search..."  />
                                     <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                 </div>
@@ -213,38 +213,33 @@
         </div>
     </div>
     
-      <!-- Modal -->
-      <div wire:ignore.self class="modal fade modal-edit-user" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label"> Name User</label>
-                        <input type="email" disabled value="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Edit Role</label>
-                        <select wire:model="editRole" class="form-control" aria-label="Default select example">
-                          {{-- <option selected>Open this select menu</option> --}}
-  
-                        </select>
-                      </div>
-                    {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
-                  </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" wire:click.prevent="saveEdit()" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-          </div>
-      </div>
-    
     </div>
     
+@endsection
+
+@section('script')
+
+<script>
+    $('#txtSearch').on('keyup',function(){
+    console.log("quân");
+      $value = $(this).val();
+      $.ajax({
+          type: 'GET',
+          url: "{{route('admin.user.listUser')}}",
+          data: {
+              'search': $value,
+          },
+          // dataType:'json',
+          // headers: {
+          //   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          // },
+          
+          success:function(data){
+            console.log("abc");
+            
+          }
+      });
+  })
+</script>
+
 @endsection

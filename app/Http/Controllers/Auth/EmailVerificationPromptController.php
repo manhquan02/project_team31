@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class EmailVerificationPromptControler extends Controller
+class EmailVerificationPromptController extends Controller
 {
     /**
      * Display the email verification prompt.
@@ -15,12 +16,13 @@ class EmailVerificationPromptControler extends Controller
      */
     public function __invoke(Request $request)
     {
+       
         //login user
         if (auth()->user())
         {
             return $request->user()->hasVerifiedEmail()
                 ? redirect()->route('auth.login')
-                : view('screens.frontend.auth.verify-email');
+                : view('screens.frontend.auth.very-email');
         }
 //guest
         else

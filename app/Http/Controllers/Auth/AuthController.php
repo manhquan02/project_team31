@@ -19,7 +19,7 @@ class AuthController extends Controller
         return view('screens.frontend.auth.signup');
     }
 
-    public function postSignup(SignupRequest $request){
+    public function postSignup(Request $request){
         $user = new User();
         if($request->hasFile('avatar')){
             // dd($request->avatar);
@@ -41,11 +41,16 @@ class AuthController extends Controller
         $user->assignRole('member');
         $user->save();
 
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return back();
 
     }
 
 
-    public function slogingnup(){
+    public function login(){
         return view('screens.frontend.auth.login');
     }
 
