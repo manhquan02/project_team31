@@ -6,9 +6,47 @@
         <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
         </div>
         <!--end::Header Menu Wrapper-->
+
         <!--begin::Topbar-->
         <div class="topbar">
             <!--begin::User-->
+            <div class="dropdown">
+                <!--begin::Toggle-->
+                <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
+                    <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
+                        <img class="h-20px w-20px rounded-sm" src="{{asset('backend/media/svg/flags/226-united-states.svg')}}" alt="" />
+                    </div>
+                </div>
+                <!--end::Toggle-->
+                <!--begin::Dropdown-->
+                <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
+                    <!--begin::Nav-->
+                    <ul class="navi navi-hover py-4">
+                        <!--begin::Item-->
+                        <li class="navi-item">
+                            <a href="#" class="navi-link">
+													<span class="symbol symbol-20 mr-3">
+														<img src="{{asset('backend/media/svg/flags/226-united-states.svg')}}" alt="" />
+													</span>
+                                <span class="navi-text">English</span>
+                            </a>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="navi-item">
+                            <a href="#" class="navi-link">
+													<span class="symbol symbol-20 mr-3">
+														<img src="{{asset('backend/media/svg/flags/220-vietnam.svg')}}" alt="" />
+													</span>
+                                <span class="navi-text">Việt Nam</span>
+                            </a>
+                        </li>
+                        <!--end::Item-->
+                    </ul>
+                    <!--end::Nav-->
+                </div>
+                <!--end::Dropdown-->
+            </div>
             <div class="topbar-item">
                 <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
                     <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>

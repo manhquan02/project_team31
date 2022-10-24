@@ -24,10 +24,8 @@ class PackageFactory extends Factory
             'price_sale' => rand(10,20),
             'into_price' => rand(200000, 1000000),
             'description' => $this->faker->text,
-            'start_date' => '2022-10-15',
-            'end_date' => '2022-12-15',
-            'status' => 1,
-            
+            'month_package'=>'1 Tháng'
+
         ];
     }
 }

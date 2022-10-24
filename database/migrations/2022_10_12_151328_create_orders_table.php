@@ -23,7 +23,8 @@ return new class extends Migration
             $table->unsignedBigInteger('pt_id'); // role : pt
             $table->unsignedBigInteger('total_money');
             $table->unsignedBigInteger('payment_method');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

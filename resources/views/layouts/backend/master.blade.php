@@ -28,6 +28,7 @@
     <link href="/backend/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css"/>
     <link href="/backend/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css"/>
     <link href="/backend/css/custom.css" rel="stylesheet" type="text/css"/>
+
     <!--end::layouts Themes-->
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     <link rel="shortcut icon" href="/backend/media/logos/favicon.ico"/>
@@ -2064,6 +2065,7 @@
 <script src="/backend/js/pages/widgets.js"></script>
 <!--sweet alert 2-->
 <script src="/backend/js/pages/features/miscellaneous/sweetalert2.js"></script>
+<script src="/backend/js/pages/crud/forms/editors/confirm-delete"></script>
 {{-- <script src="/backend/js/pages/crud/forms/widgets/select2.js"></script> --}}
 <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
@@ -2072,6 +2074,16 @@
 <script src="/backend/js/pages/my-script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script> CKEDITOR.replace( 'editor1', {
+        filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+        filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+        filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+        filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+        filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+        filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+    } );
+</script>
 @yield('script')
 <!-- custom js tag -->
 @yield('custom-js-tag')

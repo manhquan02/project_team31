@@ -31,4 +31,28 @@ class Subject extends Model
         }
         return $subjects;
     }
+
+    public function store($new, $request)
+    {
+        $new->subject_name = $request->subject_name;
+        if($request->image){
+            $image = $request->image;
+            $imageName = $image->hashName();
+            $new->image = $image->storeAs('images/subject', $imageName);
+        }
+        $new->description = $request->description;
+        $new->save();
+    }
+
+    public function update_item($subject, $request)
+    {
+        $subject->subject_name = $request->subject_name;
+        $subject->description = $request->description;
+        if ($request->image) {
+            $image = $request->image;
+            $imageName = $image->hashName();
+            $subject->image = $image->storeAs('images/subject', $imageName);
+        }
+        $subject->save();
+    }
 }

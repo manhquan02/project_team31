@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('time_name');
             $table->string('start_time');
             $table->string('end_time');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

@@ -19,12 +19,13 @@ return new class extends Migration
             $table->string('discount_code');
             $table->unsignedBigInteger('price_sale');
             $table->unsignedInteger('quantity');
-            $table->string('package_id'); // multi package string  
+            $table->string('package_id'); // multi package string
             $table->date('start_date');
             $table->date('end_date');
-            
+
             $table->unsignedInteger('status');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
