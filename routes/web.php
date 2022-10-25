@@ -32,7 +32,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('edit/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'edit'])->name('edit');
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'update'])->name('update');
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'delete'])->name('delete');
-        Route::get('sort', [\App\Http\Controllers\Admin\SubjectController::class, 'sort'])->name('sort');
+        Route::get('description/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'description'])->name('description');
     });
 
     Route::prefix('package')->name('package.')->group(function () {
@@ -42,7 +42,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('edit/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'edit'])->name('edit');
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'update'])->name('update');
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'delete'])->name('delete');
-        Route::get('sort', [\App\Http\Controllers\Admin\PackageController::class, 'sort'])->name('sort');
+
     });
 
     Route::prefix('language')->name('language.')->group(function () {

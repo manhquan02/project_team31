@@ -1,13 +1,7 @@
 @extends('layouts.backend.master')
-@section('title', 'Cấu hình ngôn ngữ')
+@section('title', translate('Language Management'))
 @section('content')
-
     <div>
-        @if(session()->has('success'))
-            <div class="card-header flex-wrap border-0 pt-6 pb-0">
-                <span class="text-success">{{ translate(session()->get('success')) }}</span>
-            </div>
-        @endif
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
@@ -51,7 +45,7 @@
                     </tr>
                     </thead>
                     <tbody id="tbody">
-                    @if($languages != null)
+                    @if(count($languages) > 0)
                         @foreach($languages as $key=>$item)
                             <tr>
                                 <td>{{$item->id}}</td>
@@ -64,7 +58,7 @@
                                 <td>
                                     <a href="{{ route('admin.language.translate', $item->code) }}"><i
                                             class="ki ki-reload text-info"></i></a>
-                                    <a href="#" style="margin-left: 12px"><i class="flaticon2-pen text-warning"></i></a>
+                                    <a href="{{route('admin.language.edit', $item->id)}}" style="margin-left: 12px"><i class="flaticon2-pen text-warning"></i></a>
                                     @if($item->code != env('DEFAULT_LANGUAGE'))
                                         <a id="btn-del" href="{{route('admin.language.delete', $item->id)}}"
                                            style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
@@ -72,70 +66,23 @@
                                 </td>
                             </tr>
                         @endforeach
-                    @endif
+                        @endif
                     </tbody>
                 </table>
                 <!--end: Datatable-->
+                @if(count($languages) <= 0)
+                    <div class="card-body">
+                        <div class="mb-7">
+                            <div class="row align-items-center">
+                                <h2 style="color: #999999; text-align: center">{{ translate('No records found') }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 @endsection
 @section('script')
-    <script>
-        $(function () {
-            function confirm_del() {
-                var del = document.querySelectorAll('#btn-del');
-                del.forEach(function (item) {
-                    item.onclick = function () {
-                        var cfm = confirm("{{ translate('Are you sure you want to delete ?') }}");
-                        if (cfm == true) {
-                            return true;
-                        } else return false;
-                    }
-                });
-            };
-            confirm_del();
-            $(document).on('click', '#sort', function () {
-                const orderby = $('#orderby').val();
-                const row = $('#row').val();
-                const url = "{{route('admin.subject.sort')}}";
-                const keyword = $('#keyword').val();
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                    data: {
-                        orderby: orderby,
-                        row: row,
-                        keyword: keyword
-                    },
-                    success: function (res) {
-                        let data = res.data;
-                        HandleData(res.data);
-                    }
-                })
-            });
 
-            function HandleData(data) {
-                let url = window.location.origin;
-
-                let html = data.map(function (value, key) {
-                    return `
-                 <tr>
-                                <td>${value.id}</td>
-                                <td>${value.subject_name}</td>
-                                <td>
-                                    <img width="100px" height="100px" src="${url + '/' + value.image}" alt="">
-                                </td>
-                                <td>${value.description}</td>
-                                <td>
-                                    <a href="${url + '/admin/subject/edit/' + value.id}"><i class="flaticon2-pen text-warning"></i></a>
-                                    <a id="btn-del" href="${url + '/admin/subject/delete/' + value.id}" style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
-                                </td>
-                            </tr>`
-                })
-                $('#tbody').html(html)
-                confirm_del();
-            }
-        })
-    </script>
 @endsection

@@ -1,16 +1,8 @@
 @extends('layouts.backend.master')
-@section('title', 'Quản lý môn tập')
+@section('title', translate('Language Management'))
 @section('content')
-
     <div>
-        @if(session()->has('success'))
-            <div class="card-header flex-wrap border-0 pt-6 pb-0">
-                <span class="text-success">{{ session()->get('success') }}</span>
-            </div>
-        @endif
-
         <div class="card card-custom">
-
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
                     <h3 class="card-label">{{ translate('Language') }}
@@ -41,7 +33,7 @@
                 @method('POST')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ translate('Language') }} <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">{{ translate('Language name') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <input class="form-control" name="name" type="text"
                                    value="{{old('name')}}"/>
@@ -84,21 +76,6 @@
     </div>
 @endsection
 @section('script')
-    <script>
-        $(function () {
-            $("input[name = 'flag']").on('change', function (e) {
-                e.preventDefault();
-                var input = e.target;
-                var reader = new FileReader();
-                reader.onload = function () {
-                    var dataURL = reader.result;
-                    var output = $('#image').attr('src', dataURL);
-                }
-                reader.readAsDataURL(input.files[0]);
-            })
-        })
-
-    </script>
 @endsection
 
 

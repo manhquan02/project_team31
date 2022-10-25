@@ -9,20 +9,22 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $subjects = Subject::all();
-        return view('screens.backend.subject.index', compact('subjects'));
-    }
+        if($request->orderby && $request->column){
+            if ($request->keyword != '') {
+                $subjects = Subject::select('subjects.*')
+                    ->where('subject_name', 'like', '%' . $request->keyword . '%')
+                    ->orderBy($request->column, $request->orderby)->paginate(12);
+            } else {
+                $subjects = Subject::select('subjects.*')
+                    ->orderBy($request->column, $request->orderby)->paginate(12);
+            }
+        }else{
+            $subjects = Subject::where('id', '>', 0)->paginate(12);
+        }
 
-    public function sort(Request $request)
-    {
-        $new_subject = new Subject();
-        $subjects = $new_subject->sort($request->keyword, $request->row, $request->orderby);
-        return response()->json([
-            'result' => true,
-            'data' => $subjects
-        ]);
+        return view('screens.backend.subject.index', compact('subjects'));
     }
 
     public function create()
@@ -58,7 +60,7 @@ class SubjectController extends Controller
         if($subject != null){
             return view('screens.backend.subject.edit', compact('subject'));
         }
-        return redirect()->route('admin.subject.index');
+        return redirect()->back();
     }
 
     public function update(Request $request, $id){
@@ -72,5 +74,14 @@ class SubjectController extends Controller
         }
         $subject->save();
         return redirect()->route('admin.subject.edit', $id)->with('success', 'Update subject successfully !');
+    }
+
+    public function description($id){
+        $subject = Subject::where('id', $id)->first();
+        $description = $subject->description;
+        if($subject != null){
+            return view('screens.backend.subject.description', compact('description'));
+        }
+        return redirect()->back();
     }
 }

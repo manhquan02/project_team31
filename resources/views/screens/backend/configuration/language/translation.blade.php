@@ -1,72 +1,29 @@
 @extends('layouts.backend.master')
-@section('title', 'Cấu hình ngôn ngữ')
+@section('title', translate('Language Management'))
 @section('content')
     <div>
-        @if(session()->has('success'))
-            <div class="card-header flex-wrap border-0 pt-6 pb-0">
-                <span class="text-success">{{ translate(session()->get('success')) }}</span>
-            </div>
-        @endif
         <div class="card card-custom">
-            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+            <div class="card-header border-0 pt-6 pb-0">
                 <div class="card-title">
                     <h3 class="card-label">{{ translate('Configuration') }}
                         <span
                             class="d-block text-muted pt-2 font-size-sm">{{ translate('Language') }}</span>
                     </h3>
                 </div>
-                <div class="card-toolbar">
-                    <!--begin::Button-->
-                    <a href="{{route('admin.language.create')}}" class="btn btn-primary font-weight-bolder">
-                <span class="svg-icon svg-icon-md">
-                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                         height="24px" viewBox="0 0 24 24" version="1.1">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <rect x="0" y="0" width="24" height="24"/>
-                            <circle fill="#000000" cx="9" cy="15" r="6"/>
-                            <path
-                                d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
-                                fill="#000000" opacity="0.3"/>
-                        </g>
-                    </svg>
-                    <!--end::Svg Icon-->
-                </span>{{translate('Add new language')}}</a>
-                    <!--end::Button-->
+                <div class="card-title">
+                    <form action="">
+                        <div class="input-icon" style="margin-right: 280px">
+                            <input type="text" class="form-control" style="width: 200%"
+                                   name="keyword"
+                                   placeholder="{{translate('Type keywords and Enter ...')}}"/>
+                        </div>
+                        <button hidden>Search</button>
+                    </form>
                 </div>
             </div>
+
             <div class="card-body">
-                <!--begin::Search Form-->
-                <form action="">
-                    <div class="mb-7">
-                        <div class="row align-items-center">
-                            <div class="col-lg-9 col-xl-8">
-                                <div class="row align-items-center">
 
-                                    <div class="col-md-4 my-2 my-md-0">
-                                        <div class="input-icon">
-                                            <input type="text" class="form-control"
-                                                   name="keyword"
-                                                   placeholder="{{translate('Enter keyword ...')}}"/>
-                                            <span>
-                                        <i class="flaticon2-search-1 text-muted"></i>
-                                        </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 my-2 my-md-0">
-                                        <div class="d-flex align-items-center">
-                                            <button id="search" class="btn btn-light-primary px-6 font-weight-bold">
-                                                {{translate('Search')}}
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <!--end::Search Form-->
             </div>
             <form action="{{route('admin.language.store_translate', $lang)}}" method="post">
                 @csrf
@@ -100,39 +57,23 @@
                     <div>
                         {{$translations->appends(request()->input())->links()}}
                     </div>
+
+                    <!--end: Datatable-->
                     @if(count($translations) > 0)
                         <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
                     @else
                         <div class="card-body">
-                            <!--begin::Search Form-->
                             <div class="mb-7">
                                 <div class="row align-items-center">
                                     <h2 style="color: #999999; text-align: center">{{ translate('No records found') }}</h2>
                                 </div>
                             </div>
-                            <!--end::Search Form-->
                         </div>
                     @endif
-                    <!--end: Datatable-->
                 </div>
             </form>
         </div>
     </div>
 @endsection
 @section('script')
-    <script>
-        $(function () {
-            function confirm_del() {
-                var del = document.querySelectorAll('#btn-del');
-                del.forEach(function (item) {
-                    item.onclick = function () {
-                        var cfm = confirm("{{translate('Are you sure you want to delete ?')}}");
-                        if (cfm == true) {
-                            return true;
-                        } else return false;
-                    }
-                });
-            };
-        })
-    </script>
 @endsection

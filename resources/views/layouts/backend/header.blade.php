@@ -22,7 +22,7 @@
                                  src="{{asset($language->flag)}}" alt=""/>
                         @else
                             <img class="h-20px w-20px rounded-sm"
-                                 src="{{asset('backend/media/svg/flags/226-united-states.svg')}}" alt=""/>
+                                 src="{{asset(env('DEFAULT_FLAG'))}}" alt=""/>
                         @endif
                     </div>
                 </div>

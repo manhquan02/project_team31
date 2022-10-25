@@ -1,17 +1,12 @@
 @extends('layouts.backend.master')
-@section('title', 'Quản lý môn tập')
+@section('title', translate('Package Management'))
 @section('content')
     <div>
-        @if(session()->has('success'))
-            <div class="card-header flex-wrap border-0 pt-6 pb-0">
-                <span class="text-success">{{ session()->get('success') }}</span>
-            </div>
-        @endif
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">Quản lý gói tập
-                        <span class="d-block text-muted pt-2 font-size-sm">Danh sách</span></h3>
+                    <h3 class="card-label">{{ translate('Package Management') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('List') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -29,20 +24,21 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>Thêm gói tập</a>
+                </span>{{ translate('Add New Package') }}</a>
                     <!--end::Button-->
                 </div>
             </div>
             <div class="card-body">
                 <!--begin::Search Form-->
+                <form action="">
                 <div class="mb-7">
                     <div class="row align-items-center">
                         <div class="col-lg-9 col-xl-8">
                             <div class="row align-items-center">
                                 <div class="col-md-4 my-2 my-md-0">
                                     <div class="input-icon">
-                                        <input id="keyword" type="text" class="form-control"
-                                               placeholder="Search..."/>
+                                        <input name="keyword" type="text" class="form-control"
+                                               placeholder="{{ translate('Enter Package Name ...') }}"/>
                                         <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                         </span>
@@ -50,8 +46,8 @@
                                 </div>
                                 <div class="col-md-4 my-2 my-md-0">
                                     <div class="d-flex align-items-center">
-                                        <label class="mr-3 mb-0 d-none d-md-block">OrderBy:</label>
-                                        <select class="form-control" id="orderby">
+                                        <label class="mr-3 mb-0 d-none d-md-block">{{ translate('OrderBy') }}</label>
+                                        <select class="form-control" name="orderby">
                                             <option value="asc">Asc</option>
                                             <option value="desc">Desc</option>
                                         </select>
@@ -59,20 +55,22 @@
                                 </div>
                                 <div class="col-md-4 my-2 my-md-0">
                                     <div class="d-flex align-items-center">
-                                        <label class="mr-3 mb-0 d-none d-md-block">Row</label>
-                                        <select class="form-control" id="row">
+                                        <label class="mr-3 mb-0 d-none d-md-block">{{ translate('Column') }}</label>
+                                        <select class="form-control" name="column">
                                             <option value="id">ID</option>
-                                            <option value="subject_name">Subject name</option>
+                                            <option value="package_name">{{ translate('Package Name') }}</option>
+                                            <option value="subject_name">{{ translate('Subject Name') }}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                            <a id="sort" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+                            <button class="btn btn-light-primary px-6 font-weight-bold">{{ translate('Search') }}</button>
                         </div>
                     </div>
                 </div>
+                </form>
                 <!--end::Search Form-->
             </div>
             <div class="card-body">
@@ -81,15 +79,15 @@
                     <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>Gói tập</th>
-                        <th>Môn tập</th>
-                        <th>Avatar</th>
-                        <th>Giá niêm yiết</th>
-                        <th>% sale</th>
-                        <th>Giá tập</th>
-                        <th>Mô tả</th>
-                        <th>Trạng thái</th>
-                        <th>Actions</th>
+                        <th>{{ translate('Package Name') }}</th>
+                        <th>{{ translate('Subject Name') }}</th>
+                        <th>{{ translate('Avatar') }}</th>
+                        <th>{{ translate('Listed Price') }}</th>
+                        <th>{{ translate('% Discount') }}</th>
+                        <th>{{ translate('Episode Price') }}</th>
+                        <th>{{ translate('Description') }}</th>
+                        <th>{{ translate('Status') }}</th>
+                        <th>{{ translate('Actions') }}</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
@@ -119,67 +117,23 @@
                     @endif
                     </tbody>
                 </table>
+                <div>
+                    {{$packages->appends(request()->input())->links()}}
+                </div>
                 <!--end: Datatable-->
+                @if(count($packages) <= 0)
+                    <div class="card-body">
+                        <div class="mb-7">
+                            <div class="row align-items-center">
+                                <h2 style="color: #999999; text-align: center">{{ translate('No records found') }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 @endsection
 @section('script')
-    <script>
-        $(function () {
-            function confirm_del() {
-                var del = document.querySelectorAll('#btn-del');
-                del.forEach(function (item) {
-                    item.onclick = function () {
-                        var cfm = confirm("Bạn có chắc chắn muốn xóa ?");
-                        if (cfm == true) {
-                            return true;
-                        } else return false;
-                    }
-                });
-            };
-            confirm_del();
-            $(document).on('click', '#sort', function () {
-                const orderby = $('#orderby').val();
-                const row = $('#row').val();
-                const url = "{{route('admin.subject.sort')}}";
-                const keyword = $('#keyword').val();
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                    data: {
-                        orderby: orderby,
-                        row: row,
-                        keyword: keyword
-                    },
-                    success: function (res) {
-                        let data = res.data;
-                        HandleData(res.data);
-                    }
-                })
-            });
 
-            function HandleData(data) {
-                let url = window.location.origin;
-
-                let html = data.map(function (value, key) {
-                    return `
-                 <tr>
-                                <td>${value.id}</td>
-                                <td>${value.subject_name}</td>
-                                <td>
-                                    <img width="100px" height="100px" src="${url + '/' + value.image}" alt="">
-                                </td>
-                                <td>${value.description}</td>
-                                <td>
-                                    <a href="${url + '/admin/subject/edit/' + value.id}"><i class="flaticon2-pen text-warning"></i></a>
-                                    <a id="btn-del" href="${url + '/admin/subject/delete/' + value.id}" style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
-                                </td>
-                            </tr>`
-                })
-                $('#tbody').html(html)
-                confirm_del();
-            }
-        })
-    </script>
 @endsection
