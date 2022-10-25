@@ -1,20 +1,19 @@
 @extends('layouts.backend.master')
 @section('title', 'Cấu hình ngôn ngữ')
 @section('content')
-    @php
-        $translate = new \App\Models\Translation();
-    @endphp
     <div>
         @if(session()->has('success'))
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
-                <span class="text-success">{{ $translate->translate(session()->get('success')) }}</span>
+                <span class="text-success">{{ translate(session()->get('success')) }}</span>
             </div>
         @endif
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ $translate->translate('Configuration') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ $translate->translate('Language') }}</span></h3>
+                    <h3 class="card-label">{{ translate('Configuration') }}
+                        <span
+                            class="d-block text-muted pt-2 font-size-sm">{{ translate('Language') }}</span>
+                    </h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -32,95 +31,108 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{$translate->translate('Add language')}}</a>
+                </span>{{translate('Add new language')}}</a>
                     <!--end::Button-->
                 </div>
             </div>
             <div class="card-body">
-                <!--begin: Datatable-->
-                <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
-                    <thead>
-                    <tr>
-                        <th>#ID</th>
-                        <th>{{$translate->translate('KeyWord')}}</th>
-                        <th>{{$translate->translate('Value')}}</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tbody">
-                    @if($translations != null)
-                        @foreach($translations as $item)
-                            <tr>
-                                <td>{{$item->id}}</td>
-                                <td>{{$item->lang_in}}</td>
-                                <td><input type="text" class="form-control" value="{{$item->lang_value}}"></td>
-                            </tr>
-                        @endforeach
-                    @endif
-                    </tbody>
-                </table>
-                <button type="submit" class="btn btn-success mr-2">{{ $translate->translate('Save') }}</button>
-                <!--end: Datatable-->
+                <!--begin::Search Form-->
+                <form action="">
+                    <div class="mb-7">
+                        <div class="row align-items-center">
+                            <div class="col-lg-9 col-xl-8">
+                                <div class="row align-items-center">
+
+                                    <div class="col-md-4 my-2 my-md-0">
+                                        <div class="input-icon">
+                                            <input type="text" class="form-control"
+                                                   name="keyword"
+                                                   placeholder="{{translate('Enter keyword ...')}}"/>
+                                            <span>
+                                        <i class="flaticon2-search-1 text-muted"></i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 my-2 my-md-0">
+                                        <div class="d-flex align-items-center">
+                                            <button id="search" class="btn btn-light-primary px-6 font-weight-bold">
+                                                {{translate('Search')}}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!--end::Search Form-->
             </div>
+            <form action="{{route('admin.language.store_translate', $lang)}}" method="post">
+                @csrf
+                <div class="card-body">
+                    <!--begin: Datatable-->
+                    <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
+                        <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th>{{translate('KeyWord')}}</th>
+                            <th>{{translate('Value')}}</th>
+                            <th>{{translate('Actions')}}</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        @if($translations != null)
+                            @foreach($translations as $item)
+                                <tr>
+                                    <td>{{$item->id}}</td>
+                                    <td>{{$item->lang_in}}</td>
+                                    <td><input type="text" name="lang_value[{{$item->id}}]" class="form-control"
+                                               value="{{$item->lang_value}}"></td>
+                                    <td><a id="btn-del" href="{{route('admin.language.delete_translation', $item->id)}}"
+                                           style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+                    <div>
+                        {{$translations->appends(request()->input())->links()}}
+                    </div>
+                    @if(count($translations) > 0)
+                        <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
+                    @else
+                        <div class="card-body">
+                            <!--begin::Search Form-->
+                            <div class="mb-7">
+                                <div class="row align-items-center">
+                                    <h2 style="color: #999999; text-align: center">{{ translate('No records found') }}</h2>
+                                </div>
+                            </div>
+                            <!--end::Search Form-->
+                        </div>
+                    @endif
+                    <!--end: Datatable-->
+                </div>
+            </form>
         </div>
     </div>
 @endsection
 @section('script')
     <script>
-        $(function (){
-            function confirm_del(){
+        $(function () {
+            function confirm_del() {
                 var del = document.querySelectorAll('#btn-del');
-                del.forEach(function(item){
+                del.forEach(function (item) {
                     item.onclick = function () {
-                        var cfm = confirm("Bạn có chắc chắn muốn xóa ?");
+                        var cfm = confirm("{{translate('Are you sure you want to delete ?')}}");
                         if (cfm == true) {
                             return true;
-                        }
-                        else return false;
+                        } else return false;
                     }
                 });
             };
-            confirm_del();
-            $(document).on('click', '#sort', function(){
-                const orderby = $('#orderby').val();
-                const row = $('#row').val();
-                const url = "{{route('admin.subject.sort')}}";
-                const keyword = $('#keyword').val();
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                    data: {
-                        orderby: orderby,
-                        row:row,
-                        keyword:keyword
-                    },
-                    success:function (res){
-                        let data = res.data;
-                        HandleData(res.data);
-                    }
-                })
-            });
-
-            function HandleData(data){
-                let url = window.location.origin;
-
-                let html = data.map(function(value, key) {
-                    return `
-                 <tr>
-                                <td>${value.id}</td>
-                                <td>${value.subject_name}</td>
-                                <td>
-                                    <img width="100px" height="100px" src="${url + '/' + value.image}" alt="">
-                                </td>
-                                <td>${value.description}</td>
-                                <td>
-                                    <a href="${url + '/admin/subject/edit/' + value.id}"><i class="flaticon2-pen text-warning"></i></a>
-                                    <a id="btn-del" href="${url + '/admin/subject/delete/' + value.id}" style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
-                                </td>
-                            </tr>`
-                })
-                $('#tbody').html(html)
-                confirm_del();
-            }
         })
     </script>
 @endsection

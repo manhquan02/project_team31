@@ -48,9 +48,9 @@ class SubjectController extends Controller
         $subject = Subject::where('id', $id)->first();
         if($subject != null){
             $subject->delete();
-            return redirect()->route('admin.subject.index')->with('success', 'Delete subject successfully !');
+            return redirect()->back()->with('success', 'Delete subject successfully !');
         }
-        return redirect()->route('admin.subject.index');
+        return redirect()->back();
     }
 
     public function edit($id){

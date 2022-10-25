@@ -1,9 +1,7 @@
 @extends('layouts.backend.master')
 @section('title', 'Quản lý môn tập')
 @section('content')
-    @php
-        $translate = new \App\Models\Translation();
-    @endphp
+
     <div>
         @if(session()->has('success'))
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
@@ -15,8 +13,8 @@
 
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ $translate->translate('hhh') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">Thêm mới</span></h3>
+                    <h3 class="card-label">{{ translate('Subject management') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('Add new') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -34,7 +32,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>Danh sách môn tập</a>
+                </span>{{ translate('List subject') }}</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -43,7 +41,7 @@
                 @method('POST')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">Name <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">{{ translate('Subject name') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <input class="form-control" name="subject_name" type="text"
                                    value="{{old('subject_name')}}"/>
@@ -54,7 +52,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="example-tel-input" class="col-2 col-form-label">Image <span
+                        <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Image') }} <span
                                 class="text-danger">*</span></label>
                         <div class="col-10">
                             <input type="file" class="form-control" name="image" value="{{old('image')}}"/>
@@ -62,7 +60,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">Mô tả </label>
+                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }} </label>
                         <div class="col-10">
                             <textarea id="editor1" class="form-control" name="description">{{ old('description')}}</textarea>
                             @error('description')
@@ -73,8 +71,8 @@
                     <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
-                            <button type="submit" class="btn btn-success mr-2">Save</button>
-                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
+                            <button type="reset" class="btn btn-secondary">{{ translate('Reset') }}</button>
                         </div>
                     </div>
                 </div>

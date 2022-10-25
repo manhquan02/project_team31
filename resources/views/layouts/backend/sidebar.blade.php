@@ -1,7 +1,5 @@
 <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
-    @php
-        $translate = new \App\Models\Translation();
-    @endphp
+
     <!--begin::Menu Container-->
     <div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
         <!--begin::Menu Nav-->
@@ -19,11 +17,11 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">Dashboard</span>
+                    <span class="menu-text">{{ translate('Dashboard') }}</span>
                 </a>
             </li>
             <li class="menu-section">
-                <h4 class="menu-text">Custom</h4>
+                <h4 class="menu-text">{{ translate('Custom') }}</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -773,7 +771,7 @@
                 </div>
             </li>
             <li class="menu-section">
-                <h4 class="menu-text">Dịch Vụ</h4>
+                <h4 class="menu-text">{{ translate('Services') }}</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -790,7 +788,7 @@
 
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">Môn Tập</span>
+                    <span class="menu-text">{{ translate('Subjects') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="menu-submenu">
@@ -798,7 +796,7 @@
                     <ul class="menu-subnav">
                         <li class="menu-item menu-item-parent" aria-haspopup="true">
                             <span class="menu-link">
-                                <span class="menu-text">Môn Tập</span>
+                                <span class="menu-text">{{ translate('Subjects') }}</span>
                             </span>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -806,7 +804,7 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">Danh Sách Môn Tập</span>
+                                <span class="menu-text">{{ translate('List subjects') }}</span>
                             </a>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -814,7 +812,7 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">Thêm Mới Môn Tập</span>
+                                <span class="menu-text">{{ translate('Add new subject') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -833,7 +831,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">Gói Tập</span>
+                    <span class="menu-text">{{ translate('Packages') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="menu-submenu">
@@ -841,7 +839,7 @@
                     <ul class="menu-subnav">
                         <li class="menu-item menu-item-parent" aria-haspopup="true">
                             <span class="menu-link">
-                                <span class="menu-text">Gói Tập</span>
+                                <span class="menu-text">{{ translate('Packages') }}</span>
                             </span>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -849,7 +847,7 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">Danh Sách Gói Tập</span>
+                                <span class="menu-text">{{ translate('List packages') }}</span>
                             </a>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -857,7 +855,7 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">Thêm Mới Gói Tập</span>
+                                <span class="menu-text">{{ translate('Add new package') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -1965,7 +1963,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{$translate->translate('Configuration')}}</span>
+                    <span class="menu-text">{{translate('Configuration')}}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="menu-submenu">
@@ -1974,7 +1972,7 @@
                     <ul class="menu-subnav">
                         <li class="menu-item menu-item-parent" aria-haspopup="true">
                             <span class="menu-link">
-                                <span class="menu-text">{{$translate->translate('Configuration')}}</span>
+                                <span class="menu-text">{{translate('Configuration')}}</span>
                             </span>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -1982,7 +1980,7 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">{{$translate->translate('Languages')}}</span>
+                                <span class="menu-text">{{translate('Languages')}}</span>
                             </a>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -1990,7 +1988,7 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">{{$translate->translate('General configuration')}}</span>
+                                <span class="menu-text">{{translate('General configuration')}}</span>
                             </a>
                         </li>
                     </ul>

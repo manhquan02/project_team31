@@ -53,5 +53,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\LanguageController::class, 'update'])->name('update');
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\LanguageController::class, 'delete'])->name('delete');
         Route::get('translate/{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'translate'])->name('translate');
+        Route::post('translate/{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'store_translate'])->name('store_translate');
+        Route::get('delete_translation{translation}', [\App\Http\Controllers\Admin\LanguageController::class, 'delete_translation'])->name('delete_translation');
     });
 });

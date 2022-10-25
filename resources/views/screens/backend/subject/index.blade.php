@@ -1,20 +1,18 @@
 @extends('layouts.backend.master')
 @section('title', 'Quản lý môn tập')
 @section('content')
-    @php
-        $translate = new \App\Models\Translation();
-    @endphp
+
     <div>
         @if(session()->has('success'))
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
-                <span class="text-success">{{ $translate->translate(session()->get('success')) }}</span>
+                <span class="text-success">{{ translate(session()->get('success')) }}</span>
             </div>
         @endif
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ $translate->translate('Course Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ $translate->translate('List') }}</span></h3>
+                    <h3 class="card-label">{{ translate('Subject Management') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('List') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -32,7 +30,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{$translate->translate('Add subject')}}</a>
+                </span>{{translate('Add new subject')}}</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -45,7 +43,7 @@
                                 <div class="col-md-4 my-2 my-md-0">
                                     <div class="input-icon">
                                         <input id="keyword" type="text" class="form-control"
-                                               placeholder="{{$translate->translate('Search ...')}}"/>
+                                               placeholder="{{translate('Search ...')}}"/>
                                         <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                         </span>
@@ -53,7 +51,7 @@
                                 </div>
                                 <div class="col-md-4 my-2 my-md-0">
                                     <div class="d-flex align-items-center">
-                                        <label class="mr-3 mb-0 d-none d-md-block">{{$translate->translate('OrderBy')}}</label>
+                                        <label class="mr-3 mb-0 d-none d-md-block">{{translate('OrderBy')}}</label>
                                         <select class="form-control" id="orderby">
                                             <option value="asc">Asc</option>
                                             <option value="desc">Desc</option>
@@ -62,17 +60,17 @@
                                 </div>
                                 <div class="col-md-4 my-2 my-md-0">
                                     <div class="d-flex align-items-center">
-                                        <label class="mr-3 mb-0 d-none d-md-block">{{$translate->translate('Row')}}</label>
+                                        <label class="mr-3 mb-0 d-none d-md-block">{{translate('Column')}}</label>
                                         <select class="form-control" id="row">
                                             <option value="id">ID</option>
-                                            <option value="subject_name">{{$translate->translate('Tên môn tập')}}</option>
+                                            <option value="subject_name">{{translate('Subject name')}}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                            <a id="sort" class="btn btn-light-primary px-6 font-weight-bold">{{$translate->translate('Search')}}</a>
+                            <a id="sort" class="btn btn-light-primary px-6 font-weight-bold">{{translate('Search')}}</a>
                         </div>
                     </div>
                 </div>
@@ -84,10 +82,10 @@
                     <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>{{$translate->translate('Subject name')}}</th>
-                        <th>{{$translate->translate('Image')}}</th>
-                        <th>{{$translate->translate('Description')}}</th>
-                        <th>{{$translate->translate('Actions')}}</th>
+                        <th>{{translate('Subject name')}}</th>
+                        <th>{{translate('Image')}}</th>
+                        <th>{{translate('Description')}}</th>
+                        <th>{{translate('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
@@ -121,7 +119,7 @@
                 var del = document.querySelectorAll('#btn-del');
                 del.forEach(function(item){
                     item.onclick = function () {
-                        var cfm = confirm("Bạn có chắc chắn muốn xóa ?");
+                        var cfm = confirm("{{ translate('Are you sure you want to delete ?') }}");
                         if (cfm == true) {
                             return true;
                         }
