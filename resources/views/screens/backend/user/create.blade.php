@@ -79,6 +79,9 @@
                     <span></span>
                 </label>
             </div>
+            @error('gender')
+            <span class="text-danger">{{ $message }}</span>    
+        @enderror
         </div>
     </div>
     <div class="form-group row">

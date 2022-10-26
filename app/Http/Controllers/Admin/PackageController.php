@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SubjectRequest;
 use App\Models\Package;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller

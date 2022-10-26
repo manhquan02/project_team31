@@ -31,6 +31,7 @@ class UserRequest extends FormRequest
             // 'avatar' => [ 'mimes:jpeg,jpg,png,gif','required','image','max:5120'],
             'gender' => ['required','integer'],
             'phone' => ['required','integer'],
+            'address' => ['required'],
             
         ];
     }
@@ -48,9 +49,11 @@ class UserRequest extends FormRequest
             // 'avatar.image'=>':attribute bắt buộc là ảnh',
             // 'avatar.max'=>'Ảnh vượt quá 5mb',
             // 'avatar.mimes'=>'Phải là dạng ảnh',
+            
             'same' => 'Mật khẩu phải trùng nhau',
             'integer' => ':attribute phải là dạng số',
-            
+            'address.required'=> "Đại chỉ không được để chống", 
+            'gender.required' => "Giới tính không được để chống",
         ];
 
     }
