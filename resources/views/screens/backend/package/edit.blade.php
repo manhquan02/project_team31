@@ -1,13 +1,7 @@
 @extends('layouts.backend.master')
-@section('title', 'Quản lý môn tập')
+@section('title', translate('Package Management'))
 @section('content')
     <div>
-        @if(session()->has('success'))
-            <div class="card-header flex-wrap border-0 pt-6 pb-0">
-                <span class="text-success">{{ session()->get('success') }}</span>
-            </div>
-        @endif
-
         <div class="card card-custom">
 
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
@@ -82,19 +76,6 @@
     </div>
 @endsection
 @section('script')
-    <script>
-        $(function () {
-            $("input[name = 'image']").on('change', function (e) {
-                e.preventDefault();
-                var input = e.target;
-                var reader = new FileReader();
-                reader.onload = function () {
-                    var dataURL = reader.result;
-                    var output = $('#image').attr('src', dataURL);
-                }
-                reader.readAsDataURL(input.files[0]);
-            })
-        })
-    </script>
+
 @endsection
 

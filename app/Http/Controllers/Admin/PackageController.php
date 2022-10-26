@@ -10,9 +10,21 @@ use Illuminate\Http\Request;
 
 class PackageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $packages = Package::all();
+        if($request->orderby && $request->column){
+            if ($request->keyword != '') {
+                $packages = Package::select('packages.*')
+                    ->where('package_name', 'like', '%' . $request->keyword . '%')
+                    ->orderBy($request->column, $request->orderby)->paginate(12);
+            } else {
+                $packages = Package::select('packages.*')
+                    ->orderBy($request->column, $request->orderby)->paginate(12);
+            }
+        }else{
+            $packages = Package::where('id', '>', 0)->paginate(12);
+        }
+
         return view('screens.backend.package.index', compact('packages'));
     }
 

@@ -24,9 +24,7 @@ Route::get('/list-user', function () {
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('', function () {
-        return view('layouts.backend.master');
-    });
+    Route::get('', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
     Route::prefix('subject')->name('subject.')->group(function () {
         Route::get('', [\App\Http\Controllers\Admin\SubjectController::class, 'index'])->name('index');
         Route::get('create', [\App\Http\Controllers\Admin\SubjectController::class, 'create'])->name('create');
@@ -34,7 +32,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('edit/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'edit'])->name('edit');
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'update'])->name('update');
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'delete'])->name('delete');
-        Route::get('sort', [\App\Http\Controllers\Admin\SubjectController::class, 'sort'])->name('sort');
+        Route::get('description/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'description'])->name('description');
     });
 
     Route::prefix('package')->name('package.')->group(function () {
@@ -44,6 +42,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('edit/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'edit'])->name('edit');
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'update'])->name('update');
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'delete'])->name('delete');
-        Route::get('sort', [\App\Http\Controllers\Admin\PackageController::class, 'sort'])->name('sort');
+
+    });
+
+    Route::prefix('language')->name('language.')->group(function () {
+        Route::get('', [\App\Http\Controllers\Admin\LanguageController::class, 'index'])->name('index');
+        Route::get('create', [\App\Http\Controllers\Admin\LanguageController::class, 'create'])->name('create');
+        Route::post('create', [\App\Http\Controllers\Admin\LanguageController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [\App\Http\Controllers\Admin\LanguageController::class, 'edit'])->name('edit');
+        Route::patch('edit/{id}', [\App\Http\Controllers\Admin\LanguageController::class, 'update'])->name('update');
+        Route::get('delete/{id}', [\App\Http\Controllers\Admin\LanguageController::class, 'delete'])->name('delete');
+        Route::get('translate/{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'translate'])->name('translate');
+        Route::post('translate/{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'store_translate'])->name('store_translate');
+        Route::get('delete_translation{translation}', [\App\Http\Controllers\Admin\LanguageController::class, 'delete_translation'])->name('delete_translation');
     });
 });

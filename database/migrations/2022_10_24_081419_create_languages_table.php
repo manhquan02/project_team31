@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('flag')->nullable();
             $table->string('code');
-            $table->string('app_lang_code');
-            $table->integer('status');
+            $table->integer('status')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

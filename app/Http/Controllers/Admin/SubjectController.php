@@ -9,21 +9,22 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $new_subject = new Subject();
-        $subjects = $new_subject->get_all();
-        return view('screens.backend.subject.index', compact('subjects'));
-    }
+        if($request->orderby && $request->column){
+            if ($request->keyword != '') {
+                $subjects = Subject::select('subjects.*')
+                    ->where('subject_name', 'like', '%' . $request->keyword . '%')
+                    ->orderBy($request->column, $request->orderby)->paginate(12);
+            } else {
+                $subjects = Subject::select('subjects.*')
+                    ->orderBy($request->column, $request->orderby)->paginate(12);
+            }
+        }else{
+            $subjects = Subject::where('id', '>', 0)->paginate(12);
+        }
 
-    public function sort(Request $request)
-    {
-        $new_subject = new Subject();
-        $subjects = $new_subject->sort($request->keyword, $request->row, $request->orderby);
-        return response()->json([
-            'result' => true,
-            'data' => $subjects
-        ]);
+        return view('screens.backend.subject.index', compact('subjects'));
     }
 
     public function create()
@@ -34,17 +35,24 @@ class SubjectController extends Controller
     public function store(SubjectRequest $request)
     {
         $new_subject = new Subject();
-        $new_subject->store($new_subject, $request);
-        return redirect()->route('admin.subject.create')->with('success', 'Thêm mới môn tập thành công !');
+        $new_subject->subject_name = $request->subject_name;
+        if($request->image){
+            $image = $request->image;
+            $imageName = $image->hashName();
+            $new_subject->image = $image->storeAs('images/subject', $imageName);
+        }
+        $new_subject->description = $request->description;
+        $new_subject->save();
+        return redirect()->route('admin.subject.create')->with('success', 'Add new subject successfully !');
     }
 
     public function delete($id){
         $subject = Subject::where('id', $id)->first();
         if($subject != null){
             $subject->delete();
-            return redirect()->route('admin.subject.index')->with('success', 'Xóa môn tập thành công !');
+            return redirect()->back()->with('success', 'Delete subject successfully !');
         }
-        return redirect()->route('admin.subject.index');
+        return redirect()->back();
     }
 
     public function edit($id){
@@ -52,13 +60,28 @@ class SubjectController extends Controller
         if($subject != null){
             return view('screens.backend.subject.edit', compact('subject'));
         }
-        return redirect()->route('admin.subject.index');
+        return redirect()->back();
     }
 
     public function update(Request $request, $id){
-        $new_subject = new Subject();
         $subject = Subject::where('id', $id)->first();
-        $new_subject->update_item($subject, $request);
-        return redirect()->route('admin.subject.edit', $id)->with('success', 'Cập nhật môn tập thành công !');
+        $subject->subject_name = $request->subject_name;
+        $subject->description = $request->description;
+        if ($request->image) {
+            $image = $request->image;
+            $imageName = $image->hashName();
+            $subject->image = $image->storeAs('images/subject', $imageName);
+        }
+        $subject->save();
+        return redirect()->route('admin.subject.edit', $id)->with('success', 'Update subject successfully !');
+    }
+
+    public function description($id){
+        $subject = Subject::where('id', $id)->first();
+        $description = $subject->description;
+        if($subject != null){
+            return view('screens.backend.subject.description', compact('description'));
+        }
+        return redirect()->back();
     }
 }

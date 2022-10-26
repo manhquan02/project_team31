@@ -11,7 +11,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link rel="canonical" href="https://keenthemes.com/metronic"/>
     <!--begin::Fonts-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
     <!--end::Fonts-->
@@ -114,72 +115,81 @@
 								</svg>
                                 <!--end::Svg Icon-->
 							</span>
-            </button>
-            <!--end::Toolbar-->
-        </div>
-        <!--end::Brand-->
-        <!--begin::Aside Menu-->
-        @include('layouts.backend.sidebar')
-        <!--end::Aside Menu-->
-    </div>
-    <!--end::Aside-->
-    <!--begin::Wrapper-->
-    <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-        <div class="pre-loading">
-            <div class="spinner-custom">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
+                </button>
+                <!--end::Toolbar-->
             </div>
+            <!--end::Brand-->
+            <!--begin::Aside Menu-->
+            @include('layouts.backend.sidebar')
+            <!--end::Aside Menu-->
         </div>
-        @include('layouts.backend.header')
+        <!--end::Aside-->
+        <!--begin::Wrapper-->
+        <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+            <div class="pre-loading">
+                <div class="spinner-custom">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+            </div>
+            @include('layouts.backend.header')
 
-        <!--begin::Content-->
-        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-            <!--begin::Subheader-->
-            <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
-                <div
-                    class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-                    <!--begin::Info-->
-                    <div class="d-flex align-items-center flex-wrap mr-1">
-                        <!--begin::Mobile Toggle-->
-                        <button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none"
-                                id="kt_subheader_mobile_toggle">
-                            <span></span>
-                        </button>
-                        <!--end::Mobile Toggle-->
-                        <!--begin::Page Heading-->
-                        <div class="d-flex align-items-baseline flex-wrap mr-5">
-                            <!--begin::Page Title-->
-                            <h5 class="text-dark font-weight-bold my-1 mr-5">@yield('title-heading')</h5>
-                            <!--end::Page Title-->
+            <!--begin::Content-->
+            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                <!--begin::Subheader-->
+                <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+                    <div
+                        class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                        <!--begin::Info-->
+                        <div class="d-flex align-items-center flex-wrap mr-1">
+                            <!--begin::Mobile Toggle-->
+                            <button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none"
+                                    id="kt_subheader_mobile_toggle">
+                                <span></span>
+                            </button>
+                            <!--end::Mobile Toggle-->
+                            <!--begin::Page Heading-->
+                            <div class="d-flex align-items-baseline flex-wrap mr-5">
+                                <!--begin::Page Title-->
+                                <h5 class="text-dark font-weight-bold my-1 mr-5">@yield('title-heading')</h5>
+                                <!--end::Page Title-->
+                            </div>
+                            <!--end::Page Heading-->
                         </div>
-                        <!--end::Page Heading-->
+                        <!--end::Info-->
                     </div>
-                    <!--end::Info-->
                 </div>
-            </div>
-            <!--end::Subheader-->
-            <!--begin::Entry-->
-            <div class="d-flex flex-column-fluid">
-                <!--begin::Container-->
-                <div class="container">
+                <!--end::Subheader-->
+                <!--begin::Entry-->
+                <div class="d-flex flex-column-fluid">
+                    <!--begin::Container-->
+                    <div class="container">
+                        @if(session()->has('success'))
+                            <div style="background-color: green" class="card-header flex-wrap border-0 pt-6 pb-0">
+                                <span class="text-success">{{ translate(session()->get('success')) }}</span>
+                            </div>
+                        @endif
+                        @if(session()->has('error'))
+                            <div style="background-color: gold" class="card-header flex-wrap border-0 pt-6 pb-0">
+                                <span class="text-danger">{{ session()->get('error') }}</span>
+                            </div>
+                        @endif
+                        @yield('content')
 
-                    @yield('content')
-
+                    </div>
+                    <!--end::Container-->
                 </div>
-                <!--end::Container-->
+                <!--end::Entry-->
             </div>
-            <!--end::Entry-->
+            <!--end::Content-->
+
+            @include('layouts.backend.footer')
+
         </div>
-        <!--end::Content-->
-
-        @include('layouts.backend.footer')
-
+        <!--end::Wrapper-->
     </div>
-    <!--end::Wrapper-->
-</div>
-<!--end::Page-->
+    <!--end::Page-->
 </div>
 <!--end::Main-->
 <!-- begin::User Panel-->
@@ -1556,7 +1566,7 @@
     <span class="svg-icon">
         <!--begin::Svg Icon | path:/backend/media/svg/icons/Navigation/Up-2.svg-->
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                height="24px" viewBox="0 0 24 24" version="1.1">
+             height="24px" viewBox="0 0 24 24" version="1.1">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <polygon points="0 0 24 0 24 24 0 24"/>
                 <rect fill="#000000" opacity="0.3" x="11" y="10" width="2" height="10" rx="1"/>
@@ -2004,7 +2014,8 @@
 <!--end::Demo Panel-->
 <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
 <!--begin::Global Config(global config for global JS scripts)-->
-<script>var KTAppSettings = {"breakpoints": {"sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400},
+<script>var KTAppSettings = {
+        "breakpoints": {"sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400},
         "colors": {
             "theme": {
                 "base": {
@@ -2065,24 +2076,60 @@
 <script src="/backend/js/pages/widgets.js"></script>
 <!--sweet alert 2-->
 <script src="/backend/js/pages/features/miscellaneous/sweetalert2.js"></script>
-<script src="/backend/js/pages/crud/forms/editors/confirm-delete"></script>
 {{-- <script src="/backend/js/pages/crud/forms/widgets/select2.js"></script> --}}
 <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
         integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/backend/js/pages/my-script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-<script> CKEDITOR.replace( 'editor1', {
+<script> CKEDITOR.replace('editor1', {
         filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
         filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
         filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
         filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
         filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
         filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
-    } );
+    });
+</script>
+<script>
+    $(function () {
+        var del = document.querySelectorAll('#btn-del');
+        del.forEach(function (item) {
+            item.onclick = function () {
+                var cfm = confirm("{{translate('Are you sure you want to delete ?')}}");
+                if (cfm == true) {
+                    return true;
+                } else return false;
+            }
+        });
+
+        $("input[name = 'flag']").on('change', function (e) {
+            e.preventDefault();
+            var input = e.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var dataURL = reader.result;
+                var output = $('#image').attr('src', dataURL);
+            }
+            reader.readAsDataURL(input.files[0]);
+        })
+
+        $("input[name = 'image']").on('change', function (e) {
+            e.preventDefault();
+            var input = e.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var dataURL = reader.result;
+                var output = $('#image').attr('src', dataURL);
+            }
+            reader.readAsDataURL(input.files[0]);
+        })
+    })
 </script>
 @yield('script')
 <!-- custom js tag -->

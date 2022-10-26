@@ -1,19 +1,12 @@
 @extends('layouts.backend.master')
-@section('title', 'Quản lý môn tập')
+@section('title', translate('Subject Management'))
 @section('content')
     <div>
-        @if(session()->has('success'))
-            <div class="card-header flex-wrap border-0 pt-6 pb-0">
-                <span class="text-success">{{ session()->get('success') }}</span>
-            </div>
-        @endif
-
         <div class="card card-custom">
-
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">Quản lý môn tập
-                        <span class="d-block text-muted pt-2 font-size-sm">Cập nhật</span></h3>
+                    <h3 class="card-label">{{ translate('Subject Management') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('Update') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -31,7 +24,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>Danh sách môn tập</a>
+                </span>{{translate('Subject List')}}</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -40,7 +33,7 @@
                 @method('PATCH')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">Name <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">{{ translate('Subject name') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <input class="form-control" name="subject_name" type="text"
                                    value="{{old('subject_name') ? old('subject_name') : $subject->subject_name}}"/>
@@ -50,8 +43,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-tel-input" class="col-2 col-form-label">Image <span
-                                class="text-danger">*</span></label>
+                        <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Image') }}</label>
                         <div class="col-10">
                             <input type="file" class="form-control" name="image"
                                    value="{{old('image') ? old('image') : $subject->image}} "/>
@@ -59,9 +51,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">Mô tả</label>
+                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
-                            <textarea id="editor1" class="form-control" name="description">{{old('description') ? old('description') : $subject->description}}</textarea>
+                            <textarea placeholder="{{ translate('Content ...') }}" id="editor1" class="form-control" name="description">{{old('description') ? old('description') : $subject->description}}</textarea>
                             @error('description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -70,8 +62,8 @@
                     <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
-                            <button type="submit" class="btn btn-success mr-2">Save</button>
-                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
+                            <button type="reset" class="btn btn-secondary">{{ translate('Reset') }}</button>
                         </div>
                     </div>
                 </div>
@@ -80,20 +72,5 @@
     </div>
 @endsection
 @section('script')
-    <script>
-        $(function () {
-            $("input[name = 'image']").on('change', function (e) {
-                e.preventDefault();
-                var input = e.target;
-                var reader = new FileReader();
-                reader.onload = function () {
-                    var dataURL = reader.result;
-                    var output = $('#image').attr('src', dataURL);
-                }
-                reader.readAsDataURL(input.files[0]);
-            })
-        })
-
-    </script>
 @endsection
 
