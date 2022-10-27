@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SubjectRequest extends FormRequest
+class PackageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,21 @@ class SubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject_name' => 'required',
-            'description' => 'required',
+            'package_name' => 'required',
+            'subject_id' => 'required',
+            'price' => 'required',
+            'description' =>'required',
+            'month_package' =>'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'subject_name.required' => translate('Type subject name, thanks'),
+            'package_name.required' => translate('Type package name, thanks'),
+            'subject_id.required' => translate('Choose a subject, thanks'),
+            'price.required' => translate('Type package price, thanks'),
+            'month_package.required' => translate('Choose number of months, thanks'),
             'description.required' => translate('Type description, thanks'),
         ];
 

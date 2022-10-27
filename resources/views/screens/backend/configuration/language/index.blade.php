@@ -59,10 +59,8 @@
                                     <a href="{{ route('admin.language.translate', $item->code) }}"><i
                                             class="ki ki-reload text-info"></i></a>
                                     <a href="{{route('admin.language.edit', $item->id)}}" style="margin-left: 12px"><i class="flaticon2-pen text-warning"></i></a>
-                                    @if($item->code != env('DEFAULT_LANGUAGE'))
-                                        <a id="btn-del" href="{{route('admin.language.delete', $item->id)}}"
-                                           style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
-                                    @endif
+                                        <a class="btn-del" data-url="{{route('admin.language.delete',$item->id)}}"
+                                           style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
                                 </td>
                             </tr>
                         @endforeach

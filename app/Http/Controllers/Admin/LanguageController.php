@@ -102,6 +102,18 @@ class LanguageController extends Controller
     }
 
     public function update(Request $request, $id){
-
+        $lang = Language::where('id', $id)->first();
+        $lang->name = $request->name;
+        $ex_lang = Language::where('code', $request->code)->exists();
+        if ($request->flag) {
+            $image = $request->flag;
+            $imageName = $image->hashName();
+            $lang->flag = $image->storeAs('images/flags', $imageName);
+        }
+        if($ex_lang == false){
+            $lang->code = $request->code;
+        }
+        $lang->save();
+        return redirect()->back()->with('success', translate('Update language successfully'));
     }
 }

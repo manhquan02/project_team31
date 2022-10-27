@@ -45,15 +45,15 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Image') }} <span
-                                class="text-danger">*</span></label>
+                        <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Image') }} </label>
                         <div class="col-10">
                             <input type="file" class="form-control" name="image" value="{{old('image')}}"/>
                             <img id="image" src="" width="60px" height="60px">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }} </label>
+                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }} <span
+                                class="text-danger">*</span></label>
                         <div class="col-10">
                             <textarea id="editor1" class="form-control" name="description">{{ old('description')}}</textarea>
                             @error('description')

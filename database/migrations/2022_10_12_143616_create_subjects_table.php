@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('subject_name');
             $table->string('image')->nullable();
-            $table->string('description', 1000);
+            $table->string('description', 10000);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

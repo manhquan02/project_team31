@@ -42,7 +42,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('edit/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'edit'])->name('edit');
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'update'])->name('update');
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'delete'])->name('delete');
-
+        Route::get('set-pt', [\App\Http\Controllers\Admin\PackageController::class, 'set_pt'])->name('set_pt');
+        Route::get('change-status', [\App\Http\Controllers\Admin\PackageController::class, 'change_status'])->name('change_status');
     });
 
     Route::prefix('language')->name('language.')->group(function () {

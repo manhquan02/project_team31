@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    <a href="{{route('admin.subject.index')}}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{route('admin.package.index')}}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -25,39 +25,99 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>Danh sách môn tập</a>
+                </span>{{ translate('List Packages') }}</a>
                     <!--end::Button-->
                 </div>
             </div>
-            <form action="{{route('admin.subject.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.package.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">Name <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">{{ translate('Package Name') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
-                            <input class="form-control" name="subject_name" type="text"
-                                   value="{{old('subject_name')}}"/>
-                            @error('subject_name')
+                            <input class="form-control" name="package_name" type="text"
+                                   value="{{old('package_name')}}"/>
+                            @error('package_name')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-
                     <div class="form-group row">
-                        <label for="example-tel-input" class="col-2 col-form-label">Image <span
+                        <label class="col-2 col-form-label">{{ translate('Subject') }} <span class="text-danger">*</span></label>
+                        <div class="col-10">
+                            <select class="form-control" name="subject_id">
+                                <option selected disabled>{{ translate('Choose a subject') }} </option>
+                                @if(count($subjects) >0)
+                                    @foreach($subjects as $item)
+                                        <option value="{{$item->id}}" >{{$item->subject_name}} </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            @error('subject_id')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Avatar') }} <span
                                 class="text-danger">*</span></label>
                         <div class="col-10">
-                            <input type="file" class="form-control" name="image" value="{{old('image')}}"/>
+                            <input type="file" class="form-control" name="avatar" value="{{old('avatar')}}"/>
                             <img id="image" src="" width="60px" height="60px">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">Mô tả <span
-                                class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">{{ translate('Price') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
-                            <textarea class="form-control" name="description">{{old('description')}}</textarea>
+                            <input class="form-control" name="price" type="text"
+                                   value="{{old('price')}}"/>
+                            @error('price')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">{{ translate('% Discount') }}</label>
+                        <div class="col-10">
+                            <input class="form-control" name="price_sale" type="text"
+                                   value="{{old('price_sale')}}"/>
+                            @error('price_sale')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }} <span class="text-danger">*</span></label>
+                        <div class="col-10">
+                            <textarea id="editor1" class="form-control" name="description">{{ old('description')}}</textarea>
                             @error('description')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">{{ translate('Month Package') }} <span class="text-danger">*</span></label>
+                        <div class="col-10">
+                            <select class="form-control" name="month_package">
+                                <option selected disabled>{{ translate('Choose number of months') }} </option>
+                                <option value="1" >1 {{ translate('month') }} </option>
+                                <option value="3" >3 {{ translate('month') }} </option>
+                                <option value="6" >6 {{ translate('month') }} </option>
+                                <option value="9" >9 {{ translate('month') }} </option>
+                                <option value="12" >1 {{ translate('year') }} </option>
+                                <option value="36" >3 {{ translate('year') }} </option>
+                            </select>
+                            @error('month_package')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Have a Coach ?') }} </label>
+                        <div class="col-10 p-3">
+                            <input type="checkbox" name="set_pt">
+                            @error('set_pt')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -65,8 +125,8 @@
                     <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
-                            <button type="submit" class="btn btn-success mr-2">Save</button>
-                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
+                            <button type="reset" class="btn btn-secondary">{{ translate('Reset') }}</button>
                         </div>
                     </div>
                 </div>

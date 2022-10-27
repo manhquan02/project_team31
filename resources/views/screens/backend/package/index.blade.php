@@ -83,9 +83,9 @@
                         <th>{{ translate('Subject Name') }}</th>
                         <th>{{ translate('Avatar') }}</th>
                         <th>{{ translate('Listed Price') }}</th>
-                        <th>{{ translate('% Discount') }}</th>
                         <th>{{ translate('Episode Price') }}</th>
-                        <th>{{ translate('Description') }}</th>
+                        <th>{{ translate('Month Package') }}</th>
+                        <th>{{ translate('PT') }}</th>
                         <th>{{ translate('Status') }}</th>
                         <th>{{ translate('Actions') }}</th>
                     </tr>
@@ -101,16 +101,17 @@
                                     <img width="100px" height="100px" src="{{asset($item->avatar)}}" alt="">
                                 </td>
                                 <td>{{number_format($item->price,0,'.','.')}}</td>
-                                <td>{{$item->price_sale}}</td>
                                 <td>{{number_format($item->into_price,0,'.','.')}}</td>
-                                <td>{{$item->description}}</td>
+                                <td>{{$item->month_package < 12 ? $item->month_package : $item->month_package / 12}} {{ $item->month_package < 12 ? translate('month'): translate('year') }}</td>
+                                <td><input value="{{$item->id}}" id="set_pt" type="checkbox" @if($item->set_pt == 1) checked @endif></td>
                                 <td><span
-                                        class="label label-inline label-light-primary font-weight-bold">{{config('status_package.'.$item->status)}}</span></td>
+                                        class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{config('status_package.'.$item->status)}}</span></td>
                                 <td>
                                     <a href="{{route('admin.package.edit', $item->id)}}"><i
                                             class="flaticon2-pen text-warning"></i></a>
-                                    <a id="btn-del" href="{{route('admin.package.delete', $item->id)}}"
-                                       style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
+                                    <a class="btn-del" data-url="{{route('admin.package.delete', $item->id)}}"
+                                       style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
+                                    <a package="{{$item->id}}" id="status" style="margin-left: 12px; cursor: pointer"><i class="flaticon-warning text-dark"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -135,5 +136,46 @@
     </div>
 @endsection
 @section('script')
+<script>
+    $(function (){
+        $(document).on('change', '#set_pt', function (){
+            const package_id = $(this).attr('value');
+            const url = "{{route('admin.package.set_pt')}}";
+            $.ajax({
+                url : url,
+                method: 'GET',
+                data:{
+                    package_id: package_id
+                },
+                success:function (res){
+                    Swal.fire(
+                        "{{ translate('OK') }}",
+                        "{{ translate('Set pt has been changed !') }}",
+                        'success'
+                    )
+                }
+            })
+        })
 
+        $(document).on('click', '#status', function (){
+            const package_id = $(this).attr('package');
+            const url = "{{route('admin.package.change_status')}}";
+            $.ajax({
+                url : url,
+                method: 'GET',
+                data:{
+                    package_id: package_id
+                },
+                success:function (res){
+                    Swal.fire(
+                        "{{ translate('OK') }}",
+                        "{{ translate('Status package has been changed !') }}",
+                        'success'
+                    )
+                    location.reload();
+                }
+            })
+        })
+    })
+</script>
 @endsection

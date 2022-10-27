@@ -63,7 +63,7 @@ class SubjectController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request, $id){
+    public function update(SubjectRequest $request, $id){
         $subject = Subject::where('id', $id)->first();
         $subject->subject_name = $request->subject_name;
         $subject->description = $request->description;

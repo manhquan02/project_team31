@@ -29,7 +29,7 @@
     <link href="/backend/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css"/>
     <link href="/backend/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css"/>
     <link href="/backend/css/custom.css" rel="stylesheet" type="text/css"/>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--end::layouts Themes-->
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     <link rel="shortcut icon" href="/backend/media/logos/favicon.ico"/>
@@ -166,13 +166,13 @@
                     <!--begin::Container-->
                     <div class="container">
                         @if(session()->has('success'))
-                            <div style="background-color: green" class="card-header flex-wrap border-0 pt-6 pb-0">
-                                <span class="text-success">{{ translate(session()->get('success')) }}</span>
+                            <div style="background-color: green; color: white" class="card-header flex-wrap border-0 pt-6 pb-0">
+                                <span>{{ translate(session()->get('success')) }}</span>
                             </div>
                         @endif
                         @if(session()->has('error'))
-                            <div style="background-color: gold" class="card-header flex-wrap border-0 pt-6 pb-0">
-                                <span class="text-danger">{{ session()->get('error') }}</span>
+                            <div style="background-color: gold; color: white" class="card-header flex-wrap border-0 pt-6 pb-0">
+                                <span>{{ session()->get('error') }}</span>
                             </div>
                         @endif
                         @yield('content')
@@ -2096,41 +2096,8 @@
         filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
     });
 </script>
-<script>
-    $(function () {
-        var del = document.querySelectorAll('#btn-del');
-        del.forEach(function (item) {
-            item.onclick = function () {
-                var cfm = confirm("{{translate('Are you sure you want to delete ?')}}");
-                if (cfm == true) {
-                    return true;
-                } else return false;
-            }
-        });
-
-        $("input[name = 'flag']").on('change', function (e) {
-            e.preventDefault();
-            var input = e.target;
-            var reader = new FileReader();
-            reader.onload = function () {
-                var dataURL = reader.result;
-                var output = $('#image').attr('src', dataURL);
-            }
-            reader.readAsDataURL(input.files[0]);
-        })
-
-        $("input[name = 'image']").on('change', function (e) {
-            e.preventDefault();
-            var input = e.target;
-            var reader = new FileReader();
-            reader.onload = function () {
-                var dataURL = reader.result;
-                var output = $('#image').attr('src', dataURL);
-            }
-            reader.readAsDataURL(input.files[0]);
-        })
-    })
-</script>
+@include('layouts.backend.confirm')
+@include('layouts.backend.render_image')
 @yield('script')
 <!-- custom js tag -->
 @yield('custom-js-tag')
