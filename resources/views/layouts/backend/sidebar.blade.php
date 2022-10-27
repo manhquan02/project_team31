@@ -21,7 +21,7 @@
                 </a>
             </li>
 
-            
+
 
             {{--  người dùng --}}
             <li class="menu-section">
@@ -278,8 +278,8 @@
                     </ul>
                 </div>
             </li> --}}
-            
-            
+
+
             <li class="menu-section">
                 <h4 class="menu-text">{{ translate('Services') }}</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -371,157 +371,55 @@
                     </ul>
                 </div>
             </li>
-            
-            
+
+
             <li class="menu-section">
-                <h4 class="menu-text">Features</h4>
+                <h4 class="menu-text">{{ translate('Setting') }}</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
-            
-            
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                 <a href="javascript:;" class="menu-link menu-toggle">
-                    <span class="svg-icon menu-icon">
-                        <!--begin::Svg Icon | path:assets/media/svg/icons/Home/Book-open.svg-->
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24" />
-                                <path d="M13.6855025,18.7082217 C15.9113859,17.8189707 18.682885,17.2495635 22,17 C22,16.9325178 22,13.1012863 22,5.50630526 L21.9999762,5.50630526 C21.9999762,5.23017604 21.7761292,5.00632908 21.5,5.00632908 C21.4957817,5.00632908 21.4915635,5.00638247 21.4873465,5.00648922 C18.658231,5.07811173 15.8291155,5.74261533 13,7 C13,7.04449645 13,10.79246 13,18.2438906 L12.9999854,18.2438906 C12.9999854,18.520041 13.2238496,18.7439052 13.5,18.7439052 C13.5635398,18.7439052 13.6264972,18.7317946 13.6855025,18.7082217 Z" fill="#000000" />
-                                <path d="M10.3144829,18.7082217 C8.08859955,17.8189707 5.31710038,17.2495635 1.99998542,17 C1.99998542,16.9325178 1.99998542,13.1012863 1.99998542,5.50630526 L2.00000925,5.50630526 C2.00000925,5.23017604 2.22385621,5.00632908 2.49998542,5.00632908 C2.50420375,5.00632908 2.5084219,5.00638247 2.51263888,5.00648922 C5.34175439,5.07811173 8.17086991,5.74261533 10.9999854,7 C10.9999854,7.04449645 10.9999854,10.79246 10.9999854,18.2438906 L11,18.2438906 C11,18.520041 10.7761358,18.7439052 10.4999854,18.7439052 C10.4364457,18.7439052 10.3734882,18.7317946 10.3144829,18.7082217 Z" fill="#000000" opacity="0.3" />
-                            </g>
-                        </svg>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-text">Maps</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="menu-submenu">
-                    <i class="menu-arrow"></i>
-
-                </div>
-            </li>
-            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                <a href="javascript:;" class="menu-link menu-toggle">
-                    <span class="svg-icon menu-icon">
-                        <!--begin::Svg Icon | path:assets/media/svg/icons/Home/Mirror.svg-->
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24" />
-                                <path d="M13,17.0484323 L13,18 L14,18 C15.1045695,18 16,18.8954305 16,20 L8,20 C8,18.8954305 8.8954305,18 10,18 L11,18 L11,17.0482312 C6.89844817,16.5925472 3.58685702,13.3691811 3.07555009,9.22038742 C3.00799634,8.67224972 3.3975866,8.17313318 3.94572429,8.10557943 C4.49386199,8.03802567 4.99297853,8.42761593 5.06053229,8.97575363 C5.4896663,12.4577884 8.46049164,15.1035129 12.0008191,15.1035129 C15.577644,15.1035129 18.5681939,12.4043008 18.9524872,8.87772126 C19.0123158,8.32868667 19.505897,7.93210686 20.0549316,7.99193546 C20.6039661,8.05176407 21.000546,8.54534521 20.9407173,9.09437981 C20.4824216,13.3000638 17.1471597,16.5885839 13,17.0484323 Z" fill="#000000" fill-rule="nonzero" />
-                                <path d="M12,14 C8.6862915,14 6,11.3137085 6,8 C6,4.6862915 8.6862915,2 12,2 C15.3137085,2 18,4.6862915 18,8 C18,11.3137085 15.3137085,14 12,14 Z M8.81595773,7.80077353 C8.79067542,7.43921955 8.47708263,7.16661749 8.11552864,7.19189981 C7.75397465,7.21718213 7.4813726,7.53077492 7.50665492,7.89232891 C7.62279197,9.55316612 8.39667037,10.8635466 9.79502238,11.7671393 C10.099435,11.9638458 10.5056723,11.8765328 10.7023788,11.5721203 C10.8990854,11.2677077 10.8117724,10.8614704 10.5073598,10.6647638 C9.4559885,9.98538454 8.90327706,9.04949813 8.81595773,7.80077353 Z" fill="#000000" opacity="0.3" />
-                            </g>
-                        </svg>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-text">Miscellaneous</span>
+										<span class="svg-icon menu-icon">
+											<!--begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg-->
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<rect x="0" y="0" width="24" height="24" />
+													<path d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" fill="#000000" />
+													<path d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z" fill="#000000" opacity="0.3" />
+												</g>
+											</svg>
+                                            <!--end::Svg Icon-->
+										</span>
+                    <span class="menu-text">{{ translate('Configuration') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="menu-submenu">
                     <i class="menu-arrow"></i>
                     <ul class="menu-subnav">
                         <li class="menu-item menu-item-parent" aria-haspopup="true">
-                            <span class="menu-link">
-                                <span class="menu-text">Miscellaneous</span>
-                            </span>
+												<span class="menu-link">
+													<span class="menu-text">{{ translate('Configuration') }}</span>
+												</span>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/kanban-board.html" class="menu-link">
+                            <a href="{{ asset(route('admin.language.index')) }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">Kanban Board</span>
+                                <span class="menu-text">{{ translate('Language') }}</span>
                             </a>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/sticky-panels.html" class="menu-link">
+                            <a href="layout/general/fluid-content.html" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">Sticky Panels</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/blockui.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Block UI</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/perfect-scrollbar.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Perfect Scrollbar</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/treeview.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Tree View</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/bootstrap-notify.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Bootstrap Notify</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/toastr.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Toastr</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/sweetalert2.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">SweetAlert2</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/dual-listbox.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Dual Listbox</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/session-timeout.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Session Timeout</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/idle-timer.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Idle Timer</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="features/miscellaneous/cropper.html" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Cropper</span>
+                                <span class="menu-text">{{ translate('General configuration') }}</span>
                             </a>
                         </li>
                     </ul>
                 </div>
+            </li>
             </li>
         </ul>
         <!--end::Menu Nav-->

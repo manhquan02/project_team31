@@ -6,12 +6,12 @@
 
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">Quản lý môn tập
-                        <span class="d-block text-muted pt-2 font-size-sm">Cập nhật</span></h3>
+                    <h3 class="card-label">{{ translate('Package management') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('Add new') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    <a href="{{route('admin.subject.index')}}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{route('admin.package.index')}}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -25,40 +25,107 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>Danh sách môn tập</a>
+                </span>{{ translate('List Packages') }}</a>
                     <!--end::Button-->
                 </div>
             </div>
-            <form action="{{route('admin.subject.update', $subject->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.package.update', $package->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">Name <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">{{ translate('Package Name') }} <span
+                                class="text-danger">*</span></label>
                         <div class="col-10">
-                            <input class="form-control" name="subject_name" type="text"
-                                   value="{{old('subject_name') ? old('subject_name') : $subject->subject_name}}"/>
-                            @error('subject_name')
+                            <input class="form-control" name="package_name" type="text"
+                                   value="{{old('package_name') ? old('package_name') : $package->package_name}}"/>
+                            @error('package_name')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-tel-input" class="col-2 col-form-label">Image <span
+                        <label class="col-2 col-form-label">{{ translate('Subject') }} <span
                                 class="text-danger">*</span></label>
                         <div class="col-10">
-                            <input type="file" class="form-control" name="image"
-                                   value="{{old('image') ? old('image') : $subject->image}} "/>
-                            <img id="image" src="{{asset($subject->image)}}" width="60px" height="60px">
+                            <select class="form-control" name="subject_id">
+                                <option selected
+                                        value="{{$package->subject_id}}">{{ $package->subject->subject_name }} </option>
+                                @if(count($subjects) >0)
+                                    @foreach($subjects as $item)
+                                        <option
+                                                value="{{$item->id}}">{{ $item->subject_name }} </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            @error('subject_id')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">Mô tả <span
+                        <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Avatar') }} </label>
+                        <div class="col-10">
+                            <input type="file" class="form-control" name="avatar" value="{{old('avatar')}}"/>
+                            <img id="image" src="{{asset($package->avatar)}}" width="60px" height="60px">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">{{ translate('Price') }} <span class="text-danger">*</span></label>
+                        <div class="col-10">
+                            <input class="form-control" name="price" type="text"
+                                   value="{{old('price') ? old('price') : $package->price}}"/>
+                            @error('price')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">{{ translate('% Discount') }}</label>
+                        <div class="col-10">
+                            <input class="form-control" name="price_sale" type="text"
+                                   value="{{old('price_sale') ? old('price_sale') : $package->price_sale}}"/>
+                            @error('price_sale')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }}
+                            <span class="text-danger">*</span></label>
+                        <div class="col-10">
+                            <textarea id="editor1" class="form-control"
+                                      name="description">{!! old('description') ? old('description') : $package->description !!}</textarea>
+                            @error('description')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">{{ translate('Month Package') }} <span
                                 class="text-danger">*</span></label>
                         <div class="col-10">
-                            <textarea class="form-control"
-                                      name="description">{{old('description') ? old('description') : $subject->description}}</textarea>
-                            @error('description')
+                            <select class="form-control" name="month_package">
+                                <option selected
+                                        value="{{$package->month_package}}">{{ $package->month_package < 12 ? $package->month_package .' '.translate('month')  :  $package->month_package /12 .' '.translate('year') }} </option>
+                                <option value="1">1 {{ translate('month') }} </option>
+                                <option value="3">3 {{ translate('month') }} </option>
+                                <option value="6">6 {{ translate('month') }} </option>
+                                <option value="9">9 {{ translate('month') }} </option>
+                                <option value="12">1 {{ translate('year') }} </option>
+                                <option value="36">3 {{ translate('year') }} </option>
+                            </select>
+                            @error('month_package')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-password-input"
+                               class="col-2 col-form-label">{{ translate('Have a Coach ?') }} </label>
+                        <div class="col-10 p-3">
+                            <input type="checkbox" name="set_pt" @if($package->set_pt == 1) checked @endif>
+                            @error('set_pt')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -66,8 +133,8 @@
                     <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
-                            <button type="submit" class="btn btn-success mr-2">Save</button>
-                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
+                            <button type="reset" class="btn btn-secondary">{{ translate('Reset') }}</button>
                         </div>
                     </div>
                 </div>

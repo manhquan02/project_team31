@@ -19,11 +19,12 @@ return new class extends Migration
             $table->unsignedBigInteger('subject_id');
             $table->string('avatar')->nullable();
             $table->unsignedBigInteger('price');
-            $table->unsignedBigInteger('price_sale');
+            $table->unsignedBigInteger('price_sale')->default(0);
             $table->unsignedBigInteger('into_price');
-            $table->string('description', 1000);
-            $table->string('month_package')->nullable();
+            $table->string('description', 10000);
+            $table->unsignedInteger('month_package');
             $table->unsignedInteger('status')->default(1);
+            $table->unsignedInteger('set_pt')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

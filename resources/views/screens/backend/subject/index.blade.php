@@ -98,7 +98,7 @@
                                 <td>
                                     <a href="{{route('admin.subject.edit', $item->id)}}"><i
                                             class="flaticon2-pen text-warning"></i></a>
-                                    <a id="btn-del" href="{{route('admin.subject.delete', $item->id)}}"
+                                    <a class="btn-del" data-url="{{route('admin.subject.delete', $item->id)}}"
                                        style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
                                 </td>
                             </tr>
