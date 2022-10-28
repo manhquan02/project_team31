@@ -57,4 +57,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('translate/{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'store_translate'])->name('store_translate');
         Route::get('delete_translation{translation}', [\App\Http\Controllers\Admin\LanguageController::class, 'delete_translation'])->name('delete_translation');
     });
+
+    Route::prefix('contact')->name('contact.')->group(function () {
+        Route::get('', [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('index');
+        Route::get('change-status/{id}', [\App\Http\Controllers\Admin\ContactController::class, 'change_status'])->name('change_status');
+    });
 });

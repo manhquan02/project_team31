@@ -114,7 +114,6 @@
                $("input[name = 'health']").val(test_bmi(bmi));
                console.log(bmi);
            }
-
        });
         $("input[name = 'height']").on('change', function(){
             height = $(this).val();
@@ -125,10 +124,6 @@
                 console.log(bmi);
             }
         });
-
-
-
-
     })
 </script>
 @endsection
