@@ -36,7 +36,7 @@
     <!--end::layouts Themes-->
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     <link rel="shortcut icon" href="/backend/media/logos/favicon.ico"/>
-
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 </head>
 <!--end::Head-->
@@ -170,18 +170,7 @@
                 <div class="d-flex flex-column-fluid">
                     <!--begin::Container-->
                     <div class="container">
-                        @if(session()->has('success'))
-                            <div style="background-color: green; color: white" class="card-header flex-wrap border-0 pt-6 pb-0">
-                                <span>{{ translate(session()->get('success')) }}</span>
-                            </div>
-                        @endif
-                        @if(session()->has('error'))
-                            <div style="background-color: gold; color: white" class="card-header flex-wrap border-0 pt-6 pb-0">
-                                <span>{{ session()->get('error') }}</span>
-                            </div>
-                        @endif
                         @yield('content')
-
                     </div>
                     <!--end::Container-->
                 </div>
@@ -2089,8 +2078,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
 <script>
+
     $('#summernote').summernote({
         height: 312
     });

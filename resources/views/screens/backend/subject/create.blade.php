@@ -43,7 +43,6 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Image') }} </label>
                         <div class="col-10">

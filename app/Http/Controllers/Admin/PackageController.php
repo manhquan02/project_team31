@@ -7,6 +7,7 @@ use App\Http\Requests\PackageRequest;
 use App\Http\Requests\SubjectRequest;
 use App\Models\Package;
 use App\Models\Subject;
+use Brian2694\Toastr\Facades\Toastr;
 use http\Env\Response;
 use Illuminate\Http\Request;
 
@@ -71,14 +72,16 @@ class PackageController extends Controller
             $new->set_pt = 1;
         }
         $new->save();
-        return redirect()->route('admin.package.create')->with('success', translate('Add new successfully !'));
+        Toastr::success(translate('Add new package successfully !'));
+        return redirect()->route('admin.package.create');
     }
 
     public function delete($id){
         $package = Package::where('id', $id)->first();
         if($package != null){
             $package->delete();
-            return redirect()->route('admin.package.index')->with('success', translate('Deleted successfully !'));
+            Toastr::success(translate('Delete package successfully !'));
+            return redirect()->route('admin.package.index');
         }
         return redirect()->route('admin.package.index');
     }
@@ -118,7 +121,8 @@ class PackageController extends Controller
                 $package->set_pt = 0;
             }
             $package->save();
-            return redirect()->back()->with('success', translate('Updated successfully !'));
+            Toastr::success(translate('Update package successfully !'));
+            return redirect()->back();
         }
         return redirect()->route('admin.package.index');
     }
@@ -150,7 +154,8 @@ class PackageController extends Controller
                 $package ->status =0;
             }
             $package->save();
-            return redirect()->route('admin.package.index')->with('success', translate('Update status successfully !'));
+            Toastr::success(translate('Update package status successfully !'));
+            return redirect()->route('admin.package.index');
         }
         return redirect()->route('admin.package.index');
     }

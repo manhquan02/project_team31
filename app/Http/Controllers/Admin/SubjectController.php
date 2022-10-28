@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -35,7 +36,6 @@ class SubjectController extends Controller
                         ->paginate(12);
                 }
             }
-
         return view('screens.backend.subject.index', compact('subjects'));
     }
 
@@ -55,7 +55,8 @@ class SubjectController extends Controller
         }
         $new_subject->description = $request->description;
         $new_subject->save();
-        return redirect()->route('admin.subject.create')->with('success', 'Add new subject successfully !');
+        Toastr::success(translate('Add new subject successfully !'));
+        return redirect()->route('admin.subject.create');
     }
 
     public function delete($id)
@@ -63,7 +64,8 @@ class SubjectController extends Controller
         $subject = Subject::where('id', $id)->first();
         if ($subject != null) {
             $subject->delete();
-            return redirect()->back()->with('success', 'Delete subject successfully !');
+            Toastr::success(translate('Delete subject successfully !'));
+            return redirect()->back();
         }
         return redirect()->back();
     }
@@ -88,7 +90,8 @@ class SubjectController extends Controller
             $subject->image = $image->storeAs('images/subject', $imageName);
         }
         $subject->save();
-        return redirect()->route('admin.subject.edit', $id)->with('success', 'Update subject successfully !');
+        Toastr::success(translate('Update subject successfully !'));
+        return redirect()->route('admin.subject.edit', $id);
     }
 
     public function description($id)

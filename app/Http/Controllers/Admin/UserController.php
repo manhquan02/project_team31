@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BMIRequest;
 use App\Http\Requests\UserRequest;
+use App\Models\Bodybmi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Services\UploadImgService;
+use Brian2694\Toastr\Facades\Toastr;
 
 class UserController extends Controller
 {
@@ -33,7 +36,7 @@ class UserController extends Controller
     {
         $roles = Role::all();
 
-        return view('screens.backend.user.create',['roles' => $roles]);
+        return view('screens.backend.user.create', ['roles' => $roles]);
     }
 
     /**
@@ -45,22 +48,20 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $user = new User();
-        if($request->hasFile('avatar')){
+        if ($request->hasFile('avatar')) {
             // dd($request->avatar);
             $file = $request->avatar;
-            $file_name = UploadImgService::uploadImg($request->avatar,'images/user');
-
-        }
-        else{
+            $file_name = UploadImgService::uploadImg($request->avatar, 'images/user');
+        } else {
             $file_name = 'one.jpg';
         }
-        
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->gender = $request->gender;
         $user->phone = $request->phone;
-        $user->avatar = 'images/user/'.$file_name;
+        $user->avatar = 'images/user/' . $file_name;
         $user->address = $request->address;
         $user->assignRole($request->role);
         $user->save();
@@ -109,5 +110,35 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function bmi($id)
+    {
+        $user = User::where('id', $id)->first();
+        if ($user != null) {
+            $ex_bmi = Bodybmi::where('user_id', $id)->exists();
+            if ($ex_bmi == false) {
+                $bmi = new Bodybmi();
+                $bmi->user_id = $id;
+                $bmi->save();
+            } else {
+                $bmi = Bodybmi::where('user_id', $id)->first();
+            }
+            return view('screens.backend.user.bmi', compact('bmi'));
+        }
+        return redirect()->back();
+    }
+
+    public function updateBMI($id, BMIRequest $request)
+    {
+        $bmi = Bodybmi::where('user_id', $id)->first();
+        $request_bmi = round($request->weight / (($request->height / 100) * ($request->height / 100)), 1) ;
+        $bmi->weight = $request->weight;
+        $bmi->height = $request->height;
+        $bmi->bmi = $request_bmi ; 
+        $bmi->health = test_bmi($request_bmi);
+        $bmi->save();
+        Toastr::success(translate('Update BMI user successfully !'));
+        return redirect()->back();
     }
 }

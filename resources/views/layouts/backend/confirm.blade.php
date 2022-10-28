@@ -12,14 +12,7 @@
             confirmButtonText: "{{ translate('Confirm') }}",
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                    "{{ translate('OK') }}",
-                    "{{ translate('The operation was done successfully !') }}",
-                    'success'
-                )
-                setTimeout(() => {
                     window.location = url
-                }, 999)
             }
         })
     })

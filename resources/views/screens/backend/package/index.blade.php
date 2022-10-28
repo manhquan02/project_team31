@@ -143,7 +143,7 @@
                 success:function (res){
                     Swal.fire(
                         "{{ translate('OK') }}",
-                        "{{ translate('The operation was done successfully !') }}",
+                        "{{ translate('Set up PT package successfully !') }}",
                         'success'
                     )
                 }
