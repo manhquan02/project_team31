@@ -14,17 +14,29 @@ class PackageController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->orderby && $request->column){
-            if ($request->keyword != '') {
+        if ($request->start_date && $request->end_date && strtotime($request->start_date) < strtotime($request->end_date)) {
+            if($request->keyword){
                 $packages = Package::select('packages.*')
                     ->where('package_name', 'like', '%' . $request->keyword . '%')
-                    ->orderBy($request->column, $request->orderby)->paginate(12);
-            } else {
+                    ->where('created_at', '>=', $request->start_date)
+                    ->where('created_at', '<=', $request->end_date)
+                    ->paginate(12);
+            }else{
                 $packages = Package::select('packages.*')
-                    ->orderBy($request->column, $request->orderby)->paginate(12);
+                    ->where('created_at', '>=', $request->start_date)
+                    ->where('created_at', '<=', $request->end_date)
+                    ->paginate(12);
             }
-        }else{
-            $packages = Package::where('id', '>', 0)->paginate(12);
+        } else {
+            if($request->keyword){
+                $packages = Package::select('packages.*')
+                    ->where('package_name', 'like', '%' . $request->keyword . '%')
+                    ->paginate(12);
+            }else{
+                $packages = Package::select('packages.*')
+                    ->where('id', '>', 0)
+                    ->paginate(12);
+            }
         }
 
         return view('screens.backend.package.index', compact('packages'));
@@ -129,8 +141,8 @@ class PackageController extends Controller
         ]);
     }
 
-    public function change_status(Request $request){
-        $package = Package::where('id', $request->package_id)->first();
+    public function change_status($id){
+        $package = Package::where('id', $id)->first();
         if($package != null){
             if($package->status == 0){
                 $package ->status =1;
@@ -138,13 +150,9 @@ class PackageController extends Controller
                 $package ->status =0;
             }
             $package->save();
-            return response()->json([
-                'status'=>true
-            ]);
+            return redirect()->route('admin.package.index')->with('success', translate('Update status successfully !'));
         }
-        return response()->json([
-            'status'=>false
-        ]);
+        return redirect()->route('admin.package.index');
     }
 
 

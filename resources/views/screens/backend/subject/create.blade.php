@@ -25,7 +25,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ translate('Subject List') }}</a>
+                </span>{{ translate('List Subjects') }}</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -55,7 +55,7 @@
                         <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }} <span
                                 class="text-danger">*</span></label>
                         <div class="col-10">
-                            <textarea id="editor1" class="form-control" name="description">{{ old('description')}}</textarea>
+                            <textarea id="summernote" class="form-control" name="description">{{ old('description')}}</textarea>
                             @error('description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror

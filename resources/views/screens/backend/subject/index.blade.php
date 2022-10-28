@@ -46,20 +46,14 @@
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('OrderBy')}}</label>
-                                            <select class="form-control" name="orderby">
-                                                <option value="asc">Asc</option>
-                                                <option value="desc">Desc</option>
-                                            </select>
+                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('From')}}</label>
+                                            <input name="start_date" type="date" class="form-control"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('Column')}}</label>
-                                            <select class="form-control" name="column">
-                                                <option value="id">ID</option>
-                                                <option value="subject_name">{{translate('Subject Name')}}</option>
-                                            </select>
+                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('To')}}</label>
+                                            <input name="end_date" type="date" class="form-control"/>
                                         </div>
                                     </div>
                                 </div>
@@ -96,10 +90,10 @@
                                 </td>
                                 <td><a href="{{ route('admin.subject.description', $item->id) }}">{{preg_replace('/[^A-Za-z0-9\_]/', '', str_replace(' ', '_', strtolower($item->subject_name.'_description tab')))}}</a></td>
                                 <td>
-                                    <a href="{{route('admin.subject.edit', $item->id)}}"><i
+                                    <a title="{{translate('Edit')}}" href="{{route('admin.subject.edit', $item->id)}}"><i
                                             class="flaticon2-pen text-warning"></i></a>
-                                    <a class="btn-del" data-url="{{route('admin.subject.delete', $item->id)}}"
-                                       style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
+                                    <a title="{{translate('Delete')}}" class="btn-confirm" data-title="Are you sure you want to delete ?" data-url="{{route('admin.subject.delete', $item->id)}}"
+                                       style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
                                 </td>
                             </tr>
                         @endforeach
