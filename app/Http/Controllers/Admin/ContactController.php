@@ -11,21 +11,21 @@ class ContactController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->start_date && $request->end_date && strtotime($request->start_date) < strtotime($request->end_date)) {
-            if($request->status){
+        if ($request->start_date && $request->end_date && strtotime($request->start_date) <= strtotime($request->end_date)) {
+            if(isset($request->status)){
                 $contacts = Contact::select('contacts.*')
                     ->where('status', $request->status)
-                    ->where('created_at', '>=', $request->start_date)
-                    ->where('created_at', '<=', $request->end_date)
+                    ->whereDate('created_at', '>=', $request->start_date)
+                    ->whereDate('created_at', '<=', $request->end_date)
                     ->paginate(12);
             }else{
                 $contacts = Contact::select('contacts.*')
-                    ->where('created_at', '>=', $request->start_date)
-                    ->where('created_at', '<=', $request->end_date)
+                    ->whereDate('created_at', '>=', $request->start_date)
+                    ->whereDate('created_at', '<=', $request->end_date)
                     ->paginate(12);
             }
         } else {
-            if($request->status){
+            if(isset($request->status)){
                 $contacts = Contact::select('contacts.*')
                     ->where('status', $request->status)
                     ->paginate(12);
@@ -46,4 +46,12 @@ class ContactController extends Controller
         }
         return redirect()->route('admin.contact.index');
     }
+
+//    public function show($id){
+//        $contact = Contact::where('id', $id)->first();
+//        if($contact != null){
+//            return redirect()->route('admin.contact.show', compact('contact'));
+//        }
+//        return redirect()->route('admin.contact.index');
+//    }
 }

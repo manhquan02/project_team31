@@ -12,17 +12,17 @@ class SubjectController extends Controller
 {
     public function index(Request $request)
     {
-            if ($request->start_date && $request->end_date && strtotime($request->start_date) < strtotime($request->end_date)) {
+            if ($request->start_date && $request->end_date && strtotime($request->start_date) <= strtotime($request->end_date)) {
                 if($request->keyword){
                     $subjects = Subject::select('subjects.*')
                         ->where('subject_name', 'like', '%' . $request->keyword . '%')
-                        ->where('created_at', '>=', $request->start_date)
-                        ->where('created_at', '<=', $request->end_date)
+                        ->whereDate('created_at', '>=', $request->start_date)
+                        ->whereDate('created_at', '<=', $request->end_date)
                         ->paginate(12);
                 }else{
                     $subjects = Subject::select('subjects.*')
-                        ->where('created_at', '>=', $request->start_date)
-                        ->where('created_at', '<=', $request->end_date)
+                        ->whereDate('created_at', '>=', $request->start_date)
+                        ->whereDate('created_at', '<=', $request->end_date)
                         ->paginate(12);
                 }
             } else {

@@ -1,16 +1,17 @@
 @extends('layouts.backend.master')
-@section('title', translate('Subject Management'))
+@section('title', translate('Post Management'))
 @section('content')
     <div>
         <div class="card card-custom">
+
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Subject Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('Update') }}</span></h3>
+                    <h3 class="card-label">{{ translate('Post Management') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('Add new') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    <a href="{{route('admin.subject.index')}}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{route('admin.post.index')}}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -24,37 +25,45 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{translate('List Subjects')}}</a>
+                </span>{{ translate('List Posts') }}</a>
                     <!--end::Button-->
                 </div>
             </div>
-            <form action="{{route('admin.subject.update', $subject->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.post.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PATCH')
+                @method('POST')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ translate('Subject name') }} <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">{{ translate('Post Title') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
-                            <input class="form-control" name="subject_name" type="text"
-                                   value="{{old('subject_name') ? old('subject_name') : $subject->subject_name}}"/>
-                            @error('subject_name')
+                            <input class="form-control" name="title" type="text"
+                                   value="{{old('title')}}"/>
+                            @error('title')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Image') }}</label>
+                        <label class="col-2 col-form-label">{{ translate('Subject') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
-                            <input type="file" class="form-control" name="image"
-                                   value="{{old('image') ? old('image') : $subject->image}} "/>
-                            <img id="image" src="{{asset($subject->image)}}" width="60px" height="60px">
+                            <select class="form-control" name="subject_id">
+                                <option selected disabled>{{ translate('Choose a subject') }} </option>
+                                @if(count($subjects) >0)
+                                    @foreach($subjects as $item)
+                                        <option value="{{$item->id}}" >{{$item->subject_name}} </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            @error('subject_id')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }} <span class="text-danger">*</span></label>
+                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Content') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
-                            <textarea placeholder="{{ translate('Content ...') }}" id="summernote" class="form-control" name="description">{{old('description') ? old('description') : $subject->description}}</textarea>
-                            @error('description')
+                            <textarea id="summernote" class="form-control" name="content_post">{{ old('content_post')}}</textarea>
+                            @error('content_post')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -63,6 +72,7 @@
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
                             <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
+                            <button type="reset" class="btn btn-secondary">{{ translate('Reset') }}</button>
                         </div>
                     </div>
                 </div>
@@ -71,5 +81,6 @@
     </div>
 @endsection
 @section('script')
+
 @endsection
 

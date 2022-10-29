@@ -21,8 +21,8 @@
                                             <label class="mr-3 mb-0 d-none d-md-block">{{translate('Status')}}</label>
                                             <select class="form-control" name="status">
                                                 <option selected disabled>{{ translate('Choose a status') }}</option>
-                                                <option value="0">{{ translate('No response yet') }}</option>
-                                                <option value="1">{{ translate('Responded') }}</option>
+                                                <option value="0" @if(request('status', -1) == 0) selected @endif>{{ translate('No response yet') }}</option>
+                                                <option value="1" @if(request('status', -1) == 1) selected @endif>{{ translate('Responded') }}</option>
                                             </select>
                                         </div>
                                     </div>

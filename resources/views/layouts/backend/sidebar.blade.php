@@ -444,7 +444,7 @@
 												</span>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
-                            <a href="{{ asset(route('admin.language.index')) }}" class="menu-link">
+                            <a href="{{ asset(route('admin.post.index')) }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>

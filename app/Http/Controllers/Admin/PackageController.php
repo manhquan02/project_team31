@@ -15,17 +15,17 @@ class PackageController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->start_date && $request->end_date && strtotime($request->start_date) < strtotime($request->end_date)) {
+        if ($request->start_date && $request->end_date && strtotime($request->start_date) <= strtotime($request->end_date)) {
             if($request->keyword){
                 $packages = Package::select('packages.*')
                     ->where('package_name', 'like', '%' . $request->keyword . '%')
-                    ->where('created_at', '>=', $request->start_date)
-                    ->where('created_at', '<=', $request->end_date)
+                    ->whereDate('created_at', '>=', $request->start_date)
+                    ->whereDate('created_at', '<=', $request->end_date)
                     ->paginate(12);
             }else{
                 $packages = Package::select('packages.*')
-                    ->where('created_at', '>=', $request->start_date)
-                    ->where('created_at', '<=', $request->end_date)
+                    ->whereDate('created_at', '>=', $request->start_date)
+                    ->whereDate('created_at', '<=', $request->end_date)
                     ->paginate(12);
             }
         } else {
@@ -88,8 +88,8 @@ class PackageController extends Controller
 
     public function edit($id){
         $package = Package::where('id', $id)->first();
-        $subjects = Subject::where('id', '!=', $package->subject_id)->get();
         if($package != null){
+            $subjects = Subject::where('id', '!=', $package->subject_id)->get();
             return view('screens.backend.package.edit', compact('package', 'subjects'));
         }
         return redirect()->route('admin.package.index');

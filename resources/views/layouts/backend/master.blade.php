@@ -97,7 +97,7 @@
             <div class="brand flex-column-auto" id="kt_brand">
                 <!--begin::Logo-->
                 <a href="index.html" class="brand-logo">
-                    <img alt="Logo" src="/backend/media/logos/logo-light.png"/>
+                    <img alt="Logo" src="/backend/media/svg/flags/220-vietnam.svg"/>
                 </a>
                 <!--end::Logo-->
                 <!--begin::Toggle-->

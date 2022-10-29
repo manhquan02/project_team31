@@ -1,16 +1,16 @@
 @extends('layouts.backend.master')
-@section('title', translate('Package Management'))
+@section('title', translate('Post Management'))
 @section('content')
     <div>
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Package Management') }}
+                    <h3 class="card-label">{{ translate('Post Management') }}
                         <span class="d-block text-muted pt-2 font-size-sm">{{ translate('List') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    <a href="{{route('admin.package.create')}}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{route('admin.post.create')}}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -24,10 +24,11 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ translate('Add New Package') }}</a>
+                </span>{{ translate('Add New Post') }}</a>
                     <!--end::Button-->
                 </div>
             </div>
+
             <div class="card-body">
                 <!--begin::Search Form-->
                 <form action="">
@@ -36,18 +37,19 @@
                             <div class="col-lg-9 col-xl-8">
                                 <div class="row align-items-center">
                                     <div class="col-md-4 my-2 my-md-0">
-                                        <div class="input-icon">
-                                            <input name="keyword" type="text" class="form-control"
-                                                   placeholder="{{translate('Enter Package Name')}}"/>
-                                            <span>
-                                        <i class="flaticon2-search-1 text-muted"></i>
-                                        </span>
+                                        <div class="d-flex align-items-center">
+                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('Status')}}</label>
+                                            <select class="form-control" name="status">
+                                                <option selected disabled>{{ translate('Choose a status') }}</option>
+                                                <option value="0" @if(request('status', -1) == 0) selected @endif>{{ translate('Hidden') }}</option>
+                                                <option value="1" @if(request('status', -1) == 1) selected @endif>{{ translate('Show') }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
                                             <label class="mr-3 mb-0 d-none d-md-block">{{translate('From')}}</label>
-                                            <input name="start_date" type="date" class="form-control"/>
+                                            <input name="start_date" value="2022-10-29" type="date" class="form-control"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
@@ -66,7 +68,6 @@
                     </div>
                     <!--end::Search Form-->
                 </form>
-                <!--end::Search Form-->
             </div>
             <div class="card-body">
                 <!--begin: Datatable-->
@@ -74,47 +75,36 @@
                     <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>{{ translate('Package Name') }}</th>
-                        <th>{{ translate('Subject Name') }}</th>
-                        <th>{{ translate('Avatar') }}</th>
-                        <th>{{ translate('Listed Price') }}</th>
-                        <th>{{ translate('Episode Price') }}</th>
-                        <th>{{ translate('Month Package') }}</th>
-                        <th>{{ translate('PT') }}</th>
-                        <th>{{ translate('Status') }}</th>
-                        <th>{{ translate('Actions') }}</th>
+                        <th>{{translate('Title')}}</th>
+                        <th>{{translate('Subject Name')}}</th>
+                        <th>{{translate('Poster')}}</th>
+                        <th>{{translate('Status')}}</th>
+                        <th>{{translate('Post date')}}</th>
+                        <th>{{translate('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
-                    @if($packages != null)
-                        @foreach($packages as $key=>$item)
+                    @if($posts != null)
+                        @foreach($posts as $key=>$item)
                             <tr>
                                 <td>{{$item->id}}</td>
-                                <td>{{$item->package_name}}</td>
+                                <td>{{$item->title}}</td>
                                 <td>{{$item->subject->subject_name}}</td>
-                                <td>
-                                    <img width="100px" height="100px" src="{{asset($item->avatar)}}" alt="">
-                                </td>
-                                <td>{{number_format($item->price,0,'.','.')}}</td>
-                                <td>{{number_format($item->into_price,0,'.','.')}}</td>
-                                <td>{{$item->month_package < 12 ? $item->month_package : $item->month_package / 12}} {{ $item->month_package < 12 ? translate('month'): translate('year') }}</td>
-                                <td><input value="{{$item->id}}" id="set_pt" type="checkbox"
-                                           @if($item->set_pt == 1) checked @endif></td>
+                                <td>{{$item->user->name}}</td>
                                 <td><span
-                                        class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{ translate(config('status_package.'.$item->status) )}}</span>
+                                        class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{translate(config('status_post.'.$item->status))}}</span>
                                 </td>
+                                <td>{{ date('d-m-Y H:i:s', strtotime($item->created_at)) }}</td>
                                 <td>
                                     <a title="{{ translate('Edit') }}"
-                                       href="{{route('admin.package.edit', $item->id)}}"><i
+                                       href="{{route('admin.post.edit', $item->id)}}"><i
                                             class="flaticon2-pen text-warning"></i></a>
-                                    <a title="{{ translate('Delete') }}" class="btn-confirm"
-                                       data-title="Are you sure you want to delete ?"
-                                       data-url="{{route('admin.package.delete', $item->id)}}"
-                                       style="margin-left: 12px; cursor: pointer"><i
-                                            class="flaticon2-trash text-danger"></i></a>
-                                    <a title="{{ translate('Change Status') }}" class="btn-confirm"
-                                       data-title="Are you sure you want to change the status ?"
-                                       data-url="{{route('admin.package.change_status', $item->id)}}"
+                                    <a title="{{translate('Delete')}}" class="btn-confirm" data-title="{{ translate('Are you sure you want to delete ?') }}" data-url="{{route('admin.post.delete', $item->id)}}"
+                                       style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
+                                    <a title="{{ $item->status ==0 ? translate('Show') : translate('Hidden')}}"
+                                       class="btn-confirm"
+                                       data-title="{{ $item->status ==1 ? translate('You are sure to hidden post ?') : translate('You are sure to show post ?') }}"
+                                       data-url="{{route('admin.post.change_status', $item->id)}}"
                                        style="margin-left: 12px; cursor: pointer"><i
                                             class="flaticon-warning text-dark"></i></a>
                                 </td>
@@ -123,17 +113,19 @@
                     @endif
                     </tbody>
                 </table>
-                <div>
-                    {{$packages->appends(request()->input())->links()}}
-                </div>
                 <!--end: Datatable-->
-                @if(count($packages) <= 0)
+                <div>
+                    {{$posts->appends(request()->input())->links()}}
+                </div>
+                @if(count($posts) <= 0)
                     <div class="card-body">
+                        <!--begin::Search Form-->
                         <div class="mb-7">
                             <div class="row align-items-center">
                                 <h2 style="color: #999999; text-align: center">{{ translate('No records found') }}</h2>
                             </div>
                         </div>
+                        <!--end::Search Form-->
                     </div>
                 @endif
             </div>
@@ -141,24 +133,4 @@
     </div>
 @endsection
 @section('script')
-    <script>
-        $(function () {
-            $(document).on('change', '#set_pt', function () {
-                const package_id = $(this).attr('value');
-                const url = "{{route('admin.package.set_pt')}}";
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                    data: {package_id: package_id},
-                    success: function (res) {
-                        Swal.fire(
-                            "{{ translate('OK') }}",
-                            "{{ translate('Set up PT package successfully !') }}",
-                            'success'
-                        )
-                    }
-                })
-            })
-        })
-    </script>
 @endsection

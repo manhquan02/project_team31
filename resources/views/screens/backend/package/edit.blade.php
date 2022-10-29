@@ -134,7 +134,6 @@
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
                             <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
-                            <button type="reset" class="btn btn-secondary">{{ translate('Reset') }}</button>
                         </div>
                     </div>
                 </div>
