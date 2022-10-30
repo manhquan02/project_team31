@@ -75,7 +75,6 @@
                         <th>#ID</th>
                         <th>{{translate('Subject name')}}</th>
                         <th>{{translate('Image')}}</th>
-                        <th>{{translate('Description')}}</th>
                         <th>{{translate('Actions')}}</th>
                     </tr>
                     </thead>
@@ -88,7 +87,6 @@
                                 <td>
                                     <img width="100px" height="100px" src="{{asset($item->image)}}" alt="">
                                 </td>
-                                <td><a href="{{ route('admin.subject.description', $item->id) }}">{{preg_replace('/[^A-Za-z0-9\_]/', '', str_replace(' ', '_', strtolower($item->subject_name.'_description tab')))}}</a></td>
                                 <td>
                                     <a title="{{translate('Edit')}}" href="{{route('admin.subject.edit', $item->id)}}"><i
                                             class="flaticon2-pen text-warning"></i></a>

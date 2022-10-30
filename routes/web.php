@@ -32,7 +32,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('edit/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'edit'])->name('edit');
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'update'])->name('update');
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'delete'])->name('delete');
-        Route::get('description/{id}', [\App\Http\Controllers\Admin\SubjectController::class, 'description'])->name('description');
     });
 
     Route::prefix('package')->name('package.')->group(function () {

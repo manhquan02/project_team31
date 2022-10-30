@@ -46,15 +46,13 @@ class SubjectController extends Controller
 
     public function store(SubjectRequest $request)
     {
-        $new_subject = new Subject();
-        $new_subject->subject_name = $request->subject_name;
+        $new = new Subject();
+        $new->subject_name = $request->subject_name;
         if ($request->image) {
-            $image = $request->image;
-            $imageName = $image->hashName();
-            $new_subject->image = $image->storeAs('images/subject', $imageName);
+            upload_image($request, $new, 'images/subject');
         }
-        $new_subject->description = $request->description;
-        $new_subject->save();
+        $new->description = $request->description;
+        $new->save();
         Toastr::success(translate('Add new subject successfully !'));
         return redirect()->route('admin.subject.create');
     }
@@ -85,22 +83,11 @@ class SubjectController extends Controller
         $subject->subject_name = $request->subject_name;
         $subject->description = $request->description;
         if ($request->image) {
-            $image = $request->image;
-            $imageName = $image->hashName();
-            $subject->image = $image->storeAs('images/subject', $imageName);
+            upload_image($request, $subject, 'images/subject');
         }
         $subject->save();
         Toastr::success(translate('Update subject successfully !'));
         return redirect()->route('admin.subject.edit', $id);
     }
 
-    public function description($id)
-    {
-        $subject = Subject::where('id', $id)->first();
-        $description = $subject->description;
-        if ($subject != null) {
-            return view('screens.backend.subject.description', compact('description'));
-        }
-        return redirect()->back();
-    }
 }

@@ -11,12 +11,12 @@ class ContactController extends Controller
 {
     public function store(Request $request)
     {
-        $new_contact = new Contact();
-        $new_contact->name = $request->name;
-        $new_contact->email = $request->email;
-        $new_contact->phone = $request->phone;
-        $new_contact->description = $request->description;
-        $new_contact->save();
+        $new = new Contact();
+        $new->name = $request->name;
+        $new->email = $request->email;
+        $new->phone = $request->phone;
+        $new->description = $request->description;
+        $new->save();
         return response()->json([
             'status' => 200,
             'message' => 'Nội dung của bạn đã được gửi. Hãy check gmail chúng tôi sẽ liên hệ sớm nhất !'

@@ -62,4 +62,10 @@ function test_bmi($bmi){
     }
     return $health;
 }
+
+function upload_image($request, $new, $folder){
+    $image = $request->image;
+    $imageName = $image->hashName();
+    $new->image = $image->storeAs($folder, $imageName);
+}
 ?>
