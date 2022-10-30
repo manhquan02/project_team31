@@ -27,7 +27,7 @@ class PackageRequest extends FormRequest
             'package_name' => 'required',
             'subject_id' => 'required',
             'price' => 'required',
-            'description' =>'required',
+            'description' =>'required|max:10000',
             'month_package' =>'required',
         ];
     }
@@ -40,6 +40,8 @@ class PackageRequest extends FormRequest
             'price.required' => translate('Type package price, thanks'),
             'month_package.required' => translate('Choose number of months, thanks'),
             'description.required' => translate('Type description, thanks'),
+            'description.max' => translate('The description must not be greater than 10000 characters, thanks'),
+
         ];
 
     }

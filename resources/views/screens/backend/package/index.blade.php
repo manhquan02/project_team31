@@ -31,45 +31,40 @@
             <div class="card-body">
                 <!--begin::Search Form-->
                 <form action="">
-                <div class="mb-7">
-                    <div class="row align-items-center">
-                        <div class="col-lg-9 col-xl-8">
-                            <div class="row align-items-center">
-                                <div class="col-md-4 my-2 my-md-0">
-                                    <div class="input-icon">
-                                        <input name="keyword" type="text" class="form-control"
-                                               placeholder="{{ translate('Enter Package Name ...') }}"/>
-                                        <span>
+                    <div class="mb-7">
+                        <div class="row align-items-center">
+                            <div class="col-lg-9 col-xl-8">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 my-2 my-md-0">
+                                        <div class="input-icon">
+                                            <input name="keyword" type="text" class="form-control"
+                                                   placeholder="{{translate('Enter Package Name')}}"/>
+                                            <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                         </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 my-2 my-md-0">
-                                    <div class="d-flex align-items-center">
-                                        <label class="mr-3 mb-0 d-none d-md-block">{{ translate('OrderBy') }}</label>
-                                        <select class="form-control" name="orderby">
-                                            <option value="asc">Asc</option>
-                                            <option value="desc">Desc</option>
-                                        </select>
+                                    <div class="col-md-4 my-2 my-md-0">
+                                        <div class="d-flex align-items-center">
+                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('From')}}</label>
+                                            <input name="start_date" type="date" class="form-control"/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 my-2 my-md-0">
-                                    <div class="d-flex align-items-center">
-                                        <label class="mr-3 mb-0 d-none d-md-block">{{ translate('Column') }}</label>
-                                        <select class="form-control" name="column">
-                                            <option value="id">ID</option>
-                                            <option value="package_name">{{ translate('Package Name') }}</option>
-                                            <option value="subject_name">{{ translate('Subject Name') }}</option>
-                                        </select>
+                                    <div class="col-md-4 my-2 my-md-0">
+                                        <div class="d-flex align-items-center">
+                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('To')}}</label>
+                                            <input name="end_date" type="date" class="form-control"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                            <button class="btn btn-light-primary px-6 font-weight-bold">{{ translate('Search') }}</button>
+                            <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
+                                <button
+                                    class="btn btn-light-primary px-6 font-weight-bold">{{translate('Search')}}</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <!--end::Search Form-->
                 </form>
                 <!--end::Search Form-->
             </div>
@@ -103,15 +98,25 @@
                                 <td>{{number_format($item->price,0,'.','.')}}</td>
                                 <td>{{number_format($item->into_price,0,'.','.')}}</td>
                                 <td>{{$item->month_package < 12 ? $item->month_package : $item->month_package / 12}} {{ $item->month_package < 12 ? translate('month'): translate('year') }}</td>
-                                <td><input value="{{$item->id}}" id="set_pt" type="checkbox" @if($item->set_pt == 1) checked @endif></td>
+                                <td><input value="{{$item->id}}" id="set_pt" type="checkbox"
+                                           @if($item->set_pt == 1) checked @endif></td>
                                 <td><span
-                                        class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{config('status_package.'.$item->status)}}</span></td>
+                                        class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{ translate(config('status_package.'.$item->status) )}}</span>
+                                </td>
                                 <td>
-                                    <a href="{{route('admin.package.edit', $item->id)}}"><i
+                                    <a title="{{ translate('Edit') }}"
+                                       href="{{route('admin.package.edit', $item->id)}}"><i
                                             class="flaticon2-pen text-warning"></i></a>
-                                    <a class="btn-del" data-url="{{route('admin.package.delete', $item->id)}}"
-                                       style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
-                                    <a package="{{$item->id}}" id="status" style="margin-left: 12px; cursor: pointer"><i class="flaticon-warning text-dark"></i></a>
+                                    <a title="{{ translate('Delete') }}" class="btn-confirm"
+                                       data-title="Are you sure you want to delete ?"
+                                       data-url="{{route('admin.package.delete', $item->id)}}"
+                                       style="margin-left: 12px; cursor: pointer"><i
+                                            class="flaticon2-trash text-danger"></i></a>
+                                    <a title="{{ translate('Change Status') }}" class="btn-confirm"
+                                       data-title="Are you sure you want to change the status ?"
+                                       data-url="{{route('admin.package.change_status', $item->id)}}"
+                                       style="margin-left: 12px; cursor: pointer"><i
+                                            class="flaticon-warning text-dark"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -136,46 +141,24 @@
     </div>
 @endsection
 @section('script')
-<script>
-    $(function (){
-        $(document).on('change', '#set_pt', function (){
-            const package_id = $(this).attr('value');
-            const url = "{{route('admin.package.set_pt')}}";
-            $.ajax({
-                url : url,
-                method: 'GET',
-                data:{
-                    package_id: package_id
-                },
-                success:function (res){
-                    Swal.fire(
-                        "{{ translate('OK') }}",
-                        "{{ translate('Set pt has been changed !') }}",
-                        'success'
-                    )
-                }
+    <script>
+        $(function () {
+            $(document).on('change', '#set_pt', function () {
+                const package_id = $(this).attr('value');
+                const url = "{{route('admin.package.set_pt')}}";
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    data: {package_id: package_id},
+                    success: function (res) {
+                        Swal.fire(
+                            "{{ translate('OK') }}",
+                            "{{ translate('Set up PT package successfully !') }}",
+                            'success'
+                        )
+                    }
+                })
             })
         })
-
-        $(document).on('click', '#status', function (){
-            const package_id = $(this).attr('package');
-            const url = "{{route('admin.package.change_status')}}";
-            $.ajax({
-                url : url,
-                method: 'GET',
-                data:{
-                    package_id: package_id
-                },
-                success:function (res){
-                    Swal.fire(
-                        "{{ translate('OK') }}",
-                        "{{ translate('Status package has been changed !') }}",
-                        'success'
-                    )
-                    location.reload();
-                }
-            })
-        })
-    })
-</script>
+    </script>
 @endsection

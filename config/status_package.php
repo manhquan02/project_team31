@@ -1,6 +1,6 @@
 <?php
 return [
-    0 => 'Khóa',
-    1 => 'Hoạt động',
+    0 => 'Lock',
+    1 => 'Active',
 ];
 ?>

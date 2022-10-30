@@ -43,7 +43,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'update'])->name('update');
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'delete'])->name('delete');
         Route::get('set-pt', [\App\Http\Controllers\Admin\PackageController::class, 'set_pt'])->name('set_pt');
-        Route::get('change-status', [\App\Http\Controllers\Admin\PackageController::class, 'change_status'])->name('change_status');
+        Route::get('change-status/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'change_status'])->name('change_status');
     });
 
     Route::prefix('language')->name('language.')->group(function () {
@@ -56,5 +56,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('translate/{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'translate'])->name('translate');
         Route::post('translate/{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'store_translate'])->name('store_translate');
         Route::get('delete_translation{translation}', [\App\Http\Controllers\Admin\LanguageController::class, 'delete_translation'])->name('delete_translation');
+    });
+
+    Route::prefix('contact')->name('contact.')->group(function () {
+        Route::get('', [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('index');
+        Route::get('change-status/{id}', [\App\Http\Controllers\Admin\ContactController::class, 'change_status'])->name('change_status');
+    });
+
+    Route::prefix('post')->name('post.')->group(function () {
+        Route::get('', [\App\Http\Controllers\Admin\PostController::class, 'index'])->name('index');
+        Route::get('change-status/{id}', [\App\Http\Controllers\Admin\PostController::class, 'change_status'])->name('change_status');
+        Route::get('delete/{id}', [\App\Http\Controllers\Admin\PostController::class, 'delete'])->name('delete');
+        Route::get('create', [\App\Http\Controllers\Admin\PostController::class, 'create'])->name('create');
+        Route::post('create', [\App\Http\Controllers\Admin\PostController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [\App\Http\Controllers\Admin\PostController::class, 'edit'])->name('edit');
+        Route::patch('edit/{id}', [\App\Http\Controllers\Admin\PostController::class, 'update'])->name('update');
     });
 });

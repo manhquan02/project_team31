@@ -23,6 +23,9 @@ Route::prefix('admin/')->name('admin.')->group(function (){
         Route::get('/', [UserController::class, 'index'])->name('listUser');
         Route::get('/create', [UserController::class, 'create'])->name('create');
         Route::post('/post-user', [UserController::class, 'store'])->name('postUser');
+        Route::get('bmi/{id}', [UserController::class, 'bmi'])->name('bmi');
+        Route::patch('bmi/{id}', [UserController::class, 'updateBMI'])->name('updateBMI');
+
     });
 
 
@@ -54,5 +57,5 @@ Route::prefix('admin/')->name('admin.')->group(function (){
 
 });
 
-    
+
 

@@ -20,7 +20,6 @@ class SubjectFactory extends Factory
             'subject_name' => fake()->name(),
             'image' => fake()->imageUrl(),
             'description' => $this->faker->text,
-            
         ];
     }
 }

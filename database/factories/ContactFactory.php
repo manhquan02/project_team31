@@ -17,7 +17,10 @@ class ContactFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->name(),
+            'email' => 'test@gmail.com',
+            'phone' => '0123456789',
+            'description' => 'Hello',
         ];
     }
 }

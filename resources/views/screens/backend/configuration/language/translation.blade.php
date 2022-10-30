@@ -21,10 +21,6 @@
                     </form>
                 </div>
             </div>
-
-            <div class="card-body">
-
-            </div>
             <form action="{{route('admin.language.store_translate', $lang)}}" method="post">
                 @csrf
                 <div class="card-body">

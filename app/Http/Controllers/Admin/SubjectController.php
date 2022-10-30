@@ -5,25 +5,37 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->orderby && $request->column){
-            if ($request->keyword != '') {
-                $subjects = Subject::select('subjects.*')
-                    ->where('subject_name', 'like', '%' . $request->keyword . '%')
-                    ->orderBy($request->column, $request->orderby)->paginate(12);
+            if ($request->start_date && $request->end_date && strtotime($request->start_date) <= strtotime($request->end_date)) {
+                if($request->keyword){
+                    $subjects = Subject::select('subjects.*')
+                        ->where('subject_name', 'like', '%' . $request->keyword . '%')
+                        ->whereDate('created_at', '>=', $request->start_date)
+                        ->whereDate('created_at', '<=', $request->end_date)
+                        ->paginate(12);
+                }else{
+                    $subjects = Subject::select('subjects.*')
+                        ->whereDate('created_at', '>=', $request->start_date)
+                        ->whereDate('created_at', '<=', $request->end_date)
+                        ->paginate(12);
+                }
             } else {
-                $subjects = Subject::select('subjects.*')
-                    ->orderBy($request->column, $request->orderby)->paginate(12);
+                if($request->keyword){
+                    $subjects = Subject::select('subjects.*')
+                        ->where('subject_name', 'like', '%' . $request->keyword . '%')
+                        ->paginate(12);
+                }else{
+                    $subjects = Subject::select('subjects.*')
+                        ->where('id', '>', 0)
+                        ->paginate(12);
+                }
             }
-        }else{
-            $subjects = Subject::where('id', '>', 0)->paginate(12);
-        }
-
         return view('screens.backend.subject.index', compact('subjects'));
     }
 
@@ -36,34 +48,39 @@ class SubjectController extends Controller
     {
         $new_subject = new Subject();
         $new_subject->subject_name = $request->subject_name;
-        if($request->image){
+        if ($request->image) {
             $image = $request->image;
             $imageName = $image->hashName();
             $new_subject->image = $image->storeAs('images/subject', $imageName);
         }
         $new_subject->description = $request->description;
         $new_subject->save();
-        return redirect()->route('admin.subject.create')->with('success', 'Add new subject successfully !');
+        Toastr::success(translate('Add new subject successfully !'));
+        return redirect()->route('admin.subject.create');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $subject = Subject::where('id', $id)->first();
-        if($subject != null){
+        if ($subject != null) {
             $subject->delete();
-            return redirect()->back()->with('success', 'Delete subject successfully !');
+            Toastr::success(translate('Delete subject successfully !'));
+            return redirect()->back();
         }
         return redirect()->back();
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $subject = Subject::where('id', $id)->first();
-        if($subject != null){
+        if ($subject != null) {
             return view('screens.backend.subject.edit', compact('subject'));
         }
         return redirect()->back();
     }
 
-    public function update(SubjectRequest $request, $id){
+    public function update(SubjectRequest $request, $id)
+    {
         $subject = Subject::where('id', $id)->first();
         $subject->subject_name = $request->subject_name;
         $subject->description = $request->description;
@@ -73,13 +90,15 @@ class SubjectController extends Controller
             $subject->image = $image->storeAs('images/subject', $imageName);
         }
         $subject->save();
-        return redirect()->route('admin.subject.edit', $id)->with('success', 'Update subject successfully !');
+        Toastr::success(translate('Update subject successfully !'));
+        return redirect()->route('admin.subject.edit', $id);
     }
 
-    public function description($id){
+    public function description($id)
+    {
         $subject = Subject::where('id', $id)->first();
         $description = $subject->description;
-        if($subject != null){
+        if ($subject != null) {
             return view('screens.backend.subject.description', compact('description'));
         }
         return redirect()->back();

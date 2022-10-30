@@ -38,7 +38,7 @@
                             <a href="{{route('admin.index', ['language'=> $lang->code])}}" class="navi-link">
 													<span class="symbol symbol-20 mr-3">
 														<img
-                                                            src="{{$lang->flag}}"
+                                                            src="{{asset($lang->flag)}}"
                                                             alt=""/>
 													</span>
                                 <span class="navi-text">{{$lang->name}}</span>

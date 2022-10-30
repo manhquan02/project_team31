@@ -25,7 +25,7 @@ class SubjectRequest extends FormRequest
     {
         return [
             'subject_name' => 'required',
-            'description' => 'required',
+            'description' => 'required|max:10000',
         ];
     }
 
@@ -34,6 +34,7 @@ class SubjectRequest extends FormRequest
         return [
             'subject_name.required' => translate('Type subject name, thanks'),
             'description.required' => translate('Type description, thanks'),
+            'description.max' => translate('The description must not be greater than 10000 characters, thanks'),
         ];
 
     }

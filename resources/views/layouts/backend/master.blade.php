@@ -31,9 +31,14 @@
     <link href="/backend/css/custom.css" rel="stylesheet" type="text/css"/>
     <link href="/backend/css/overwrite/style.css" rel="stylesheet" type="text/css"/>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- include summernote css/js -->
+    <link href="summernote-bs5.css" rel="stylesheet">
+    <script src="summernote-bs5.js"></script>
     <!--end::layouts Themes-->
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     <link rel="shortcut icon" href="/backend/media/logos/favicon.ico"/>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -93,7 +98,7 @@
             <div class="brand flex-column-auto" id="kt_brand">
                 <!--begin::Logo-->
                 <a href="index.html" class="brand-logo">
-                    <img alt="Logo" src="/backend/media/logos/logo-light.png"/>
+                    <img alt="Logo" src="/backend/media/svg/flags/220-vietnam.svg"/>
                 </a>
                 <!--end::Logo-->
                 <!--begin::Toggle-->
@@ -166,18 +171,7 @@
                 <div class="d-flex flex-column-fluid">
                     <!--begin::Container-->
                     <div class="container">
-                        @if(session()->has('success'))
-                            <div style="background-color: green; color: white" class="card-header flex-wrap border-0 pt-6 pb-0">
-                                <span>{{ translate(session()->get('success')) }}</span>
-                            </div>
-                        @endif
-                        @if(session()->has('error'))
-                            <div style="background-color: gold; color: white" class="card-header flex-wrap border-0 pt-6 pb-0">
-                                <span>{{ session()->get('error') }}</span>
-                            </div>
-                        @endif
                         @yield('content')
-
                     </div>
                     <!--end::Container-->
                 </div>
@@ -2078,7 +2072,6 @@
 <!--sweet alert 2-->
 <script src="/backend/js/pages/features/miscellaneous/sweetalert2.js"></script>
 {{-- <script src="/backend/js/pages/crud/forms/widgets/select2.js"></script> --}}
-<script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
         integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -2086,15 +2079,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
+<script>
 
-<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-<script> CKEDITOR.replace('editor1', {
-        filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
-        filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
-        filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
-        filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
-        filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
-        filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+    $('#summernote').summernote({
+        height: 312
     });
 </script>
 @include('layouts.backend.confirm')

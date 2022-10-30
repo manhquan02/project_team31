@@ -40,4 +40,26 @@ function translate($keyword)
 
     return $result;
 }
+
+function test_bmi($bmi){
+     $health = 0;
+    if($bmi<16){
+        $health =1;
+    }else if($bmi<17){
+        $health =2;
+    }else if($bmi<18.5){
+        $health =3;
+    }else if($bmi<25){
+        $health =4;
+    }else if($bmi<30){
+        $health =5;
+    }else if($bmi<35){
+        $health =6;
+    }else if($bmi<40){
+        $health =7;
+    }else{
+        $health =8;
+    }
+    return $health;
+}
 ?>

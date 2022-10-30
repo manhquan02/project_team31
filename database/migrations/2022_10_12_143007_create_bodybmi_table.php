@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('bodybmi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedInteger('weight');
-            $table->unsignedInteger('height');
-            $table->unsignedDouble('bmi', 8, 2);
-            $table->string('health');
+            $table->unsignedInteger('weight')->nullable();
+            $table->unsignedInteger('height')->nullable();
+            $table->unsignedDouble('bmi', 8, 2)->nullable();
+            $table->unsignedInteger('health')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

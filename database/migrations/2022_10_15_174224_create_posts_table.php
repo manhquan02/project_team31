@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('content')->nullable();
+            $table->string('title');
+            $table->string('content_post',10000);
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedInteger('status');
+            $table->unsignedInteger('status')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
