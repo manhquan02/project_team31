@@ -56,9 +56,7 @@ class PackageController extends Controller
         $new->package_name = $request->package_name;
         $new->subject_id = $request->subject_id;
         if($request->avatar){
-            $avatar = $request->avatar;
-            $avatarName = $avatar->hashName();
-            $new->avatar = $avatar->storeAs('images/package', $avatarName);
+            upload_image($request, $new, 'images/package');
         }
         $new->price = $request->price;
         if($request->price_sale){
@@ -102,9 +100,7 @@ class PackageController extends Controller
             $package->package_name = $request->package_name;
             $package->subject_id = $request->subject_id;
             if($request->avatar){
-                $avatar = $request->avatar;
-                $avatarName = $avatar->hashName();
-                $package->avatar = $avatar->storeAs('images/package', $avatarName);
+                upload_image($request, $package, 'images/package');
             }
             $package->price = $request->price;
             if($request->price_sale){

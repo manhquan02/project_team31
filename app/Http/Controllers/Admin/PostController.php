@@ -74,12 +74,12 @@ class PostController extends Controller
 
     public function store(PostRequest $request)
     {
-        $new_post = new Post();
-        $new_post->title = $request->title;
-        $new_post->subject_id = $request->subject_id;
-        $new_post->content_post = $request->content_post;
-        $new_post->user_id = 1;
-        $new_post->save();
+        $new = new Post();
+        $new->title = $request->title;
+        $new->subject_id = $request->subject_id;
+        $new->content_post = $request->content_post;
+        $new->user_id = 1;
+        $new->save();
         Toastr::success(translate('Add new post successfully !'));
         return redirect()->route('admin.post.create');
     }
