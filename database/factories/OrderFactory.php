@@ -21,6 +21,7 @@ class OrderFactory extends Factory
             'discount_id' => rand(1,10),
             'package_id' => rand(1,10),
             'time_id' => rand(1,4),
+            'weekday_id' => rand(1,2) .'|'. rand(3,4) .'|'. rand(5,7),
             'activate_day' => '2022-10-15',
             'pt_id' => 2,
             'total_money' => 2000000,

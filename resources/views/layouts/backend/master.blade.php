@@ -29,6 +29,7 @@
     <link href="/backend/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css"/>
     <link href="/backend/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css"/>
     <link href="/backend/css/custom.css" rel="stylesheet" type="text/css"/>
+    <link href="/backend/css/overwrite/style.css" rel="stylesheet" type="text/css"/>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--end::layouts Themes-->
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}

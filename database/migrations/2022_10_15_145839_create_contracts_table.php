@@ -19,7 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('package_id');
             $table->date('activate_date');
             $table->unsignedBigInteger('order_id');
-            $table->date('start_date');
+            $table->string('weekday_id');
+            $table->date('start_date'); 
             $table->date('end_date');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

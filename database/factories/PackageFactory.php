@@ -24,7 +24,10 @@ class PackageFactory extends Factory
             'price_sale' => rand(10,20),
             'into_price' => rand(200000, 1000000),
             'description' => $this->faker->text,
-            'month_package'=>'1 Tháng'
+            'month_package'=> rand(1,10),
+            'status' => 1,
+            'set_pt' => 0,
+
 
         ];
     }

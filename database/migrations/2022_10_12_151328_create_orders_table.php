@@ -19,8 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('discount_id');
             $table->unsignedBigInteger('package_id');
             $table->unsignedBigInteger('time_id');
+            $table->string('weekday_id');
             $table->date('activate_day');
-            $table->unsignedBigInteger('pt_id'); // role : pt
+            $table->unsignedBigInteger('pt_id')->nullable(); // role : pt
             $table->unsignedBigInteger('total_money');
             $table->unsignedBigInteger('payment_method');
             $table->timestamp('created_at')->useCurrent();

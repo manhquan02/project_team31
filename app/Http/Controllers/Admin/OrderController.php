@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contract;
+use App\Models\Discount;
 use App\Models\Order;
 use App\Models\Package;
 use App\Models\Time;
 use App\Models\User;
+use App\Models\Weekday;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -33,8 +36,25 @@ class OrderController extends Controller
         $packages = Package::all();
         $times = Time::all();
         $coachs = User::role('coach')->get();
-        return view('screens.backend.order.create', ['users' => $users, 'packages' => $packages, 'times' => $times, 'coachs' => $coachs]);
+        $weekdays = Weekday::all();
+        return view('screens.backend.order.create', ['users' => $users, 'packages' => $packages, 'times' => $times, 'coachs' => $coachs, 'weekdays' => $weekdays]);
     }
+
+
+    public function setPackage(Request $request){
+        $package = Package::find($request->id);
+        if(isset($package)){
+            return response()->json([
+                'result' => true,
+                'package' => $package
+            ]);
+        }
+        return response()->json([
+            'result' => false,
+            'message' => 'Gói tập không tồn tại !'
+        ]);
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -43,8 +63,32 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $order = new Order();
+        // dd($request->discount_code);
+        $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
+        $user = User::find($request->user_id);
+        $package = Package::find($request->package_id);
+        $order->fill($request->all());
+        $order->weekday_id = implode("|",$request->weekday_id);
+        if(isset($discount)){
+            $order->total_money = $package->price - $package->price*$discount->price_sale/100;
+            // dd($package->price);
+            $order->discount_id = $discount->id;
+        }
+        else{
+            $order->discount_id = 0;
+            $order->total_money = $package->price;
+        }
         
+
+        $order->save();
+
+        
+
+        
+
+
     }
 
     /**
