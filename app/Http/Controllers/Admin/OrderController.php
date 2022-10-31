@@ -70,11 +70,20 @@ class OrderController extends Controller
         $user = User::find($request->user_id);
         $package = Package::find($request->package_id);
         $order->fill($request->all());
-        $order->weekday_id = implode("|",$request->weekday_id);
+        $order->weekday_name = implode("|",$request->weekday_name);
         if(isset($discount)){
             $order->total_money = $package->price - $package->price*$discount->price_sale/100;
             // dd($package->price);
             $order->discount_id = $discount->id;
+            $quantity_discount = $discount->quantity - 1;
+            $discount->update([
+                'quantity' => $quantity_discount,
+            ]);
+            if($discount->quantity == 0){
+                $discount->update([
+                    'status' => 0,
+                ]);
+            }
         }
         else{
             $order->discount_id = 0;

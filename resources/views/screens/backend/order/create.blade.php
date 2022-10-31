@@ -100,11 +100,11 @@
         <div class="form-group row">
             <label class="col-2 col-form-label">Chọn thứ tập PT</label>
             <div class=" col-lg-4 col-md-9 col-sm-12">
-             <select name="weekday_id[]" class="form-control select2" id="kt_select2_9" name="param" multiple>
+             <select name="weekday_name[]" class="form-control select2" id="kt_select2_9" name="param" multiple>
               <option label="Label"></option>
               <optgroup label="Chọn 3 ngày">
                 @foreach ($weekdays as $weekday)
-                    <option value="{{$weekday->id}}">{{$weekday->weekday_name}}</option>  
+                    <option value="{{$weekday->weekday_name}}">{{$weekday->weekday_name}}</option>  
                 @endforeach 
               </optgroup>
 

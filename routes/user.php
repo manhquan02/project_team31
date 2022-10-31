@@ -33,6 +33,8 @@ Route::prefix('admin/')->name('admin.')->group(function (){
         Route::get('/', [DiscountController::class, 'index'])->name('list');
         Route::get('/create', [DiscountController::class, 'create'])->name('create');
         Route::post('/post-discount', [DiscountController::class, 'store'])->name('postDiscount');
+        Route::get('/edit/{id}', [DiscountController::class, 'edit'])->name('edit');
+        Route::get('/post-edit', [DiscountController::class, 'update'])->name('postEdit');
     });
 
     Route::prefix('order/')->name('order.')->group(function (){
@@ -51,7 +53,7 @@ Route::prefix('admin/')->name('admin.')->group(function (){
 
     Route::prefix('contract/')->name('contract.')->group(function (){
         Route::get('/', [ContractController::class, 'index'])->name('list');
-        Route::get('/create/{order}', [ContractController::class, 'create'])->name('create');
+        Route::get('/create/{id}', [ContractController::class, 'create'])->name('create');
         Route::post('/post-time', [ContractController::class, 'store'])->name('postTime');
     });
 

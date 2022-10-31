@@ -54,7 +54,7 @@ class SubjectController extends Controller
         $new->description = $request->description;
         $new->save();
         Toastr::success(translate('Add new subject successfully !'));
-        return redirect()->route('admin.subject.create');
+        // return redirect()->route('admin.subject.create');
     }
 
     public function delete($id)

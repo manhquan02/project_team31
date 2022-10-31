@@ -159,6 +159,7 @@
                         <th>Ngày bắt đầu</th>
                         <th>Ngày kết thúc</th>
                         <th>Status</th>
+                        <th></th>
                         <th>Actions</th>
 
                         {{-- <th>Edit Permission</th> --}}
@@ -190,6 +191,10 @@
                                 id="change_status" >
                                 <i class="ki ki-reload text-warning"></i>
                             </a>
+                        </td>
+
+                        <td align="center">
+                            <a title="Edit" href="{{route('admin.discount.edit', [encrypt($discount ->id)])}}"><i class="flaticon2-pen text-warning"></i></a>
                         </td>
                             
                     </tr>

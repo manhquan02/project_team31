@@ -69,7 +69,9 @@ class DiscountController extends Controller
      */
     public function edit($id)
     {
-        //
+        $discounts = Discount::find(decrypt($id));
+        $packages = Package::all();
+        return view('screens.backend.discount.edit', ['discounts' => $discounts ,'packages' => $packages]);
     }
 
     /**

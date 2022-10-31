@@ -24,17 +24,9 @@ class PackageFactory extends Factory
             'price_sale' => rand(10,20),
             'into_price' => rand(200000, 1000000),
             'description' => $this->faker->text,
-<<<<<<< HEAD
-            'month_package'=> rand(1,10),
-            'status' => 1,
-            'set_pt' => 0,
-
-
-=======
-            'month_package'=> 60,
+            'month_package'=> rand(1,12),
             'status' =>rand(0,1),
             'set_pt'=>rand(0,1)
->>>>>>> 2da94c9ed9f55689c7f3ad1a291695011dc9bec3
         ];
     }
 }

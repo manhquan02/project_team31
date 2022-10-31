@@ -18,6 +18,7 @@ class Order extends Model
         'activate_day',
         'pt_id',
         'total_money',
+        'weekday_name',
         'payment_method'
     ];
 

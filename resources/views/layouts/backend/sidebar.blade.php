@@ -211,7 +211,7 @@
                 </div>
             </li>
 
-            <li class="menu-section">
+            {{-- <li class="menu-section">
                 <h4 class="menu-text">Order</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
@@ -263,7 +263,7 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> --}}
 
             <li class="menu-section">
                 <h4 class="menu-text">Ca tập</h4>
