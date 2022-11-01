@@ -71,4 +71,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('edit/{id}', [\App\Http\Controllers\Admin\PostController::class, 'edit'])->name('edit');
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\PostController::class, 'update'])->name('update');
     });
+
+    Route::prefix('schedule')->name('schedule.')->group(function () {
+        Route::get('show/{id}', [\App\Http\Controllers\Admin\ScheduleController::class, 'show'])->name('show');
+    });
 });
