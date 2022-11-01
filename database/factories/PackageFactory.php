@@ -24,7 +24,7 @@ class PackageFactory extends Factory
             'price_sale' => rand(10,20),
             'into_price' => rand(200000, 1000000),
             'description' => $this->faker->text,
-            'month_package'=> 12,
+            'month_package'=> rand(1,12),
             'status' =>rand(0,1),
             'set_pt'=>rand(0,1)
         ];

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('contract_id');
             $table->unsignedBigInteger('time_id');
-            $table->unsignedBigInteger('weekday_id');
+            $table->string('weekday_name');
             $table->unsignedBigInteger('pt_id');
             $table->date('date');
             $table->unsignedBigInteger('status');

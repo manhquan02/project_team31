@@ -29,8 +29,9 @@ class ContractController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Order $order)
+    public function create($id)
     {
+        $order = Order::find(decrypt($id));
         $contract = new Contract();
         $attendance = new Attendance();
         
@@ -43,14 +44,11 @@ class ContractController extends Controller
         $contract->package_id = $order->package->id;
         $contract->activate_date = $order->activate_day;
         $contract->order_id = $order->id;
-        $contract->weekday_id = $order->weekday_id;
+        $contract->weekday_name = $order->weekday_name;
         $contract->start_date = $order->activate_day;
         $contract->end_date = $end_date;
 
         $contract->save();
-
-        // $weekdays_pt = $order->weekday_id;
-        // $weekdays_pt =  explode('|', $weekdays_pt);
 
         $begin = new DateTime($contract->start_date);
         $end = new DateTime($contract->end_date);
@@ -58,46 +56,41 @@ class ContractController extends Controller
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($begin, $interval, $end);
         $weekdays = Weekday::all();
-        $weekday_contract = $contract->weekday_id;
+        $weekday_contract = $contract->weekday_name;
         $weekdays_pt =  explode('|', $weekday_contract);
         
+        $order->status_contract = 1;
+        $order->save();
+
         foreach ($period as $dt) {
             // echo $dt->format("l Y-m-d \n");
             // echo "<br>";
             // dd($dt->format("l"));
             
             $attendance->date = $dt->format("Y-m-d");
-            foreach ($weekdays_pt as $key => $item) {
-                // dd($weekday);
-                $weekday = Weekday::find($item);
-                // dd($weekday->weekday_name);
-                if($weekday->weekday_name ==  $dt->format("l")){
+            foreach ($weekdays_pt as $key => $weekday_name) {
+
+                if($weekday_name ==  $dt->format("l")){
                     // echo $dt->format("l Y-m-d \n");
                     // echo "<br>";
-                    $attendance->weekday_id = $item;
-                    $attendance->pt_id = 1;
-                    $attendance->user_id = $contract->user_id;
-                    $attendance->contract_id = $contract->id;
-                    $attendance->time_id = $contract->order->time_id;
                     $attendance->create([
                         'user_id' => $contract->user_id,
                         'contract_id' => $contract->id,
                         'time_id' => $contract->order->time_id,
-                        'weekday_id' => $item,
+                        'weekday_name' => $dt->format("l"),
                         'pt_id' => 1,
                         'date' => $dt->format("Y-m-d"),
                         'status' => 1,
 
                     ]);
                 }
-                // $attendance->weekday_id = 0;
 
 
             }
 
         }
 
-        
+        return back();
         
     }
 

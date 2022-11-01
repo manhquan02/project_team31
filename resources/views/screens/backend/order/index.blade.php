@@ -151,50 +151,53 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Code</th>
-                        <th>Sale(%)</th>
-                        <th>Số lượng</th>
-                        <th>Gói tập</th>
+                        <th>Tên hội viên</th>
+                        <th>Ca tập</th>
+                        <th>Thứ tập</th>
                         <th>Ngày bắt đầu</th>
-                        <th>Ngày kết thúc</th>
-                        <th>Status</th>
+                        <th>Huấn luyện viên</th>
+                        <th>Tổng tiền</th>
+                        <th>Hợp đồng</th>
                         <th>Actions</th>
 
                         {{-- <th>Edit Permission</th> --}}
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach ($discounts as $discount)
+                    @foreach ($orders as $order)
                         
                     
                      <tr>
-                        <td>{{$discount->id}}</td>
-                        <td>{{$discount->discount_title}}</td>
-                        <td>{{$discount->discount_code}}</td>
-                        <td>{{$discount->price_sale}} %</td>
-                        <td>{{$discount->quantity}}</td> 
-                        <td></td>
-                        <td>{{$discount->start_date}}</td>
-                        <td>{{$discount->end_date}}</td> 
+                        <td>{{$order->id}}</td>
+                        <td>{{$order->user->name}}</td>
+                        <td>{{$order->time->time_name}}</td>
+                        <td>{{$order->weekday_name}}</td>
+                        <td>{{$order->activate_day}}</td> 
+                        <td>{{$order->user->name}}</td>
+                        <td>{{$order->total_money}}</td> 
                         <td>
-                            @if ($discount->status == 1)
+                            @if ($order->status_contract == 1)
                             <span
-                                class="label label-inline label-light-primary font-weight-bold">Hiện</span>
+                                class="label label-inline label-light-primary font-weight-bold">Đã tạo</span>
                         @else
-                            <span class="label label-inline label-light-danger font-weight-bold">Khoá</span>
+                            <span class="label label-inline label-light-danger font-weight-bold">Chưa tạo</span>
                         @endif
                         </td>
                         <td nowrap="nowrap">
-                            <a class="btn btn-light  btn-sm mr-2"
-                                id="change_status" >
-                                <i class="ki ki-reload text-warning"></i>
-                            </a>
+
+                            @if ($order->status_contract == 1)
+                                <a href="" class="btn btn-primary mr-2">Xem hợp đồng</a>
+                            @else
+                                <a href="{{route('admin.contract.create', [encrypt($order->id)])}}" class="btn btn-success mr-2">Tạo hợp đồng </a>
+                            @endif
+
                         </td>
+
+                       
                             
                     </tr>
                     
-                    @endforeach --}}
+                    @endforeach
     
     
                 </tbody>

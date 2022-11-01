@@ -17,8 +17,7 @@ class Attendance extends Model
         'user_id',
         'contract_id',
         'time_id',
-        'weekday_id',
-        'weekday_id',
+        'weekday_name',
         'pt_id',
         'date',
         'status'

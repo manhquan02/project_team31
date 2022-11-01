@@ -15,7 +15,7 @@ class Contract extends Model
         'package_id',
         'order_id',
         'activate_day',
-        'weekday_id',
+        'weekday_name',
         'start_date',
         'end_date',
     ];
