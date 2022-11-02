@@ -75,4 +75,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('schedule')->name('schedule.')->group(function () {
         Route::get('show/{id}', [\App\Http\Controllers\Admin\ScheduleController::class, 'show'])->name('show');
     });
+
+    Route::prefix('time')->name('time.')->group(function () {
+        Route::get('', [\App\Http\Controllers\Admin\TimeController::class, 'index'])->name('list');
+        Route::get('create', [\App\Http\Controllers\Admin\TimeController::class, 'create'])->name('create');
+        Route::post('create', [\App\Http\Controllers\Admin\TimeController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [\App\Http\Controllers\Admin\TimeController::class, 'edit'])->name('edit');
+        Route::patch('edit/{id}', [\App\Http\Controllers\Admin\TimeController::class, 'update'])->name('update');
+        Route::get('delete/{id}', [\App\Http\Controllers\Admin\TimeController::class, 'delete'])->name('delete');
+    });
 });
