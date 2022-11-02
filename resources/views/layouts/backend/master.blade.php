@@ -2084,7 +2084,13 @@
 <script>
 
     $('#summernote').summernote({
-        height: 312
+        height: 312,
+        callbacks: {
+            //onImageUpload: function (image)
+            onImageUpload: function (image) {
+                uploadImage(image[0]);
+            }
+        }
     });
 </script>
 @include('layouts.backend.confirm')
