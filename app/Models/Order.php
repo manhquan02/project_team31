@@ -19,9 +19,13 @@ class Order extends Model
         'pt_id',
         'total_money',
         'weekday_name',
+        'status_contract',
         'payment_method'
     ];
 
+    protected $attributes = [
+        'status_contract' => 0
+    ];
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');
     }
