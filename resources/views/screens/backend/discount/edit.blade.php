@@ -3,6 +3,11 @@
 @section('title', 'Thêm phiếu giảm giá')
 
 @section('content')
+
+{{-- <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Thêm mới thành công
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div> --}}
 <div class="card card-custom">
     <div class="card-header">
      <h3 class="card-title">
@@ -10,9 +15,9 @@
      </h3>
     </div>
     <!--begin::Form-->
-    <form action="{{route('admin.discount.postDiscount')}}" method="POST">
+    <form action="{{route('admin.discount.postEdit', $discounts->id)}}" method="POST">
         @csrf
-        @method('POST')
+        @method('PUT')
      <div class="card-body">
       
       <div class="form-group row">
@@ -61,7 +66,7 @@
             <select class="form-control select2" id="kt_select2_3" name="package_id[]" placeholder="Chọn gói tập" multiple="multiple">
                 <optgroup label="Gói tâp">
                     @foreach ($packages as $package)
-                      <option selected="selected" value="{{$package->id}}">{{$package->package_name}}</option>  
+                      <option  value="{{$package->id}}">{{$package->package_name}}</option>  
                     @endforeach                   
                 </optgroup>
             </select>

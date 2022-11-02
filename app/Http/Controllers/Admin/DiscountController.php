@@ -83,7 +83,14 @@ class DiscountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $discount = Discount::find(decrypt($id));
+        $package_id = implode("|",$request->package_id);
+        // dd($package_id);
+        $discount->fill($request->all());
+        $discount->package_id = $package_id;
+        $discount->save();
+
+        return redirect()->route('admin.discount.list')->with('success','Update giảm giá thành cômng');
     }
 
     /**

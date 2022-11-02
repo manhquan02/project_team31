@@ -41,7 +41,8 @@ class DiscountRequest extends FormRequest
             'min'=>':attribute tối thiểu 5 kí tự',
             'discount_code.unique'=>':attribute đã tồn tại',
             'integer' => ':attribute phải là dạng số',
-            'package_id.required' => 'Chọn gói tập được giảm giá'
+            'package_id.required' => 'Chọn gói tập được giảm giá',
+            'price_sale.max' => ':attribute tối đa 3 kí tự',
         ];
 
     }
