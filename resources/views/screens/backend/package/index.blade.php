@@ -47,13 +47,14 @@
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
                                             <label class="mr-3 mb-0 d-none d-md-block">{{translate('From')}}</label>
-                                            <input name="start_date" type="date" class="form-control"/>
+                                            <input name="start_date" @if(request('start_date')) value="{{ request('start_date') }}" @endif type="date"
+                                                   class="form-control"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
                                             <label class="mr-3 mb-0 d-none d-md-block">{{translate('To')}}</label>
-                                            <input name="end_date" type="date" class="form-control"/>
+                                            <input name="end_date" @if(request('end_date')) value="{{ request('end_date') }}" @endif type="date" class="form-control"/>
                                         </div>
                                     </div>
                                 </div>

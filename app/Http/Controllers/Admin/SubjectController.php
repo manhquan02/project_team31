@@ -53,8 +53,8 @@ class SubjectController extends Controller
         }
         $new->description = $request->description;
         $new->save();
-        Toastr::success(translate('Add new subject successfully !'));
-        // return redirect()->route('admin.subject.create');
+        Toastr::success(translate('Add new subject successfully'));
+        return redirect()->route('admin.subject.create');
     }
 
     public function delete($id)
@@ -62,7 +62,7 @@ class SubjectController extends Controller
         $subject = Subject::where('id', $id)->first();
         if ($subject != null) {
             $subject->delete();
-            Toastr::success(translate('Delete subject successfully !'));
+            Toastr::success(translate('Delete subject successfully'));
             return redirect()->back();
         }
         return redirect()->back();
@@ -86,7 +86,7 @@ class SubjectController extends Controller
             upload_image($request, $subject, 'images/subject');
         }
         $subject->save();
-        Toastr::success(translate('Update subject successfully !'));
+        Toastr::success(translate('Update subject successfully'));
         return redirect()->route('admin.subject.edit', $id);
     }
 

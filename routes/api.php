@@ -18,6 +18,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');
+Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'register'])->name('register');
+
 Route::prefix('package')->name('package.')->group(function () {
     Route::get('', [\App\Http\Controllers\Api\PackageController::class, 'index'])->name('index');
     Route::get('show/{id}', [\App\Http\Controllers\Api\PackageController::class, 'show'])->name('show');

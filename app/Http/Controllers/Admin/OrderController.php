@@ -63,7 +63,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $order = new Order();
         // dd($request->discount_code);
         $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
@@ -89,13 +89,13 @@ class OrderController extends Controller
             $order->discount_id = 0;
             $order->total_money = $package->price;
         }
-        
+
 
         $order->save();
 
-        
 
-        
+return redirect()->back();
+
 
 
     }

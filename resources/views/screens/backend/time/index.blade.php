@@ -1,6 +1,6 @@
 @extends('layouts.backend.master')
 
-@section('title', 'Trang order')
+@section('title', translate('Time Management'))
 
 @section('content')
 <div>
@@ -8,8 +8,8 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">Remote Datasource
-                <span class="d-block text-muted pt-2 font-size-sm">Sorting &amp; pagination remote datasource</span></h3>
+                <h3 class="card-label">{{ translate('Time Management') }}
+                <span class="d-block text-muted pt-2 font-size-sm">{{ translate('List') }}</span></h3>
             </div>
             <div class="card-toolbar">
                 <!--begin::Dropdown-->
@@ -127,8 +127,8 @@
                                     <label class="mr-3 mb-0 d-none d-md-block">Role:</label>
                                     <select wire:model="role" class="form-control" id="kt_datatable_search_type">
                                         <option value="">All</option>
-                                        
-    
+
+
                                     </select>
                                 </div>
                             </div>
@@ -160,8 +160,8 @@
                 </thead>
                 <tbody>
                     @foreach ($times as $time)
-                        
-                    
+
+
                      <tr>
                         <td>{{$time->id}}</td>
                         <td>{{$time->time_name}}</td>
@@ -174,21 +174,21 @@
                                 <i class="ki ki-reload text-warning"></i>
                             </a>
                         </td>
-                            
+
                     </tr>
-                    
+
                     @endforeach
-    
-    
+
+
                 </tbody>
             </table>
             <!--end: Datatable-->
-            
+
         </div>
     </div>
-    
+
     </div>
-    
+
 @endsection
 
 @section('script')

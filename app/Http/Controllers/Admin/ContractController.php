@@ -34,7 +34,6 @@ class ContractController extends Controller
         $order = Order::find(decrypt($id));
         $contract = new Contract();
         $attendance = new Attendance();
-        
 
         $month = $order->package->month_package;
         $newdate = strtotime ( '+'.$month.' month' , strtotime ( $order->activate_day ) );
@@ -58,7 +57,7 @@ class ContractController extends Controller
         $weekdays = Weekday::all();
         $weekday_contract = $contract->weekday_name;
         $weekdays_pt =  explode('|', $weekday_contract);
-        
+
         $order->status_contract = 1;
         $order->save();
 
@@ -66,7 +65,7 @@ class ContractController extends Controller
             // echo $dt->format("l Y-m-d \n");
             // echo "<br>";
             // dd($dt->format("l"));
-            
+
             $attendance->date = $dt->format("Y-m-d");
             foreach ($weekdays_pt as $key => $weekday_name) {
 
@@ -91,7 +90,7 @@ class ContractController extends Controller
         }
 
         return back();
-        
+
     }
 
     /**

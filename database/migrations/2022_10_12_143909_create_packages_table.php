@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('into_price');
             $table->string('description', 10000);
             $table->unsignedInteger('month_package');
+            $table->unsignedInteger('number_member')->default(1);
             $table->unsignedInteger('status')->default(1);
             $table->unsignedInteger('set_pt')->default(0);
             $table->timestamp('created_at')->useCurrent();

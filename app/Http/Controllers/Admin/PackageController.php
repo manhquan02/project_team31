@@ -70,7 +70,7 @@ class PackageController extends Controller
             $new->set_pt = 1;
         }
         $new->save();
-        Toastr::success(translate('Add new package successfully !'));
+        Toastr::success(translate('Add new package successfully'));
         return redirect()->route('admin.package.create');
     }
 
@@ -78,7 +78,7 @@ class PackageController extends Controller
         $package = Package::where('id', $id)->first();
         if($package != null){
             $package->delete();
-            Toastr::success(translate('Delete package successfully !'));
+            Toastr::success(translate('Delete package successfully'));
             return redirect()->route('admin.package.index');
         }
         return redirect()->route('admin.package.index');
@@ -117,7 +117,7 @@ class PackageController extends Controller
                 $package->set_pt = 0;
             }
             $package->save();
-            Toastr::success(translate('Update package successfully !'));
+            Toastr::success(translate('Update package successfully'));
             return redirect()->back();
         }
         return redirect()->route('admin.package.index');
@@ -150,7 +150,7 @@ class PackageController extends Controller
                 $package ->status =0;
             }
             $package->save();
-            Toastr::success(translate('Update package status successfully !'));
+            Toastr::success(translate('Update package status successfully'));
             return redirect()->route('admin.package.index');
         }
         return redirect()->route('admin.package.index');
