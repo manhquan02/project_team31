@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderRequest;
 use App\Models\Contract;
 use App\Models\Discount;
 use App\Models\Order;
@@ -44,10 +45,20 @@ class OrderController extends Controller
     public function setPackage(Request $request){
         $package = Package::find($request->id);
         if(isset($package)){
-            return response()->json([
-                'result' => true,
-                'package' => $package
-            ]);
+            if($package->set_pt == 1){
+                return response()->json([
+                    'result' => true,
+                    'package' => $package,
+                    
+                ]);
+            }
+            else{
+                return response()->json([
+                    'result' => true,
+                    'package' => $package,
+                ]);
+            }
+            
         }
         return response()->json([
             'result' => false,
@@ -56,44 +67,102 @@ class OrderController extends Controller
     }
 
 
+    public function setCoach(Request $request){
+        $package = Package::find($request->id);
+        
+        if($package->set_pt == 1){
+            return response()->json([
+                'result' => true,
+                'package' => $package,
+                
+            ]);
+        }
+        return response()->json([
+            'result' => false,
+            'message' => 'Gói tập không có huấn luyện viên !'
+        ]);
+    }
+
+    public function setTotalMoney(Request $request){
+        $package = Package::find($request->package_id);
+        $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
+        if(isset($discount)){
+            $discount_packages =  explode('|', $discount->package_id);
+            if($discount->status == 0){
+                return response()->json([
+                    'result' => false,
+                    'message' => 'Phiếu giảm giá này đã hết hạn'
+                ]);
+            }
+            if(in_array($package->id, $discount_packages)){
+                
+                return response()->json([
+                    'result' => true,
+                    'message' => 'Phiếu giảm tồn tại',
+                    'total_money' => $package->price - $package->price*$discount->price_sale/100,
+                ]);
+
+            }
+        }
+        else{
+            return response()->json([
+                'result' => false,
+                'message' => 'Phiếu giảm giá không tồn tại',
+            ]);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {   
         $order = new Order();
         // dd($request->discount_code);
-        $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
         $user = User::find($request->user_id);
         $package = Package::find($request->package_id);
         $order->fill($request->all());
         $order->weekday_name = implode("|",$request->weekday_name);
+        $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
         if(isset($discount)){
-            $order->total_money = $package->price - $package->price*$discount->price_sale/100;
-            // dd($package->price);
-            $order->discount_id = $discount->id;
-            $quantity_discount = $discount->quantity - 1;
-            $discount->update([
-                'quantity' => $quantity_discount,
-            ]);
-            if($discount->quantity == 0){
-                $discount->update([
-                    'status' => 0,
-                ]);
+            $discount_packages =  explode('|', $discount->package_id);
+            if($discount->status == 0){
+                return back()->with('msg', 'Xin lỗi. Phiếu giảm giá này đã hết hạn'); 
             }
+            if(in_array($package->id, $discount_packages)){
+                $order->total_money = $package->price - $package->price*$discount->price_sale/100;
+                // dd($package->price);
+                $order->discount_id = $discount->id;
+                $quantity_discount = $discount->quantity - 1;
+                $discount->update([
+                    'quantity' => $quantity_discount,
+                ]);
+                if($discount->quantity == 0){
+                    $discount->update([
+                        'status' => 0,
+                    ]);
+                }
+                $order->save();
+                return back()->with('success', 'Thêm Order thành công'); 
+            }
+            else{
+                return back()->with('msg', 'Phiếu giảm giá không đúng'); 
+            }
+            
         }
         else{
-            $order->discount_id = 0;
-            $order->total_money = $package->price;
+            return back()->with('msg', 'Phiếu giảm giá không đúng'); 
         }
-        
 
+        $order->discount_id = 0;
+        $order->total_money = $package->price;
         $order->save();
 
         
+        return back()->with('success', 'Thêm order thành công');
 
         
 

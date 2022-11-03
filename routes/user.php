@@ -42,6 +42,9 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::post('/post-order', [OrderController::class, 'store'])->name('postOrder');
 
         Route::get('/set-package', [OrderController::class, 'setPackage'])->name('setPackage');
+        
+        Route::get('/set-coach', [OrderController::class, 'setCoach'])->name('setCoach');
+
     });
 
     Route::prefix('time/')->name('time.')->group(function () {

@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="card card-custom">
+    @include('screens.backend._alert')
     <div class="card-header">
      <h3 class="card-title">
       Thêm mới Order
@@ -27,6 +28,9 @@
               </optgroup>
 
              </select>
+             @error('user_id')
+                <span class="text-danger">{{ $message }}</span>    
+            @enderror
             </div>
         </div>
 
@@ -41,6 +45,9 @@
                 @endforeach  
                    
              </select>
+             @error('package_id')
+                <span class="text-danger">{{ $message }}</span>    
+            @enderror
             </div>
         </div>
 
@@ -56,27 +63,26 @@
 
                 
                 </select>
-                    {{-- <div class="invalid-feedback">Shucks, check the formatting of that and try again.</div>
-                    <span class="form-text text-muted">Example help text that remains unchanged.</span> --}}
+                @error('time_id')
+                    <span class="text-danger">{{ $message }}</span>    
+                @enderror
             </div>
         </div>
 
 
-        <div class="form-group row">
+        <div class="form-group row set-coach" >
             <label class="col-2 col-form-label">Chọn huấn viện viên</label>
             <div class=" col-lg-4 col-md-9 col-sm-12">
                 <select name="pt_id" class="form-control select2 is-invalid" id="kt_select2_3_validate" >
-
                     <option style="display: none;" value=""></option>
                     <option >Không có</option>
                     @foreach ($coachs as $coach)
                         <option value="{{$coach->id}}">{{$coach->name}}</option>  
                     @endforeach 
-
-                
-                </select>
-                    {{-- <div class="invalid-feedback">Shucks, check the formatting of that and try again.</div>
-                    <span class="form-text text-muted">Example help text that remains unchanged.</span> --}}
+                </select> 
+                @error('pt_id')
+                    <span class="text-danger">{{ $message }}</span>    
+                @enderror
             </div>
         </div>
 
@@ -92,7 +98,7 @@
                         </div>
                     </div>
                 <span class="form-text text-muted">Thời gian bắt đầu</span>
-                @error('start_date')
+                @error('activate_day')
                  <span class="text-danger">{{ $message }}</span>    
                 @enderror
             </div>
@@ -100,7 +106,7 @@
         <div class="form-group row">
             <label class="col-2 col-form-label">Chọn thứ tập PT</label>
             <div class=" col-lg-4 col-md-9 col-sm-12">
-             <select name="weekday_name[]" class="form-control select2" id="kt_select2_9" name="param" multiple>
+             <select name="weekday_name[]" class="form-control select2" id="kt_select2_9"  multiple>
               <option label="Label"></option>
               <optgroup label="Chọn 3 ngày">
                 @foreach ($weekdays as $weekday)
@@ -109,6 +115,9 @@
               </optgroup>
 
              </select>
+                @error('weekday_name')
+                    <span class="text-danger">{{ $message }}</span>    
+                @enderror
             </div>
            </div>
         
@@ -145,8 +154,15 @@
                 <option value="2">Chuyển khoản ngân hàng</option>
 
             </select>
-                {{-- <div class="invalid-feedback">Shucks, check the formatting of that and try again.</div>
-                <span class="form-text text-muted">Example help text that remains unchanged.</span> --}}
+                
+        </div>
+    </div>
+
+    <div  class="form-group row">
+        <label class="col-2 col-form-label"><strong>Tổng tiền</strong></label>
+        <div class=" col-lg-4 col-md-9 col-sm-12">
+            <strong style="color: red">123</strong>
+                
         </div>
     </div>
       
@@ -169,9 +185,7 @@
 
 <script>
 
-
-    
-    $('.add_package').on('change',function(){
+$('.add_package').on('change',function(){
     console.log("quân");
       $package_id = $(this).val();
       $.ajax({
@@ -196,7 +210,34 @@
             }
           }
       });
+  });
+
+
+  $('.add_package').on('change',function(){
+    console.log("quân");
+      $package_id = $(this).val();
+      $.ajax({
+          type: 'GET',
+          url: "{{route('admin.order.setCoach')}}",
+          data:{
+                id: $package_id
+            },
+          
+          success:function(data){
+            console.log("abc");
+            if(data['result'] == true){
+                console.log(data['package']);
+                console.log(data['result']);
+                document.querySelector(".set-coach").disabled = false;
+            }
+            else{
+                // document.querySelector(".set-coach").innerHTML = `Gói tập này không có PT`;
+            }
+          }
+      });
   })
+
+
 
 </script>
 
