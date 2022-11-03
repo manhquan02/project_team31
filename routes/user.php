@@ -47,11 +47,7 @@ Route::prefix('admin/')->name('admin.')->group(function () {
 
     });
 
-    Route::prefix('time/')->name('time.')->group(function () {
-        Route::get('/', [TimeController::class, 'index'])->name('list');
-        Route::get('/create', [TimeController::class, 'create'])->name('create');
-        Route::post('/post-time', [TimeController::class, 'store'])->name('postTime');
-    });
+
 
     Route::prefix('contract/')->name('contract.')->group(function () {
         Route::get('/', [ContractController::class, 'index'])->name('list');

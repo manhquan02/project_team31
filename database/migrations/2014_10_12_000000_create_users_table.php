@@ -23,8 +23,8 @@ return new class extends Migration
             $table->unsignedBigInteger('phone');
             $table->string('avatar')->nullable();
             $table->string('address');
-            $table->unsignedInteger('status');
-            $table->rememberToken();
+            $table->unsignedInteger('status')->default(1);
+            $table->rememberToken()->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

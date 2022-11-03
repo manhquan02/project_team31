@@ -49,7 +49,7 @@ class PostController extends Controller
                 $post->status = 0;
             }
             $post->save();
-            Toastr::success(translate('Update post status successfully !'));
+            Toastr::success(translate('Update post status successfully'));
             return redirect()->route('admin.post.index');
         }
         return redirect()->route('admin.post.index');
@@ -60,7 +60,7 @@ class PostController extends Controller
         $post = Post::where('id', $id)->first();
         if ($post != null) {
             $post->delete();
-            Toastr::success(translate('Delete post successfully !'));
+            Toastr::success(translate('Delete post successfully'));
             return redirect()->route('admin.post.index');
         }
         return redirect()->route('admin.post.index');
@@ -80,7 +80,7 @@ class PostController extends Controller
         $new->content_post = $request->content_post;
         $new->user_id = 1;
         $new->save();
-        Toastr::success(translate('Add new post successfully !'));
+        Toastr::success(translate('Add new post successfully'));
         return redirect()->route('admin.post.create');
     }
 
@@ -104,7 +104,7 @@ class PostController extends Controller
             $post->user_id = 1;
             $post->save();
         }
-        Toastr::success(translate('Update post successfully !'));
+        Toastr::success(translate('Update post successfully'));
         return redirect()->route('admin.post.index');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
 use App\Models\Translation;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 
@@ -42,8 +43,14 @@ class LanguageController extends Controller
                 $new_lang->status = 1;
             }
             $new_lang->save();
-            return redirect()->route('admin.language.index')->with('success', translate('Add language successfully !'));
-        }else return redirect()->route('admin.language.index')->with('error', translate('Language already exists !'));
+            Toastr::success(translate('Add language successfully'));
+            return redirect()->route('admin.language.index');
+        }else
+        {
+            Toastr::error(translate('Language already exists'));
+            return redirect()->route('admin.language.index');
+        }
+
 
     }
 
@@ -52,10 +59,12 @@ class LanguageController extends Controller
         $lang = Language::where('id', $id)->first();
         if ($lang != null) {
             if ($lang->status == 1) {
-                return redirect()->back()->with('error', translate('Default language cannot be deleted !'));
+                Toastr::error(translate('Default language cannot be deleted'));
+                return redirect()->back();
             }
             $lang->delete();
-            return redirect()->back()->with('success', translate('Delete language successfully !'));
+            Toastr::success(translate('Delete language successfully'));
+            return redirect()->back();
         }
         return redirect()->route('admin.language.index');
     }
@@ -79,6 +88,7 @@ class LanguageController extends Controller
                 $translation->save();
             }
         }
+        Toastr::success(translate('Translate successfully'));
         return redirect()->back();
     }
 
@@ -88,7 +98,8 @@ class LanguageController extends Controller
         $translation = Translation::where('id', $translation)->first();
         if ($translation != null) {
             $translation->delete();
-            return redirect()->back()->with('success', translate('Delete translation successfully !'));
+            Toastr::success(translate('Delete translation successfully'));
+            return redirect()->back();
         }
         return redirect()->back();
     }
@@ -114,6 +125,7 @@ class LanguageController extends Controller
             $lang->code = $request->code;
         }
         $lang->save();
-        return redirect()->back()->with('success', translate('Update language successfully'));
+        Toastr::success(translate('Update language successfully'));
+        return redirect()->back();
     }
 }

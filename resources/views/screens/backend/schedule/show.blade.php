@@ -5,12 +5,12 @@
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Post Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('List') }}</span></h3>
+                    <h3 class="card-label">{{ translate('Schedule Management') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ $user->name }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    <a href="{{route('admin.post.create')}}" class="btn btn-primary font-weight-bolder">
+                    <a href="#" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -24,7 +24,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ translate('Add New Post') }}</a>
+                </span>{{ translate('Add New Schedule') }}</a>
                     <!--end::Button-->
                 </div>
             </div>

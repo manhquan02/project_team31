@@ -33,7 +33,7 @@
             @enderror
             </div>
         </div>
-
+        
         <div class="form-group row">
             <label class="col-2 col-form-label">Chọn gói tập</label>
             <div class="col-lg-4 col-md-9 col-sm-12">
@@ -41,7 +41,7 @@
                 <select name="package_id"  class="form-control select2 is-invalid add_package" id="kt_select2_1_validate" >
                 <option value=""><strong>Chọn gói tập</strong></option>
                 @foreach ($packages as $package)
-                    <option  value="{{$package->id}}">{{$package->package_name}}</option>  
+                    <option  value="{{$package->id}}">{{$package->package_name}}  </option>  
                 @endforeach  
                    
              </select>
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <div class="form-group row">
+        <div id="time_package" style="display: none"  class="form-group row">
             <label class="col-2 col-form-label">Chọn ca tập</label>
             <div class=" col-lg-4 col-md-9 col-sm-12">
                 <select name="time_id" class="form-control select2 is-invalid" id="kt_select2_2_validate" >
@@ -70,7 +70,7 @@
         </div>
 
 
-        <div class="form-group row set-coach" >
+        <div id="coach_package" style="display: none"  class="form-group row set-coach" >
             <label class="col-2 col-form-label">Chọn huấn viện viên</label>
             <div class=" col-lg-4 col-md-9 col-sm-12">
                 <select name="pt_id" class="form-control select2 is-invalid" id="kt_select2_3_validate" >
@@ -103,7 +103,7 @@
                 @enderror
             </div>
         </div> 
-        <div class="form-group row">
+        <div id="weekday_package" style="display: none" class="form-group row">
             <label class="col-2 col-form-label">Chọn thứ tập PT</label>
             <div class=" col-lg-4 col-md-9 col-sm-12">
              <select name="weekday_name[]" class="form-control select2" id="kt_select2_9"  multiple>
@@ -143,8 +143,8 @@
         @enderror
        </div>
       </div> --}}
-
-      <div id="method_pm" style="visibility: hidden; transform: translateY(-20px); opacity:0"  class="form-group row">
+        {{-- style="visibility: hidden; transform: translateY(-20px); opacity:0"  --}}
+      <div id="method_pm"  class="form-group row">
         <label class="col-2 col-form-label">Chọn phương thức thanh toán</label>
         <div class=" col-lg-4 col-md-9 col-sm-12">
             <select name="payment_method" class="form-control select2" id="kt_select2_10" name="param">
@@ -161,7 +161,7 @@
     <div  class="form-group row">
         <label class="col-2 col-form-label"><strong>Tổng tiền</strong></label>
         <div class=" col-lg-4 col-md-9 col-sm-12">
-            <strong style="color: red">123</strong>
+            <strong id="total_money" style="color: red">123</strong>
                 
         </div>
     </div>
@@ -197,15 +197,25 @@ $('.add_package').on('change',function(){
           
           success:function(data){
             console.log("abc");
-            if(data['result'] == true){
+            if(data['result'] == 1){
                 console.log(data['package']);
                 console.log(data['result']);
+                document.querySelector('#coach_package').style.display='flex';
+                document.querySelector('#weekday_package').style.display='flex';
+                document.querySelector('#time_package').style.display='flex';
+
                 // document.querySelector('#method_pm').classList.add('method_pm_block');
                 // document.querySelector('#method_pm').style.display='flex';
-                document.querySelector('#method_pm').style.visibility= 'visible';
-                document.querySelector('#method_pm').style.transform='translate(0)';
-                document.querySelector('#method_pm').style.transition='.5s';
-                document.querySelector('#method_pm').style.opacity='1';
+                // document.querySelector('#method_pm').style.visibility= 'visible';
+                // document.querySelector('#method_pm').style.transform='translate(0)';
+                // document.querySelector('#method_pm').style.transition='.5s';
+                // document.querySelector('#method_pm').style.opacity='1';
+                document.querySelector('#btn_disabled').classList.remove("disabled");
+            }
+            if(data['result'] == 0){
+                document.querySelector('#coach_package').style.display='none';
+                document.querySelector('#weekday_package').style.display='none';
+                document.querySelector('#time_package').style.display='none';
                 document.querySelector('#btn_disabled').classList.remove("disabled");
             }
           }

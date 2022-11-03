@@ -18,13 +18,13 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('discount_id');
             $table->unsignedBigInteger('package_id');
-            $table->unsignedBigInteger('time_id');
-            $table->string('weekday_name');
+            $table->unsignedBigInteger('time_id')->nullable();
+            $table->string('weekday_name')->nullable();
             $table->date('activate_day');
             $table->unsignedBigInteger('pt_id')->nullable(); // role : pt
             $table->unsignedBigInteger('total_money');
             $table->unsignedBigInteger('payment_method');
-            $table->unsignedBigInteger('status_contract');
+            $table->unsignedBigInteger('status_contract')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderRequest extends FormRequest
+class TimeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,20 +24,18 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
-            'package_id' => 'required',
-            // 'time_id' => 'required',
-            // 'pt_id' =>'required',
-            // 'weekday_name' =>'required',
-            'activate_day' => 'required',
-            'payment_method' =>'required',
+            'time_name' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
         ];
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
-            'required'=>':attribute không được bỏ trống',
-
+            'time_name.required' => translate('Type time name, thanks'),
+            'start_time.required' => translate('Choose start time, thanks'),
+            'end_time.required' => translate('Choose end time, thanks'),
         ];
 
     }

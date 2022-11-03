@@ -47,14 +47,14 @@ class OrderController extends Controller
         if(isset($package)){
             if($package->set_pt == 1){
                 return response()->json([
-                    'result' => true,
+                    'result' => 1,
                     'package' => $package,
                     
                 ]);
             }
             else{
                 return response()->json([
-                    'result' => true,
+                    'result' => 0,
                     'package' => $package,
                 ]);
             }
@@ -124,38 +124,60 @@ class OrderController extends Controller
         // dd($request->discount_code);
         $user = User::find($request->user_id);
         $package = Package::find($request->package_id);
-        $order->fill($request->all());
-        $order->weekday_name = implode("|",$request->weekday_name);
-        $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
-        if(isset($discount)){
-            $discount_packages =  explode('|', $discount->package_id);
-            if($discount->status == 0){
-                return back()->with('msg', 'Xin lỗi. Phiếu giảm giá này đã hết hạn'); 
-            }
-            if(in_array($package->id, $discount_packages)){
-                $order->total_money = $package->price - $package->price*$discount->price_sale/100;
-                // dd($package->price);
-                $order->discount_id = $discount->id;
-                $quantity_discount = $discount->quantity - 1;
-                $discount->update([
-                    'quantity' => $quantity_discount,
-                ]);
-                if($discount->quantity == 0){
-                    $discount->update([
-                        'status' => 0,
-                    ]);
+        if($package->set_pt == 1){
+            $rule = [
+                'time_id' => 'required',
+                'pt_id' =>'required',
+                'weekday_name' =>'required',
+            ];
+            $messages = [
+                'required' => ':attribute không được để chống',
+            ];
+            $request->validate($rule,$messages);
+            $order->fill($request->all());
+            $order->weekday_name = implode("|",$request->weekday_name);
+        }
+        elseif($package->set_pt == 0){
+            $order->user_id = $request->user_id;
+            $order->package_id = $request->package_id;
+            $order->activate_day = $request->activate_day;
+            $order->payment_method = $request->payment_method;
+        }
+        
+        if($request->discount_code != ""){
+            $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
+            if(isset($discount)){
+                $discount_packages =  explode('|', $discount->package_id);
+                if($discount->status == 0){
+                    return back()->with('msg', 'Xin lỗi. Phiếu giảm giá này đã hết hạn'); 
                 }
-                $order->save();
-                return back()->with('success', 'Thêm Order thành công'); 
+                if(in_array($package->id, $discount_packages)){
+                    $order->total_money = $package->price - $package->price*$discount->price_sale/100;
+                    // dd($package->price);
+                    $order->discount_id = $discount->id;
+                    $quantity_discount = $discount->quantity - 1;
+                    $discount->update([
+                        'quantity' => $quantity_discount,
+                    ]);
+                    if($discount->quantity == 0){
+                        $discount->update([
+                            'status' => 0,
+                        ]);
+                    }
+                    $order->save();
+                    return back()->with('success', 'Thêm Order thành công'); 
+                }
+                else{
+                    return back()->with('msg', 'Phiếu giảm giá không đúng'); 
+                }
+                
             }
             else{
                 return back()->with('msg', 'Phiếu giảm giá không đúng'); 
             }
-            
         }
-        else{
-            return back()->with('msg', 'Phiếu giảm giá không đúng'); 
-        }
+        
+        
 
         $order->discount_id = 0;
         $order->total_money = $package->price;
@@ -164,7 +186,8 @@ class OrderController extends Controller
         
         return back()->with('success', 'Thêm order thành công');
 
-        
+
+
 
 
     }
