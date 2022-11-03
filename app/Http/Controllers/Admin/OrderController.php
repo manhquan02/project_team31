@@ -176,14 +176,11 @@ class OrderController extends Controller
                 return back()->with('msg', 'Phiếu giảm giá không đúng'); 
             }
         }
-        
-        
 
         $order->discount_id = 0;
         $order->total_money = $package->price;
         $order->save();
 
-        
         return back()->with('success', 'Thêm order thành công');
 
 

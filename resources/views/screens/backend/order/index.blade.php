@@ -170,9 +170,27 @@
                      <tr>
                         <td>{{$order->id}}</td>
                         <td>{{$order->user->name}}</td>
-                        <td>{{$order->time->time_name}}</td>
-                        <td>{{$order->weekday_name}}</td>
-                        <td>{{$order->activate_day}}</td> 
+                        <td>
+                            @if(isset($order->time->time_name))
+                            {{$order->time->time_name}}
+                            @else
+                            Gói tập không có pt
+                            @endif
+                        </td>
+                        <td>
+                            @if(isset($order->weekday_name))
+                            {{$order->weekday_name}}
+                            @else
+                            Gói tập không có pt
+                            @endif
+                        </td>
+                        <td>
+                            @if(isset($order->activate_day))
+                            {{$order->activate_day}}
+                            @else
+                            Gói tập không có pt
+                            @endif
+                        </td> 
                         <td>{{$order->user->name}}</td>
                         <td>{{$order->total_money}}</td> 
                         <td>
