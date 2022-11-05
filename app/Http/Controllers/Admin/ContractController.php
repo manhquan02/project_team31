@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\Contract;
 use App\Models\Order;
+use App\Models\Schedule;
 use App\Models\Weekday;
 use DateInterval;
 use DatePeriod;
@@ -34,6 +35,7 @@ class ContractController extends Controller
         $order = Order::find(decrypt($id));
         $contract = new Contract();
         $attendance = new Attendance();
+        $schedule = new Schedule();
 
         $month = $order->package->month_package;
         $newdate = strtotime ( '+'.$month.' month' , strtotime ( $order->activate_day ) );
@@ -80,7 +82,6 @@ class ContractController extends Controller
                         'pt_id' => 1,
                         'date' => $dt->format("Y-m-d"),
                         'status' => 1,
-
                     ]);
                 }
 

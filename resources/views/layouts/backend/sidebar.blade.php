@@ -104,7 +104,7 @@
                 </a>
             </li>
             <li class="menu-section">
-                <h4 class="menu-text">Phiếu giảm giá</h4>
+                <h4 class="menu-text">{{ translate('Events') }}</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -126,7 +126,7 @@
 
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">Phiếu giảm giá</span>
+                    <span class="menu-text">{{ translate('Coupons') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="menu-submenu">
@@ -134,7 +134,7 @@
                     <ul class="menu-subnav">
                         <li class="menu-item menu-item-parent" aria-haspopup="true">
                             <span class="menu-link">
-                                <span class="menu-text">Phiếu giảm giá</span>
+                                <span class="menu-text">{{ translate('Coupons') }}</span>
                             </span>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -142,7 +142,7 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">Danh sách phiếu giảm giá</span>
+                                <span class="menu-text">{{ translate('List coupons') }}</span>
                             </a>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -150,7 +150,7 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">Thêm mới phiếu giảm giá</span>
+                                <span class="menu-text">{{ translate('Add new coupon') }}</span>
                             </a>
                         </li>
                     </ul>

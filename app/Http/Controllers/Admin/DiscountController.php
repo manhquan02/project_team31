@@ -15,10 +15,33 @@ class DiscountController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $discounts = Discount::all();
-        return view('screens.backend.discount.index', ['discounts' => $discounts]);
+        if ($request->start_date && $request->end_date && strtotime($request->start_date) <= strtotime($request->end_date)) {
+            if($request->keyword){
+                $discounts = Discount::select('discounts.*')
+                    ->where('discount_code', 'like', '%' . $request->keyword . '%')
+                    ->whereDate('created_at', '>=', $request->start_date)
+                    ->whereDate('created_at', '<=', $request->end_date)
+                    ->paginate(12);
+            }else{
+                $discounts = Discount::select('discounts.*')
+                    ->whereDate('created_at', '>=', $request->start_date)
+                    ->whereDate('created_at', '<=', $request->end_date)
+                    ->paginate(12);
+            }
+        } else {
+            if($request->keyword){
+                $discounts = Discount::select('discounts.*')
+                    ->where('discount_code', 'like', '%' . $request->keyword . '%')
+                    ->paginate(12);
+            }else{
+                $discounts = Discount::select('discounts.*')
+                    ->where('id', '>', 0)
+                    ->paginate(12);
+            }
+        }
+        return view('screens.backend.discount.index', compact('discounts'));
     }
 
     /**
