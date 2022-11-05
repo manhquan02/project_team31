@@ -4,7 +4,7 @@
 
 <!--begin::Head-->
 <head>
-    <meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>@yield('title')</title>
     <meta name="description" content="User profile personal information example"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -38,7 +38,6 @@
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     <link rel="shortcut icon" href="/backend/media/logos/favicon.ico"/>
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-
 </head>
 <!--end::Head-->
 <!--begin::Body-->

@@ -64,7 +64,7 @@
                                 </a>
                             </li>
                             <li class="navi-item">
-                                <a href="#" class="navi-link">
+                                <a href="{{route('admin.order.pdf')}}" class="navi-link">
                                     <span class="navi-icon">
                                         <i class="la la-file-pdf-o"></i>
                                     </span>

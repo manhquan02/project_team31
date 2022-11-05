@@ -12,6 +12,7 @@ use App\Models\Time;
 use App\Models\User;
 use App\Models\Weekday;
 use Illuminate\Http\Request;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -232,5 +233,12 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function pdf(){
+        $orders = Order::all();
+        $pdf = PDF::loadView('screens.backend.order.pdf', compact('orders'))->setOption('dpi', 150);
+      return $pdf->stream();
+    //   return view('screens.backend.order.pdf', compact('orders'));
     }
 }
