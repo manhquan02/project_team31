@@ -20,7 +20,7 @@ class DiscountController extends Controller
         if ($request->start_date && $request->end_date && strtotime($request->start_date) <= strtotime($request->end_date)) {
             if($request->keyword){
                 $discounts = Discount::select('discounts.*')
-                    ->where('discount_code', 'like', '%' . $request->keyword . '%')
+                    ->orWhere('discount_title', 'like', '%' . $request->keyword . '%')
                     ->whereDate('created_at', '>=', $request->start_date)
                     ->whereDate('created_at', '<=', $request->end_date)
                     ->paginate(12);
@@ -33,7 +33,7 @@ class DiscountController extends Controller
         } else {
             if($request->keyword){
                 $discounts = Discount::select('discounts.*')
-                    ->where('discount_code', 'like', '%' . $request->keyword . '%')
+                    ->Where('discount_title', 'like', '%' . $request->keyword . '%')
                     ->paginate(12);
             }else{
                 $discounts = Discount::select('discounts.*')

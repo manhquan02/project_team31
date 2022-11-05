@@ -118,7 +118,7 @@
                                         <div class="input-icon">
                                             <input name="keyword" type="text" class="form-control"
                                                    @if(request('keyword')) value="{{ request('keyword') }}" @endif
-                                                   placeholder="{{translate('Enter Discount Code')}}"/>
+                                                   placeholder="{{translate('Enter Discount Title')}}"/>
                                             <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                         </span>

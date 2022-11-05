@@ -37,7 +37,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="input-icon">
-                                            <input name="keyword" type="text" class="form-control"
+                                            <input name="keyword" type="text" class="form-control" @if(request('keyword')) value="{{ request('keyword') }}" @endif
                                                    placeholder="{{translate('Enter Subject Name')}}"/>
                                             <span>
                                         <i class="flaticon2-search-1 text-muted"></i>

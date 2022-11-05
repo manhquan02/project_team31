@@ -14,7 +14,7 @@
                     <form action="">
                         <div class="input-icon" style="margin-right: 280px">
                             <input type="text" class="form-control" style="width: 200%"
-                                   name="keyword"
+                                   name="keyword" @if(request('keyword')) value="{{ request('keyword') }}" @endif
                                    placeholder="{{translate('Type keywords and Enter ...')}}"/>
                         </div>
                         <button hidden>Search</button>
