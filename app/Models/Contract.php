@@ -11,7 +11,7 @@ class Contract extends Model
     protected $table = 'contracts';
 
     protected $fillable = [
-        'user_id',
+        'pt_id',
         'package_id',
         'order_id',
         'activate_day',
@@ -23,4 +23,6 @@ class Contract extends Model
     public function order(){  
         return $this->belongsTo(Order::class,'order_id','id');
     }
+
+    
 }

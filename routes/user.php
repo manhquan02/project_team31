@@ -40,9 +40,13 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('list');
         Route::get('/create', [OrderController::class, 'create'])->name('create');
         Route::post('/post-order', [OrderController::class, 'store'])->name('postOrder');
+        Route::get('/add', [OrderController::class, 'add'])->name('add');
+
+        Route::get('/create-multi', [OrderController::class, 'createMulti'])->name('createMulti');
+        Route::post('/post-orderMulti', [OrderController::class, 'postOrderMulti'])->name('postOrderMulti');
 
         Route::get('/set-package', [OrderController::class, 'setPackage'])->name('setPackage');
-        
+        Route::get('/total-money', [OrderController::class, 'setTotalMoney'])->name('setTotalMoney');
         Route::get('/set-coach', [OrderController::class, 'setCoach'])->name('setCoach');
 
     });

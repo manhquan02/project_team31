@@ -8,6 +8,7 @@ use App\Http\Requests\SubjectRequest;
 use App\Models\Package;
 use App\Models\Subject;
 use Brian2694\Toastr\Facades\Toastr;
+use App\Http\Utility\PackageUtility;
 use http\Env\Response;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,8 @@ class PackageController extends Controller
 {
     public function index(Request $request)
     {
+        $package_type=PackageUtility::$arrayPackage;
+   
         if ($request->start_date && $request->end_date && strtotime($request->start_date) <= strtotime($request->end_date)) {
             if($request->keyword){
                 $packages = Package::select('packages.*')
@@ -40,7 +43,7 @@ class PackageController extends Controller
             }
         }
 
-        return view('screens.backend.package.index', compact('packages'));
+        return view('screens.backend.package.index', compact('packages','package_type'));
     }
 
 

@@ -68,4 +68,18 @@ function upload_image($request, $new, $folder){
     $imageName = $image->hashName();
     $new->image = $image->storeAs($folder, $imageName);
 }
+
+const PACKAGE_ONE_TO_ONE=1;
+const PACKAGE_ONE_TO_TWO=2;
+const PACKAGE_ONE_TO_THREE=3;
+$arrayPackage=[
+ 
+PACKAGE_ONE_TO_ONE=>'1:1',
+PACKAGE_ONE_TO_TWO=>'1:2',
+PACKAGE_ONE_TO_THREE=>'1:3'
+]
+
+// USER 
+// LIST DANH -> pACKAGE_ID=PACKAGE_TYPE CLASS::arrayPackage[PACKAGE_TYPE]
+
 ?>

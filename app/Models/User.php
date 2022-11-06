@@ -57,4 +57,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function body(){
         return $this->hasOne(Bodybmi::class, 'user_id','id');
     }
+
+    public function orders(){
+        return $this->belongsToMany(
+            Order::class,
+            'user_order_contract',
+            'user_id',
+            'order_id'
+        );
+    }
+
+
 }

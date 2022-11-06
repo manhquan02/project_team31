@@ -38,7 +38,7 @@
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     <link rel="shortcut icon" href="/backend/media/logos/favicon.ico"/>
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-
+    @yield('style')
 </head>
 <!--end::Head-->
 <!--begin::Body-->

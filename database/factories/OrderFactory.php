@@ -17,13 +17,12 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => rand(3,10),
             'discount_id' => rand(1,10),
             'package_id' => rand(1,10),
             'time_id' => rand(1,4),
             'weekday_name' => 'Monday|Tuesday|Wednesday',
             'activate_day' => '2022-10-15',
-            'pt_id' => 2,
+            'pt_id' => 3,
             'total_money' => 2000000,
             'payment_method' => rand(1,2),
             'status_contract'=> 0,

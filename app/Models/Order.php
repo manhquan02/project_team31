@@ -11,7 +11,6 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'user_id',
         'discount_id',
         'package_id',
         'time_id',
@@ -26,8 +25,8 @@ class Order extends Model
     protected $attributes = [
         'status_contract' => 0
     ];
-    public function user(){
-        return $this->belongsTo(User::class,'user_id','id');
+    public function pt(){
+        return $this->belongsTo(User::class,'pt_id','id');
     }
 
     public function package(){  
@@ -39,4 +38,15 @@ class Order extends Model
         return $this->belongsTo(Time::class,'time_id','id');
     }
 
+
+    public function users(){
+        return $this->belongsToMany(
+            User::class,
+            'result_contract',
+            'order_id',
+            'user_id'    
+        );
+    }
+
+    
 }

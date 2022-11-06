@@ -1,6 +1,7 @@
 @extends('layouts.backend.master')
 @section('title', translate('Package Management'))
 @section('content')
+
     <div>
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
@@ -82,6 +83,7 @@
                         <th>{{ translate('Episode Price') }}</th>
                         <th>{{ translate('Month Package') }}</th>
                         <th>{{ translate('PT') }}</th>
+                        <th>{{ translate('Loại kèm') }}</th>
                         <th>{{ translate('Status') }}</th>
                         <th>{{ translate('Actions') }}</th>
                     </tr>
@@ -101,6 +103,7 @@
                                 <td>{{$item->month_package < 12 ? $item->month_package : $item->month_package / 12}} {{ $item->month_package < 12 ? translate('month'): translate('year') }}</td>
                                 <td><input value="{{$item->id}}" id="set_pt" type="checkbox"
                                            @if($item->set_pt == 1) checked @endif></td>
+                                <td>{{$package_type[$item->type_package]}}</td>
                                 <td><span
                                         class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{ translate(config('status_package.'.$item->status) )}}</span>
                                 </td>
