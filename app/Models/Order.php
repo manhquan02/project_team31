@@ -29,11 +29,15 @@ class Order extends Model
         return $this->belongsTo(User::class,'pt_id','id');
     }
 
+
     public function package(){  
         return $this->belongsTo(Package::class,'package_id','id');
     }
 
-
+    public function coupon(){  
+        return $this->belongsTo(Discount::class,'discount_id','id');
+    }
+    
     public function time(){  
         return $this->belongsTo(Time::class,'time_id','id');
     }

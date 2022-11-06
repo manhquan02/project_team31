@@ -48,6 +48,7 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::get('/set-package', [OrderController::class, 'setPackage'])->name('setPackage');
         Route::get('/total-money', [OrderController::class, 'setTotalMoney'])->name('setTotalMoney');
         Route::get('/set-coach', [OrderController::class, 'setCoach'])->name('setCoach');
+        Route::get('pdf', [OrderController::class, 'pdf'])->name('pdf');
 
     });
 

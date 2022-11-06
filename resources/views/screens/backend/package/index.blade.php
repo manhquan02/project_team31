@@ -38,7 +38,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="input-icon">
-                                            <input name="keyword" type="text" class="form-control"
+                                            <input name="keyword" type="text" class="form-control" @if(request('keyword')) value="{{ request('keyword') }}" @endif
                                                    placeholder="{{translate('Enter Package Name')}}"/>
                                             <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
@@ -108,9 +108,9 @@
                                         class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{ translate(config('status_package.'.$item->status) )}}</span>
                                 </td>
                                 <td>
-                                    <a title="{{ translate('Edit') }}"
+                                    <a title="{{ translate('View') }}"
                                        href="{{route('admin.package.edit', $item->id)}}"><i
-                                            class="flaticon2-pen text-warning"></i></a>
+                                            class="flaticon-eye text-info"></i></a>
                                     <a title="{{ translate('Delete') }}" class="btn-confirm"
                                        data-title="Are you sure you want to delete ?"
                                        data-url="{{route('admin.package.delete', $item->id)}}"

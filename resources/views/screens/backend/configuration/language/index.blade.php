@@ -58,8 +58,8 @@
                                 <td>
                                     <a title="{{ translate('Translate') }}" href="{{ route('admin.language.translate', $item->code) }}"><i
                                             class="ki ki-reload text-info"></i></a>
-                                    <a title="{{ translate('Edit') }}" href="{{route('admin.language.edit', $item->id)}}" style="margin-left: 12px"><i class="flaticon2-pen text-warning"></i></a>
-                                        <a title="{{ translate('Delete') }}" class="btn-del" data-url="{{route('admin.language.delete',$item->id)}}"
+                                    <a title="{{ translate('Edit') }}" href="{{route('admin.language.edit', $item->id)}}" style="margin-left: 12px"><i class="far fa-edit text-warning"></i></a>
+                                        <a title="{{ translate('Delete') }}" class="btn-confirm" data-url="{{route('admin.language.delete',$item->id)}}" data-title="Are you sure you want to delete ?"
                                            style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
                                 </td>
                             </tr>

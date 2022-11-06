@@ -37,6 +37,7 @@ class ContractController extends Controller
         $contract = new Contract();
         $attendance = new Attendance();
         $schedule = new Schedule();
+
         $month = $order->package->month_package;
         $newdate = strtotime ( '+'.$month.' month' , strtotime ( $order->activate_day ) );
         $end_date = date ( 'Y-m-j' , $newdate );
