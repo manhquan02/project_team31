@@ -49,8 +49,9 @@
                                 <td>{{$item->start_time}}</td>
                                 <td>{{$item->end_time}}</td>
                                 <td>
-                                    <a title="{{translate('Edit')}}" href="{{route('admin.time.edit', $item->id)}}"><i
-                                            class="flaticon2-pen text-warning"></i></a>
+                                <a title="{{ translate('View') }}"
+                                       href="{{route('admin.time.edit', $item->id)}}"><i
+                                            class="flaticon-eye text-info"></i></a>
                                     <a title="{{translate('Delete')}}" class="btn-confirm" data-title="Are you sure you want to delete ?" data-url="{{route('admin.time.delete', $item->id)}}"
                                        style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
                                 </td>

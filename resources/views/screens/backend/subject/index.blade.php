@@ -89,8 +89,9 @@
                                     <img width="100px" height="100px" src="{{asset($item->image)}}" alt="">
                                 </td>
                                 <td>
-                                    <a title="{{translate('Edit')}}" href="{{route('admin.subject.edit', $item->id)}}"><i
-                                            class="flaticon2-pen text-warning"></i></a>
+                                <a title="{{ translate('View') }}"
+                                       href="{{route('admin.subject.edit', $item->id)}}"><i
+                                            class="flaticon-eye text-info"></i></a>
                                     <a title="{{translate('Delete')}}" class="btn-confirm" data-title="Are you sure you want to delete ?" data-url="{{route('admin.subject.delete', $item->id)}}"
                                        style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
                                 </td>

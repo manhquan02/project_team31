@@ -97,9 +97,9 @@
                                 </td>
                                 <td>{{ date('d-m-Y H:i:s', strtotime($item->created_at)) }}</td>
                                 <td>
-                                    <a title="{{ translate('Edit') }}"
+                                <a title="{{ translate('View') }}"
                                        href="{{route('admin.post.edit', $item->id)}}"><i
-                                            class="flaticon2-pen text-warning"></i></a>
+                                            class="flaticon-eye text-info"></i></a>
                                     <a title="{{translate('Delete')}}" class="btn-confirm" data-title="{{ translate('Are you sure you want to delete ?') }}" data-url="{{route('admin.post.delete', $item->id)}}"
                                        style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
                                     <a title="{{ $item->status ==0 ? translate('Show') : translate('Hidden')}}"

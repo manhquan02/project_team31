@@ -8,21 +8,26 @@
 font-family: DejaVu Sans;
 font-size: 18px;
 }
-th,td{
-    text-align: center;
-    padding: 0 4px;
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
-th{
-    background-color: #7270cc;
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  text-align: center;
 }
+
+tr:nth-child(even) {background-color: #f2f2f2;}
     </style>
   </head>
   <body>
-    <div>
-    <div style="text-align: center;color:Blue"><h2>Danh sách đơn</h2></div>
+  <div style="overflow-x: auto;">
+    <div style="text-align: center;color:blue"><h2>Danh sách đơn</h2></div>
   <table>
                     <thead>
-                    <tr>
+                    <tr style="background-color: #7545be;">
                         <th>#ID</th>
                         <th>{{translate('Username')}}</th>
                         <th>{{translate('Package')}}</th>
@@ -36,30 +41,19 @@ th{
                     </thead>
                     <tbody>
                     @foreach ($orders as $order)
-                     <tr @if($order->status_contract==1) style="background-color:#47cc2e"  @else style="background-color:goldenrod" @endif">
+                     <tr>
                         <td>{{$order->id}}</td>
                         <td>{{$order->user->name}}</td>
                         <td>{{$order->package->package_name}}</td>                       
-                        <td>
-                            @if(isset($order->time->time_name))
-                            {{$order->time->time_name}}
-                            @endif
-                        </td>
-                        <td>
-                            @if(isset($order->weekday_name))
-                            {{$order->weekday_name}}
-                            @endif
-                        </td>
+                        <td>{{$order->time->time_name}}</td>
+                        <td>{{$order->weekday_name}}</td>
                         <td>{{$order->pt->name}}</td>
                         <td>{{number_format($order->total_money,0,'.','.')}}</td> 
-                        <td>{{$order->payment_method}}</td>
+                        <td>{{$order->payment_method == 1 ? translate('Direct payment') : translate('Transfer payment')}}</td>
                         <td>
-                            @if ($order->status_contract == 1)
+                           
                             <span
-                                class="label label-inline label-light-primary font-weight-bold">{{translate('Yes')}}</span>
-                        @else
-                            <span class="label label-inline label-light-danger font-weight-bold">{{translate('No')}}</span>
-                        @endif
+                                class="label label-inline label-light-primary font-weight-bold">{{$order->status_contract == 1 ? translate('Yes') : translate('No')}}</span>
                         </td>
                     </tr>
                     @endforeach
