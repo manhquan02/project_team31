@@ -16,14 +16,24 @@ use PDF;
 
 class OrderController extends Controller
 {
+    public function add(){
+        return view('screens.backend.order.add');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::all();
+        $orders = Order::get();
+        // $orders = Order::select('order.*');
+        // // if(isset($request->key)){
+        // //     $orders = $orders->where('package_name', 'like', '%' . $request->keyword . '%')
+        // //                     ->paginate(12);
+        // // }
         return view('screens.backend.order.index', ['orders' => $orders]);
     }
 
@@ -89,6 +99,7 @@ class OrderController extends Controller
         $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
         if(isset($discount)){
             $discount_packages =  explode('|', $discount->package_id);
+            
             if($discount->status == 0){
                 return response()->json([
                     'result' => false,
@@ -139,7 +150,6 @@ class OrderController extends Controller
             $order->weekday_name = implode("|",$request->weekday_name);
         }
         elseif($package->set_pt == 0){
-            $order->user_id = $request->user_id;
             $order->package_id = $request->package_id;
             $order->activate_day = $request->activate_day;
             $order->payment_method = $request->payment_method;
@@ -166,6 +176,7 @@ class OrderController extends Controller
                         ]);
                     }
                     $order->save();
+                    $order->users()->attach($request->user_id);
                     return back()->with('success', 'Thêm Order thành công'); 
                 }
                 else{
@@ -181,14 +192,97 @@ class OrderController extends Controller
         $order->discount_id = 0;
         $order->total_money = $package->price;
         $order->save();
-
+        $order->users()->attach($request->user_id);
         return back()->with('success', 'Thêm order thành công');
 
-
-
-
-
     }
+
+
+
+    public function createMulti(){
+        $users = User::role('member')->get();
+        $packages = Package::all();
+        $times = Time::all();
+        $coachs = User::role('coach')->get();
+        $weekdays = Weekday::all();
+        return view('screens.backend.order.create-multi', ['users' => $users, 'packages' => $packages, 'times' => $times, 'coachs' => $coachs, 'weekdays' => $weekdays]);
+    }
+
+
+    public function postOrderMulti(Request $request){
+        // dd($request->user_id);
+        $order = new Order();
+        $package = Package::find($request->package_id);
+        $order->fill($request->all());
+        if($request->discount_code != ""){
+                $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
+                if(isset($discount)){
+                    $discount_packages =  explode('|', $discount->package_id);
+                
+                    if($discount->status == 0){
+                        return back()->with('msg', 'Xin lỗi. Phiếu giảm giá này đã hết hạn'); 
+                    }
+                    if(count($request->user_id)){
+                        if(in_array($package->id, $discount_packages)){
+                            foreach ($request->user_id as $key => $user) {
+                                // $order->user_id = $user;
+                                // $order->total_money = $package->price - $package->price*$discount->price_sale/100;
+                                // $order->discount_id = $discount->id;
+                                $order->create([
+                                    'user_id' => $user,
+                                    'discount_id' => $discount->id,
+                                    'package_id' => $request->package_id,
+                                    'weekday_name' => implode("|",$request->weekday_name),
+                                    'time_id' => $request->time_id, 
+                                    'activate_day' => $request->activate_day,
+                                    'pt_id' => $request->pt_id,
+                                    'total_money' => $package->price - $package->price*$discount->price_sale/100,
+                                    'payment_method' => $request->payment_method,
+                                ]);
+                                // $order->save();
+                            }
+                                $quantity_discount = $discount->quantity - 1;
+                                $discount->update([
+                                    'quantity' => $quantity_discount,
+                                ]);
+                             
+                                if($discount->quantity == 0){
+                                    $discount->update([
+                                        'status' => 0,
+                                    ]);
+                                }
+                            return back()->with('success', 'Thêm Order thành công'); 
+                        }
+                    }
+                    
+                    else{
+                        return back()->with('msg', 'Phiếu giảm giá không đúng'); 
+                    }
+                    
+                }
+                else{
+                    return back()->with('msg', 'Phiếu giảm giá không đúng'); 
+                }
+            }
+            foreach ($request->user_id as $key => $user) {
+  
+                $order->create([
+                    'user_id' => $user,
+                    'package_id' => $request->package_id,
+                    'weekday_name' => implode("|",$request->weekday_name),
+                    'time_id' => $request->time_id, 
+                    'activate_day' => $request->activate_day,
+                    'pt_id' => $request->pt_id,
+                    'total_money' => $package->price,
+                    'payment_method' => $request->payment_method,
+                ]);
+            }
+            return back()->with('success', 'Thêm Order thành công');
+        
+    }
+
+
+
 
     /**
      * Display the specified resource.

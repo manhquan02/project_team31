@@ -18,14 +18,14 @@
      </h3>
     </div>
     <!--begin::Form-->
-    <form action="{{route('admin.order.postOrder')}}" method="POST">
+    <form action="{{route('admin.order.postOrderMulti')}}" method="POST">
         @csrf
         @method('POST')
      <div class="card-body">
       
-        <div class="form-group row">
+        {{-- <div class="form-group row">
             <label class="col-2 col-form-label">Chọn người dùng</label>
-            <div class="col-lg-4 col-md-9 col-sm-12">
+            <div class=" col-lg-4 col-md-9 col-sm-12">
              <select name="user_id" class="form-control select2" id="kt_select2_11">
               <option label="Label"></option>
               <optgroup label="Chọn người dùng">
@@ -39,7 +39,26 @@
                 <span class="text-danger">{{ $message }}</span>    
             @enderror
             </div>
-        </div>
+        </div> --}}
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Chọn người dùng</label>
+            <div class=" col-lg-4 col-md-9 col-sm-12">
+             <select name="user_id[]" class="form-control select2" id="kt_select2_11" multiple name="param">
+              <option label="Label"></option>
+              <optgroup label="Chọn người dùng">
+                @foreach ($users as $user)
+                    <option value="{{$user->id}}">{{$user->name}}</option>
+                @endforeach
+              </optgroup>
+
+             </select>
+             @error('user_id')
+                <span class="text-danger">{{ $message }}</span>    
+            @enderror
+             </select>
+            </div>
+           </div>
         
         <div class="form-group row">
             <label class="col-2 col-form-label">Chọn gói tập</label>
@@ -58,7 +77,7 @@
             </div>
         </div>
 
-        <div id="time_package" style="display: none"  class="form-group row">
+        <div id="time_package" class="form-group row">
             <label class="col-2 col-form-label">Chọn ca tập</label>
             <div class=" col-lg-4 col-md-9 col-sm-12">
                 <select name="time_id" class="form-control select2 is-invalid" id="kt_select2_2_validate" >
@@ -77,7 +96,7 @@
         </div>
 
 
-        <div id="coach_package" style="display: none"  class="form-group row set-coach" >
+        <div id="coach_package"  class="form-group row set-coach" >
             <label class="col-2 col-form-label">Chọn huấn viện viên</label>
             <div class=" col-lg-4 col-md-9 col-sm-12">
                 <select name="pt_id" class="form-control select2 is-invalid" id="kt_select2_3_validate" >
@@ -110,7 +129,7 @@
                 @enderror
             </div>
         </div> 
-        <div id="weekday_package" style="display: none" class="form-group row">
+        <div id="weekday_package"  class="form-group row">
             <label class="col-2 col-form-label">Chọn thứ tập PT</label>
             <div class=" col-lg-4 col-md-9 col-sm-12">
              <select name="weekday_name[]" class="form-control select2" id="kt_select2_9"  multiple>
@@ -151,7 +170,7 @@
        </div>
       </div> --}}
         {{-- style="visibility: hidden; transform: translateY(-20px); opacity:0"  --}}
-      <div id="method_pm"  class="form-group row">
+      <div  class="form-group row">
         <label class="col-2 col-form-label">Chọn phương thức thanh toán</label>
         <div class=" col-lg-4 col-md-9 col-sm-12">
             <select name="payment_method" class="form-control select2" id="kt_select2_10" name="param">
@@ -214,25 +233,14 @@ $('.add_package').on('change',function(){
                 console.log(data['result']);
                 $('.discount_code').attr('disabled', false);
                 $('.button_discount').attr('disabled', false);
-                document.querySelector('#coach_package').style.display='flex';
-                document.querySelector('#weekday_package').style.display='flex';
-                document.querySelector('#time_package').style.display='flex';
-
-                // document.querySelector('#method_pm').classList.add('method_pm_block');
-                // document.querySelector('#method_pm').style.display='flex';
-                // document.querySelector('#method_pm').style.visibility= 'visible';
-                // document.querySelector('#method_pm').style.transform='translate(0)';
-                // document.querySelector('#method_pm').style.transition='.5s';
-                // document.querySelector('#method_pm').style.opacity='1';
+        
                 document.querySelector('#btn_disabled').classList.remove("disabled");
                 document.querySelector('#total_money').innerHTML = `${data['package'].price}`;
             }
             if(data['result'] == 0){
                 $('.discount_code').attr('disabled', false);
                 $('.button_discount').attr('disabled', false);
-                document.querySelector('#coach_package').style.display='none';
-                document.querySelector('#weekday_package').style.display='none';
-                document.querySelector('#time_package').style.display='none';
+
                 document.querySelector('#btn_disabled').classList.remove("disabled");
                 document.querySelector('#total_money').innerHTML = `${data['package'].price}`;
 

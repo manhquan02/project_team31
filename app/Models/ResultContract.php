@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Schedule extends Model
+class ResultContract extends Model
 {
     use HasFactory;
-    protected $table = 'schedule_pt';
+    protected $table = 'result_contract';
 
     protected $fillable = [
+        'user_id',
+        'order_id',
         'contract_id',
-        'time_id',
-        'weekday_name',
-        'pt_id',
-        'date',
+        'height',
+        'weight',
+        'bmi',
+        'comment',
         'status'
     ];
 }

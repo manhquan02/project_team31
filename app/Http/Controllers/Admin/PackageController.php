@@ -8,6 +8,7 @@ use App\Http\Requests\SubjectRequest;
 use App\Models\Package;
 use App\Models\Subject;
 use Brian2694\Toastr\Facades\Toastr;
+use App\Http\Utility\PackageUtility;
 use http\Env\Response;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,6 @@ class PackageController extends Controller
 {
     public function index(Request $request)
     {
-
             if(isset($request->subject_id)){
                 if(isset($request->status)){
                     $packages = Package::select('packages.*')
@@ -41,7 +41,10 @@ class PackageController extends Controller
                         ->paginate(12);
                 }
             }
-        return view('screens.backend.package.index', compact('packages'));
+        $package_type=PackageUtility::$arrayPackage;
+
+        return view('screens.backend.package.index', compact('packages','package_type'));
+
     }
 
     public function create()

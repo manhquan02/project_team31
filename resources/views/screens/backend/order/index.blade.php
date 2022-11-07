@@ -169,7 +169,12 @@
                     
                      <tr>
                         <td>{{$order->id}}</td>
-                        <td>{{$order->user->name}}</td>
+                        <td>
+                            {{-- {{$order->users()->name}} --}}
+                            @foreach($order->users as $user)
+                                {{$user->name}}
+                            @endforeach
+                        </td>
                         <td>
                             @if(isset($order->time->time_name))
                             {{$order->time->time_name}}
@@ -191,7 +196,14 @@
                             Gói tập không có pt
                             @endif
                         </td> 
-                        <td>{{$order->user->name}}</td>
+                        <td>
+                            @if(isset($order->pt->name))
+                            {{$order->pt->name}}
+                            @else
+                            Gói tập không có pt
+                            @endif
+                            
+                        </td>
                         <td>{{$order->total_money}}</td> 
                         <td>
                             @if ($order->status_contract == 1)

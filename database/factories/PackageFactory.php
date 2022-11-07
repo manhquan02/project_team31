@@ -26,7 +26,8 @@ class PackageFactory extends Factory
             'description' => $this->faker->text,
             'month_package'=> rand(1,12),
             'status' =>rand(0,1),
-            'set_pt'=>rand(0,1)
+            'set_pt'=>rand(0,1),
+            'type_package'=>rand(1,3),
         ];
     }
 }
