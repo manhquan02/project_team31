@@ -35,26 +35,13 @@
                         <div class="row align-items-center">
                             <div class="col-lg-9 col-xl-8">
                                 <div class="row align-items-center">
-                                    <div class="col-md-4 my-2 my-md-0">
+                                    <div class="col-md-12 my-2 my-md-0">
                                         <div class="input-icon">
                                             <input name="keyword" type="text" class="form-control" @if(request('keyword')) value="{{ request('keyword') }}" @endif
                                                    placeholder="{{translate('Enter Subject Name')}}"/>
                                             <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                         </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 my-2 my-md-0">
-                                        <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('From')}}</label>
-                                            <input name="start_date" @if(request('start_date')) value="{{ request('start_date') }}" @endif type="date"
-                                                   class="form-control"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 my-2 my-md-0">
-                                        <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('To')}}</label>
-                                            <input name="end_date" @if(request('end_date')) value="{{ request('end_date') }}" @endif type="date" class="form-control"/>
                                         </div>
                                     </div>
                                 </div>

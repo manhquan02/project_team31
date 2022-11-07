@@ -15,34 +15,34 @@ class PackageController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->start_date && $request->end_date && strtotime($request->start_date) <= strtotime($request->end_date)) {
-            if($request->keyword){
-                $packages = Package::select('packages.*')
-                    ->where('package_name', 'like', '%' . $request->keyword . '%')
-                    ->whereDate('created_at', '>=', $request->start_date)
-                    ->whereDate('created_at', '<=', $request->end_date)
-                    ->paginate(12);
-            }else{
-                $packages = Package::select('packages.*')
-                    ->whereDate('created_at', '>=', $request->start_date)
-                    ->whereDate('created_at', '<=', $request->end_date)
-                    ->paginate(12);
-            }
-        } else {
-            if($request->keyword){
-                $packages = Package::select('packages.*')
-                    ->where('package_name', 'like', '%' . $request->keyword . '%')
-                    ->paginate(12);
-            }else{
-                $packages = Package::select('packages.*')
-                    ->where('id', '>', 0)
-                    ->paginate(12);
-            }
-        }
 
+            if(isset($request->subject_id)){
+                if(isset($request->status)){
+                    $packages = Package::select('packages.*')
+                        ->where('subject_id', $request->subject_id)
+                        ->where('status', $request->status)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(12);
+                }else{
+                    $packages = Package::select('packages.*')
+                        ->where('subject_id', $request->subject_id)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(12);
+                }
+            }else{
+                if(isset($request->status)){
+                    $packages = Package::select('packages.*')
+                        ->where('status', $request->status)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(12);
+                }else{
+                    $packages = Package::select('packages.*')
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(12);
+                }
+            }
         return view('screens.backend.package.index', compact('packages'));
     }
-
 
     public function create()
     {
@@ -72,16 +72,6 @@ class PackageController extends Controller
         $new->save();
         Toastr::success(translate('Add new package successfully'));
         return redirect()->route('admin.package.create');
-    }
-
-    public function delete($id){
-        $package = Package::where('id', $id)->first();
-        if($package != null){
-            $package->delete();
-            Toastr::success(translate('Delete package successfully'));
-            return redirect()->route('admin.package.index');
-        }
-        return redirect()->route('admin.package.index');
     }
 
     public function edit($id){
@@ -123,24 +113,6 @@ class PackageController extends Controller
         return redirect()->route('admin.package.index');
     }
 
-    public function set_pt(Request $request){
-        $package = Package::where('id', $request->package_id)->first();
-        if($package != null){
-            if($package->set_pt == 0){
-                $package ->set_pt =1;
-            }else{
-                $package ->set_pt =0;
-            }
-            $package->save();
-            return response()->json([
-                'status'=>true
-            ]);
-        }
-        return response()->json([
-            'status'=>false
-        ]);
-    }
-
     public function change_status($id){
         $package = Package::where('id', $id)->first();
         if($package != null){
@@ -155,6 +127,4 @@ class PackageController extends Controller
         }
         return redirect()->route('admin.package.index');
     }
-
-
 }
