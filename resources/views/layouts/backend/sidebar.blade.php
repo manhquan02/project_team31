@@ -37,11 +37,26 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
+                    <span class="menu-text">All User</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('admin.user.listAdmin')}}" class="menu-link menu-toggle">
+                    <span class="svg-icon menu-icon">
+                        <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24" />
+                                <path d="M21.9999843,15.009808 L22.0249378,15 L22.0249378,19.5857864 C22.0249378,20.1380712 21.5772226,20.5857864 21.0249378,20.5857864 C20.7597213,20.5857864 20.5053674,20.4804296 20.317831,20.2928932 L18.0249378,18 L5,18 C3.34314575,18 2,16.6568542 2,15 L2,6 C2,4.34314575 3.34314575,3 5,3 L19,3 C20.6568542,3 22,4.34314575 22,6 L22,15 C22,15.0032706 21.9999948,15.0065399 21.9999843,15.009808 Z M6.16794971,10.5547002 C7.67758127,12.8191475 9.64566871,14 12,14 C14.3543313,14 16.3224187,12.8191475 17.8320503,10.5547002 C18.1384028,10.0951715 18.0142289,9.47430216 17.5547002,9.16794971 C17.0951715,8.86159725 16.4743022,8.98577112 16.1679497,9.4452998 C15.0109146,11.1808525 13.6456687,12 12,12 C10.3543313,12 8.9890854,11.1808525 7.83205029,9.4452998 C7.52569784,8.98577112 6.90482849,8.86159725 6.4452998,9.16794971 C5.98577112,9.47430216 5.86159725,10.0951715 6.16794971,10.5547002 Z" fill="#000000" />
+                            </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
                     <span class="menu-text">Admin</span>
                 </a>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                <a href="" class="menu-link menu-toggle">
+                <a href="{{route('admin.user.listPt')}}" class="menu-link menu-toggle">
                     <span class="svg-icon menu-icon">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -56,7 +71,7 @@
                 </a>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                <a href="" class="menu-link menu-toggle">
+                <a href="{{route('admin.user.listMember')}}" class="menu-link menu-toggle">
                     <span class="svg-icon menu-icon">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -177,6 +192,55 @@
                                     <span></span>
                                 </i>
                                 <span class="menu-text">Thêm mới Order</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="menu-section">
+                <h4 class="menu-text">{{ translate('Schedule Coach') }}</h4>
+                <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="javascript:;" class="menu-link menu-toggle">
+                    <span class="svg-icon menu-icon">
+                        <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24" />
+                                <path d="M10.9630156,7.5 L11.0475062,7.5 C11.3043819,7.5 11.5194647,7.69464724 11.5450248,7.95024814 L12,12.5 L15.2480695,14.3560397 C15.403857,14.4450611 15.5,14.6107328 15.5,14.7901613 L15.5,15 C15.5,15.2109164 15.3290185,15.3818979 15.1181021,15.3818979 C15.0841582,15.3818979 15.0503659,15.3773725 15.0176181,15.3684413 L10.3986612,14.1087258 C10.1672824,14.0456225 10.0132986,13.8271186 10.0316926,13.5879956 L10.4644883,7.96165175 C10.4845267,7.70115317 10.7017474,7.5 10.9630156,7.5 Z" fill="#000000" />
+                                <path d="M7.38979581,2.8349582 C8.65216735,2.29743306 10.0413491,2 11.5,2 C17.2989899,2 22,6.70101013 22,12.5 C22,18.2989899 17.2989899,23 11.5,23 C5.70101013,23 1,18.2989899 1,12.5 C1,11.5151324 1.13559454,10.5619345 1.38913364,9.65805651 L3.31481075,10.1982117 C3.10672013,10.940064 3,11.7119264 3,12.5 C3,17.1944204 6.80557963,21 11.5,21 C16.1944204,21 20,17.1944204 20,12.5 C20,7.80557963 16.1944204,4 11.5,4 C10.54876,4 9.62236069,4.15592757 8.74872191,4.45446326 L9.93948308,5.87355717 C10.0088058,5.95617272 10.0495583,6.05898805 10.05566,6.16666224 C10.0712834,6.4423623 9.86044965,6.67852665 9.5847496,6.69415008 L4.71777931,6.96995273 C4.66931162,6.97269931 4.62070229,6.96837279 4.57348157,6.95710938 C4.30487471,6.89303938 4.13906482,6.62335149 4.20313482,6.35474463 L5.33163823,1.62361064 C5.35654118,1.51920756 5.41437908,1.4255891 5.49660017,1.35659741 C5.7081375,1.17909652 6.0235153,1.2066885 6.2010162,1.41822583 L7.38979581,2.8349582 Z" fill="#000000" opacity="0.3" />
+                            </g>
+                        </svg>
+        
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-text">{{ trans('Schedule Coach') }}</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="menu-submenu">
+                    <i class="menu-arrow"></i>
+                    <ul class="menu-subnav">
+                        <li class="menu-item menu-item-parent" aria-haspopup="true">
+                            <span class="menu-link">
+                                <span class="menu-text">{{ trans('Schedule Coach') }}</span>
+                            </span>
+                        </li>
+                        <li class="menu-item" aria-haspopup="true">
+                            <a href="{{route('admin.time.list')}}" class="menu-link">
+                                <i class="menu-bullet menu-bullet-dot">
+                                    <span></span>
+                                </i>
+                                <span class="menu-text">{{ trans('') }}</span>
+                            </a>
+                        </li>
+                        <li class="menu-item" aria-haspopup="true">
+                            <a href="{{route('admin.time.create')}}" class="menu-link">
+                                <i class="menu-bullet menu-bullet-dot">
+                                    <span></span>
+                                </i>
+                                <span class="menu-text">{{ trans('Add new time') }}</span>
                             </a>
                         </li>
                     </ul>

@@ -171,7 +171,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($discounts as $discount)
+                    {{-- @foreach ($discounts as $discount)
                         @php
                             $packages = \App\Models\Package::whereIn('id', explode('|',$discount->package_id))->get();
                         @endphp
@@ -186,8 +186,8 @@
                                     {{$package->package_name}}<br>
                                 @endforeach
                             </td>
-                            <td>{{ date('d-m-Y', strtotime($discount->start_date)) }}</td>
-                            <td>{{ date('d-m-Y', strtotime($discount->end_date)) }}</td>
+                            <td>{{$discount->start_date}}</td>
+                            <td>{{$discount->end_date}}</td>
                             <td>
                                 @if ($discount->status == 1)
                                     <span
@@ -207,17 +207,17 @@
 
                         </tr>
 
-                    @endforeach
+                    @endforeach --}}
 
 
                     </tbody>
                 </table>
                 <!--end: Datatable-->
                 <div>
-                    {{$discounts->appends(request()->input())->links()}}
+                    {{-- {{$discounts->appends(request()->input())->links()}} --}}
                 </div>
                 <!--end: Datatable-->
-                @if(count($discounts) <= 0)
+                {{-- @if(count($discounts) <= 0)
                     <div class="card-body">
                         <div class="mb-7">
                             <div class="row align-items-center">
@@ -225,7 +225,7 @@
                             </div>
                         </div>
                     </div>
-                @endif
+                @endif --}}
 
             </div>
         </div>

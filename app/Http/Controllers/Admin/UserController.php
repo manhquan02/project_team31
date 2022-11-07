@@ -27,6 +27,46 @@ class UserController extends Controller
         return view('screens.backend.user.list-user', ['users' => $users]);
     }
 
+    public function listAdmin(){
+        $users = User::role(['admin', 'manager'])->get();
+
+        return view('screens.backend.user.list-user', ['users' => $users]);
+    }
+
+    public function listPt(Request $request){
+        $users = User::role('coach')
+                ->paginate(6);
+
+        return view('screens.backend.user.list-user', ['users' => $users]);
+    }
+
+    public function listMember(Request $request){
+        $users = User::role('member')
+                    ->findByName($request)
+                    ->findByOrder($request)
+                    ->findByStatus($request)
+                    ->paginate(6);
+
+        return view('screens.backend.user.list-user', ['users' => $users]);
+    }
+
+    public function status(Request $request){
+        $user = User::find($request->id);
+        if($request->status == 0){
+            $user->update([
+                'status' => 1,
+            ]);
+        }
+        elseif($request->status == 1){
+            $user->update([
+                'status' => 1,
+            ]);
+        }
+        return response()->json([
+            'result' => 0,
+            'user' => $user,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *

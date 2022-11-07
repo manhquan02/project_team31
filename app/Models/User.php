@@ -67,5 +67,27 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
+    public function scopeFindByName($query, $request){
+        if($request->q){
+            $query->where('name', 'like', '%'.$request->q.'%');
+        }
+    }
 
+    public function scopeFindByOrder($query, $request){
+        if($request->sort == 'idDesc')
+         $query->orderByDesc('id');
+
+        if($request->sort == 'idAsc')
+            $query->orderBy('id');
+        
+    }
+
+    public function scopeFindByStatus($query, $request){
+        if($request->status == 0){
+            $query->where('status', $request->status);
+        }
+        if($request->status == 1){
+            $query->where('status', $request->status);
+        }
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\AttendanceMemberController;
 use App\Http\Controllers\Admin\ContractController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\OrderController;
@@ -21,8 +23,12 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin/')->name('admin.')->group(function () {
     Route::prefix('user/')->name('user.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('listUser');
+        Route::get('/list-admin', [UserController::class, 'listAdmin'])->name('listAdmin');
+        Route::get('/list-pt', [UserController::class, 'listPt'])->name('listPt');
+        Route::get('/list-member', [UserController::class, 'listMember'])->name('listMember');
         Route::get('/create', [UserController::class, 'create'])->name('create');
         Route::post('/post-user', [UserController::class, 'store'])->name('postUser');
+        Route::get('/edit-status', [UserController::class, 'status'])->name('editStatus');
         Route::get('bmi/{id}', [UserController::class, 'bmi'])->name('bmi');
         Route::patch('bmi/{id}', [UserController::class, 'updateBMI'])->name('updateBMI');
     });
@@ -58,6 +64,14 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::get('/', [ContractController::class, 'index'])->name('list');
         Route::get('/create/{id}', [ContractController::class, 'create'])->name('create');
         Route::post('/post-time', [ContractController::class, 'store'])->name('postTime');
+    });
+
+    Route::prefix('attendance/')->name('attendance.')->group(function () {
+        Route::get('/', [AttendanceMemberController::class, 'index'])->name('list');
+    });
+
+    Route::prefix('attendance/')->name('attendance.')->group(function () {
+        Route::get('/', [AttendanceMemberController::class, 'index'])->name('list');
     });
 
 });

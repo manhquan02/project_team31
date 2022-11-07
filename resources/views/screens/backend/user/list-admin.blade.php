@@ -96,7 +96,6 @@
         <div class="card-body">
             {{-- {{ $page->links() }} --}}
             <!--begin: Search Form-->
-            <form action="">
             <!--begin::Search Form-->
             <div class="mb-7">
                 <div class="row align-items-center">
@@ -104,7 +103,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="input-icon">
-                                    <input type="text" name="q" id="txtSearch" class="form-control" value="{{ request()->query('q') ?: '' }}" placeholder="Nhập tên..."  />
+                                    <input type="text" name="search" id="txtSearch" class="form-control" placeholder="Search..."  />
                                     <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                 </div>
@@ -112,20 +111,23 @@
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">OrderBy:</label>
-                                    <select class="form-control" id="kt_datatable_search_status">
-                                        <option value="idDesc">ID DESC</option>
-                                        <option value="idAsc">ID ASC</option>
-                                        {{-- <option value="name">Name</option> --}}
-
+                                    <select wire:model="orderBy" class="form-control" id="kt_datatable_search_status">
+                                        <option value="id">ID</option>
+                                        <option value="name">Name</option>
+                                        {{-- <option value="2">Delivered</option>
+                                        <option value="3">Canceled</option>
+                                        <option value="4">Success</option>
+                                        <option value="5">Info</option>
+                                        <option value="6">Danger</option> --}}
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                    <select name="status" class="form-control" id="kt_datatable_search_type">
-                                        <option value="0">Off</option>
-                                        <option value="1">On</option>
+                                    <label class="mr-3 mb-0 d-none d-md-block">Role:</label>
+                                    <select wire:model="role" class="form-control" id="kt_datatable_search_type">
+                                        <option value="">All</option>
+                                        
     
                                     </select>
                                 </div>
@@ -133,12 +135,10 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                        {{-- <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a> --}}
-                        <button class="btn btn-light-primary px-6 font-weight-bold">Lọc</button>
+                        <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
                     </div>
                 </div>
             </div>
-            </form>
             <!--end::Search Form-->
             <!--end: Search Form-->
             <!--begin: Datatable-->
@@ -220,30 +220,26 @@
 @section('script')
 
 <script>
-      $('#change_status').on('click',function(){
+    $('#txtSearch').on('keyup',function(){
     console.log("quân");
-      $package_id = $(this).val();
+      $value = $(this).val();
       $.ajax({
           type: 'GET',
-          url: "{{route('admin.user.editStatus')}}",
-          data:{
-                id: $package_id
-            },
+          url: "{{route('admin.user.listUser')}}",
+          data: {
+              'search': $value,
+          },
+          // dataType:'json',
+          // headers: {
+          //   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          // },
           
           success:function(data){
             console.log("abc");
-            if(data['result'] == true){
-                console.log(data['package']);
-                console.log(data['result']);
-                document.querySelector(".set-coach").disabled = false;
-                // document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
-            }
-            else{
-                // document.querySelector(".set-coach").innerHTML = `Gói tập này không có PT`;
-            }
+            
           }
       });
-    })
+  })
 </script>
 
 @endsection

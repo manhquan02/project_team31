@@ -69,6 +69,39 @@ function upload_image($request, $new, $folder){
     $new->image = $image->storeAs($folder, $imageName);
 }
 
+
+function weekday($weekday){
+    $weekday_name ="";
+    switch ($weekday) {
+        case 'Monday':
+            $weekday_name = "Thứ 2";
+            break;
+        case 'Tuesday':
+            $weekday_name = "Thứ 3";
+            break;
+        case 'Wednesday':
+            $weekday_name = "Thứ 4";
+            break;
+        case 'Thursday':
+            $weekday_name = "Thứ 5";
+            break;
+        case 'Friday':
+            $weekday_name = "Thứ 6";
+            break;
+        case 'Saturday':
+            $weekday_name = "Thứ 7";
+            break;
+        case 'Sunday':
+            $weekday_name = "Chủ nhật";
+            break;
+        default:
+            # code...
+            break;
+        return $weekday_name;
+    }
+}
+
+
 const PACKAGE_ONE_TO_ONE=1;
 const PACKAGE_ONE_TO_TWO=2;
 const PACKAGE_ONE_TO_THREE=3;
