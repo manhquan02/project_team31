@@ -12,30 +12,16 @@ class SubjectController extends Controller
 {
     public function index(Request $request)
     {
-            if ($request->start_date && $request->end_date && strtotime($request->start_date) <= strtotime($request->end_date)) {
-                if($request->keyword){
-                    $subjects = Subject::select('subjects.*')
-                        ->where('subject_name', 'like', '%' . $request->keyword . '%')
-                        ->whereDate('created_at', '>=', $request->start_date)
-                        ->whereDate('created_at', '<=', $request->end_date)
-                        ->paginate(12);
-                }else{
-                    $subjects = Subject::select('subjects.*')
-                        ->whereDate('created_at', '>=', $request->start_date)
-                        ->whereDate('created_at', '<=', $request->end_date)
-                        ->paginate(12);
-                }
-            } else {
-                if($request->keyword){
-                    $subjects = Subject::select('subjects.*')
-                        ->where('subject_name', 'like', '%' . $request->keyword . '%')
-                        ->paginate(12);
-                }else{
-                    $subjects = Subject::select('subjects.*')
-                        ->where('id', '>', 0)
-                        ->paginate(12);
-                }
-            }
+        if ($request->keyword) {
+            $subjects = Subject::select('subjects.*')
+                ->where('subject_name', 'like', '%' . $request->keyword . '%')
+                ->orderBy('created_at', 'desc')
+                ->paginate(12);
+        } else {
+            $subjects = Subject::select('subjects.*')
+                ->orderBy('created_at', 'desc')
+                ->paginate(12);
+        }
         return view('screens.backend.subject.index', compact('subjects'));
     }
 

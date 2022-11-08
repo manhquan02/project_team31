@@ -36,26 +36,25 @@
                         <div class="row align-items-center">
                             <div class="col-lg-9 col-xl-8">
                                 <div class="row align-items-center">
-                                    <div class="col-md-4 my-2 my-md-0">
-                                        <div class="input-icon">
-                                            <input name="keyword" type="text" class="form-control" @if(request('keyword')) value="{{ request('keyword') }}" @endif
-                                                   placeholder="{{translate('Enter Package Name')}}"/>
-                                            <span>
-                                        <i class="flaticon2-search-1 text-muted"></i>
-                                        </span>
-                                        </div>
+                                    <div class="col-md-6 my-2 my-md-0">
+                                                <select name="subject_id"  class="form-control select2 is-invalid" id="kt_select2_1_validate" >
+                                                    <option selected disabled>{{ translate('Choose a subject') }}</option>
+                                                    @php
+                                                    $subjects = \App\Models\Subject::all();
+                                                    @endphp
+                                                    @foreach ($subjects as $item)
+                                                        <option  value="{{$item->id}}" @if(request('subject_id', -1) == $item->id) selected @endif>{{$item->subject_name}}  </option>
+                                                    @endforeach
+                                                </select>
                                     </div>
-                                    <div class="col-md-4 my-2 my-md-0">
+                                    <div class="col-md-6 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('From')}}</label>
-                                            <input name="start_date" @if(request('start_date')) value="{{ request('start_date') }}" @endif type="date"
-                                                   class="form-control"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 my-2 my-md-0">
-                                        <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('To')}}</label>
-                                            <input name="end_date" @if(request('end_date')) value="{{ request('end_date') }}" @endif type="date" class="form-control"/>
+                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('Status')}}</label>
+                                            <select class="form-control" name="status">
+                                                <option selected disabled>{{ translate('Choose a status') }}</option>
+                                                <option value="0" @if(request('status', -1) == 0) selected @endif>{{ translate('Lock') }}</option>
+                                                <option value="1" @if(request('status', -1) == 1) selected @endif>{{ translate('Active') }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +81,6 @@
                         <th>{{ translate('Listed Price') }}</th>
                         <th>{{ translate('Episode Price') }}</th>
                         <th>{{ translate('Month Package') }}</th>
-                        <th>{{ translate('PT') }}</th>
                         <th>{{ translate('Loại kèm') }}</th>
                         <th>{{ translate('Status') }}</th>
                         <th>{{ translate('Actions') }}</th>
@@ -101,9 +99,8 @@
                                 <td>{{number_format($item->price,0,'.','.')}}</td>
                                 <td>{{number_format($item->into_price,0,'.','.')}}</td>
                                 <td>{{$item->month_package < 12 ? $item->month_package : $item->month_package / 12}} {{ $item->month_package < 12 ? translate('month'): translate('year') }}</td>
-                                <td><input value="{{$item->id}}" id="set_pt" type="checkbox"
-                                           @if($item->set_pt == 1) checked @endif></td>
                                 <td>{{$package_type[$item->type_package]}}</td>
+
                                 <td><span
                                         class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{ translate(config('status_package.'.$item->status) )}}</span>
                                 </td>
@@ -111,16 +108,11 @@
                                     <a title="{{ translate('View') }}"
                                        href="{{route('admin.package.edit', $item->id)}}"><i
                                             class="flaticon-eye text-info"></i></a>
-                                    <a title="{{ translate('Delete') }}" class="btn-confirm"
-                                       data-title="Are you sure you want to delete ?"
-                                       data-url="{{route('admin.package.delete', $item->id)}}"
-                                       style="margin-left: 12px; cursor: pointer"><i
-                                            class="flaticon2-trash text-danger"></i></a>
                                     <a title="{{ translate('Change Status') }}" class="btn-confirm"
                                        data-title="Are you sure you want to change the status ?"
                                        data-url="{{route('admin.package.change_status', $item->id)}}"
                                        style="margin-left: 12px; cursor: pointer"><i
-                                            class="flaticon-warning text-dark"></i></a>
+                                            class="flaticon-warning text-warning"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -146,23 +138,9 @@
 @endsection
 @section('script')
     <script>
-        $(function () {
-            $(document).on('change', '#set_pt', function () {
-                const package_id = $(this).attr('value');
-                const url = "{{route('admin.package.set_pt')}}";
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                    data: {package_id: package_id},
-                    success: function (res) {
-                        Swal.fire(
-                            "{{ translate('OK') }}",
-                            "{{ translate('Set up PT package successfully !') }}",
-                            'success'
-                        )
-                    }
-                })
-            })
-        })
+        $(document).ready(function(){
+            $('.select2').select2()
+        });
     </script>
-@endsection
+    @endsection
+

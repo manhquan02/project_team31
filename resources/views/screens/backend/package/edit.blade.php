@@ -48,15 +48,11 @@
                         <label class="col-2 col-form-label">{{ translate('Subject') }} <span
                                 class="text-danger">*</span></label>
                         <div class="col-10">
-                            <select class="form-control" name="subject_id">
-                                <option selected
-                                        value="{{$package->subject_id}}">{{ $package->subject->subject_name }} </option>
-                                @if(count($subjects) >0)
-                                    @foreach($subjects as $item)
-                                        <option
-                                                value="{{$item->id}}">{{ $item->subject_name }} </option>
-                                    @endforeach
-                                @endif
+                            <select name="subject_id" class="form-control select2" >
+                                <option selected value="{{$package->subject_id}}">{{ $package->subject->subject_name}}</option>
+                                @foreach ($subjects as $item)
+                                    <option  value="{{$item->id}}" @if(old('subject_id') == $item->id) selected @endif>{{$item->subject_name}}  </option>
+                                @endforeach
                             </select>
                             @error('subject_id')
                             <span class="text-danger">{{ $message }}</span>
@@ -142,6 +138,10 @@
     </div>
 @endsection
 @section('script')
-
+    <script>
+        $(document).ready(function(){
+            $('.select2').select2()
+        });
+    </script>
 @endsection
 
