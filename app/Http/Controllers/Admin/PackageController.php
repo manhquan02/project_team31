@@ -16,41 +16,42 @@ class PackageController extends Controller
 {
     public function index(Request $request)
     {
-            if(isset($request->subject_id)){
-                if(isset($request->status)){
-                    $packages = Package::select('packages.*')
-                        ->where('subject_id', $request->subject_id)
-                        ->where('status', $request->status)
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(12);
-                }else{
-                    $packages = Package::select('packages.*')
-                        ->where('subject_id', $request->subject_id)
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(12);
-                }
-            }else{
-                if(isset($request->status)){
-                    $packages = Package::select('packages.*')
-                        ->where('status', $request->status)
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(12);
-                }else{
-                    $packages = Package::select('packages.*')
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(12);
-                }
+        if (isset($request->subject_id)) {
+            if (isset($request->status)) {
+                $packages = Package::select('packages.*')
+                    ->where('subject_id', $request->subject_id)
+                    ->where('status', $request->status)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(12);
+            } else {
+                $packages = Package::select('packages.*')
+                    ->where('subject_id', $request->subject_id)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(12);
             }
-        $package_type=PackageUtility::$arrayPackage;
+        } else {
+            if (isset($request->status)) {
+                $packages = Package::select('packages.*')
+                    ->where('status', $request->status)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(12);
+            } else {
+                $packages = Package::select('packages.*')
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(12);
+            }
+        }
+        $package_type = PackageUtility::$arrayPackage;
 
-        return view('screens.backend.package.index', compact('packages','package_type'));
+        return view('screens.backend.package.index', compact('packages', 'package_type'));
 
     }
 
     public function create()
     {
         $subjects = Subject::all();
-        return view('screens.backend.package.create', compact('subjects'));
+        $type_package = PackageUtility::$arrayPackage;
+        return view('screens.backend.package.create', compact('subjects', 'type_package'));
     }
 
     public function store(PackageRequest $request)
@@ -58,18 +59,20 @@ class PackageController extends Controller
         $new = new Package();
         $new->package_name = $request->package_name;
         $new->subject_id = $request->subject_id;
-        if($request->avatar){
-            upload_image($request, $new, 'images/package');
+        if ($request->avatar) {
+
+            upload_image('avatar', $request->avatar, $new, 'images/package');
         }
         $new->price = $request->price;
-        if($request->price_sale){
+        if ($request->price_sale) {
             $new->price_sale = $request->price_sale;
         }
 
-        $new->into_price = $request->price - ($request->price * $new->price_sale  / 100);
+        $new->into_price = $request->price - ($request->price * $new->price_sale / 100);
         $new->description = $request->description;
         $new->month_package = $request->month_package;
-        if($request->set_pt == 'on'){
+        $new->type_package = $request->type_package;
+        if ($request->set_pt == 'on') {
             $new->set_pt = 1;
         }
         $new->save();
@@ -77,36 +80,39 @@ class PackageController extends Controller
         return redirect()->route('admin.package.create');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
+        $type_package = PackageUtility::$arrayPackage;
         $package = Package::where('id', $id)->first();
-        if($package != null){
+        if ($package != null) {
             $subjects = Subject::where('id', '!=', $package->subject_id)->get();
-            return view('screens.backend.package.edit', compact('package', 'subjects'));
+            return view('screens.backend.package.edit', compact('package', 'subjects', 'type_package'));
         }
         return redirect()->route('admin.package.index');
     }
 
-    public function update(PackageRequest $request, $id){
+    public function update(PackageRequest $request, $id)
+    {
 
         $package = Package::where('id', $id)->first();
-        if($package != null){
+        if ($package != null) {
             $package->package_name = $request->package_name;
             $package->subject_id = $request->subject_id;
-            if($request->avatar){
-                upload_image($request, $package, 'images/package');
+            if ($request->avatar) {
+                upload_image('avatar', $request, $package, 'images/package');
             }
             $package->price = $request->price;
-            if($request->price_sale){
+            if ($request->price_sale) {
                 $package->price_sale = $request->price_sale;
             }
-
-            $package->into_price = $request->price - ($request->price * $package->price_sale  / 100);
+            $package->type_package = $request->type_package;
+            $package->into_price = $request->price - ($request->price * $package->price_sale / 100);
             $package->description = $request->description;
             $package->month_package = $request->month_package;
 
-            if($request->set_pt == 'on'){
+            if ($request->set_pt == 'on') {
                 $package->set_pt = 1;
-            }else{
+            } else {
                 $package->set_pt = 0;
             }
             $package->save();
@@ -116,13 +122,14 @@ class PackageController extends Controller
         return redirect()->route('admin.package.index');
     }
 
-    public function change_status($id){
+    public function change_status($id)
+    {
         $package = Package::where('id', $id)->first();
-        if($package != null){
-            if($package->status == 0){
-                $package ->status =1;
-            }else{
-                $package ->status =0;
+        if ($package != null) {
+            if ($package->status == 0) {
+                $package->status = 1;
+            } else {
+                $package->status = 0;
             }
             $package->save();
             Toastr::success(translate('Update package status successfully'));

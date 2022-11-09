@@ -87,6 +87,23 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Type Package') }} <span
+                                class="text-danger">*</span></label>
+                        <div class="col-10">
+                            <select class="form-control" name="type_package">
+                                <option selected value="{{$package->type_package}}" >{{ $type_package[$package->type_package] }}</option>
+                                @foreach($type_package as $key=>$item)
+                                    @if($key != $package->type_package)
+                                    <option @if(old('$type_package') == $key) selected @endif  value="{{$key}}">{{ $item }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error('type_package')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }}
                             <span class="text-danger">*</span></label>
                         <div class="col-10">

@@ -17,7 +17,7 @@ class TimeController extends Controller
      */
     public function index()
     {
-        $times = Time::where('id', '>', 0)->paginate(12);
+        $times = Time::paginate(12);
         return view('screens.backend.time.index', compact('times'));
     }
 
