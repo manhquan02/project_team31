@@ -86,7 +86,7 @@ class User extends Authenticatable implements MustVerifyEmail
         if($request->status == 0){
             $query->where('status', $request->status);
         }
-        if($request->status == 1){
+        else{
             $query->where('status', $request->status);
         }
     }

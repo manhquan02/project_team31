@@ -37,10 +37,10 @@ class SchedulePtController extends Controller
                 $schedules = Schedule::where('pt_id', $id)->orderBy('date', 'asc')->paginate(12);
             }
         }
-        if(count($schedules) > 0){
+        // if(count($schedules) > 0){
             $user = \App\Models\User::where('id', $id)->first();
             return view('screens.backend.schedule.show', compact('schedules', 'user'));
-        }
-        return redirect()->back();
+        // }
+        // return redirect()->back();
     }
 }

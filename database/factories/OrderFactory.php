@@ -22,7 +22,7 @@ class OrderFactory extends Factory
             'time_id' => rand(1,4),
             'weekday_name' => 'Monday|Tuesday|Wednesday',
             'activate_day' => '2022-10-15',
-            'pt_id' => 3,
+            'pt_id' => rand(3,5),
             'total_money' => 2000000,
             'payment_method' => rand(1,2),
             'status_contract'=> 0,

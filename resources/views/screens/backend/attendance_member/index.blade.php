@@ -1,95 +1,16 @@
 @extends('layouts.backend.master')
-
-@section('title', translate('Coupon Management'))
-
+@section('title', translate('Schedule Management'))
 @section('content')
     <div>
-
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Coupon Management') }}
-                        <span
-                            class="d-block text-muted pt-2 font-size-sm">{{ translate('List') }}</span>
-                    </h3>
+                    <h3 class="card-label">{{ translate('Schedule Management') }}
+                        <span class="d-block text-muted pt-2 font-size-sm"></span></h3>
                 </div>
                 <div class="card-toolbar">
-                    <!--begin::Dropdown-->
-                    <div class="dropdown dropdown-inline mr-2">
-                        <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="svg-icon svg-icon-md">
-                        <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                             height="24px" viewBox="0 0 24 24" version="1.1">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24"/>
-                                <path
-                                    d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z"
-                                    fill="#000000" opacity="0.3"/>
-                                <path
-                                    d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z"
-                                    fill="#000000"/>
-                            </g>
-                        </svg>
-                        <!--end::Svg Icon-->
-                    </span>Export
-                        </button>
-                        <!--begin::Dropdown Menu-->
-                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                            <!--begin::Navigation-->
-                            <ul class="navi flex-column navi-hover py-2">
-                                <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">
-                                    Choose an option:
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-                                    <span class="navi-icon">
-                                        <i class="la la-print"></i>
-                                    </span>
-                                        <span class="navi-text">Print</span>
-                                    </a>
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-                                    <span class="navi-icon">
-                                        <i class="la la-copy"></i>
-                                    </span>
-                                        <span class="navi-text">Copy</span>
-                                    </a>
-                                </li>
-                                <li class="navi-item">
-                                    <div wire:click="exportUser()" class="navi-link">
-                                    <span class="navi-icon">
-                                        <i class="la la-file-excel-o"></i>
-                                    </span>
-                                        <span class="navi-text">Excel</span>
-                                    </div>
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-                                    <span class="navi-icon">
-                                        <i class="la la-file-text-o"></i>
-                                    </span>
-                                        <span class="navi-text">CSV</span>
-                                    </a>
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-                                    <span class="navi-icon">
-                                        <i class="la la-file-pdf-o"></i>
-                                    </span>
-                                        <span class="navi-text">PDF</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <!--end::Navigation-->
-                        </div>
-                        <!--end::Dropdown Menu-->
-                    </div>
-                    <!--end::Dropdown-->
                     <!--begin::Button-->
-                    <a href="{{route('admin.discount.create')}}" class="btn btn-primary font-weight-bolder">
+                    <a href="#" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -103,10 +24,11 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ translate('Add new coupon') }}</a>
+                </span>{{ translate('Add New Schedule') }}</a>
                     <!--end::Button-->
                 </div>
             </div>
+
             <div class="card-body">
                 <!--begin::Search Form-->
                 <form action="">
@@ -115,30 +37,30 @@
                             <div class="col-lg-9 col-xl-8">
                                 <div class="row align-items-center">
                                     <div class="col-md-4 my-2 my-md-0">
-                                        <div class="input-icon">
-                                            <input name="keyword" type="text" class="form-control"
-                                                   @if(request('keyword')) value="{{ request('keyword') }}" @endif
-                                                   placeholder="{{translate('Enter Discount Title')}}"/>
-                                            <span>
-                                        <i class="flaticon2-search-1 text-muted"></i>
-                                        </span>
+                                        <div class="d-flex align-items-center">
+                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('Status')}}</label>
+                                            <select class="form-control" name="status">
+                                                <option selected disabled>{{ translate('Choose a status') }}</option>
+                                                <option value="0"
+                                                        @if(request('status', -1) == 0) selected @endif>{{ translate('Future') }}</option>
+                                                <option value="1"
+                                                        @if(request('status', -1) == 1) selected @endif>{{ translate('Absent') }}</option>
+                                                <option value="2"
+                                                        @if(request('status', -1) == 2) selected @endif>{{ translate('Present') }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
                                             <label class="mr-3 mb-0 d-none d-md-block">{{translate('From')}}</label>
-                                            <input name="start_date"
-                                                   @if(request('start_date')) value="{{ request('start_date') }}"
-                                                   @endif type="date"
+                                            <input name="start_date" @if(request('start_date')) value="{{ request('start_date') }}" @endif type="date"
                                                    class="form-control"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
                                             <label class="mr-3 mb-0 d-none d-md-block">{{translate('To')}}</label>
-                                            <input name="end_date"
-                                                   @if(request('end_date')) value="{{ request('end_date') }}"
-                                                   @endif type="date" class="form-control"/>
+                                            <input name="end_date" @if(request('end_date')) value="{{ request('end_date') }}" @endif type="date" class="form-control"/>
                                         </div>
                                     </div>
                                 </div>
@@ -151,92 +73,111 @@
                     </div>
                     <!--end::Search Form-->
                 </form>
-                <!--end::Search Form-->
             </div>
             <div class="card-body">
                 <!--begin: Datatable-->
                 <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Code</th>
-                        <th>Sale(%)</th>
-                        <th>Số lượng</th>
-                        <th>Gói tập</th>
-                        <th>Ngày bắt đầu</th>
-                        <th>Ngày kết thúc</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th>#ID</th>
+                        <th>{{translate('Name member')}}</th>
+                        <th>{{translate('Day')}}</th>
+                        <th>{{translate('Package type')}}</th>
+                        <th>{{translate('Shift')}}</th>
+                        <th>{{translate('Time start')}}</th>
+                        <th>{{translate('Time end')}}</th>
+                        <th>{{translate('Status')}}</th>
+                        <th>{{translate('Attendance')}}</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    {{-- @foreach ($discounts as $discount)
-                        @php
-                            $packages = \App\Models\Package::whereIn('id', explode('|',$discount->package_id))->get();
-                        @endphp
+                    <tbody id="tbody">
+                    @if(count($attendances) > 0)
+                        @foreach($attendances as $item)
+                            <tr>
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->user->name}}</td>
+                                <td>{{ translate(getdate(strtotime($item->date))['weekday']) }}<br>
+                                    <span style="color: #999999">{{ date('d-m-Y', strtotime($item->date)) }}</span>
+                                </td>
+                                <td></td>
+                                <td>{{$item->time->time_name}}</td>
+                                <td>{{$item->time->start_time}}</td>
+                                <td>{{$item->time->end_time}}</td>
+                                <td class="view_status">
+                                        <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{translate(config('status_schedule.'.$item->status))}}</span>
 
-                        <tr>
-                            <td>{{$discount->id}}</td>
-                            <td>{{$discount->discount_title}}</td>
-                            <td>{{$discount->discount_code}}</td>
-                            <td>{{$discount->price_sale}} %</td>
-                            <td>{{$discount->quantity}}</td>
-                            <td>@foreach($packages as $package)
-                                    {{$package->package_name}}<br>
-                                @endforeach
-                            </td>
-                            <td>{{$discount->start_date}}</td>
-                            <td>{{$discount->end_date}}</td>
-                            <td>
-                                @if ($discount->status == 1)
-                                    <span
-                                        class="label label-inline label-light-primary font-weight-bold">Hiện</span>
-                                @else
-                                    <span class="label label-inline label-light-danger font-weight-bold">Khoá</span>
-                                @endif
-                            </td>
-                            <td align="center">
-                                <a class="btn btn-light  btn-sm mr-2"
-                                   id="change_status">
-                                    <i class="ki ki-reload text-warning"></i>
-                                </a>
-                                <a title="Edit" href="{{route('admin.discount.edit', [encrypt($discount ->id)])}}"><i
-                                        class="flaticon2-pen text-warning"></i></a>
-                            </td>
-
-                        </tr>
-
-                    @endforeach --}}
-
-
+                                </td>
+                                <td >
+                                    <div class="update_attendance" data-url="{{'admin.attendance.editStatus'}}" data-id="{{$item->id}}" style="cursor: pointer;">
+                                        <i style="font-size: 20px; " class="ki ki-reload text-warning"></i>
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                     </tbody>
                 </table>
                 <!--end: Datatable-->
                 <div>
-                    {{-- {{$discounts->appends(request()->input())->links()}} --}}
+                    {{$attendances->appends(request()->input())->links()}}
                 </div>
-                <!--end: Datatable-->
-                {{-- @if(count($discounts) <= 0)
+                @if(count($attendances) <= 0)
                     <div class="card-body">
+                        <!--begin::Search Form-->
                         <div class="mb-7">
                             <div class="row align-items-center">
                                 <h2 style="color: #999999; text-align: center">{{ translate('No records found') }}</h2>
                             </div>
                         </div>
+                        <!--end::Search Form-->
                     </div>
-                @endif --}}
-
+                @endif
             </div>
         </div>
-
     </div>
-
 @endsection
-
 @section('script')
-
     <script>
-    </script>
+        $(".update_attendance").click(function(){
+    console.log("quân");
+      var id = $(this).data("id");
+      var link = $(this).data("url");
+        $.ajax(
+        {
+            url: link,
+            type: 'GET',
+            dataType: "JSON",
+            data: {
+                "id": id,
+            },
+            success: function ()
+            {
+                $('.view_status').html(` <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{translate(config('status_schedule.'.$item->status))}}</span>`);
+            }
+        });
 
+        console.log("It failed");
+    });
+
+
+    //     $('.update_attendance').on('click', function() {
+    //     $id = $(this).data("id");
+    //     console.log($id);
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: "{{route('admin.attendance.editStatus')}}",
+    //         data: {
+    //             'id': $id,
+    //         },
+    //         success: function(data) {
+    //             console.log($data);
+    //             $('.view_status').html(` <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{translate(config('status_schedule.'.$item->status))}}</span>`);
+    //             if (data == '') {
+    //                 window.location.reload()
+    //             }
+    //         }
+    //     });
+    // })
+    </script>
 @endsection

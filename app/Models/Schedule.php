@@ -18,4 +18,8 @@ class Schedule extends Model
         'date',
         'status'
     ];
+
+    public function time(){  
+        return $this->belongsTo(Time::class,'time_id','id');
+    }
 }

@@ -228,11 +228,11 @@
                             </span>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
-                            <a href="{{route('admin.time.list')}}" class="menu-link">
+                            <a href="{{route('admin.schedule.list', "3")}}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">{{ trans('') }}</span>
+                                <span class="menu-text">{{ trans('List Schedule') }}</span>
                             </a>
                         </li>
                         <li class="menu-item" aria-haspopup="true">

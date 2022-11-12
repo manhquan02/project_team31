@@ -81,9 +81,12 @@
                     <tr>
                         <th>#ID</th>
                         <th>{{translate('Day')}}</th>
+                        <th>{{translate('Package type')}}</th>
                         <th>{{translate('Shift')}}</th>
+                        <th>{{translate('Time start')}}</th>
+                        <th>{{translate('Time end')}}</th>
                         <th>{{translate('Status')}}</th>
-                        <th>{{translate('Options')}}</th>
+                        <th>{{translate('View')}}</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
@@ -97,12 +100,10 @@
                                 <td>{{ translate(getdate(strtotime($item->date))['weekday']) }}<br>
                                     <span style="color: #999999">{{ date('d-m-Y', strtotime($item->date)) }}</span>
                                 </td>
-                                <td>
-                                    @if($shift != null)
-                                        {{-- {{translate('Shift').' '.$shift->time_name}} --}}
-                                        {{$shift->time_name}}
-                                    @endif
-                                </td>
+                                <td></td>
+                                <td>{{$item->time->time_name}}</td>
+                                <td>{{$item->time->start_time}}</td>
+                                <td>{{$item->time->end_time}}</td>
                                 <td>
                                 @if($item->status == 0)
                                     <span
@@ -114,9 +115,10 @@
                                 @endif
                                 </td>
                                 <td>
-                                    <span title="{{ $item->status == 2 ? translate('Absent') : translate('Present') }}" style="cursor: pointer">
+                                    {{-- <span title="{{ $item->status == 2 ? translate('Absent') : translate('Present') }}" style="cursor: pointer">
                                         <i class="fas fa-spinner"></i>
-                                    </span>
+                                    </span> --}}
+                                    <a href="{{route('admin.attendance.list', $item->id)}}" class="btn btn-light-primary font-weight-bold mr-2">View member</a>
                                 </td>
                             </tr>
                         @endforeach

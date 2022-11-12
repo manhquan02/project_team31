@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\AttendanceMemberController;
 use App\Http\Controllers\Admin\ContractController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ScheduleController;
+use App\Http\Controllers\Admin\SchedulePtController;
 use App\Http\Controllers\Admin\TimeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
@@ -29,6 +31,7 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::get('/create', [UserController::class, 'create'])->name('create');
         Route::post('/post-user', [UserController::class, 'store'])->name('postUser');
         Route::get('/edit-status', [UserController::class, 'status'])->name('editStatus');
+        Route::post('/edit-role', [UserController::class, 'editRole'])->name('editRole');
         Route::get('bmi/{id}', [UserController::class, 'bmi'])->name('bmi');
         Route::patch('bmi/{id}', [UserController::class, 'updateBMI'])->name('updateBMI');
     });
@@ -66,12 +69,13 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::post('/post-time', [ContractController::class, 'store'])->name('postTime');
     });
 
-    Route::prefix('attendance/')->name('attendance.')->group(function () {
-        Route::get('/', [AttendanceMemberController::class, 'index'])->name('list');
-    });
+    // Route::prefix('schedule/')->name('schedule.')->group(function () {
+    //     Route::get('/', [SchedulePtController::class, 'index'])->name('list');
+    // });
 
     Route::prefix('attendance/')->name('attendance.')->group(function () {
-        Route::get('/', [AttendanceMemberController::class, 'index'])->name('list');
+        Route::get('/{id}', [AttendanceMemberController::class, 'index'])->name('list');
+        Route::get('/edit-status', [AttendanceMemberController::class, 'editStatus'])->name('editStatus');
     });
 
 });

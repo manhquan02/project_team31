@@ -85,20 +85,7 @@ class ContractController extends Controller
             foreach ($weekdays_pt as $key => $weekday_name) {
                 
                 if($weekday_name ==  $dt->format("l")){
-                    foreach ($user_contract as $key => $user_id) {
-                       
-                        $attendance->create([
-                            'user_id' => $user_id,
-                            'contract_id' => $contract->id,
-                            'time_id' => $contract->order->time_id,
-                            'weekday_name' => $dt->format("l"),
-                            'pt_id' => 1,
-                            'date' => $dt->format("Y-m-d"),
-                            'status' => 1,
-    
-                        ]);
-                    }
-                    $schedule->create([
+                    $schedule = $schedule->create([
                         'pt_id' => $contract->pt_id,
                         'contract_id' => $contract->id,
                         'time_id' => $contract->order->time_id,
@@ -106,6 +93,21 @@ class ContractController extends Controller
                         'date' => $dt->format("Y-m-d"),
                         'status' => 1,
                     ]);
+                    foreach ($user_contract as $key => $user_id) {
+                       
+                        $attendance->create([
+                            'user_id' => $user_id,
+                            'contract_id' => $contract->id,
+                            'schedule_id' =>  $schedule->id,
+                            'time_id' => $contract->order->time_id,
+                            'weekday_name' => $dt->format("l"),
+                            'pt_id' => 1,
+                            'date' => $dt->format("Y-m-d"),
+                            'status' => 0,
+                            
+                        ]);
+                    }
+                   
                    
                 }
 

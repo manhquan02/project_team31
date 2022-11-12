@@ -81,7 +81,9 @@
                     <tr>
                         <th>#ID</th>
                         <th>{{translate('Day')}}</th>
+                        <th>{{translate('Package type')}}</th>
                         <th>{{translate('Shift')}}</th>
+                        <th>{{translate('Time')}}</th>
                         <th>{{translate('Status')}}</th>
                         <th>{{translate('Options')}}</th>
                     </tr>
@@ -97,12 +99,12 @@
                                 <td>{{ translate(getdate(strtotime($item->date))['weekday']) }}<br>
                                     <span style="color: #999999">{{ date('d-m-Y', strtotime($item->date)) }}</span>
                                 </td>
+                                <td>{{1:1}}</td>
                                 <td>
-                                    @if($shift != null)
-                                        {{-- {{translate('Shift').' '.$shift->time_name}} --}}
-                                        {{$shift->time_name}}
-                                    @endif
+                                    {{--  --}}
+                                    {{$item->time->id}}
                                 </td>
+                                <td></td>
                                 <td>
                                 @if($item->status == 0)
                                     <span

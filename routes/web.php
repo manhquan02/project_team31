@@ -71,7 +71,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 
     Route::prefix('schedule')->name('schedule.')->group(function () {
-        Route::get('show/{id}', [\App\Http\Controllers\Admin\ScheduleController::class, 'show'])->name('show');
+        Route::get('list/{id}', [\App\Http\Controllers\Admin\ScheduleController::class, 'show'])->name('list');
     });
 
     Route::prefix('time')->name('time.')->group(function () {

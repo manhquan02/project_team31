@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('contract_id');
+            $table->unsignedBigInteger('schedule_id');
             $table->unsignedBigInteger('time_id');
             $table->string('weekday_name');
             $table->unsignedBigInteger('pt_id');
