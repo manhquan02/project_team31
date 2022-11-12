@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,4 +84,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\TimeController::class, 'update'])->name('update');
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\TimeController::class, 'delete'])->name('delete');
     });
+
+
 });
+
+

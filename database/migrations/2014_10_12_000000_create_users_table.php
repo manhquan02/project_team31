@@ -18,12 +18,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('verify_code')->nullable();
             $table->string('password');
             $table->string('gender');
             $table->unsignedBigInteger('phone');
             $table->string('avatar')->nullable();
             $table->string('address');
-            $table->unsignedInteger('status')->default(1);
+            $table->unsignedInteger('status')->default(0);
             $table->rememberToken()->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

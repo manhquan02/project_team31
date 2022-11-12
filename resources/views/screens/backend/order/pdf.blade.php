@@ -29,11 +29,11 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                     <thead>
                     <tr style="background-color: #7545be;">
                         <th>#ID</th>
-                        <th>{{translate('Username')}}</th>
+{{--                        <th>{{translate('Username')}}</th>--}}
                         <th>{{translate('Package')}}</th>
                         <th>{{translate('Shift')}}</th>
                         <th>{{translate('Day')}}</th>
-                        <th>{{translate('PT training')}}</th>
+{{--                        <th>{{translate('PT training')}}</th>--}}
                         <th>{{translate('Total money')}}</th>
                         <th>{{translate('Payment method')}}</th>
                         <th>{{translate('Contract signed ?')}}</th>
@@ -43,15 +43,15 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                     @foreach ($orders as $order)
                      <tr>
                         <td>{{$order->id}}</td>
-                        <td>{{$order->user->name}}</td>
-                        <td>{{$order->package->package_name}}</td>                       
+{{--                        <td>{{$order->user->name}}</td>--}}
+                        <td>{{$order->package->package_name}}</td>
                         <td>{{$order->time->time_name}}</td>
                         <td>{{$order->weekday_name}}</td>
-                        <td>{{$order->pt->name}}</td>
-                        <td>{{number_format($order->total_money,0,'.','.')}}</td> 
+{{--                        <td>{{$order->pt->name}}</td>--}}
+                        <td>{{number_format($order->total_money,0,'.','.')}}</td>
                         <td>{{$order->payment_method == 1 ? translate('Direct payment') : translate('Transfer payment')}}</td>
                         <td>
-                           
+
                             <span
                                 class="label label-inline label-light-primary font-weight-bold">{{$order->status_contract == 1 ? translate('Yes') : translate('No')}}</span>
                         </td>

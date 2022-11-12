@@ -10,7 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable implements MustVerifyEmail   
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
@@ -28,11 +28,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'avatar',
         'status',
 
-    ];
-
-
-    protected $attributes = [
-        'status' => 1
     ];
 
     /**
