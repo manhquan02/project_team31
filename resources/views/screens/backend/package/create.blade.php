@@ -86,6 +86,21 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Type Package') }} <span
+                                class="text-danger">*</span></label>
+                        <div class="col-10">
+                            <select class="form-control" name="type_package">
+                                <option selected disabled>{{ translate('Choose a type package') }}</option>
+                                @foreach($type_package as $key=>$item)
+                                <option  value="{{$key}}">{{ $item }}</option>
+                                @endforeach
+                            </select>
+                            @error('type_package')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <textarea id="summernote" class="form-control" name="description">{{ old('description')}}</textarea>
