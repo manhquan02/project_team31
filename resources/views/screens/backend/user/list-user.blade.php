@@ -96,6 +96,7 @@
         <div class="card-body">
             {{-- {{ $page->links() }} --}}
             <!--begin: Search Form-->
+            <form action="">
             <!--begin::Search Form-->
             <div class="mb-7">
                 <div class="row align-items-center">
@@ -103,7 +104,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="input-icon">
-                                    <input type="text" name="search" id="txtSearch" class="form-control" placeholder="Search..."  />
+                                    <input type="text" name="q" id="txtSearch" value="{{request('q')}}" class="form-control" value="{{ request()->query('q') ?: '' }}" placeholder="Nhập tên..."  />
                                     <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                 </div>
@@ -111,22 +112,21 @@
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">OrderBy:</label>
-                                    <select wire:model="orderBy" class="form-control" id="kt_datatable_search_status">
-                                        <option value="id">ID</option>
-                                        <option value="name">Name</option>
-                                        {{-- <option value="2">Delivered</option>
-                                        <option value="3">Canceled</option>
-                                        <option value="4">Success</option>
-                                        <option value="5">Info</option>
-                                        <option value="6">Danger</option> --}}
+                                    <select name="sort" class="form-control" id="kt_datatable_search_status">
+                                        <option @if(request('sort', -1) == 'idAsc') selected @endif value="idAsc">ID ASC</option>
+                                        <option @if(request('sort', -1) == 'idDesc') selected @endif value="idDesc">ID DESC</option>        
+                                        {{-- <option value="name">Name</option> --}}
+
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Role:</label>
-                                    <select wire:model="role" class="form-control" id="kt_datatable_search_type">
+                                    <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
+                                    <select name="status" class="form-control" id="kt_datatable_search_type">
                                         <option value="">All</option>
+                                        <option @if(request('status', -1) == '1') selected @endif value="1">On</option>
+                                        <option @if(request('status', -1) == '0') selected @endif value="0">Off</option>
                                         
     
                                     </select>
@@ -135,10 +135,12 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                        <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+                        {{-- <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a> --}}
+                        <button class="btn btn-light-primary px-6 font-weight-bold">Lọc</button>
                     </div>
                 </div>
             </div>
+            </form>
             <!--end::Search Form-->
             <!--end: Search Form-->
             <!--begin: Datatable-->
@@ -172,7 +174,7 @@
                         <td>
                             <img src="{{$user->Avatar}}" width="200px" alt="">
                         </td>
-                        <td>
+                        <td  class="show_role{{$user->id}}">
                             {{ $user->getRoleNames() }}
                         </td>
                         <td>
@@ -190,9 +192,8 @@
                             </a>
                         </td>
                             <td>
-                            <button
-    
-                                
+                            <button  
+                            onclick="javascript:name_edit_role({{ $user }})"             
                                 class="btn btn-light-primary px-6 font-weight-bold"
     
                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -214,32 +215,136 @@
     </div>
     
     </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Cấp quyền người dùng</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="update_user_role">
+                @csrf
+                @method('POST')
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Name</label>
+                  <input type="email" disabled class="form-control name_edit_role" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <select id="name_role" class="form-select form-select-lg mb-3" aria-label="Default select example">
+                    <option name="role"  selected>Phân quyền</option>
+                        @foreach ($roles as $role)
+                        <option value="{{$role->name}}">{{$role->name}}</option>
+                         @endforeach
+                  </select>
+                <div class="mb-3 form-check">
+                  <input type="text" hidden id="update_role" name="id" id="">
+                </div>
+                <button type="button" data-id="" data-token="{{ csrf_token() }}"     onclick="update_user_role('exampleModal','update_user_role')" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
     
 @endsection
 
 @section('script')
 
 <script>
-    $('#txtSearch').on('keyup',function(){
+
+    function name_edit_role(item) {
+        console.log(item.name);
+        document.querySelector('.name_edit_role').value = item.name;
+        document.getElementById('update_role').value = item.id;
+        var id = document.getElementById('id');
+            
+    }
+
+    function update_user_role(id_modal,id_form) {
+        console.log(id_modal);
+        
+        // formData = new FormData(document.getElementById(id_form));
+        // console.log(formData)
+        var token = $(this).data("token");
+        $.ajax({
+            type: 'post',
+            url: "{{route('admin.user.editRole')}}",
+            data: {
+                "_method": 'POST',
+                "_token": token,
+                "id": document.getElementById('update_role').value,
+                "role": document.getElementById('name_role').value
+            },
+            // processData: false,
+            // contentType: false,
+            success: function(data) {
+                console.log(document.getElementById('update_role').value);
+                console.log( document.getElementById('name_role').value);
+                id = document.getElementById('update_role').value;
+                console.log(data['user']);
+                $('.show_role'+id).html(`["${data['role']}"]`);
+                Swal.fire(
+                    'Good job!',
+                    'Thanh cong',
+                    'success'
+                )
+                modal = document.querySelector('.modal-backdrop')
+                modal.classList.remove('show');
+                modal.style.display = 'none'
+                modal1 = document.getElementById(id_modal)
+                modal1.classList.remove('show');
+                modal1.style.display = 'none'
+                // window.location.reload()
+            },
+            error: function(response) {
+                // console.log(response.responseJSON.errors.name)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    // text: response.responseJSON.errors.name[0],
+                    footer: '<a href="">Quay trở lại?</a>'
+                })
+            }
+        });
+        $.ajaxSetup({
+            headers: {
+                'csrftoken': '{{ csrf_token() }}'
+            }
+        });
+    }
+
+
+      $('#change_status').on('click',function(){
     console.log("quân");
-      $value = $(this).val();
+      $package_id = $(this).val();
       $.ajax({
           type: 'GET',
-          url: "{{route('admin.user.listUser')}}",
-          data: {
-              'search': $value,
-          },
-          // dataType:'json',
-          // headers: {
-          //   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          // },
+          url: "{{route('admin.user.editStatus')}}",
+          data:{
+                id: $package_id
+            },
           
           success:function(data){
             console.log("abc");
-            
+            if(data['result'] == true){
+                console.log(data['package']);
+                console.log(data['result']);
+                document.querySelector(".set-coach").disabled = false;
+                // document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
+            }
+            else{
+                // document.querySelector(".set-coach").innerHTML = `Gói tập này không có PT`;
+            }
           }
       });
-  })
+    })
 </script>
 
 @endsection

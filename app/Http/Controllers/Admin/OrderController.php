@@ -17,7 +17,7 @@ use PDF;
 class OrderController extends Controller
 {
     public function add(){
-        return view('screens.backend.order.add');
+        return view('screens.backend.order.test');
     }
 
 

@@ -6,7 +6,7 @@
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
                     <h3 class="card-label">{{ translate('Schedule Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ $user->name }}</span></h3>
+                        <span class="d-block text-muted pt-2 font-size-sm"></span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -80,23 +80,22 @@
                     <thead>
                     <tr>
                         <th>#ID</th>
+                        <th>{{translate('Name member')}}</th>
                         <th>{{translate('Day')}}</th>
                         <th>{{translate('Package type')}}</th>
                         <th>{{translate('Shift')}}</th>
                         <th>{{translate('Time start')}}</th>
                         <th>{{translate('Time end')}}</th>
                         <th>{{translate('Status')}}</th>
-                        <th>{{translate('View')}}</th>
+                        <th>{{translate('Attendance')}}</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
-                    @if(count($schedules) >0)
-                        @foreach($schedules as $item)
-                            @php
-                            $shift = \App\Models\Time::where('id', $item->time_id)->first();
-                            @endphp
+                    @if(count($attendances) > 0)
+                        @foreach($attendances as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
+                                <td>{{ $item->user->name}}</td>
                                 <td>{{ translate(getdate(strtotime($item->date))['weekday']) }}<br>
                                     <span style="color: #999999">{{ date('d-m-Y', strtotime($item->date)) }}</span>
                                 </td>
@@ -104,21 +103,15 @@
                                 <td>{{$item->time->time_name}}</td>
                                 <td>{{$item->time->start_time}}</td>
                                 <td>{{$item->time->end_time}}</td>
-                                <td>
-                                @if($item->status == 0)
-                                    <span
-                                        class="label label-inline label-light-primary font-weight-bold"> {{ translate(config('status_schedule.'.$item->status)) }}</span>
+                                <td class="view_status">
+                                        <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{translate(config('status_schedule.'.$item->status))}}</span>
 
-                                @else
-                                        <span
-                                            class="label label-inline {{$item->status == 1 ? 'label-light-danger': 'label-light-success'}} font-weight-bold">{{translate(config('status_schedule.'.$item->status))}}</span>
-                                @endif
                                 </td>
-                                <td>
-                                    {{-- <span title="{{ $item->status == 2 ? translate('Absent') : translate('Present') }}" style="cursor: pointer">
-                                        <i class="fas fa-spinner"></i>
-                                    </span> --}}
-                                    <a href="{{route('admin.attendance.list', $item->id)}}" class="btn btn-light-primary font-weight-bold mr-2">View member</a>
+                                <td >
+                                    <div class="update_attendance" data-url="{{'admin.attendance.editStatus'}}" data-id="{{$item->id}}" style="cursor: pointer;">
+                                        <i style="font-size: 20px; " class="ki ki-reload text-warning"></i>
+                                    </div>
+                                    
                                 </td>
                             </tr>
                         @endforeach
@@ -127,9 +120,9 @@
                 </table>
                 <!--end: Datatable-->
                 <div>
-                    {{$schedules->appends(request()->input())->links()}}
+                    {{$attendances->appends(request()->input())->links()}}
                 </div>
-                @if(count($schedules) <= 0)
+                @if(count($attendances) <= 0)
                     <div class="card-body">
                         <!--begin::Search Form-->
                         <div class="mb-7">
@@ -145,4 +138,46 @@
     </div>
 @endsection
 @section('script')
+    <script>
+        $(".update_attendance").click(function(){
+    console.log("quân");
+      var id = $(this).data("id");
+      var link = $(this).data("url");
+        $.ajax(
+        {
+            url: link,
+            type: 'GET',
+            dataType: "JSON",
+            data: {
+                "id": id,
+            },
+            success: function ()
+            {
+                $('.view_status').html(` <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{translate(config('status_schedule.'.$item->status))}}</span>`);
+            }
+        });
+
+        console.log("It failed");
+    });
+
+
+    //     $('.update_attendance').on('click', function() {
+    //     $id = $(this).data("id");
+    //     console.log($id);
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: "{{route('admin.attendance.editStatus')}}",
+    //         data: {
+    //             'id': $id,
+    //         },
+    //         success: function(data) {
+    //             console.log($data);
+    //             $('.view_status').html(` <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{translate(config('status_schedule.'.$item->status))}}</span>`);
+    //             if (data == '') {
+    //                 window.location.reload()
+    //             }
+    //         }
+    //     });
+    // })
+    </script>
 @endsection

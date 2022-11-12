@@ -127,8 +127,8 @@
                                     <label class="mr-3 mb-0 d-none d-md-block">Role:</label>
                                     <select wire:model="role" class="form-control" id="kt_datatable_search_type">
                                         <option value="">All</option>
-                                        
-    
+
+
                                     </select>
                                 </div>
                             </div>
@@ -165,8 +165,8 @@
                 </thead>
                 <tbody>
                     @foreach ($orders as $order)
-                        
-                    
+
+
                      <tr>
                         <td>{{$order->id}}</td>
                         <td>
@@ -195,16 +195,16 @@
                             @else
                             Gói tập không có pt
                             @endif
-                        </td> 
+                        </td>
                         <td>
                             @if(isset($order->pt->name))
                             {{$order->pt->name}}
                             @else
                             Gói tập không có pt
                             @endif
-                            
+
                         </td>
-                        <td>{{$order->total_money}}</td> 
+                        <td>{{$order->total_money}}</td>
                         <td>
                             @if ($order->status_contract == 1)
                             <span
@@ -214,31 +214,22 @@
                         @endif
                         </td>
                         <td nowrap="nowrap">
-
                             @if ($order->status_contract == 1)
                                 <a href="" class="btn btn-primary mr-2">Xem hợp đồng</a>
                             @else
                                 <a href="{{route('admin.contract.create', [encrypt($order->id)])}}" class="btn btn-success mr-2">Tạo hợp đồng </a>
                             @endif
-
                         </td>
-
-                       
-                            
                     </tr>
-                    
                     @endforeach
-    
-    
                 </tbody>
             </table>
             <!--end: Datatable-->
-            
         </div>
     </div>
-    
+
     </div>
-    
+
 @endsection
 
 @section('script')

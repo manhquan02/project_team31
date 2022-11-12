@@ -77,6 +77,40 @@ function config_encode($text)
     return $data;
 }
 
+function weekday($weekday){
+    $weekday_name ="";
+    switch ($weekday) {
+        case 'Monday':
+            $weekday_name = "Thứ 2";
+            break;
+        case 'Tuesday':
+            $weekday_name = "Thứ 3";
+            break;
+        case 'Wednesday':
+            $weekday_name = "Thứ 4";
+            break;
+        case 'Thursday':
+            $weekday_name = "Thứ 5";
+            break;
+        case 'Friday':
+            $weekday_name = "Thứ 6";
+            break;
+        case 'Saturday':
+            $weekday_name = "Thứ 7";
+            break;
+        case 'Sunday':
+            $weekday_name = "Chủ nhật";
+            break;
+        default:
+            # code...
+            break;
+        return $weekday_name;
+    }
+}
+
+
+
+
 function config_decode($text)
 {
     $result = substr($text, 35);

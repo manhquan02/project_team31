@@ -19,14 +19,127 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $users = User::paginate(5);
-        $users = User::all();
-
-        return view('screens.backend.user.list-user', ['users' => $users]);
+        $roles = Role::all();
+        $users = new User();
+        if (isset($request->q)) {
+            $users = $users->where('name', 'like', '%'.$request->q.'%');
+        }
+        if(isset($request->sort)){
+            if($request->sort == 'idDesc')
+             $users = $users->orderByDesc('id');
+   
+           if($request->sort == 'idAsc')
+             $users = $users->orderBy('id');
+        }
+        if(isset($request->status)){
+            $users = $users->where('status', $request->status);
+        }
+        $users = $users->paginate(12);
+        return view('screens.backend.user.list-user', ['users' => $users, 'roles' => $roles]);
     }
 
+    public function listAdmin(Request $request){
+        $roles = Role::all();
+        $users = User::role(['admin', 'manager']);
+        if (isset($request->q)) {
+            $users = $users->where('name', 'like', '%'.$request->q.'%');
+        }
+        if(isset($request->sort)){
+            if($request->sort == 'idDesc')
+             $users = $users->orderByDesc('id');
+   
+           if($request->sort == 'idAsc')
+             $users = $users->orderBy('id');
+        }
+        if(isset($request->status)){
+            $users = $users->where('status', $request->status);
+        }
+        $users = $users->paginate(12);
+        return view('screens.backend.user.list-user', ['users' => $users, 'roles' => $roles]);
+    }
+
+    public function listPt(Request $request){
+        $roles = Role::all();
+        $users = User::role('coach');
+        if (isset($request->q)) {
+            $users = $users->where('name', 'like', '%'.$request->q.'%');
+        }
+        if(isset($request->sort)){
+            if($request->sort == 'idDesc')
+             $users = $users->orderByDesc('id');
+   
+           if($request->sort == 'idAsc')
+             $users = $users->orderBy('id');
+        }
+        if(isset($request->status)){
+            $users = $users->where('status', $request->status);
+        }
+        $users = $users->paginate(12);
+
+        return view('screens.backend.user.list-user', ['users' => $users, 'roles' => $roles]);
+    }
+
+    public function listMember(Request $request){
+        $roles = Role::all();
+        $users = User::role('member');
+        if (isset($request->q)) {
+            $users = $users->where('name', 'like', '%'.$request->q.'%');
+        }
+        if(isset($request->sort)){
+            if($request->sort == 'idDesc')
+             $users = $users->orderByDesc('id');
+   
+           if($request->sort == 'idAsc')
+             $users = $users->orderBy('id');
+        }
+        if(isset($request->status)){
+            $users = $users->where('status', $request->status);
+        }
+        $users = $users->paginate(12);
+
+        return view('screens.backend.user.list-user', ['users' => $users, 'roles' => $roles]);
+    }
+
+    public function status(Request $request){
+        $user = User::find($request->id);
+        if($request->status == 0){
+            $user->update([
+                'status' => 1,
+            ]);
+        }
+        elseif($request->status == 1){
+            $user->update([
+                'status' => 1,
+            ]);
+        }
+        return response()->json([
+            'result' => 0,
+            'user' => $user,
+        ]);
+    }
+
+    public function editRole(Request $request){
+        $user = User::where('id',$request->id)->first();
+        // return response()->json([
+        //     'result' => 0,
+        //     'user' => $request->id,
+            
+        // ]);
+        foreach($user->roles as $role){
+            $user->removeRole($role);
+        }
+        $user->assignRole($request->role);
+        $roles = $user->roles->pluck('name')->all();
+        return response()->json([
+            'result' => 0,
+            'user' => $user,
+            'role' => $roles[0]
+        ]);
+        
+
+    }
     /**
      * Show the form for creating a new resource.
      *

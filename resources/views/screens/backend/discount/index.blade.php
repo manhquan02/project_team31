@@ -186,8 +186,8 @@
                                     {{$package->package_name}}<br>
                                 @endforeach
                             </td>
-                            <td>{{$discount->start_date}}</td>
-                            <td>{{$discount->end_date}}</td>
+                            <td>{{ date('d-m-Y', strtotime($discount->start_date)) }}</td>
+                            <td>{{ date('d-m-Y', strtotime($discount->end_date)) }}</td>
                             <td>
                                 @if ($discount->status == 1)
                                     <span
