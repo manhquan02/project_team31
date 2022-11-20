@@ -3,31 +3,40 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\VeryEmail;
 use App\Models\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        if (!$request->email || !$request->password) {
-            return response()->json([
-                'result' => false,
-                'message' => 'Cần nhập đủ các trường thông tin'
-            ]);
-        }
         if (Auth::attempt(
             [
                 'email' => $request->email,
                 'password' => $request->password
             ]
         )) {
+            $user = User::where('email', $request->email)->first();
+            if ($user != null && $user->verify_code == null) {
+                $code = rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9);
+                $data = [
+                    'code' => $code
+                ];
+                Mail::to("$request->email")->send(new VeryEmail($data));
+                return response()->json([
+                    'user' => User::where('id', $user->id)->first(),
+                    'massage' => 'Mã xác minh đã được gửi về email của bạn'
+                ]);
+            }
             if ($request->checkbox == 'on') {
-                Cookie::queue('email', $request->email, 44640);
-                Cookie::queue('password', $request->password, 44640);
+                Cookie::queue('em', $request->email, 44640);
+                Cookie::queue('ps', $request->password, 44640);
             }
             return response()->json(['result' => true]);
         } else return response()->json([
@@ -39,7 +48,6 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $new_user = new User();
         $user = User::where('phone', $request->phone)->orWhere('email', $request->email)->first();
         if ($user != null) {
             return response()->json([
@@ -47,25 +55,49 @@ class AuthController extends Controller
                 'message' => 'Số điện thoại hoặc email đã tồn tại'
             ]);
         }
-
-        if ($request->password != $request->confirm_password) {
-            return response()->json([
-                'result' => false,
-                'message' => 'Mật khẩu không trùng khớp'
-            ]);
-        }
-
-        $new_user->name = $request->name;
-        $new_user->email = $request->email;
-        $new_user->phone = $request->phone;
-        $new_user->password = Hash::make($request->password);
-        $new_user->address = $request->address;
-        $new_user->gender = $request->gender;
-        $new_user->save();
-
+        $code = rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9);
+        $data = [
+            'code' => $code
+        ];
+        $new = new User();
+        $new->name = $request->name;
+        $new->email = $request->email;
+        $new->phone = $request->phone;
+        $new->password = $request->password;
+        $new->address = $request->address;
+        $new->gender = $request->gender;
+        $new->verify_code = $code;
+        $new->save();
+        Mail::to("$request->email")->send(new VeryEmail($data));
         return response()->json([
             'result' => true,
-            'message' => 'Đăng ký tài khoản thành công'
+            'user' => User::where('id', $new->id)->first(),
+            'massage' => 'Mã xác minh đã được gửi về email của bạn'
         ]);
+    }
+
+
+    public function verify(Request $request, $userId)
+    {
+        $user = User::where('id', $userId)->where('status', 0)->first();
+        if ($user == null) {
+            return response()->json(['result' => false]);
+        }
+        if ($request->code && $request->code == $user->verify_code) {
+            $user->email_verified_at = date('Y/m/d H:i:s');
+            $user->status = 1;
+            $user->save();
+            return response()->json([
+                'result' => true,
+                'massage' => 'Xác minh email thành công'
+            ]);
+        }
+        return response()->json([
+            'result' => false,
+        ]);
+    }
+
+    public function reset_password(){
+
     }
 }

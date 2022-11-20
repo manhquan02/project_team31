@@ -25,12 +25,11 @@ class AuthController extends Controller
             // dd($request->avatar);
             $file = $request->avatar;
             $file_name = UploadImgService::uploadImg($request->avatar,'images/user');
-
         }
         else{
             $file_name = 'one.jpg';
         }
-        
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
@@ -59,7 +58,7 @@ class AuthController extends Controller
 
         $email = $request->email;
         $password = $request->password;
-         
+
         if(Auth::attempt([
             'email' => $email,
             'password' => $password
@@ -75,6 +74,6 @@ class AuthController extends Controller
                 'status' => 'tài khoản không tồn tại z'
             ]);
         }
-        
+
     }
 }

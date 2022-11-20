@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');
 Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'register'])->name('register');
+Route::post('verify/{userId}', [\App\Http\Controllers\Api\AuthController::class, 'verify'])->name('verify');
 
 Route::prefix('package')->name('package.')->group(function () {
     Route::get('', [\App\Http\Controllers\Api\PackageController::class, 'index'])->name('index');
