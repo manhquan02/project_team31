@@ -59,6 +59,9 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::get('/set-coach', [OrderController::class, 'setCoach'])->name('setCoach');
         Route::get('pdf', [OrderController::class, 'pdf'])->name('pdf');
 
+        Route::post('/momo_payment', [OrderController::class, 'momoPayment'])->name('momoPayment');
+        Route::get('checkPayment', [OrderController::class, 'returnUrl'])->name('returnUrl');
+
     });
 
 
