@@ -16,6 +16,31 @@ use Illuminate\Support\Facades\Cookie;
 use PDF;
 class OrderController extends Controller
 {
+
+
+    public function setPackage(Request $request){
+        $package = Package::find($request->id);
+        if(isset($package)){
+            if($package->set_pt == 1){
+                return response()->json([
+                    'result' => 1,
+                    'package' => $package,
+                    
+                ]);
+            }
+            else{
+                return response()->json([
+                    'result' => 0,
+                    'package' => $package,
+                ]);
+            }
+            
+        }
+        return response()->json([
+            'result' => false,
+            'message' => 'Gói tập không tồn tại !'
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      *

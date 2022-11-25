@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AttendanceMemberController;
 use App\Http\Controllers\Admin\ContractController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PtMyStudentController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\SchedulePtController;
 use App\Http\Controllers\Admin\TimeController;
@@ -81,7 +82,21 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::get('/edit-status', [AttendanceMemberController::class, 'editStatus'])->name('editStatus');
     });
 
+
 });
+
+Route::prefix('coach/')->name('coach.')->group(function () {
+    Route::prefix('my-student/')->name('my_student.')->group(function () {
+        Route::get('/', [PtMyStudentController::class, 'index'])->name('list');
+    });
+    
+});
+
+Route::prefix('home/')->name('coach.')->group(function () {
+    return view('layouts.frontend.master');
+});
+
+
 
 
 
