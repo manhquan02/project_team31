@@ -92,6 +92,10 @@ Route::prefix('coach/')->name('coach.')->group(function () {
     
 });
 
+Route::prefix('home/')->name('coach.')->group(function () {
+    return view('layouts.frontend.master');
+});
+
 
 
 
