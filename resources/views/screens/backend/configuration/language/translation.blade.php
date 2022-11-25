@@ -42,8 +42,8 @@
                                     <td>{{$item->lang_in}}</td>
                                     <td><input type="text" name="lang_value[{{$item->id}}]" class="form-control"
                                                value="{{$item->lang_value}}"></td>
-                                    <td><a id="btn-del" href="{{route('admin.language.delete_translation', $item->id)}}"
-                                           style="margin-left: 12px"><i class="flaticon2-trash text-danger"></i></a>
+                                    <td><a class="btn-confirm" data-title="{{ translate('Are you sure you want to delete ?') }}" data-url="{{route('admin.language.delete_translation', $item->id)}}"
+                                           style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

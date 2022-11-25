@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Language;
+use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,7 @@ class DashboardController extends Controller
             Toastr::success(translate('Change language successfully'));
             return redirect()->back();
         }
-        return view('screens.backend.dashboard');
+        $total_user = User::count();
+            return view('screens.backend.dashboard', compact('total_user'));
     }
 }

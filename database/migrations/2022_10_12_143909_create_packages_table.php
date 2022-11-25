@@ -26,9 +26,9 @@ return new class extends Migration
             $table->unsignedInteger('number_member')->default(1);
             $table->unsignedInteger('status')->default(1);
             $table->unsignedInteger('set_pt')->default(0);
+            $table->unsignedInteger('session_pt')->default(0);
             $table->unsignedBigInteger('type_package')->default(0);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

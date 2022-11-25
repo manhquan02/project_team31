@@ -100,7 +100,6 @@
                                 <td>{{number_format($item->into_price,0,'.','.')}}</td>
                                 <td>{{$item->month_package < 12 ? $item->month_package : $item->month_package / 12}} {{ $item->month_package < 12 ? translate('month'): translate('year') }}</td>
                                 <td>{{$package_type[$item->type_package]}}</td>
-
                                 <td><span
                                         class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{ translate(config('status_package.'.$item->status) )}}</span>
                                 </td>
