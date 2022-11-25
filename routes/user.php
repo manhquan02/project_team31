@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SchedulePtController;
 use App\Http\Controllers\Admin\TimeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Client\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -92,8 +93,17 @@ Route::prefix('coach/')->name('coach.')->group(function () {
     
 });
 
-Route::prefix('home/')->name('coach.')->group(function () {
-    return view('layouts.frontend.master');
+// client 
+
+Route::prefix('payment/')->name('payment.')->group(function () {
+    Route::get('/', [PaymentController::class, 'index'])->name('index');
+});
+
+Route::prefix('account/')->name('account.')->group(function () {
+    Route::get('/', function () {
+        return view('screens.frontend.account.index');
+    });
+    
 });
 
 

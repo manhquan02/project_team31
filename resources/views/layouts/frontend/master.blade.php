@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.png">
     <!-- All CSS -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="frontend/assets/css/animate.css">
     <link rel="stylesheet" href="frontend/assets/css/fontawesome.min.css">
     <link rel="stylesheet" href="frontend/assets/css/flaticon.css">
@@ -17,6 +19,7 @@
     <link rel="stylesheet" href="frontend/assets/css/swiper.min.css">
     <link rel="stylesheet" href="frontend/assets/css/spacing.css">
     <link rel="stylesheet" href="frontend/assets/css/main.css">
+    @yield('style')
     <title>Document</title>
 </head>
 
@@ -65,7 +68,7 @@
         <!-- feature-area-2 end -->
         {{-- Nội dung  --}}
 
-        @yield('content');
+        @yield('content')
 
         {{-- kết thúc nội dung  --}}
         <!-- about-area-2 start -->
@@ -125,6 +128,7 @@
     <script src="frontend/assets/js/tilt.jquery.min.js"></script>
     <script src="frontend/assets/js/wow.min.js"></script>
     <script src="frontend/assets/js/script.js"></script>
+    @yield('js')
 </body>
 
 </html>
