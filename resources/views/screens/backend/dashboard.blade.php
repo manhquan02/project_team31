@@ -1,12 +1,15 @@
 @extends('layouts.backend.master')
 @section('title', translate('Dashboard'))
 @section('content')
+@php
+$today = getdate();
+$year = request('year') ? request('year') : $today['year'];
+@endphp
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->
     <div class="container">
         <!--begin::Row-->
         <div class="row">
-
             <!--begin::Mixed Widget 1-->
             <div class="card card-custom bg-gray-100 gutter-b card-stretch">
                 <!--begin::Header-->
@@ -104,6 +107,52 @@
                     </div>
                     <!--end::Stats-->
                 </div>
+                <div class="card card-custom card-stretch gutter-b">
+											<!--begin::Header-->
+											<div class="card-header h-auto border-0">
+												<!--begin::Title-->
+												<div class="card-title py-5">
+													<h3 class="card-label">
+														<span class="d-block text-dark font-weight-bolder">{{translate('Total revenue')}}</span>
+														<span class="d-block text-muted mt-2 font-size-sm">{{translate("Statistics data of the year ".$year)}}</span>
+													</h3>
+												</div>
+												<!--end::Title-->
+												<!--begin::Toolbar-->
+												<div class="card-toolbar">
+													<div class="dropdown dropdown-inline">
+														
+														
+															<!--begin::Naviigation-->
+															<ul class="navi">
+																<li class="navi-header font-weight-bold py-5">
+																	<span class="font-size-lg">{{translate('Select year')}}</span>
+																</li>
+                                                               <form action="" id="sb">
+                                                               <select class="form-control" name="year" id="year">
+																@for($i=$today['year']-5; $i<=$today['year']; $i++)
+																	<option @if($year == $i) selected @endif value="{{$i}}">
+                                                                    <span class="navi-text">{{$i}}</span>
+                                                                    </option>
+                                                                @endfor
+                                                               </select>
+                                                               <button  hidden></button>
+                                                               </form>                                                             
+															</ul>
+															<!--end::Naviigation-->														
+													</div>
+												</div>
+												<!--end::Toolbar-->
+											</div>
+											<!--end::Header-->
+											<!--begin::Body-->
+											<div class="card-body">
+												<!--begin::Chart-->
+												<div id="kt_charts_widget_1_chart"></div>
+												<!--end::Chart-->
+											</div>
+											<!--end::Body-->
+										</div>
                 <!--end::Body-->
             </div>
             <!--end::Mixed Widget 1-->
@@ -114,4 +163,129 @@
 </div>
 <!--end::Container-->
 </div>
+@endsection
+@section('script')
+<script>
+      var _initChartsWidget1 = function () {
+        var element = document.getElementById("kt_charts_widget_1_chart");
+
+        if (!element) {
+            return;
+        }
+        var options = {
+            series: [{
+                name: "{{translate('Total revenue')}}",
+                data: [{{st(1, $year)}}, {{st(2, $year)}}, {{st(3, $year)}}, {{st(4, $year)}}, {{st(5, $year)}}, {{st(6, $year)}},{{st(7, $year)}}, {{st(8, $year)}}, {{st(9, $year)}}, {{st(10, $year)}}, {{st(11, $year)}},{{st(12, $year)}}]
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: ['30%'],
+                    endingShape: 'rounded'
+                },
+            },
+            legend: {
+                show: false
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: ['Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Otb','Nov','Dec'],
+                axisBorder: {
+                    show: false,
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                active: {
+                    allowMultipleDataPointsSelection: false,
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                }
+            },
+            tooltip: {
+                style: {
+                    fontSize: '12px',
+                    fontFamily: KTApp.getSettings()['font-family']
+                },
+                y: {
+                    formatter: function (val) {
+                        return val + " vnđ"
+                    }
+                }
+            },
+            colors: [KTApp.getSettings()['colors']['theme']['base']['success'], KTApp.getSettings()['colors']['gray']['gray-300']],
+            grid: {
+                borderColor: KTApp.getSettings()['colors']['gray']['gray-200'],
+                strokeDashArray: 4,
+                yaxis: {
+                    lines: {
+                        show: true
+                    }
+                }
+            }
+        };
+
+        var chart = new ApexCharts(element, options);
+        chart.render();
+    }
+
+    $(function(){
+
+        $('#year').on('change', function(){
+            $('#sb').submit();
+        })
+        
+           
+
+    })
+</script>
 @endsection
