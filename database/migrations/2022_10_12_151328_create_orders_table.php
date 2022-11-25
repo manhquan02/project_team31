@@ -25,8 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('total_money');
             $table->unsignedBigInteger('payment_method');
             $table->unsignedBigInteger('status_contract')->default(0);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

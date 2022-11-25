@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('description');
             $table->unsignedInteger('status')->default(0);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

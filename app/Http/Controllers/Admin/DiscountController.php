@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DiscountRequest;
 use App\Models\Discount;
 use App\Models\Package;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class DiscountController extends Controller
@@ -65,12 +66,11 @@ class DiscountController extends Controller
     {
         $discount = new Discount();
         $package_id = implode("|",$request->package_id);
-        // dd($package_id);
         $discount->fill($request->all());
         $discount->package_id = $package_id;
         $discount->save();
-
-        return redirect()->route('admin.discount.list')->with('success','Thêm phiếu giảm giá thành cômng');
+        Toastr::success(translate('Add new coupon successfully'));
+        return redirect()->back();
     }
 
     /**
@@ -92,9 +92,9 @@ class DiscountController extends Controller
      */
     public function edit($id)
     {
-        $discounts = Discount::find(decrypt($id));
+        $discount = Discount::find(decrypt($id));
         $packages = Package::all();
-        return view('screens.backend.discount.edit', ['discounts' => $discounts ,'packages' => $packages]);
+        return view('screens.backend.discount.edit', ['discount' => $discount ,'packages' => $packages]);
     }
 
     /**
@@ -108,12 +108,11 @@ class DiscountController extends Controller
     {
         $discount = Discount::find(decrypt($id));
         $package_id = implode("|",$request->package_id);
-        // dd($package_id);
         $discount->fill($request->all());
         $discount->package_id = $package_id;
         $discount->save();
-
-        return redirect()->route('admin.discount.list')->with('success','Update giảm giá thành cômng');
+        Toastr::success(translate('Update coupon successfully'));
+        return redirect()->back();
     }
 
     /**

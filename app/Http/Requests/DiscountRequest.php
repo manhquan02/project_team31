@@ -26,7 +26,7 @@ class DiscountRequest extends FormRequest
         return [
             'discount_title'=>['required','max:255','min:5'],
             'discount_code' => ['required', 'max:255','unique:discounts'],
-            'price_sale'=>['required', 'integer' ,'max:3'],
+            'price_sale'=>['required', 'integer'],
             'quantity'=>['required', 'integer'],
             'package_id' => ['required'],
             'start_date' => ['required'],
@@ -42,7 +42,7 @@ class DiscountRequest extends FormRequest
             'discount_code.unique'=>':attribute đã tồn tại',
             'integer' => ':attribute phải là dạng số',
             'package_id.required' => 'Chọn gói tập được giảm giá',
-            'price_sale.max' => ':attribute tối đa 3 kí tự',
+//            'price_sale.max' => ':attribute tối đa 2 kí tự',
         ];
 
     }

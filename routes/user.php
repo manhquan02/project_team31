@@ -41,8 +41,8 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::get('/', [DiscountController::class, 'index'])->name('list');
         Route::get('/create', [DiscountController::class, 'create'])->name('create');
         Route::post('/post-discount', [DiscountController::class, 'store'])->name('postDiscount');
-        Route::get('/edit/{id}', [DiscountController::class, 'edit'])->name('edit');
-        Route::put('/post-edit', [DiscountController::class, 'update'])->name('postEdit');
+        Route::get('edit/{id}', [DiscountController::class, 'edit'])->name('edit');
+        Route::patch('edit/{id}', [DiscountController::class, 'update'])->name('postEdit');
     });
 
     Route::prefix('order/')->name('order.')->group(function () {

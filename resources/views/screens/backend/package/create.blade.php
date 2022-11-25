@@ -46,7 +46,7 @@
                     <div class="form-group row">
                         <label class="col-2 col-form-label">{{ translate('Subject') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
-                                <select name="subject_id"  class="form-control select2 is-invalid" id="kt_select2_1_validate" >
+                                <select name="subject_id"  class="form-control select2">
                                     <option selected disabled>{{ translate('Choose a subject') }}</option>
                                     @foreach ($subjects as $item)
                                         <option  value="{{$item->id}}" @if(old('subject_id') == $item->id) selected @endif>{{$item->subject_name}}  </option>

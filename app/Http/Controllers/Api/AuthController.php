@@ -23,11 +23,13 @@ class AuthController extends Controller
             ]
         )) {
             $user = User::where('email', $request->email)->first();
-            if ($user != null && $user->verify_code == null) {
+            if ($user != null && $user->email_verified_at == null) {
                 $code = rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9);
                 $data = [
                     'code' => $code
                 ];
+                $user->verify_code = $code;
+                $user->save();
                 Mail::to("$request->email")->send(new VeryEmail($data));
                 return response()->json([
                     'user' => User::where('id', $user->id)->first(),
@@ -44,7 +46,6 @@ class AuthController extends Controller
             'message' => 'Tài khoản hoặc mật khẩu không chính xác'
         ]);
     }
-
 
     public function register(Request $request)
     {
@@ -63,14 +64,13 @@ class AuthController extends Controller
         $new->name = $request->name;
         $new->email = $request->email;
         $new->phone = $request->phone;
-        $new->password = $request->password;
+        $new->password = Hash::make($request->password);
         $new->address = $request->address;
         $new->gender = $request->gender;
         $new->verify_code = $code;
         $new->save();
         Mail::to("$request->email")->send(new VeryEmail($data));
         return response()->json([
-            'result' => true,
             'user' => User::where('id', $new->id)->first(),
             'massage' => 'Mã xác minh đã được gửi về email của bạn'
         ]);
@@ -94,6 +94,7 @@ class AuthController extends Controller
         }
         return response()->json([
             'result' => false,
+            'massage' => 'Mã xác minh không chính xác'
         ]);
     }
 

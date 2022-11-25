@@ -23,8 +23,7 @@ return new class extends Migration
             $table->string('weekday_name')->nullable();
             $table->date('start_date'); 
             $table->date('end_date');
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

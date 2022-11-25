@@ -1,6 +1,6 @@
 <script>
     $(function () {
-        $("input[name = file]").on('change', function (e) {
+        $("input[type = file]").on('change', function (e) {
             e.preventDefault();
             var input = e.target;
             var reader = new FileReader();

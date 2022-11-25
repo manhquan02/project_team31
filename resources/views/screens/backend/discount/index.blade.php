@@ -204,12 +204,8 @@
                                 <a title="Edit" href="{{route('admin.discount.edit', [encrypt($discount ->id)])}}"><i
                                         class="flaticon2-pen text-warning"></i></a>
                             </td>
-
                         </tr>
-
                     @endforeach
-
-
                     </tbody>
                 </table>
                 <!--end: Datatable-->
