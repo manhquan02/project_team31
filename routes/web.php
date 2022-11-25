@@ -21,7 +21,8 @@ Route::get('/', function () {
     return view('screens.frontend.index');
 });
 
-
+Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');
+Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'register'])->name('register');
 Route::get('/list-user', function () {
     return view('screens.backend.user.list-user');
 });
@@ -85,8 +86,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\TimeController::class, 'update'])->name('update');
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\TimeController::class, 'delete'])->name('delete');
     });
-
-
 });
-
-

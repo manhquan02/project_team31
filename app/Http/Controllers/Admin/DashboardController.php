@@ -25,6 +25,7 @@ class DashboardController extends Controller
             return redirect()->back();
         }
         $total_user = User::count();
+
             return view('screens.backend.dashboard', compact('total_user'));
     }
 }
