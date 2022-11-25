@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use App\Http\Services\UploadImgService;
 use App\Models\User;
-use App\Http\Requests\SignupRequest;
-use App\Http\Requests\Login;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class AuthController extends Controller
 {
@@ -53,9 +52,7 @@ class AuthController extends Controller
         return view('screens.frontend.auth.login');
     }
 
-    public function postLogin(Request $request){
-        $user = new User();
-
+    public function postLogin(LoginRequest $request){
         $email = $request->email;
         $password = $request->password;
 
@@ -63,16 +60,10 @@ class AuthController extends Controller
             'email' => $email,
             'password' => $password
         ])){
-            $user = Auth::user();
-            return response([
-                'user' => $user,
-            ]);
+            return redirect()->route('home');
         }
         else{
-            $user = Auth::user();
-            return response([
-                'status' => 'tài khoản không tồn tại z'
-            ]);
+            return back()->with('error', translate('Email or password incorrect'));
         }
 
     }
