@@ -131,7 +131,7 @@ $year = request('year') ? request('year') : $today['year'];
                                                                <form action="" id="sb">
                                                                <select class="form-control" name="year" id="year">
 																@for($i=$today['year']-5; $i<=$today['year']; $i++)
-																	<option @if($year == $i) selected @endif value="{{$i}}">
+																	<option @if($year == $i) selected @else($year ) @endif value="{{$i}}">
                                                                     <span class="navi-text">{{$i}}</span>
                                                                     </option>
                                                                 @endfor

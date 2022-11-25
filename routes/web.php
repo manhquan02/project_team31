@@ -20,8 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');
-Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'register'])->name('register');
+Route::post('login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login');
+Route::post('register', [\App\Http\Controllers\Auth\AuthController::class, 'register'])->name('register');
+
 Route::get('/list-user', function () {
     return view('screens.backend.user.list-user');
 });
