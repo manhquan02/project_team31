@@ -21,20 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/signup', [AuthController::class, 'signup']);
 Route::post('/postSignup', [AuthController::class, 'postSignup'])->name('postSignup');
-
-Route::get('/login', function (Request $request) {
-    // dd($request->id);
-        if(Auth::attempt([
-            'email' => "linhhchii6886@gmail.com",
-            'password' => "12345678"
-        ])){
-            $user = Auth::user();
-            return response([
-                'user' => $user,
-            ]);
-        }
-    return view('screens.frontend.auth.login');
-})->name('auth.login');
+Route::get('login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login');
+Route::post('/postLogin', [AuthController::class, 'postLogin'])->name('postLogin');
 
 
 /**

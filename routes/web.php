@@ -16,17 +16,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return view('screens.frontend.index');
-});
 
-Route::post('login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login');
-Route::post('register', [\App\Http\Controllers\Auth\AuthController::class, 'register'])->name('register');
+
 
 Route::get('/list-user', function () {
     return view('screens.backend.user.list-user');
 });
+Route::get('', [\App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
