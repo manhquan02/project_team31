@@ -11,6 +11,7 @@
                 <span class="text-muted">Giỏ hàng</span>
                 <span class="badge badge-secondary badge-pill">1</span>
             </h4>
+            @include('screens.backend._alert')
             <ul class="list-group mb-3 sticky-top">
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
@@ -24,7 +25,7 @@
                         <div>
                             <div class="text-black">
                                 <label for="firstName">Số lượng</label>
-                                <input type="number" class="form-control" id="firstName" placeholder="" value="" required="">
+                                <input name="discount_code" type="text" class="form-control" id="firstName" placeholder="" value="" required="">
                                 <div class="invalid-feedback"> Valid first name is required. </div>
                             </div>
                         </div>
@@ -47,12 +48,14 @@
         </div>
         <div class="col-md-8 order-md-1">
             <h4 class="mb-3">Thanh toán gói tập</h4>
-            <form class="needs-validation" novalidate="">
+            <form action="{{route('payment.store', $package->id)}}" class="needs-validation" method="POST">
+                @csrf
+                @method('POST')
                 <div class="row">
                    
                     <div class="col-md-6 mb-3">
                         <label for="lastName">Họ và tên</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                        <input type="text" value="{{Auth::user()->name}}" disabled class="form-control" id="lastName" placeholder="">
                         <div class="invalid-feedback"> Valid last name is required. </div>
                     </div>
                 </div>
@@ -62,63 +65,62 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input type="text" class="form-control" id="username" placeholder="" required="">
+                        <input type="text" value="{{Auth::user()->email}}" disabled class="form-control" id="username" placeholder="" >
                         <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
                     </div>
                 </div>
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="username">Địa chỉ</label>
                     <div class="input-group">
                         <input type="text" class="form-control" id="username" placeholder="" required="">
                         <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="mb-3">
                     <label for="email">Số điện thoại<span class="text-muted"></span></label>
-                    <input type="email" class="form-control" id="email" placeholder="">
+                    <input type="email" value="{{Auth::user()->phone}}" disabled class="form-control" id="email" placeholder="">
                     <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
                 </div>
                 <div id="weekday_package" class="mb-3">
                     <label for="email">Chọn ca tập<span class="text-muted"></span></label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select name="time_id"  class="form-select" aria-label="Default select example">
+                        {{-- <option selected>Open this select menu</option> --}}
+                        @foreach ($times as $time)
+                            <option value="{{$time->id}}">{{$time->time_name}}</option>  
+                        @endforeach 
+
                     </select>
                 </div>
 
                 <div id="coach_package" class="mb-3">
                     <label for="email">Chọn huấn luyện viên<span class="text-muted"></span></label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select  name="pt_id" class="form-select" aria-label="Default select example">
+                        {{-- <option selected>Open this select menu</option> --}}
+                        @foreach ($coachs as $coach)
+                            <option value="{{$coach->id}}">{{$coach->name}}</option>  
+                        @endforeach 
                     </select>
                 </div>
                 
                 <div class="mb-3" id="time_package">
                     <label for="username">Thời gian bắt đầu</label>
                     <div class="input-group">
-                        <input type="date" class="form-control" id="username" placeholder="" required="">
+                        <input name="activate_day" type="date" class="form-control" id="username" placeholder="" required="">
                         <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
                     </div>
                 </div>
                 <div id="weekday_package" class="mb-3">
                     <label for="email">Chọn thứ tập có PT<span class="text-muted"></span></label>
-                    <select multiple class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select name="weekday_name[]" multiple class="form-select" aria-label="Default select example">
+                        @foreach ($weekdays as $weekday)
+                            <option value="{{$weekday->weekday_name}}">{{$weekday->weekday_name}}</option>  
+                        @endforeach 
                     </select>
                 </div>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="save-info">
                     <label class="custom-control-label" for="save-info">Bạn đồng ý với điều kiện của chúng tôi ? </label>
                 </div>
-
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Tiếp tục thanh toán</button>
             </form>
@@ -133,7 +135,7 @@
 <script>
     packageId = {{$package->id}};
     console.log(packageId);
-    console.log("quân");
+    console.log("{{route('admin.order.setPackage')}}");
         $.ajax({
             type: 'GET',
             url: "{{route('admin.order.setPackage')}}",

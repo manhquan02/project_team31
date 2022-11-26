@@ -61,6 +61,7 @@ class OrderController extends Controller
 
 
     public function setPackage(Request $request){
+        // dd($request);
         $package = Package::find($request->id);
         if(isset($package)){
             if($package->set_pt == 1){
