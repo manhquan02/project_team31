@@ -7,23 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.png">
     <!-- All CSS -->
-    <link rel="stylesheet" href="frontend/assets/css/animate.css">
-    <link rel="stylesheet" href="frontend/assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="frontend/assets/css/flaticon.css">
-    <link rel="stylesheet" href="frontend/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="frontend/assets/css/metisMenu.css">
-    <link rel="stylesheet" href="frontend/assets/css/odometer.css">
-    <link rel="stylesheet" href="frontend/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="frontend/assets/css/swiper.min.css">
-    <link rel="stylesheet" href="frontend/assets/css/spacing.css">
-    <link rel="stylesheet" href="frontend/assets/css/main.css">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/animate.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/flaticon.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/metisMenu.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/odometer.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/swiper.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/spacing.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css')}}">
     <title>Document</title>
 </head>
 
 <body>
     <div id="preloader">
         <div class="preloader">
-            <img src="frontend/assets/img/logo/preloader.gif" alt="preloader">
+            <img src="{{asset('frontend/assets/img/logo/preloader.gif')}}" alt="preloader">
             <h4>...Đang Load ....</h4>
         </div>
     </div>
@@ -110,21 +110,21 @@
     <!--    search-bar End    -->
     <div id="scrollUp"><i class="fas fa-level-up-alt"></i></div>
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="frontend/assets/js/jquery-3.4.1.min.js"></script>
-    <script src="frontend/assets/js/popper.min.js"></script>
-    <script src="frontend/assets/js/bootstrap.min.js"></script>
-    <script src="frontend/assets/js/metisMenu.min.js"></script>
-    <script src="frontend/assets/js/swiper.min.js"></script>
-    <script src="frontend/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="frontend/assets/js/jquery.appear.js"></script>
-    <script src="frontend/assets/js/jquery.knob.min.js"></script>
-    <script src="frontend/assets/js/odometer.min.js"></script>
-    <script src="frontend/assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="frontend/assets/js/isotope.pkgd.min.js"></script>
-    <script src="frontend/assets/js/tilt.jquery.min.js"></script>
-    <script src="frontend/assets/js/wow.min.js"></script>
-    <script src="frontend/assets/js/script.js"></script>
+    <!-- jQuery first, then Popper.js')}}, then Bootstrap JS -->
+    <script src="{{asset('frontend/assets/js/jquery-3.4.1.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/popper.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/metisMenu.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/swiper.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/jquery.appear.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/jquery.knob.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/odometer.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/imagesloaded.pkgd.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/isotope.pkgd.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/tilt.jquery.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/wow.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/script.js')}}"></script>
 </body>
 
 </html>

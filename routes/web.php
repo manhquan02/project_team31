@@ -24,6 +24,13 @@ Route::get('/list-user', function () {
 });
 Route::get('', [\App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
 
+    Route::prefix('package')->name('package_client.')->group(function () {
+        Route::get('', [\App\Http\Controllers\Client\PackageController::class, 'index'])->name('index');
+        Route::get('{id}', [\App\Http\Controllers\Client\PackageController::class, 'detail'])->name('detail');
+
+    });
+
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
     Route::prefix('subject')->name('subject.')->group(function () {
