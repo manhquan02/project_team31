@@ -115,11 +115,6 @@
     <!--    search-bar End    -->
     <div id="scrollUp"><i class="fas fa-level-up-alt"></i></div>
     <!-- Optional JavaScript -->
-<<<<<<< HEAD
-    <!-- jQuery first, then Popper.js')}}, then Bootstrap JS -->
-=======
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
->>>>>>> 9dd16979b8cdd4fbf8882c6a66b6638029f26d02
     <script src="{{asset('frontend/assets/js/jquery-3.4.1.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/popper.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/bootstrap.min.js')}}"></script>

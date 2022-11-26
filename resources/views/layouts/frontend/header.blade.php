@@ -21,7 +21,7 @@
                             </ul>
                         </li>
                         <li class="has">
-                            <a href="class.html">Gói Tập</a>
+                            <a href="{{route('package_client.index')}}">Gói Tập</a>
                         </li>
                         <li class="has">
                             <a href="Our-Trainer.html">Huấn Luyện Viên</a>

@@ -139,7 +139,7 @@
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                <a href="javascript:;" class="menu-link menu-toggle">
+                <a href="{{route('admin.order.list')}}" class="menu-link menu-toggle">
                     <span class="svg-icon menu-icon">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -153,34 +153,7 @@
                         <!--end::Svg Icon-->
                     </span>
                     <span class="menu-text">{{translate('Order')}}</span>
-                    <i class="menu-arrow"></i>
                 </a>
-                <div class="menu-submenu">
-                    <i class="menu-arrow"></i>
-                    <ul class="menu-subnav">
-                        <li class="menu-item menu-item-parent" aria-haspopup="true">
-                            <span class="menu-link">
-                                <span class="menu-text">Order</span>
-                            </span>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="{{route('admin.order.list')}}" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Danh sách Order</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="{{route('admin.order.create')}}" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">Thêm mới Order</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </li>
             <li class="menu-section">
                 <h4 class="menu-text">{{ translate('Schedule') }}</h4>
@@ -204,7 +177,7 @@
                 </a>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                <a href="javascript:;" class="menu-link menu-toggle">
+                <a href="#" class="menu-link menu-toggle">
                     <span class="svg-icon menu-icon">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -225,7 +198,6 @@
                         <!--end::Svg Icon-->
                     </span>
                     <span class="menu-text">{{ trans('Schedule Coach') }}</span>
-                    <i class="menu-arrow"></i>
                 </a>
                 <div class="menu-submenu">
                     <i class="menu-arrow"></i>

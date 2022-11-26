@@ -100,7 +100,7 @@ class PackageController extends Controller
             $package->package_name = $request->package_name;
             $package->subject_id = $request->subject_id;
             if ($request->avatar) {
-                upload_image('avatar', $request, $package, 'images/package');
+                upload_image('avatar', $request->avatar, $package, 'images/package');
             }
             $package->price = $request->price;
             if ($request->price_sale) {

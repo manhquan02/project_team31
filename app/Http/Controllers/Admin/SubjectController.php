@@ -35,7 +35,7 @@ class SubjectController extends Controller
         $new = new Subject();
         $new->subject_name = $request->subject_name;
         if ($request->image) {
-            upload_image($request, $new, 'images/subject');
+            upload_image('image',$request->image, $new, 'images/subject');
         }
         $new->description = $request->description;
         $new->save();
@@ -69,7 +69,7 @@ class SubjectController extends Controller
         $subject->subject_name = $request->subject_name;
         $subject->description = $request->description;
         if ($request->image) {
-            upload_image($request, $subject, 'images/subject');
+            upload_image('image',$request->image, $subject, 'images/subject');
         }
         $subject->save();
         Toastr::success(translate('Update subject successfully'));

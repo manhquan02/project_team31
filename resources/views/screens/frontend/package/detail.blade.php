@@ -32,9 +32,7 @@
                             </div>
                             <span class="price">{{number_format($package->into_price,0,'.','.')}} VND</span>
                             <p>
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantiu wdolorem que
-                                laudantium, totam rem aperiam, eaquipsa quae ab illo inventore veritatis et quaarchi
-                                tecto beatae vitae dicta sunt explicabo enim ipsam voluptatem
+                               {{$package->short_description}}
                             </p>
                             <div class="product-action-box mb-30">
                                 <div class="add-to-cart">

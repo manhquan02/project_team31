@@ -1,6 +1,6 @@
 @extends('layouts.backend.master')
 
-@section('title', 'Trang order')
+@section('title', translate('Order Management'))
 
 @section('content')
 <div>
@@ -8,8 +8,8 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">Remote Datasource
-                <span class="d-block text-muted pt-2 font-size-sm">Sorting &amp; pagination remote datasource</span></h3>
+                <h3 class="card-label">{{translate('Order Management')}}
+                <span class="d-block text-muted pt-2 font-size-sm">{{translate('List')}}</span></h3>
             </div>
             <div class="card-toolbar">
                 <!--begin::Dropdown-->
@@ -78,7 +78,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="{{route('admin.order.create')}}" class="btn btn-primary font-weight-bolder">
+                <a href="{{route('admin.order.add')}}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -89,7 +89,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>Thêm Order</a>
+                </span>{{translate('Add New Order')}}</a>
                 <!--end::Button-->
             </div>
         </div>

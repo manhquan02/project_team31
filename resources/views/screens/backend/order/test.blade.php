@@ -1,7 +1,7 @@
 
 @extends('layouts.backend.master')
 
-@section('title', 'Thêm phiếu giảm giá')
+@section('title', translate('Order management'))
 @section('style')
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -29,8 +29,6 @@
     </style>
 @endsection
 @section('content')
-
-
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
@@ -40,15 +38,15 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline mr-5">
                     <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-2 mr-5">Wizard 3</h5>
+                    <h5 class="text-dark font-weight-bold my-2 mr-5">{{translate('Order')}}</h5>
                     <!--end::Page Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                         <li class="breadcrumb-item">
-                            <a href="" class="text-muted">Pages</a>
+                            <a href="" class="text-muted">{{translate('Payment')}}</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="" class="text-muted">Wizard 3</a>
+                            <a href="" class="text-muted">{{translate('Finish')}}</a>
                         </li>
                     </ul>
                     <!--end::Breadcrumb-->
@@ -149,7 +147,7 @@
                                 <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
                                     <div class="wizard-label">
                                         <h3 class="wizard-title">
-                                        <span>1.</span>Setup Location</h3>
+                                        <span>1.</span>{{translate('Choose a package')}}</h3>
                                         <div class="wizard-bar"></div>
                                     </div>
                                 </div>
@@ -158,7 +156,7 @@
                                 <div class="wizard-step" data-wizard-type="step">
                                     <div class="wizard-label">
                                         <h3 class="wizard-title">
-                                        <span>2.</span>Enter Details</h3>
+                                        <span>2.</span>{{translate('Enter detail')}}</h3>
                                         <div class="wizard-bar"></div>
                                     </div>
                                 </div>
@@ -167,28 +165,28 @@
                                 <div class="wizard-step" data-wizard-type="step">
                                     <div class="wizard-label">
                                         <h3 class="wizard-title">
-                                        <span>3.</span>Select Services</h3>
+                                        <span>3.</span>{{translate('Payment and submit')}}</h3>
                                         <div class="wizard-bar"></div>
                                     </div>
                                 </div>
                                 <!--end::Wizard Step 3 Nav-->
                                 <!--begin::Wizard Step 4 Nav-->
-                                <div class="wizard-step" data-wizard-type="step">
+                                <!-- <div class="wizard-step" data-wizard-type="step">
                                     <div class="wizard-label">
                                         <h3 class="wizard-title">
                                         <span>4.</span>Delivery Address</h3>
                                         <div class="wizard-bar"></div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!--end::Wizard Step 4 Nav-->
                                 <!--begin::Wizard Step 5 Nav-->
-                                <div class="wizard-step" data-wizard-type="step">
+                                <!-- <div class="wizard-step" data-wizard-type="step">
                                     <div class="wizard-label">
                                         <h3 class="wizard-title">
                                         <span>5</span>Review and Submit</h3>
                                         <div class="wizard-bar"></div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!--end::Wizard Step 5 Nav-->
                             </div>
                         </div>
@@ -204,16 +202,15 @@
                                     @csrf
                                     @method('POST')
                                     <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                        <h4 class="mb-10 font-weight-bold text-dark">Chọn gói tập</h4>
+                                        <h4 class="mb-10 font-weight-bold text-dark">{{translate('Choose a package')}}</h4>
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label>Chọn gói tập</label>
                                             {{-- <input type="text" class="form-control" name="address1" placeholder="Address Line 1" value="Address Line 1" />
                                             <span class="form-text text-muted">Please enter your Address.</span> --}}
                                             <div class="col-sm-12">
                                                 {{-- <select id="add_package" placeholder="" class="form-control select2" id="kt_select2_1" > --}}
                                                    <select name="package_id" style="height: 50px"  class="form-control select2 is-invalid add_package" id="kt_select2_1_validate" >
-                                                   <option value=""><strong>Chọn gói tập</strong></option>
+                                                   <option value=""><strong>{{translate('Choose a package')}}</strong></option>
                                                    @foreach ($packages as $package)
                                                        <option  value="{{$package->id}}">{{$package->package_name}}  </option>  
                                                    @endforeach  
@@ -231,21 +228,18 @@
                                     <!--end: Wizard Step 1-->
                                     <!--begin: Wizard Step 2-->
                                     <div class="pb-5" data-wizard-type="step-content">
-                                        <h4 class="mb-10 font-weight-bold text-dark">Enter the Details of your Delivery</h4>
+                                        <h4 class="mb-10 font-weight-bold text-dark">{{translate('Enter the details of your delivery')}}</h4>
                                         <!--begin::Input-->
-                                        
-
                                         <div class="form-group">
-                                            <label class="col-form-label">Chọn người dùng</label>
+                                            <label class="col-form-label">{{translate('Choose a user')}}</label>
                                             <div style="width: 100%;" class="col-sm-12">
                                              <select name="user_id[]" multiple style="width: 100%;" class="form-control select2" id="kt_select2_11" multiple name="param">
-                                              <option label="Label"></option>
-                                              <optgroup label="Chọn người dùng">
+                                              <optgroup label="{{translate('Choose a user')}}">
+                                              
                                                 @foreach ($users as $user)
                                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                                 @endforeach
                                               </optgroup>
-                                
                                              </select>
                                              @error('user_id')
                                                 <span class="text-danger">{{ $message }}</span>    
@@ -254,15 +248,14 @@
                                             </div>
                                         </div>
                                         <div id="time_package" style="display: none;" class="form-group">
-                                            <label >Chọn ca tập</label>
-                                            <div class="col-md-9 col-sm-12">
+                                            <label >{{translate('Choose a shift')}}</label>
+                                            <div style="width: 100%;" class="col-sm-12">
                                                 <select name="time_id" style="width: 100%;" class="form-control select2 is-invalid" id="kt_select2_2_validate" >
                                 
                                                     <option style="display: none;" value=""></option>
                                                     @foreach ($times as $time)
                                                         <option value="{{$time->id}}">{{$time->time_name}}</option>  
                                                     @endforeach 
-                                
                                                 
                                                 </select>
                                                 @error('time_id')
@@ -272,11 +265,11 @@
                                         </div>
 
                                         <div id="coach_package" style="display: none;" class="form-group  set-coach" >
-                                            <label >Chọn huấn viện viên</label>
+                                            <label >{{translate('Choose a coach')}}</label>
                                             <div class="col-sm-12">
                                                 <select style="width: 100%;" name="pt_id" class="form-control select2 is-invalid" id="kt_select2_3_validate" >
                                                     <option style="display: none;" value=""></option>
-                                                    <option >Không có</option>
+                                                    <option value="0">{{translate('No coach')}}</option>
                                                     @foreach ($coachs as $coach)
                                                         <option value="{{$coach->id}}">{{$coach->name}}</option>  
                                                     @endforeach 
@@ -288,7 +281,7 @@
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label class="col-form-label">Thời gian bắt đầu</label>
+                                            <label class="col-form-label">{{translate('Choose activate day')}}</label>
                                                 <div class="col-sm-12">
                                                     <div class="input-group date" >
                                                         <input type="date" class="form-control" name="activate_day" placeholder="Select time" id="kt_datetimepicker_7"/>
@@ -297,8 +290,7 @@
                                                         <i class="la la-calendar glyphicon-th"></i>
                                                         </span>
                                                         </div>
-                                                    </div>
-                                                <span class="form-text text-muted">Thời gian bắt đầu</span>
+                                            </div>
                                                 @error('activate_day')
                                                  <span class="text-danger">{{ $message }}</span>    
                                                 @enderror
@@ -323,16 +315,12 @@
                                             </div>
                                         </div>
 
-
                                         <div id="method_pm"  class="form-group">
-                                            <label class="col-form-label">Chọn phương thức thanh toán</label>
+                                            <label class="col-form-label">{{translate('Choose a payment method')}}</label>
                                             <div class=" col-sm-12">
                                                 <select name="payment_method" style="width: 100%;" class="form-control select2" id="kt_select2_10" name="param">
-                                    
-                                    
-                                                    <option value="1">Thanh toán trực tiếp</option>
-                                                    <option value="2">Chuyển khoản ngân hàng</option>
-                                    
+                                                    <option value="1">{{translate('Direct payment')}}</option>
+                                                    <option value="2">{{translate('Online payment')}}</option>
                                                 </select>
                                                     
                                             </div>
@@ -379,10 +367,10 @@
                                     <!--end: Wizard Step 2-->
                                     <!--begin: Wizard Step 3-->
                                     <div class="pb-5" data-wizard-type="step-content">
-                                        <h4 class="mb-10 font-weight-bold text-dark">Nhập phiếu giảm giá</h4>
+                                        <h4 class="mb-10 font-weight-bold text-dark">{{translate('Payment and submit')}}</h4>
                                         <!--begin::Select-->
                                         <div class="form-group">
-                                            <label  class="col-10 col-form-label">Nhập phiếu giảm giá (nếu có)</label>
+                                        <label class="col-form-label">{{translate('Enter coupon ( if have )')}}</label>
                                             <div style="display: flex" class="col-10">
                                                 <input disabled name="discount_code" style="width: 80%" class="form-control discount_code @error('discount_title') is-invalid @enderror" name="discount_title"  type="text" value="{{ old('discount_code') }}" placeholder="title" id="example-text-input "/>
                                                 @error('discount_title')
@@ -398,7 +386,7 @@
                                         <!--end::Select-->
                                         <!--begin::Select-->
                                         <div class="form-group">
-                                            <label>Tổng tiền</label>
+                                            <label>{{translate('Total money')}}</label>
                                             <div class=" col-lg-4 col-md-9 col-sm-12">
                                                 <strong id="total_money" style="color: red"></strong>
 
@@ -406,62 +394,62 @@
                                         </div>
                                         <!--end::Select-->
                                         <button name="direct_trading" onclick="return confirm('Thanh toán và tạo ra hợp đồng luôn ?');"
-                                         class="btn btn-success font-weight-bold text-uppercase" >Thanh toán</button>
+                                         class="btn btn-success font-weight-bold text-uppercase" >{{translate('Payment')}}</button>
                                         {{-- <button name="payUrl" class="btn btn-success font-weight-bold text-uppercase" >Thanh toán VNPAY</button> --}}
                                         
                                     </div>
                                     <!--end: Wizard Step 3-->
                                     <!--begin: Wizard Step 4-->
-                                    <div class="pb-5" data-wizard-type="step-content">
+                                    <!-- <div class="pb-5" data-wizard-type="step-content">
                                         <h4 class="mb-10 font-weight-bold text-dark">Setup Your Delivery Location</h4>
                                         <div class="my-5">
-                                            <!--begin::Input-->
+                                          
                                             <div class="form-group">
                                                 <label>Address Line 1</label>
                                                 <input type="text" class="form-control" name="locaddress1" placeholder="Address Line 1" value="Address Line 1" />
                                                 <span class="form-text text-muted">Please enter your Address.</span>
                                             </div>
-                                            <!--end::Input-->
-                                            <!--begin::Input-->
+                                          
+                                            
                                             <div class="form-group">
                                                 <label>Address Line 2</label>
                                                 <input type="text" class="form-control" name="locaddress2" placeholder="Address Line 2" value="Address Line 2" />
                                                 <span class="form-text text-muted">Please enter your Address.</span>
                                             </div>
-                                            <!--end::Input-->
+                                           
                                             <div class="row">
                                                 <div class="col-xl-6">
-                                                    <!--begin::Input-->
+                                                
                                                     <div class="form-group">
                                                         <label>Postcode</label>
                                                         <input type="text" class="form-control" name="locpostcode" placeholder="Postcode" value="3072" />
                                                         <span class="form-text text-muted">Please enter your Postcode.</span>
                                                     </div>
-                                                    <!--end::Input-->
+                                                    
                                                 </div>
                                                 <div class="col-xl-6">
-                                                    <!--begin::Input-->
+                                                    
                                                     <div class="form-group">
                                                         <label>City</label>
                                                         <input type="text" class="form-control" name="loccity" placeholder="City" value="Preston" />
                                                         <span class="form-text text-muted">Please enter your City.</span>
                                                     </div>
-                                                    <!--end::Input-->
+                                                   
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xl-6">
-                                                    <!--begin::Input-->
+                                                   
                                                     <div class="form-group">
                                                         <label>State</label>
                                                         <input type="text" class="form-control" name="locstate" placeholder="State" value="VIC" />
                                                         <span class="form-text text-muted">Please enter your State.</span>
                                                     </div>
-                                                    <!--end::Input-->
+                                                    
                                                    
                                                 </div>
                                                 <div class="col-xl-6">
-                                                    <!--begin::Select-->
+                                                   
                                                     <div class="form-group">
                                                         <label>Country</label>
                                                         <select name="loccountry" class="form-control">
@@ -486,15 +474,15 @@
                                                             <option value="ZW">Zimbabwe</option>
                                                         </select>
                                                     </div>
-                                                    <!--end::Select-->
+                                                    
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!--end: Wizard Step 4-->
                                     <!--begin: Wizard Step 5-->
-                                    <div class="pb-5" data-wizard-type="step-content">
-                                        <!--begin::Section-->
+                                   <!--  <div class="pb-5" data-wizard-type="step-content">
+                                       
                                         <h4 class="mb-10 font-weight-bold text-dark">Review your Details and Submit</h4>
                                         <h6 class="font-weight-bolder mb-3">Current Address:</h6>
                                         <div class="text-dark-50 line-height-lg">
@@ -503,8 +491,7 @@
                                             <div>Melbourne 3000, VIC, Australia</div>
                                         </div>
                                         <div class="separator separator-dashed my-5"></div>
-                                        <!--end::Section-->
-                                        <!--begin::Section-->
+                                        
                                         <h6 class="font-weight-bolder mb-3">Delivery Details:</h6>
                                         <div class="text-dark-50 line-height-lg">
                                             <div>Package: Complete Workstation (Monitor, Computer, Keyboard &amp; Mouse)</div>
@@ -512,27 +499,24 @@
                                             <div>Dimensions: 110cm (w) x 90cm (h) x 150cm (L)</div>
                                         </div>
                                         <div class="separator separator-dashed my-5"></div>
-                                        <!--end::Section-->
-                                        <!--begin::Section-->
+                                        
                                         <h6 class="font-weight-bolder mb-3">Delivery Service Type:</h6>
                                         <div class="text-dark-50 line-height-lg">
                                             <div>Overnight Delivery with Regular Packaging</div>
                                             <div>Preferred Morning (8:00AM - 11:00AM) Delivery</div>
                                         </div>
                                         <div class="separator separator-dashed my-5"></div>
-                                        <!--end::Section-->
-                                        <!--begin::Section-->
+                                       
                                         <h6 class="font-weight-bolder mb-3">Delivery Address:</h6>
                                         <div class="text-dark-50 line-height-lg">
                                             <div>Address Line 1</div>
                                             <div>Address Line 2</div>
                                             <div>Preston 3072, VIC, Australia</div>
                                         </div>
-                                        <!--end::Section-->
+                                       
                                         
-                                    </div>
-                                    <!--end: Wizard Step 5-->
-                                    <!--begin: Wizard Actions-->
+                                    </div> -->
+                                    
                                     <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                         <div class="mr-2">
                                             <button class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4" data-wizard-type="action-prev">Previous</button>
@@ -542,7 +526,7 @@
                                             <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" data-wizard-type="action-next">Next Step</button>
                                         </div>
                                     </div>
-                                    <!--end: Wizard Actions-->
+                                   
                                 </form>
                                 <!--end: Wizard Form-->
                             </div>
@@ -694,17 +678,17 @@ var KTSelect2 = function() {
     var demos = function() {
     // basic
     $('#kt_select2_1_validate').select2({
-        placeholder: "Chọn gói tập"
+        placeholder: "{{translate('Choose a package')}}"
     });
 
     // nested
     $('#kt_select2_2_validate').select2({
-        placeholder: "Chọn ca tập"
+        placeholder: "{{translate('Choose a shift')}}"
     });
 
     // multi select
     $('#kt_select2_3_validate').select2({
-        placeholder: "Select a state",
+        placeholder: "{{translate('Choose a coach')}}"
         });
     }
 
