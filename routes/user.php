@@ -96,7 +96,7 @@ Route::prefix('coach/')->name('coach.')->group(function () {
 // client 
 
 Route::prefix('payment/')->name('payment.')->group(function () {
-    Route::get('/', [PaymentController::class, 'index'])->name('index');
+    Route::get('/{id}', [PaymentController::class, 'index'])->name('index');
 });
 
 Route::prefix('account/')->name('account.')->group(function () {

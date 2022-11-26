@@ -78,7 +78,7 @@
                     <input type="email" class="form-control" id="email" placeholder="">
                     <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
                 </div>
-                <div class="mb-3">
+                <div id="weekday_package" class="mb-3">
                     <label for="email">Chọn ca tập<span class="text-muted"></span></label>
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Open this select menu</option>
@@ -88,7 +88,7 @@
                     </select>
                 </div>
 
-                <div class="mb-3">
+                <div id="coach_package" class="mb-3">
                     <label for="email">Chọn huấn luyện viên<span class="text-muted"></span></label>
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Open this select menu</option>
@@ -98,14 +98,14 @@
                     </select>
                 </div>
                 
-                <div class="mb-3">
+                <div class="mb-3" id="time_package">
                     <label for="username">Thời gian bắt đầu</label>
                     <div class="input-group">
                         <input type="date" class="form-control" id="username" placeholder="" required="">
                         <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
                     </div>
                 </div>
-                <div class="mb-3">
+                <div id="weekday_package" class="mb-3">
                     <label for="email">Chọn thứ tập có PT<span class="text-muted"></span></label>
                     <select multiple class="form-select" aria-label="Default select example">
                         <option selected>Open this select menu</option>
@@ -126,4 +126,105 @@
     </div> 
 </div>
 <br>
+@endsection
+
+@section('js')
+
+<script>
+    packageId = {{$package->id}};
+    console.log(packageId);
+    console.log("quân");
+        $.ajax({
+            type: 'GET',
+            url: "{{route('admin.order.setPackage')}}",
+            data:{
+                id: packageId
+            },
+            
+            success:function(data){
+            console.log("abc");
+            if(data['result'] == 1){
+                console.log(data['package'].price);
+                console.log(data['result']);
+                console.log("có pt");
+                $('.discount_code').attr('disabled', false);
+                $('.button_discount').attr('disabled', false);
+                document.querySelector('#coach_package').style.display='block';
+                document.querySelector('#weekday_package').style.display='block';
+                document.querySelector('#time_package').style.display='block';
+                document.querySelector('#total_money').innerHTML = `${data['package'].price}`;
+            }
+            if(data['result'] == 0){
+                console.log("bằng 0");
+                $('.discount_code').attr('disabled', false);
+                $('.button_discount').attr('disabled', false);
+                document.querySelector('#coach_package').style.display='none';
+                document.querySelector('#weekday_package').style.display='none';
+                document.querySelector('#time_package').style.display='none';
+                // document.querySelector('#btn_disabled').classList.remove("disabled");
+                document.querySelector('#total_money').innerHTML = `${data['package'].price}`;
+
+            }
+            }
+        });
+    
+    
+
+        
+        $.ajax({
+            type: 'GET',
+            url: "{{route('admin.order.setCoach')}}",
+            data:{
+                id: {{$package->id}}
+            },
+            
+            success:function(data){
+            console.log("abc");
+            if(data['result'] == true){
+                console.log(data['package']);
+                console.log(data['result']);
+                document.querySelector(".set-coach").disabled = false;
+                // document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
+            }
+            else{
+                // document.querySelector(".set-coach").innerHTML = `Gói tập này không có PT`;
+            }
+            }
+        });
+    
+        $('.button_discount').on('click',function(){
+            var package_id = $('#add_package').val();
+            console.log("quân");
+            var discount_code = $('.discount_code').val();
+            $.ajax({
+                type: 'GET',
+                url: "{{route('admin.order.setTotalMoney')}}",
+                data:{
+                    package_id: package_id,
+                    discount_code: discount_code
+                },
+                
+                success:function(data){
+                console.log("abc");
+                console.log(data);
+                if(data['result'] == true){
+                    
+                    // console.log(data['package']);
+                    // console.log(data['result']);
+                    // document.querySelector(".set-coach").disabled = false;
+                    document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
+                }
+                else{
+                    // document.querySelector(".set-coach").innerHTML = `Gói tập này không có PT`;
+                }
+                }
+            });
+        })
+    
+    
+    
+</script>
+    
+
+
 @endsection

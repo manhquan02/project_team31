@@ -9,16 +9,16 @@
     <!-- All CSS -->
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="frontend/assets/css/animate.css">
-    <link rel="stylesheet" href="frontend/assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="frontend/assets/css/flaticon.css">
-    <link rel="stylesheet" href="frontend/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="frontend/assets/css/metisMenu.css">
-    <link rel="stylesheet" href="frontend/assets/css/odometer.css">
-    <link rel="stylesheet" href="frontend/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="frontend/assets/css/swiper.min.css">
-    <link rel="stylesheet" href="frontend/assets/css/spacing.css">
-    <link rel="stylesheet" href="frontend/assets/css/main.css">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/animate.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/flaticon.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/metisMenu.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/odometer.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/swiper.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/spacing.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css')}}">
     @yield('style')
     <title>Document</title>
 </head>
@@ -114,20 +114,20 @@
     <div id="scrollUp"><i class="fas fa-level-up-alt"></i></div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="frontend/assets/js/jquery-3.4.1.min.js"></script>
-    <script src="frontend/assets/js/popper.min.js"></script>
-    <script src="frontend/assets/js/bootstrap.min.js"></script>
-    <script src="frontend/assets/js/metisMenu.min.js"></script>
-    <script src="frontend/assets/js/swiper.min.js"></script>
-    <script src="frontend/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="frontend/assets/js/jquery.appear.js"></script>
-    <script src="frontend/assets/js/jquery.knob.min.js"></script>
-    <script src="frontend/assets/js/odometer.min.js"></script>
-    <script src="frontend/assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="frontend/assets/js/isotope.pkgd.min.js"></script>
-    <script src="frontend/assets/js/tilt.jquery.min.js"></script>
-    <script src="frontend/assets/js/wow.min.js"></script>
-    <script src="frontend/assets/js/script.js"></script>
+    <script src="{{asset('frontend/assets/js/jquery-3.4.1.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/popper.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/metisMenu.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/swiper.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/jquery.appear.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/jquery.knob.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/odometer.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/imagesloaded.pkgd.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/isotope.pkgd.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/tilt.jquery.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/wow.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/script.js')}}"></script>
     @yield('js')
 </body>
 
