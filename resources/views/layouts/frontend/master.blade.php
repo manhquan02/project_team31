@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.png">
     <!-- All CSS -->
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{{asset('frontend/assets/css/animate.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/fontawesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/flaticon.css')}}">
@@ -17,6 +21,7 @@
     <link rel="stylesheet" href="{{asset('frontend/assets/css/swiper.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/spacing.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css')}}">
+
     <title>Document</title>
 </head>
 
@@ -65,7 +70,7 @@
         <!-- feature-area-2 end -->
         {{-- Nội dung  --}}
 
-        @yield('content');
+        @yield('content')
 
         {{-- kết thúc nội dung  --}}
         <!-- about-area-2 start -->
@@ -110,7 +115,11 @@
     <!--    search-bar End    -->
     <div id="scrollUp"><i class="fas fa-level-up-alt"></i></div>
     <!-- Optional JavaScript -->
+<<<<<<< HEAD
     <!-- jQuery first, then Popper.js')}}, then Bootstrap JS -->
+=======
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+>>>>>>> 9dd16979b8cdd4fbf8882c6a66b6638029f26d02
     <script src="{{asset('frontend/assets/js/jquery-3.4.1.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/popper.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/bootstrap.min.js')}}"></script>
@@ -125,6 +134,10 @@
     <script src="{{asset('frontend/assets/js/tilt.jquery.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/wow.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/script.js')}}"></script>
+
+
+    @yield('js')
+
 </body>
 
 </html>
