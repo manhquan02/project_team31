@@ -29,7 +29,7 @@ class PackageFactory extends Factory
             'month_package'=> rand(1,12),
             'status' =>rand(0,1),
             'set_pt'=>rand(0,1),
-            'type_package'=>rand(1,3),
+            'type_package'=>rand(1,3),  
         ];
     }
 }

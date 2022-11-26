@@ -11,10 +11,16 @@ use App\Models\Package;
 use App\Models\Time;
 use App\Models\User;
 use App\Models\Weekday;
+use App\Models\Attendance;
+use App\Models\Schedule;
+use App\Models\ResultContract;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use PDF;
+use DateInterval;
+use DatePeriod;
+use DateTime;
 
 class OrderController extends Controller
 {
@@ -324,13 +330,97 @@ class OrderController extends Controller
                                 $returnData['RspCode'] = '00';
                                 $returnData['Message'] = 'Giao dịch thành công';
                             } else {
+
                                 $returnData['RspCode'] = '24';
                                 $returnData['Message'] = 'Giao dịch không thành công do: Khách hàng hủy giao dịch';
                                 $order->status_contract=0;
                             }
-                            // dd($order);
+                            // dd($order->id);
                             $order->save();
-
+                            $order = Order::find($order->id);
+                            $contract = new Contract();
+                            $attendance = new Attendance();
+                            $schedule = new Schedule();
+                    
+                            $month = $order->package->month_package;
+                            $newdate = strtotime ( '+'.$month.' month' , strtotime ( $order->activate_day ) );
+                            $end_date = date ( 'Y-m-j' , $newdate );
+                    
+                            $contract->package_id = $order->package->id;
+                            if (isset($order->pt_id)) {
+                                $contract->pt_id = $order->pt_id;
+                                $contract->weekday_name = $order->weekday_name;
+                            }
+                            $contract->activate_date = $order->activate_day;
+                            $contract->order_id = $order->id;
+                            $contract->start_date = $order->activate_day;
+                            $contract->end_date = $end_date;
+                            
+                            $contract->save();
+                            $user_contract = $order->users->pluck('id')->toArray();
+                            // dd($user_contract);
+                            foreach ($user_contract as $key => $user_id) {
+                                $result_contract = ResultContract::where('user_id', '=', $user_id )
+                                                    ->Where('order_id', '=', $order->id)->first();
+                                $result_contract->update([
+                                    'contract_id' => $contract->id,
+                                ]);
+                            }
+                            
+                            $begin = new DateTime($contract->start_date);
+                            $end = new DateTime($contract->end_date);
+                    
+                            $interval = DateInterval::createFromDateString('1 day');
+                            $period = new DatePeriod($begin, $interval, $end);
+                            $weekdays = Weekday::all();
+                            $weekday_contract = $contract->weekday_name;
+                            $weekdays_pt =  explode('|', $weekday_contract);
+                    
+                            $order->status_contract = 1;
+                            $order->save();
+                            
+                            // tạo lịch trình pt và điểm danh hội viên
+                            foreach ($period as $dt) {
+                                // echo $dt->format("l Y-m-d \n");
+                                // echo "<br>";
+                                // dd($dt->format("l"));
+                    
+                                $attendance->date = $dt->format("Y-m-d");
+                                foreach ($weekdays_pt as $key => $weekday_name) {
+                                    
+                                    if($weekday_name ==  $dt->format("l")){
+                                        $schedule = $schedule->create([
+                                            'pt_id' => $contract->pt_id,
+                                            'contract_id' => $contract->id,
+                                            'time_id' => $contract->order->time_id,
+                                            'weekday_name' => $dt->format("l"),
+                                            'date' => $dt->format("Y-m-d"),
+                                            'status' => 1,
+                                        ]);
+                                        foreach ($user_contract as $key => $user_id) {
+                                           
+                                            $attendance->create([
+                                                'user_id' => $user_id,
+                                                'contract_id' => $contract->id,
+                                                'schedule_id' =>  $schedule->id,
+                                                'time_id' => $contract->order->time_id,
+                                                'weekday_name' => $dt->format("l"),
+                                                'pt_id' => 1,
+                                                'date' => $dt->format("Y-m-d"),
+                                                'status' => 0,
+                                                
+                                            ]);
+                                        }
+                                       
+                                       
+                                    }
+                    
+                    
+                                }
+                    
+                            }
+                    
+                            return back()->with('success', 'Mua hang thanh cong');
                         } else {
                             $returnData['RspCode'] = '02';
                             $returnData['Message'] = 'Giao dịch thất bại';

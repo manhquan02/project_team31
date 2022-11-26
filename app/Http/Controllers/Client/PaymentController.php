@@ -204,7 +204,8 @@ class PaymentController extends Controller
         $vnp_TmnCode = "UDOPNWS1"; //Mã website tại VNPAY 
         $vnp_HashSecret = "EBAHADUGCOEWYXCMYZRMTMLSHGKNRPBN"; //Chuỗi bí mật
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://127.0.0.1:8000/payment/checkPayment";
+        // $vnp_Returnurl = "http://127.0.0.1:8000/payment/checkPayment";
+        $vnp_Returnurl = "http://127.0.0.1:8000/admin/order/checkPayment";
         $vnp_TxnRef = date("YmdHis"); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toán hóa đơn phí dich vụ";
         $vnp_OrderType = 'billpayment';
@@ -255,7 +256,7 @@ class PaymentController extends Controller
     }
 
     function returnUrl(){
-        dd(123);
+
         $vnp_HashSecret = "EBAHADUGCOEWYXCMYZRMTMLSHGKNRPBN";   //Chuỗi bí mật
         $inputData = array();
         $returnData = array();
@@ -294,26 +295,21 @@ class PaymentController extends Controller
             // dd($secureHash == $vnp_SecureHash);
             // if ($secureHash == $vnp_SecureHash) {
                 if ($order != NULL) {
-                    dd($order->id);
                         if ( $order->status_contract == 0) {
                             if ($inputData['vnp_ResponseCode'] == '00' 
                             // && $inputData['vnp_TransactionStatus'] == '00'
                             ) {
                                 $order->status_contract=1;
-                                $order->save();
-                                dd($order->id);
-                                $this->create($order->id);
                                 $returnData['RspCode'] = '00';
                                 $returnData['Message'] = 'Giao dịch thành công';
                             } else {
                                 $returnData['RspCode'] = '24';
                                 $returnData['Message'] = 'Giao dịch không thành công do: Khách hàng hủy giao dịch';
                                 $order->status_contract=0;
-                                $order->save();
                             }
                             // dd($order);
+                            $order->save();
                             
-
                         } else {
                             $returnData['RspCode'] = '02';
                             $returnData['Message'] = 'Giao dịch thất bại';
@@ -335,6 +331,8 @@ class PaymentController extends Controller
         }
         //Trả lại VNPAY theo định dạng JSON
 
+//dd($inputData);
+    // dd($order);
         return view('screens.backend.order.payment',compact('returnData'));
     }
 

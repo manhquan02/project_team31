@@ -9,7 +9,7 @@
   </head>
   <body>
     <main class="mx-auto max-w-screen-xl my-12">
-      @year('content')
+      @yield('content')
     </main>
   </body>
 </html>
