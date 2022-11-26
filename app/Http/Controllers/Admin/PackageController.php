@@ -60,9 +60,9 @@ class PackageController extends Controller
         $new->package_name = $request->package_name;
         $new->subject_id = $request->subject_id;
         if ($request->avatar) {
-
             upload_image('avatar', $request->avatar, $new, 'images/package');
         }
+        $new->short_description = $request->short_description;
         $new->price = $request->price;
         if ($request->price_sale) {
             $new->price_sale = $request->price_sale;
@@ -74,6 +74,7 @@ class PackageController extends Controller
         $new->type_package = $request->type_package;
         if ($request->set_pt == 'on') {
             $new->set_pt = 1;
+            $new->weekday_pt = $request->weekday_pt;
         }
         $new->save();
         Toastr::success(translate('Add new package successfully'));
@@ -107,11 +108,13 @@ class PackageController extends Controller
             }
             $package->type_package = $request->type_package;
             $package->into_price = $request->price - ($request->price * $package->price_sale / 100);
+            $package->short_description = $request->short_description;
             $package->description = $request->description;
             $package->month_package = $request->month_package;
 
             if ($request->set_pt == 'on') {
                 $package->set_pt = 1;
+                $package->weekday_pt = $request->weekday_pt;
             } else {
                 $package->set_pt = 0;
             }

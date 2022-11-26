@@ -27,10 +27,11 @@ class PackageRequest extends FormRequest
             'package_name' => 'required',
             'subject_id' => 'required',
             'price' => 'required',
-            'description' =>'required|max:10000',
-            'month_package' =>'required',
-            'type_package' =>'required',
-
+            'description' => 'required|max:10000',
+            'month_package' => 'required',
+            'type_package' => 'required',
+            'short_description' => 'required',
+            'weekday_pt' => 'required'
         ];
     }
 
@@ -42,10 +43,10 @@ class PackageRequest extends FormRequest
             'price.required' => translate('Type package price, thanks'),
             'month_package.required' => translate('Choose number of months, thanks'),
             'description.required' => translate('Type description, thanks'),
+            'short_description.required' => translate('Type short description, thanks'),
+            'weekday_pt.required' => translate('Type number of pt on week, thanks'),
             'type_package.required' => translate('Choose a type package, thanks'),
             'description.max' => translate('The description must not be greater than 10000 characters, thanks'),
-
         ];
-
     }
 }
