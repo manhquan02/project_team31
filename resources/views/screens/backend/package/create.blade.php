@@ -101,6 +101,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Short Description') }} <span class="text-danger">*</span></label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="short_description">{{ old('short_description')}}
+                            @error('short_description')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <textarea id="summernote" class="form-control" name="description">{{ old('description')}}</textarea>
