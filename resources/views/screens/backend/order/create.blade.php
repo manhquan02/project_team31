@@ -116,9 +116,9 @@
              <select name="weekday_name[]" class="form-control select2" id="kt_select2_9"  multiple>
               <option label="Label"></option>
               <optgroup label="Chọn 3 ngày">
-                @foreach ($weekdays as $weekday)
-                    <option value="{{$weekday->weekday_name}}">{{$weekday->weekday_name}}</option>  
-                @endforeach 
+                    @foreach ($weekdays as $weekday)
+                        <option value="{{$weekday->weekday_name}}">{{$weekday->weekday_name}}</option>  
+                    @endforeach 
               </optgroup>
 
              </select>
