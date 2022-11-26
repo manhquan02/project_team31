@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\TimeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Client\PaymentController;
+use App\Http\Controllers\Client\ScheduleUsserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -103,9 +104,7 @@ Route::prefix('payment/')->name('payment.')->group(function () {
 });
 
 Route::prefix('account/')->name('account.')->group(function () {
-    Route::get('/', function () {
-        return view('screens.frontend.account.index');
-    });
+    Route::get('/', [ScheduleUsserController::class, 'index'])->name('index');
     
 });
 

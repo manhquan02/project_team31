@@ -24,7 +24,7 @@
                         </div>
                         <div>
                             <div class="text-black">
-                                <label for="firstName">Số lượng</label>
+                                <label for="firstName">Phiếu giảm giá</label>
                                 <input name="discount_code" type="text" class="form-control" id="firstName" placeholder="" value="" required="">
                                 <div class="invalid-feedback"> Valid first name is required. </div>
                             </div>

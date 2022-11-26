@@ -22,12 +22,14 @@ class PackageFactory extends Factory
             'avatar' => fake()->imageUrl(),
             'price' => rand(200000, 1000000),
             'price_sale' => rand(10,20),
+            'weekday_pt' => rand(1,3),
+            'short_description' => "goi tap oke",
             'into_price' => rand(200000, 1000000),
             'description' => $this->faker->text,
             'month_package'=> rand(1,12),
             'status' =>rand(0,1),
             'set_pt'=>rand(0,1),
-            'type_package'=>rand(1,3),
+            'type_package'=>rand(1,3),  
         ];
     }
 }

@@ -62,34 +62,38 @@
                 <thead>
                   <tr>
                     <th  style="max-width: 25px;">STT</th>
-                    <th>Ngày</th>
-                    <th>Phòng</th>
-                    <th >Tên HLV</th>
-                    <th><a href="http://" class="underline text-red-300">Đặt lịch</a></th>
+                      <th>{{translate('Name member')}}</th>
+                      <th>{{translate('Date')}}</th>
+                      <th>{{translate('Shift')}}</th>
+                      <th>{{translate('Time start')}}</th>
+                      <th>{{translate('Time end')}}</th>
+
+                    <th><a href="http://" class="underline text-red-300"> Đổi Lịch</a></th>
                   </tr>
                 </thead>
+
                 <tbody class="text-left">
-                  <tr class="py-8" >
-                    <td>1</td>
-                    <td>01/01/2023</td>
-                    <td>phòng gymer</td>
-                    <td>Nguyễn Tiến Hoàng</td>
-                    <td><input type="text" name="" id=""></td>
+                @foreach ($schedules as $schedule)
+                
+                  <tr style="padding-bottom: 50px ;" class="py-8 schedule_member" >
+                    <td>{{$schedule->id}}</td>
+                    <td>{{ $schedule->user->name}}</td>
+                    <!-- <td>{{Auth::user()->name}}</td> -->
+                    <td>{{$schedule->date}}</td>
+                    <td>{{$schedule->time->time_name}}</td>
+                    <td>{{$schedule->time->start_time}}</td>
+                    <td>{{$schedule->time->end_time}}</td>
+                    <td>
+                    <button class="relative group overflow-hidden pl-6 h-14 flex space-x-6 items-center bg-blue-500">
+                    <span class="relative uppercase text-base text-white">Đổi Lịch</span>
+                    <div aria-hidden="true" class="w-14 bg-blue-600 transition duration-300 -translate-y-7 group-hover:translate-y-7">
+                        
+                        
+                    </div>
+                  </button>
+                    </td>
                   </tr>
-                  <tr class="py-8" >
-                    <td>1</td>
-                    <td>01/01/2023</td>
-                    <td>phòng gymer</td>
-                    <td>Nguyễn Tiến Hoàng</td>
-                    <td><input type="text" name="" id=""></td>
-                  </tr>
-                  <tr class="py-8" >
-                    <td>1</td>
-                    <td>01/01/2023</td>
-                    <td>phòng gymer</td>
-                    <td>Nguyễn Tiến Hoàng</td>
-                    <td><input type="text" name="" id=""></td>
-                  </tr>
+                @endforeach
                   
                 </tbody>
               </table>
