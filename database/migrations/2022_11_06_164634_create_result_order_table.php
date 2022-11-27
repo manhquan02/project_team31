@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('result_contract', function (Blueprint $table) {
+        Schema::create('result_order', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('contract_id')->nullable();
+            // $table->unsignedBigInteger('contract_id')->nullable();
             $table->unsignedInteger('height')->nullable();
             $table->unsignedInteger('weight')->nullable();
             $table->unsignedDouble('bmi', 8, 2)->nullable();

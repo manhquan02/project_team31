@@ -137,8 +137,6 @@ $arrayPackage = [
     PACKAGE_ONE_TO_THREE => '1:3'
 ]
 
-// USER
-// LIST DANH -> pACKAGE_ID=PACKAGE_TYPE CLASS::arrayPackage[PACKAGE_TYPE]
 
 
 ?>

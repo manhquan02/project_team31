@@ -19,15 +19,12 @@ class OrderFactory extends Factory
         return [
             'discount_id' => rand(1,10),
             'package_id' => rand(1,10),
-            'time_id' => rand(1,4),
-            'weekday_name' => 'Monday|Tuesday|Wednesday',
-            'activate_day' => '2022-10-15',
+            'date_start' => '2022-10-15',
+            'date_end' => '2022-12-15',
             'pt_id' => rand(3,5),
             'total_money' => 2000000,
             'payment_method' => rand(1,2),
-            'status_contract'=> 0,
-            
-
+            'status'=> 0,
         ];
     }
 }
