@@ -90,7 +90,7 @@
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                <a href="javascript:;" class="menu-link menu-toggle">
+                <a href="{{route('admin.discount.list')}}" class="menu-link menu-toggle">
                     <span class="svg-icon menu-icon">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -100,38 +100,11 @@
                                 <polygon fill="#000000" opacity="0.3" transform="translate(7.050253, 17.949747) rotate(-315.000000) translate(-7.050253, -17.949747) " points="5.55025253 13.9497475 5.55025253 19.6640332 7.05025253 21.9497475 8.55025253 19.6640332 8.55025253 13.9497475" />
                             </g>
                         </svg>
-
                         <!--end::Svg Icon-->
                     </span>
                     <span class="menu-text">{{ translate('Coupons') }}</span>
-                    <i class="menu-arrow"></i>
+                    
                 </a>
-                <div class="menu-submenu">
-                    <i class="menu-arrow"></i>
-                    <ul class="menu-subnav">
-                        <li class="menu-item menu-item-parent" aria-haspopup="true">
-                            <span class="menu-link">
-                                <span class="menu-text">{{ translate('Coupons') }}</span>
-                            </span>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="{{route('admin.discount.list')}}" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">{{ translate('List coupons') }}</span>
-                            </a>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="{{route('admin.discount.create')}}" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">{{ translate('Add new coupon') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </li>
 
             <li class="menu-section">
@@ -173,7 +146,7 @@
 
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{ trans('Shifts') }}</span>
+                    <span class="menu-text">{{ translate('Shifts') }}</span>
                 </a>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">

@@ -42,14 +42,14 @@ class TimeController extends Controller
         $ex_time = Time::where('start_time', $request->start_time)->where('end_time', $request->end_time)->first();
         $new = new Time();
         if ($ex_time != null) {
-            Toastr::error(translate('Time has existed'));
+            Toastr::error(translate('Shift has existed'));
             return redirect()->back();
         }
         $new->time_name = $request->time_name;
         $new->start_time = $request->start_time;
         $new->end_time = $request->end_time;
         $new->save();
-        Toastr::success(translate('Add new time successfully'));
+        Toastr::success(translate('Add new shift successfully'));
         return redirect()->back();
     }
 
@@ -93,7 +93,7 @@ class TimeController extends Controller
         $time->start_time = $request->start_time;
         $time->end_time = $request->end_time;
         $time->save();
-        Toastr::success(translate('Update time successfully'));
+        Toastr::success(translate('Update shift successfully'));
         return redirect()->back();
     }
 
@@ -113,7 +113,7 @@ class TimeController extends Controller
         $time = Time::where('id', $id)->first();
         if ($time != null) {
             $time->delete();
-            Toastr::success(translate('Delete time successfully'));
+            Toastr::success(translate('Delete shift successfully'));
         }
         return redirect()->back();
     }

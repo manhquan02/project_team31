@@ -1,11 +1,11 @@
 @extends('layouts.backend.master')
-@section('title', translate('Time Management'))
+@section('title', translate('Shift management'))
 @section('content')
     <div>
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Time Management') }}
+                    <h3 class="card-label">{{ translate('Shift management') }}
                         <span class="d-block text-muted pt-2 font-size-sm">{{ translate('List') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
@@ -24,7 +24,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{translate('Add new time')}}</a>
+                </span>{{translate('Add new shift')}}</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>{{translate('Time name')}}</th>
+                        <th>{{translate('Shift name')}}</th>
                         <th>{{translate('Start time')}}</th>
                         <th>{{translate('End time')}}</th>
                         <th>{{translate('Actions')}}</th>

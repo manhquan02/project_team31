@@ -118,7 +118,7 @@
                                         <div class="input-icon">
                                             <input name="keyword" type="text" class="form-control"
                                                    @if(request('keyword')) value="{{ request('keyword') }}" @endif
-                                                   placeholder="{{translate('Enter Discount Title')}}"/>
+                                                   placeholder="{{translate('Enter coupon title')}}"/>
                                             <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                         </span>
@@ -159,15 +159,15 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Code</th>
-                        <th>Sale(%)</th>
-                        <th>Số lượng</th>
-                        <th>Gói tập</th>
-                        <th>Ngày bắt đầu</th>
-                        <th>Ngày kết thúc</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th>{{translate('Title')}}</th>
+                        <th>{{translate('Code')}}</th>
+                        <th>{{translate('% Sale')}}</th>
+                        <th>{{translate('Quantity')}}</th>
+                        <th>{{translate('Package')}}</th>
+                        <th>{{translate('Start date')}}</th>
+                        <th>{{translate('End date')}}</th>
+                        <th>{{translate('Status')}}</th>
+                        <th>{{translate('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
