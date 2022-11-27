@@ -36,7 +36,7 @@
                             </p>
                             <div class="product-action-box mb-30">
                                 <div class="add-to-cart">
-                                    <a href="#" class="btn btn-gra">Đăng Ký Ngay</a>
+                                    <a href="{{route('payment.index', $package->id)}}" class="btn btn-gra">Đăng Ký Ngay</a>
                                 </div>
                             </div>
                             <div class="product-share">

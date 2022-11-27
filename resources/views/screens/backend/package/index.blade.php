@@ -49,7 +49,6 @@
                                     </div>
                                     <div class="col-md-6 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('Status')}}</label>
                                             <select class="form-control" name="status">
                                                 <option selected disabled>{{ translate('Choose a status') }}</option>
                                                 <option value="0" @if(request('status', -1) == 0) selected @endif>{{ translate('Lock') }}</option>
@@ -79,9 +78,8 @@
                         <th>{{ translate('Subject Name') }}</th>
                         <th>{{ translate('Avatar') }}</th>
                         <th>{{ translate('Listed Price') }}</th>
-                        <th>{{ translate('Episode Price') }}</th>
-                        <th>{{ translate('Month Package') }}</th>
-                        <th>{{ translate('Loại kèm') }}</th>
+                        <th>{{ translate('Promotion price') }}</th>
+                        <th>{{ translate('Type package') }}</th>
                         <th>{{ translate('Status') }}</th>
                         <th>{{ translate('Actions') }}</th>
                     </tr>
@@ -98,8 +96,7 @@
                                 </td>
                                 <td>{{number_format($item->price,0,'.','.')}}</td>
                                 <td>{{number_format($item->into_price,0,'.','.')}}</td>
-                                <td>{{$item->month_package < 12 ? $item->month_package : $item->month_package / 12}} {{ $item->month_package < 12 ? translate('month'): translate('year') }}</td>
-                                <td>{{$package_type[$item->type_package]}}</td>
+                                <td>{{typePackage()[$item->type_package]}}</td>
                                 <td><span
                                         class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{ translate(config('status_package.'.$item->status) )}}</span>
                                 </td>

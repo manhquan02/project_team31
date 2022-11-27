@@ -24,11 +24,14 @@ Route::get('/list-user', function () {
 });
 Route::get('', [\App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
 
-    Route::prefix('package')->name('package_client.')->group(function () {
-        Route::get('', [\App\Http\Controllers\Client\PackageController::class, 'index'])->name('index');
-        Route::get('{id}', [\App\Http\Controllers\Client\PackageController::class, 'detail'])->name('detail');
-
-    });
+Route::prefix('package')->name('package_client.')->group(function () {
+    Route::get('', [\App\Http\Controllers\Client\PackageController::class, 'index'])->name('index');
+    Route::get('{id}', [\App\Http\Controllers\Client\PackageController::class, 'detail'])->name('detail');
+});
+Route::prefix('contact')->name('contact_client.')->group(function () {
+    Route::get('', [\App\Http\Controllers\Client\ContactController::class, 'view'])->name('view');
+    Route::post('', [\App\Http\Controllers\Client\ContactController::class, 'store'])->name('store');
+});
 
 
 Route::prefix('admin')->name('admin.')->group(function () {

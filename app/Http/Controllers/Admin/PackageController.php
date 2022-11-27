@@ -70,11 +70,9 @@ class PackageController extends Controller
 
         $new->into_price = $request->price - ($request->price * $new->price_sale / 100);
         $new->description = $request->description;
-        $new->month_package = $request->month_package;
         $new->type_package = $request->type_package;
         if ($request->set_pt == 'on') {
             $new->set_pt = 1;
-            $new->weekday_pt = $request->weekday_pt;
         }
         $new->save();
         Toastr::success(translate('Add new package successfully'));
@@ -110,11 +108,9 @@ class PackageController extends Controller
             $package->into_price = $request->price - ($request->price * $package->price_sale / 100);
             $package->short_description = $request->short_description;
             $package->description = $request->description;
-            $package->month_package = $request->month_package;
-
+           
             if ($request->set_pt == 'on') {
                 $package->set_pt = 1;
-                $package->weekday_pt = $request->weekday_pt;
             } else {
                 $package->set_pt = 0;
             }

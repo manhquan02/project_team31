@@ -30,7 +30,7 @@
                             <a href="blog.html">Bài Viết</a>
                         </li>
                         <li class="has">
-                            <a href="contact.html">Liên Hệ</a>
+                            <a href="{{route('contact_client.view')}}">Liên Hệ</a>
                         </li>
                     </ul>
                 </nav>
