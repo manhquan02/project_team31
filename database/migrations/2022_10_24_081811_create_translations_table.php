@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('lang_in');
             $table->string('lang_key');
             $table->string('lang_value')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

@@ -11,7 +11,8 @@ class PackageController extends Controller
     public function index()
     {
         $packages = Package::where('id', '>', 0)->get();
-        return view('screens.frontend.package.index', compact('packages'));
+        $popular =  Package::where('id', '>', 0)->limit(3)->get();
+        return view('screens.frontend.package.index', compact('packages','popular'));
     }
 
     public function detail($id)

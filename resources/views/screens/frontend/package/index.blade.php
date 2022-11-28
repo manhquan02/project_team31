@@ -35,57 +35,27 @@
 				</div>
 			</div>
 			<div class="row justify-content-center">
+			<div class="popular-badge" style="text-align: center;">
+							<h2 style="color: #e63a34;">Most Popular</h2>
+						</div>
+				
+				@foreach($popular as $i)
 				<div class="col-lg-4 col-md-7">
 					<div class="pricing-wrap mt-30 mb-30">
-						<h3>Basic</h3>
-						<p>
-							Bobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere
-							possimus, omnis volup tas assumenda est omnis dess
+						<h3>{{$i->package_name}}</h3>
+						<p style="color: white;">
+							{{$i->short_description}}
 						</p>
-						<span class="price">$45.99</span>
-						<a href="pricing.html" class="order-btn">
-							select plan <i class="fas fa-angle-double-right"></i>
+						<span class="price">{{number_format($i->into_price,0,'.','.')}} VNĐ</span>
+						<a href="{{route('package_client.detail', $i->id)}}" class="order-btn">
+							Xem gói tập <i class="fas fa-angle-double-right"></i>
 						</a>
 						<div class="shape">
-							<img src="assets/img/shape/shape-11.png" alt="shape">
+							<img src="{{asset($i->avatar)}}" alt="shape">
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-7">
-					<div class="pricing-wrap popular mt-50 mb-30">
-						<div class="popular-badge">
-							<span>Most Popular</span>
-						</div>
-						<h3>Standard</h3>
-						<p>
-							Procure him some great pleasure. To take a trivial example, which of us ever undertakes
-							laborious physical exercise, except to obtain some ad
-						</p>
-						<span class="price">$99.99</span>
-						<a href="pricing.html" class="order-btn">
-							select plan <i class="fas fa-angle-double-right"></i>
-						</a>
-						<div class="shape">
-							<img src="assets/img/shape/shape-11.png" alt="shape">
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-7">
-					<div class="pricing-wrap mt-30 mb-30">
-						<h3>Premium</h3>
-						<p>
-							Bobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere
-							possimus, omnis volup tas assumenda est omnis dess
-						</p>
-						<span class="price">$99.99</span>
-						<a href="pricing.html" class="order-btn">
-							select plan <i class="fas fa-angle-double-right"></i>
-						</a>
-						<div class="shape">
-							<img src="assets/img/shape/shape-11.png" alt="shape">
-						</div>
-					</div>
-				</div>
+				@endforeach
 			</div>
 		</div>
 	</div>
@@ -145,57 +115,7 @@
 	</div>
 	<!-- pricing-area-2 end -->
 
-	<!-- brand-area start -->
-	<div class="brand-area pt-70 pb-70">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-12">
-					<div class="brand-slider">
-						<div class="swiper-container">
-							<div class="swiper-wrapper">
-								<div class="swiper-slide single-slide">
-									<div class="brand-wrap">
-										<img src="assets/img/brand/brand-1.png" alt="brand">
-									</div>
-								</div>
-								<div class="swiper-slide single-slide">
-									<div class="brand-wrap">
-										<img src="assets/img/brand/brand-2.png" alt="brand">
-									</div>
-								</div>
-								<div class="swiper-slide single-slide">
-									<div class="brand-wrap">
-										<img src="assets/img/brand/brand-3.png" alt="brand">
-									</div>
-								</div>
-								<div class="swiper-slide single-slide">
-									<div class="brand-wrap">
-										<img src="assets/img/brand/brand-4.png" alt="brand">
-									</div>
-								</div>
-								<div class="swiper-slide single-slide">
-									<div class="brand-wrap">
-										<img src="assets/img/brand/brand-5.png" alt="brand">
-									</div>
-								</div>
-								<div class="swiper-slide single-slide">
-									<div class="brand-wrap">
-										<img src="assets/img/brand/brand-6.png" alt="brand">
-									</div>
-								</div>
-								<div class="swiper-slide single-slide">
-									<div class="brand-wrap">
-										<img src="assets/img/brand/brand-1.png" alt="brand">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- brand-area end -->
+	
 </main>
 
 @endsection

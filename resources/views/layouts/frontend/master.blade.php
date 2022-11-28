@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{asset('frontend/assets/css/swiper.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/spacing.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css')}}">
-
+    @yield('style')
     <title>Document</title>
 </head>
 

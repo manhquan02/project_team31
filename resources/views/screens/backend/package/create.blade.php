@@ -84,7 +84,7 @@
                     <div class="col-10">
                         <select class="form-control" name="type_package">
                             <option selected disabled>{{ translate('Choose a type package') }}</option>
-                            @foreach($type_package as $key=>$item)
+                            @foreach(typePackage() as $key=>$item)
                             <option value="{{$key}}">{{ $item }}</option>
                             @endforeach
                         </select>
@@ -112,23 +112,6 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label">{{ translate('Month Package') }} <span class="text-danger">*</span></label>
-                    <div class="col-10">
-                        <select class="form-control" name="month_package">
-                            <option selected disabled>{{ translate('Choose number of months') }} </option>
-                            <option value="1">1 {{ translate('month') }} </option>
-                            <option value="3">3 {{ translate('month') }} </option>
-                            <option value="6">6 {{ translate('month') }} </option>
-                            <option value="9">9 {{ translate('month') }} </option>
-                            <option value="12">1 {{ translate('year') }} </option>
-                            <option value="36">3 {{ translate('year') }} </option>
-                        </select>
-                        @error('month_package')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label">{{ translate('Have a Coach ?') }} </label>
                     <div class="col-10 p-3">
                         <input type="checkbox" id="pt" name="set_pt" @if(old('set_pt')) checked @endif>
@@ -137,9 +120,9 @@
                         @enderror
                     </div>
                 </div>
-                <div id="weekday_pt" class="form-group row">
+                <!-- <div id="weekday_pt" class="form-group row">
 
-                </div>
+                </div> -->
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label"></label>
                     <div class="col-10">
@@ -158,7 +141,7 @@
         $('.select2').select2()
 
         
-        if ($('#pt').prop('checked') == true) {
+        /* if ($('#pt').prop('checked') == true) {
                 content = ` <label for="example-password-input" class="col-2 col-form-label">{{ translate('Number of pt on week') }} <span class="text-danger">*</span></label>
                         <div class="col-10 p-3">
                             <input class="form-control" type="number" name="weekday_pt" value="{{old('weekday_pt')}}">
@@ -184,7 +167,7 @@
             } 
 
             $('#weekday_pt').html(content);
-        })
+        }) */
     });
 </script>
 @endsection

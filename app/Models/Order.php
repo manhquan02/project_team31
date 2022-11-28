@@ -52,5 +52,14 @@ class Order extends Model
         );
     }
 
+    public function times(){
+        return $this->belongsToMany(
+            User::class,
+            'training_package',
+            'order_id',
+            'time_id'    
+        );
+    }
+
     
 }

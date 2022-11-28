@@ -15,7 +15,20 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
-        
-        Subject::factory(10)->create();
+        $subjects = [
+            [
+                'subject_name' => 'Gym',
+                'image' => 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-luxury-gyms-london-1577449934.jpg',
+                'description' => 'Đây là mô tả môn tập Gym',
+            ],
+            [
+                'subject_name' => 'Boxing',
+                'image' => 'https://vothuattayson.vn/wp-content/uploads/loi-ich-cua-tap-boxing.jpg',
+                'description' => 'Đây là mô tả môn tập Boxing',
+            ],
+        ];
+        foreach($subjects as $item){
+            Subject::create($item);
+        }
     }
 }

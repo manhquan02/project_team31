@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SchedulePtController;
 use App\Http\Controllers\Admin\TimeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Client\OrderController as ClientOrderController;
 use App\Http\Controllers\Client\PaymentController;
 use App\Http\Controllers\Client\ScheduleUsserController;
 use Illuminate\Support\Facades\Route;
@@ -104,7 +105,13 @@ Route::prefix('payment/')->name('payment.')->group(function () {
 });
 
 Route::prefix('account/')->name('account.')->group(function () {
-    Route::get('/', [ScheduleUsserController::class, 'index'])->name('index');
+    Route::get('/', [ScheduleUserController::class, 'index'])->name('index');
+    
+});
+
+Route::prefix('order/')->name('order.')->group(function () {
+    Route::get('/{id}', [ClientOrderController::class, 'index'])->name('index');
+    Route::post('postOrder/{id}', [ClientOrderController::class, 'store'])->name('postOrder');
     
 });
 

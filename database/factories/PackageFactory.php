@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
@@ -17,19 +18,17 @@ class PackageFactory extends Factory
     public function definition()
     {
         return [
-            'package_name' => fake()->name(),
-            'subject_id' => rand(1,10),
-            'avatar' => fake()->imageUrl(),
-            'price' => rand(200000, 1000000),
-            'price_sale' => rand(10,20),
-            'weekday_pt' => rand(1,3),
-            'short_description' => "goi tap oke",
-            'into_price' => rand(200000, 1000000),
-            'description' => $this->faker->text,
-            'month_package'=> rand(1,12),
-            'status' =>rand(0,1),
-            'set_pt'=>rand(0,1),
-            'type_package'=>rand(1,3),  
+                'package_name' => 'Gói New',
+                'subject_id' => 1,
+                'avatar' => 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-luxury-gyms-london-1577449934.jpg',
+                'price' => 20000,
+                'price_sale' => 0,
+                'short_description' => "Gói tập này dành cho người mới tham gia tập",
+                'into_price' => 20000,
+                'description' => 'Đây là mô tả gói tập',
+                'status' => rand(0, 1),
+                'set_pt' => rand(0, 1),
+                'type_package' => 1,
         ];
     }
 }

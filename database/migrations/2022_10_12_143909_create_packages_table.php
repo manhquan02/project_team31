@@ -22,15 +22,12 @@ return new class extends Migration
             $table->unsignedBigInteger('price_sale')->default(0);
             $table->unsignedBigInteger('into_price');
             $table->string('description', 10000);
-            $table->unsignedInteger('month_package');
-            $table->unsignedInteger('weekday_pt');
-            $table->string('short_description');
-            $table->unsignedInteger('number_member')->default(1);
+            $table->string('short_description',1000);
             $table->unsignedInteger('status')->default(1);
             $table->unsignedInteger('set_pt')->default(0);
-            $table->unsignedInteger('session_pt')->default(0);
-            $table->unsignedBigInteger('type_package')->default(0);
-            $table->timestamps();
+            $table->unsignedBigInteger('type_package');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

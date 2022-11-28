@@ -49,6 +49,16 @@ class AuthController extends Controller
 
 
     public function login(){
+        // dd(Auth::id());
+        if(Auth::attempt([
+            'email' => 'admin@example.com',
+            'password' => 12345678
+        ])){
+            return redirect()->route('home');
+        }
+        else{
+            return back()->with('error', translate('Email or password incorrect'));
+        }
         return view('screens.frontend.auth.login');
     }
 

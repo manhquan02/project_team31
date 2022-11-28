@@ -83,8 +83,8 @@
                     <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Type Package') }} <span class="text-danger">*</span></label>
                     <div class="col-10">
                         <select class="form-control" name="type_package">
-                            <option selected value="{{$package->type_package}}">{{ $type_package[$package->type_package] }}</option>
-                            @foreach($type_package as $key=>$item)
+                            <option selected value="{{$package->type_package}}">{{ typePackage()[$package->type_package] }}</option>
+                            @foreach(typePackage() as $key=>$item)
                             @if($key != $package->type_package)
                             <option @if(old('$type_package')==$key) selected @endif value="{{$key}}">{{ $item }}</option>
                             @endif
@@ -114,23 +114,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-2 col-form-label">{{ translate('Month Package') }} <span class="text-danger">*</span></label>
-                    <div class="col-10">
-                        <select class="form-control" name="month_package">
-                            <option selected value="{{$package->month_package}}">{{ $package->month_package < 12 ? $package->month_package .' '.translate('month')  :  $package->month_package /12 .' '.translate('year') }} </option>
-                            <option value="1">1 {{ translate('month') }} </option>
-                            <option value="3">3 {{ translate('month') }} </option>
-                            <option value="6">6 {{ translate('month') }} </option>
-                            <option value="9">9 {{ translate('month') }} </option>
-                            <option value="12">1 {{ translate('year') }} </option>
-                            <option value="36">3 {{ translate('year') }} </option>
-                        </select>
-                        @error('month_package')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
+                
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label">{{ translate('Have a Coach ?') }} </label>
                     <div class="col-10 p-3">
@@ -140,9 +124,9 @@
                         @enderror
                     </div>
                 </div>
-                <div id="weekday_pt" class="form-group row">
+                <!-- <div id="weekday_pt" class="form-group row">
 
-                </div>
+                </div> -->
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label"></label>
                     <div class="col-10">
@@ -160,9 +144,9 @@
         $('.select2').select2()
     });
 
-           console.log($('#pt').prop('checked'));
+    /* console.log($('#pt').prop('checked'));
     if ($('#pt').prop('checked') == true) {
-                content = ` <label for="example-password-input" class="col-2 col-form-label">{{ translate('Number of pt on week') }} <span class="text-danger">*</span></label>
+        content = ` <label for="example-password-input" class="col-2 col-form-label">{{ translate('Number of pt on week') }} <span class="text-danger">*</span></label>
                         <div class="col-10 p-3">
                             <input class="form-control" type="number" name="weekday_pt" value="{{old('weekday_pt') ? old('weekday_pt') : $package->weekday_pt}}">
                             @error('weekday_pt')
@@ -170,24 +154,23 @@
                         @enderror
                         </div>`
 
-                        $('#weekday_pt').html(content);
-            } 
+        $('#weekday_pt').html(content);
+    }
 
-        $(document).on('click', '#pt', function() {
-            console.log($(this).prop('checked'));
-            let content = ``;
-            if ($(this).prop('checked') == true) {
-                content = ` <label for="example-password-input" class="col-2 col-form-label">{{ translate('Number of pt on week') }} <span class="text-danger">*</span></label>
+    $(document).on('click', '#pt', function() {
+        console.log($(this).prop('checked'));
+        let content = ``;
+        if ($(this).prop('checked') == true) {
+            content = ` <label for="example-password-input" class="col-2 col-form-label">{{ translate('Number of pt on week') }} <span class="text-danger">*</span></label>
                         <div class="col-10 p-3">
                             <input class="form-control" type="number" name="weekday_pt" value="{{old('weekday_pt') ? old('weekday_pt') : $package->weekday_pt}}">
                             @error('weekday_pt')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                         </div>`
-            } 
+        }
 
-            $('#weekday_pt').html(content);
-        })
-       
+        $('#weekday_pt').html(content);
+    }) */
 </script>
 @endsection

@@ -30,7 +30,6 @@ function translate($keyword)
             $new_translation->lang_key = $lang_key;
             $new_translation->save();
         }
-
     }
 
     if (isset($translate_current) && $translate_current != null) {
@@ -65,7 +64,7 @@ function test_bmi($bmi)
     return $health;
 }
 
-function upload_image($name = 'image', $request, $new, $folder)
+function upload_image($name , $request, $new, $folder)
 {
     $image = $request;
     $imageName = $image->hashName();
@@ -78,8 +77,9 @@ function config_encode($text)
     return $data;
 }
 
-function weekday($weekday){
-    $weekday_name ="";
+function weekday($weekday)
+{
+    $weekday_name = "";
     switch ($weekday) {
         case 'Monday':
             $weekday_name = "Thứ 2";
@@ -105,17 +105,18 @@ function weekday($weekday){
         default:
             # code...
             break;
-        return $weekday_name;
+            return $weekday_name;
     }
 }
 
 
-function st($month,$year){
+function st($month, $year)
+{  // Thống kê
     $total_turnover = Order::where('status_contract', 1)->get();
-    $total =0;
-    foreach($total_turnover as $item){
-        if(date('m-Y', strtotime($item->activate_day)) == "$month"."-"."$year"){
-            $total+=$item->total_money;
+    $total = 0;
+    foreach ($total_turnover as $item) {
+        if (date('m-Y', strtotime($item->activate_day)) == "$month" . "-" . "$year") {
+            $total += $item->total_money;
         }
     }
     return $total;
@@ -126,6 +127,7 @@ function config_decode($text)
     $result = substr($text, 35);
     return (int)base64_decode($result);
 }
+
 
 const PACKAGE_ONE_TO_ONE = 1;
 const PACKAGE_ONE_TO_TWO = 2;
@@ -138,5 +140,7 @@ $arrayPackage = [
 ]
 
 
-
 ?>
+
+
+

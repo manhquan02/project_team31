@@ -78,6 +78,7 @@
             </div>
             <form action="{{route('postLogin')}}" method="post">
                 @csrf
+                @method('POST')
                 <h3>{{ translate('Login')}}</h3>
                 <div class="form-row">
                     @if(session()->has('error'))
