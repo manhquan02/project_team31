@@ -10,4 +10,9 @@ class TrainingPackage extends Model
     use HasFactory;
     protected $table = 'training_package';
     
+    protected $fillable = [
+        'order_id',
+        'weekday_id',
+        'time_id',
+    ];
 }

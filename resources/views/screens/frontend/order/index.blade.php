@@ -13,7 +13,9 @@
 
     <div class="col-md-12 order-md-1">
         <h4 class="mb-3">Hóa đơn gói tập</h4>
-        <form action="{{'order.postOrder', $package->id}}" id="wizard">
+        <form action="{{route('postOrder', 2)}}" method="POST" enctype="multipart/form-data" id="wizard">
+          @csrf
+            @method('POST')
             <h3>
               <div class="media">
                 <div class="bd-wizard-step-icon"><i class="mdi mdi-account-outline"></i></div>
@@ -71,18 +73,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach ($arrayWeekdays as $weekday)
+                                      @foreach ($arrayWeekdays as $key => $weekday)
                                         <tr>
                                             <td class="day">
                                                 {{$weekday}}
                                                 <div>
-                                                    <input class="checkboxclass" name="weekday[]" type="checkbox">
+                                                    <input class="checkboxclass" name="weekday[]" value="{{$key}}" type="checkbox">
                                                 </div>
                                             </td>
                                             @foreach ($times as $time)
                                               <td class="active">
                                                 <label>
-                                                    <input type="radio" class="option-input radio" name="{{$weekday}}" /> 
+                                                    <input type="checkbox" class="option-input radio" name="time[]" value="{{$time->id}}" /> 
                                                   </label>
                                               </td>
                                             @endforeach
@@ -150,6 +152,7 @@
                     <span>Tổng tiền</span>
                     <strong>$20</strong>
                   </div>
+                  
                   <div style="margin-top: 20px; width: 30%; border: none" class="list-group-item d-flex justify-content-between">
                     <button class="btn btn-secondary btn-md waves-effect m-0" type="submit">Thanh toán</button>
                   </div>

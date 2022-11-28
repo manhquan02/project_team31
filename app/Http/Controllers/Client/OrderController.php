@@ -15,6 +15,7 @@ use App\Models\Time;
 use App\Models\User;
 use App\Models\Weekday;
 use App\Http\Utility\PackageUtility;
+use App\Models\TrainingPackage;
 use DateInterval;
 use DatePeriod;
 use DateTime;
@@ -39,10 +40,13 @@ class OrderController extends Controller
 
     public function store($id ,Request $request)
     {   
+        dd($id);
+        dd(array_merge($request->weekday, $request->time));
         // dd(Auth::id());
         // dd($request->payment_method);
         $order = new Order();
         // dd($request->discount_code);
+        $training = new TrainingPackage();
         $user = User::find(Auth::id());
         $package = Package::find($id);
         $order->date_start = $request->date_start;
@@ -51,7 +55,8 @@ class OrderController extends Controller
         $order->payment_method = 2;
         if($package->set_pt == 1){
             $order->pt_id = $request->pt_id;
-            $order->weekday_name = implode("|",$request->weekday_name);
+            
+            
         }
         
         
