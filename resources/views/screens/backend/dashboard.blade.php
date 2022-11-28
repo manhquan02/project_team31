@@ -114,7 +114,7 @@ $year = request('year') ? request('year') : $today['year'];
 												<div class="card-title py-5">
 													<h3 class="card-label">
 														<span class="d-block text-dark font-weight-bolder">{{translate('Total revenue')}}</span>
-														<span class="d-block text-muted mt-2 font-size-sm">{{translate("Statistics data of the year ".$year)}}</span>
+														<span class="d-block text-muted mt-2 font-size-sm">{{translate("Statistics data of the year")}} {{$year}}</span>
 													</h3>
 												</div>
 												<!--end::Title-->

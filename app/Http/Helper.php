@@ -17,14 +17,13 @@ function translate($keyword)
     }
 
     $languages = Language::all();
-
     foreach ($languages as $lang) {
         $new_translation = new Translation();
         $ex_translate = Translation::where('lang', $lang->code)->where('lang_key', $lang_key)->exists();
         if ($ex_translate == false) {
             $new_translation->lang = $lang->code;
             $new_translation->lang_in = $keyword;
-            if ($lang->code == env('DEFAULT_LANG_CODE')) {
+            if ($lang->code == 'en') {
                 $new_translation->lang_value = $keyword;
             }
             $new_translation->lang_key = $lang_key;
