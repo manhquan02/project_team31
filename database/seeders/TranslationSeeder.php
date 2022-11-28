@@ -64,7 +64,7 @@ class TranslationSeeder extends Seeder
             ['lang' => 'vn','lang_in' => 'Delete','lang_key' => 'delete','lang_value' => 'Xóa'],
             ['lang' => 'vn','lang_in' => 'Translate successfully','lang_key' => 'translate_successfully','lang_value' => 'Dịch thành công'],
             ['lang' => 'vn','lang_in' => 'Hi','lang_key' => 'hi','lang_value' => 'Chào'],
-            ['lang' => 'vn','lang_in' => 'Total user','lang_key' => 'total_user','lang_value' => 'Tổng người dùng'],
+            ['lang' => 'vn','lang_in' => 'Total user','lang_key' => 'total_user','lang_value' => 'Tổng số người dùng'],
             ['lang' => 'vn','lang_in' => 'Total revenue','lang_key' => 'total_revenue','lang_value' => 'Tổng doanh thu'],
             ['lang' => 'vn','lang_in' => 'Statistics data of the year','lang_key' => 'statistics_data_of_the_year','lang_value' => 'Số liệu thống kê trong năm'],
             ['lang' => 'vn','lang_in' => 'Select year','lang_key' => 'select_year','lang_value' => 'Chọn năm'],
@@ -122,6 +122,12 @@ class TranslationSeeder extends Seeder
             ['lang' => 'vn','lang_in' => 'Responded','lang_key' => 'responded','lang_value' => 'Đã phản hồi'],
             ['lang' => 'vn','lang_in' => 'Add new shift','lang_key' => 'add_new_shift','lang_value' => 'Thêm mới ca tập'],
             ['lang' => 'vn','lang_in' => 'Shift management','lang_key' => 'shift_management','lang_value' => 'Quản lý ca tập'],
+            ['lang' => 'vn','lang_in' => 'Total order','lang_key' => 'total_order','lang_value' => 'Tổng số đơn hàng'],
+            ['lang' => 'vn','lang_in' => 'Total subject','lang_key' => 'total_subject','lang_value' => 'Tổng số môn tập'],
+            ['lang' => 'vn','lang_in' => 'Total package','lang_key' => 'total_package','lang_value' => 'Tổng số gói tập'],
+
+
+            
         ];
         foreach ($translations as $item) {
             Translation::create($item);

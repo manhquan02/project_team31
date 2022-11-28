@@ -175,7 +175,7 @@
                             <img src="{{$user->Avatar}}" width="200px" alt="">
                         </td>
                         <td  class="show_role{{$user->id}}">
-                            {{ $user->getRoleNames() }}
+                            {{ Auth::user()->getRoleNames() }}
                         </td>
                         <td>
                             @if ($user->status == 1)

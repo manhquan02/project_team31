@@ -81,28 +81,25 @@ $year = request('year') ? request('year') : $today['year'];
                         <div class="row m-0">
                             <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 mb-7">
                                 <h4 style="color: #999999;">{{$total_user}}</h4>
-                                <a href="#" class="text-warning font-weight-bold font-size-h6">{{translate('Total User')}}</a>
+                                <a href="#" class="text-warning font-weight-bold font-size-h6">{{translate('Total user')}}</a>
                             </div>
-                            <!-- <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
-                            <h4 style="color: #999999;"> 2</h4>
-                                <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">New
-                                    Users</a>
-                            </div> -->
+                            <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
+                            <h4 style="color: #999999;">{{$total_order}}</h4>
+                                <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">{{translate('Total order')}}</a>
+                            </div>
                         </div>
                         <!--end::Row-->
                         <!--begin::Row-->
-                        <!-- <div class="row m-0">
+                        <div class="row m-0">
                             <div class="col bg-light-danger px-6 py-8 rounded-xl mr-7">
-                            <h4 style="color: #999999;"> 2</h4>
-                                <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Item
-                                    Orders</a>
+                            <h4 style="color: #999999;">{{$total_subject}}</h4>
+                                <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">{{translate('Total subject')}}</a>
                             </div>
                             <div class="col bg-light-success px-6 py-8 rounded-xl">
-                            <h4 style="color: #999999;"> 2</h4>
-                                <a href="#" class="text-success font-weight-bold font-size-h6 mt-2">Bug
-                                    Reports</a>
+                            <h4 style="color: #999999;">{{$total_package}}</h4>
+                                <a href="#" class="text-success font-weight-bold font-size-h6 mt-2">{{translate('Total package')}}</a>
                             </div>
-                        </div> -->
+                        </div>
                         <!--end::Row-->
                     </div>
                     <!--end::Stats-->
@@ -279,13 +276,9 @@ $year = request('year') ? request('year') : $today['year'];
     }
 
     $(function(){
-
         $('#year').on('change', function(){
             $('#sb').submit();
         })
-        
-           
-
     })
 </script>
 @endsection

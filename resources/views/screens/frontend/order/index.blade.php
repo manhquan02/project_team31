@@ -13,7 +13,7 @@
 
     <div class="col-md-12 order-md-1">
         <h4 class="mb-3">Hóa đơn gói tập</h4>
-        <form action="{{route('postOrder', 2)}}" method="POST" enctype="multipart/form-data" id="wizard">
+        <form action="{{route('order.postOrder', 2)}}" method="POST" enctype="multipart/form-data" id="wizard">
           @csrf
             @method('POST')
             <h3>
