@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{asset('frontend/assets/css/spacing.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css')}}">
     @yield('style')
-    <title>Document</title>
+    <title>@yield('title')</title>
 </head>
 
 <body>
