@@ -110,9 +110,11 @@ Route::prefix('account/')->name('account.')->group(function () {
 });
 
 Route::prefix('order/')->name('order.')->group(function () {
-    Route::get('/{id}', [ClientOrderController::class, 'index'])->name('index');
+    Route::get('create/{id}', [ClientOrderController::class, 'index'])->name('index');
     Route::post('postOrder/{id}', [ClientOrderController::class, 'store'])->name('postOrder');
-    
+    Route::get('checkPayment', [ClientOrderController::class, 'returnUrl'])->name('returnUrl');
+    Route::get('test', [ClientOrderController::class, 'test'])->name('test');
+    Route::get('create/{orderId}', [ClientOrderController::class, 'create'])->name('create');
 });
 
 

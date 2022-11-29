@@ -96,7 +96,9 @@
                                 </td>
                                 <td>{{number_format($item->price,0,'.','.')}}</td>
                                 <td>{{number_format($item->into_price,0,'.','.')}}</td>
-                                <td>{{typePackage()[$item->type_package]}}</td>
+                                <td>
+                                    {{-- {{typePackage()[$item->type_package]}} --}}
+                                </td>
                                 <td><span
                                         class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{ translate(config('status_package.'.$item->status) )}}</span>
                                 </td>
