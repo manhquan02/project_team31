@@ -13,9 +13,9 @@
 
     <div class="col-md-12 order-md-1">
         <h4 class="mb-3">Hóa đơn gói tập</h4>
+        @include('screens.backend._alert')
         <form action="{{route('order.postOrder', 2)}}" method="POST" enctype="multipart/form-data" id="wizard">
           @csrf
-            @method('POST')
             <h3>
               <div class="media">
                 <div class="bd-wizard-step-icon"><i class="mdi mdi-account-outline"></i></div>
@@ -78,13 +78,13 @@
                                             <td class="day">
                                                 {{$weekday}}
                                                 <div>
-                                                    <input class="checkboxclass" name="weekday[]" value="{{$key}}" type="checkbox">
+                                                    <input class="checkboxclass" name="weekday[{{$key}}]" value="{{$key}}" type="checkbox">
                                                 </div>
                                             </td>
                                             @foreach ($times as $time)
                                               <td class="active">
                                                 <label>
-                                                    <input type="checkbox" class="option-input radio" name="time[]" value="{{$time->id}}" /> 
+                                                    <input type="radio" class="option-input radio" name="weekday[{{$key}}]" value="{{$time->id}}" /> 
                                                   </label>
                                               </td>
                                             @endforeach
@@ -113,13 +113,13 @@
                   <h4 class="section-heading mb-5">Lựa chọn PT theo yêu cầu</h4>
                   
 
-                  <select name="pets" id="pet-select" class="fs-90 p-2-5 w-100 text-center">
+                  <select name="pt_id" id="pet-select" class="fs-90 p-2-5 w-100 text-center">
                       <option value="">--PT hướng dẫn--</option>
-                      <option value="dog">Nguyễn Mạnh Quân</option>
-                      <option value="cat">Nguyễn Quang Huy</option>
-                      <option value="hamster">Lê Văn An</option>
-                      <option value="parrot">Hoàng Huy Dũng</option>
-                      <option value="parrot">Không có PT</option>
+                      <option value="1">Nguyễn Mạnh Quân</option>
+                      <option value="2">Nguyễn Quang Huy</option>
+                      <option value="3">Lê Văn An</option>
+                      <option value="4">Hoàng Huy Dũng</option>
+                      <option value="5">Không có PT</option>
 
                   </select>
           </section>
@@ -139,7 +139,7 @@
                   
                   <div class="card p-2">
                       <div class="input-group">
-                          <input type="text" class="form-control" placeholder="Mời nhập mã giảm giá"
+                          <input name="discount_code" type="text" class="form-control" placeholder="Mời nhập mã giảm giá"
                               aria-label="Recipient's username" aria-describedby="basic-addon2">
                           <div class="input-group-append w-20">
                               <button class="btn btn-secondary btn-md waves-effect m-0" type="submit">Áp

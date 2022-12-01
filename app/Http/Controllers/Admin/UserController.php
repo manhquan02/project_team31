@@ -178,6 +178,7 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->assignRole($request->role);
         $user->save();
+        dd($user->id);
     }
 
     /**

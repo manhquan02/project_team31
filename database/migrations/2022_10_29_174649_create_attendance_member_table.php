@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('attendance_member', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('contract_id');
+            $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('schedule_id');
             $table->unsignedBigInteger('time_id');
             $table->string('weekday_name');

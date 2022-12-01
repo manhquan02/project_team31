@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('schedule_pt', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pt_id');
-            $table->unsignedBigInteger('contract_id');
+            $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('time_id');
             $table->string('weekday_name');
             $table->date('date');

@@ -11,7 +11,7 @@ class Schedule extends Model
     protected $table = 'schedule_pt';
 
     protected $fillable = [
-        'contract_id',
+        'order_id',
         'time_id',
         'weekday_name',
         'pt_id',

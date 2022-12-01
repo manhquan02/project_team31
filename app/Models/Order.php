@@ -18,12 +18,12 @@ class Order extends Model
         'pt_id',
         'total_money',
         'weekday_name',
-        'status_contract',
+        'status',
         'payment_method'
     ];
 
     protected $attributes = [
-        'status_contract' => 0
+        'status' => 0
     ];
     public function pt(){
         return $this->belongsTo(User::class,'pt_id','id');
@@ -61,5 +61,9 @@ class Order extends Model
         );
     }
 
+    public function trainings()
+    {
+        return $this->hasMany(TrainingPackage::class,'order_id','id');
+    }
     
 }

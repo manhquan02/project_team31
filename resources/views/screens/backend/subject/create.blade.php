@@ -30,7 +30,7 @@
                 </div>
             </div>
             <form action="{{route('admin.subject.store')}}" method="POST" enctype="multipart/form-data">
-                @csrf
+                {{ csrf_field() }}
                 @method('POST')
                 <div class="card-body">
                     <div class="form-group row">
