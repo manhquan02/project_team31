@@ -73,6 +73,8 @@ class PackageController extends Controller
         $new->type_package = $request->type_package;
         if ($request->set_pt == 'on') {
             $new->set_pt = 1;
+            $new->total_session_pt = $request->total_session_pt;
+            $new->week_session_pt = $request->week_session_pt;
         }
         $new->save();
         Toastr::success(translate('Add new package successfully'));
@@ -111,6 +113,8 @@ class PackageController extends Controller
            
             if ($request->set_pt == 'on') {
                 $package->set_pt = 1;
+                $package->total_session_pt = $request->total_session_pt;
+                $package->week_session_pt = $request->week_session_pt;
             } else {
                 $package->set_pt = 0;
             }

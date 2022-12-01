@@ -111,7 +111,7 @@ function weekday($weekday)
 
 function st($month, $year)
 {  // Thống kê
-    $total_turnover = Order::where('status_contract', 1)->get();
+    $total_turnover = Order::where('status', 1)->get();
     $total = 0;
     foreach ($total_turnover as $item) {
         if (date('m-Y', strtotime($item->activate_day)) == "$month" . "-" . "$year") {
@@ -128,15 +128,12 @@ function config_decode($text)
 }
 
 
-const PACKAGE_ONE_TO_ONE = 1;
-const PACKAGE_ONE_TO_TWO = 2;
-const PACKAGE_ONE_TO_THREE = 3;
-$arrayPackage = [
-
-    PACKAGE_ONE_TO_ONE => '1:1',
-    PACKAGE_ONE_TO_TWO => '1:2',
-    PACKAGE_ONE_TO_THREE => '1:3'
-]
+function typePackage(){
+    return [
+        '1'=>'Gói ngày',
+        '2'=> 'Gói tháng'
+    ];
+}
 
 
 ?>

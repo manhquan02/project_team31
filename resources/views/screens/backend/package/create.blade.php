@@ -120,6 +120,20 @@
                         @enderror
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Tổng buổi tập có PT') }} </label>
+                    <div class="col-10 p-3">
+                        <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt')}}">
+                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Số buổi PT trên tuần') }} </label>
+                    <div class="col-10 p-3">
+                        <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt')}}">
+                       
+                    </div>
+                </div>
                 <!-- <div id="weekday_pt" class="form-group row">
 
                 </div> -->

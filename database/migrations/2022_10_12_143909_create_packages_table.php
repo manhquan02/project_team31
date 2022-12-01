@@ -21,6 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('price');
             $table->unsignedBigInteger('price_sale')->default(0);
             $table->unsignedBigInteger('into_price');
+            $table->unsignedBigInteger('total_session_pt')->nullable();
+            $table->unsignedBigInteger('week_session_pt')->nullable();
             $table->string('description', 10000);
             $table->string('short_description',1000);
             $table->unsignedInteger('status')->default(1);
