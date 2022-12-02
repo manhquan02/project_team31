@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('result_contract');
+        Schema::dropIfExists('result_order');
     }
 };

@@ -48,23 +48,10 @@
             <div class="form-group row">
                 <label class="col-lg-2 col-form-label">{{translate('Gender')}}</label>
                 <div class="col-xl-8 col-lg-8 col-sm-12 col-md-12 d-flex align-items-center">
-                    <div class="checkbox-inline">
-                        <label class="checkbox">
-                           
-                            <span></span>
-                            <input name="gender" type="radio" /> {{translate('Male')}}
-                        </label>
-                        <label class="checkbox">
-                           
-                            <span></span>
-                            <input name="gender" type="radio" /> {{translate('Female')}}
-                        </label>
-                        <label class="checkbox">
-                           
-                            <span></span>
-                            <input name="gender" type="radio" /> {{translate('Other')}}
-                        </label>
-                    </div>
+                    <select class="form-control" name="gender">
+                        <option value="1">Nam</option>
+                        <option value="2">Nữ</option>
+                    </select>
                     @error('gender')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -87,7 +74,6 @@
                         @foreach ($roles as $role)
                         <option value="{{$role->name}}">{{$role->name}}</option>
                         @endforeach
-
                     </select>
                 </div>
             </div>

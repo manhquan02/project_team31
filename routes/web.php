@@ -93,4 +93,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\TimeController::class, 'update'])->name('update');
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\TimeController::class, 'delete'])->name('delete');
     });
+
+    Route::prefix('wage')->name('wage.')->group(function () {
+        Route::get('', [\App\Http\Controllers\Admin\WageController::class, 'index'])->name('index');
+    });
 });

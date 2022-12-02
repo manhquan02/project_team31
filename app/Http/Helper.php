@@ -134,9 +134,9 @@ function typePackage(){
         '2'=> 'Gói tháng'
     ];
 }
-
-
-?>
-
-
-
+function statusWage(){
+    return [
+        '0'=>'Chưa quyết toán',
+        '1'=> 'Đã quyết toán'
+    ];
+}
