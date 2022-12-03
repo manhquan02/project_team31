@@ -85,7 +85,7 @@
                         <select class="form-control" name="type_package">
                             <option selected disabled>{{ translate('Choose a type package') }}</option>
                            @foreach(typePackage() as $key=>$item)
-                            <option value="{{$key}}">{{ $item }}</option>
+                            <option @if(old('type_package') == $key) selected @endif value="{{$key}}">{{ $item }}</option>
                             @endforeach
                         </select>
                         @error('type_package')
@@ -96,7 +96,7 @@
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label">{{ translate('Short Description') }} <span class="text-danger">*</span></label>
                     <div class="col-10">
-                        <input type="text" class="form-control" name="short_description">{{ old('short_description')}}
+                        <input type="text" class="form-control" name="short_description" value="{{ old('short_description')}}">
                         @error('short_description')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -115,28 +115,11 @@
                     <label for="example-password-input" class="col-2 col-form-label">{{ translate('Have a Coach ?') }} </label>
                     <div class="col-10 p-3">
                         <input type="checkbox" id="pt" name="set_pt" @if(old('set_pt')) checked @endif>
-                        @error('set_pt')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Tổng buổi tập có PT') }} </label>
-                    <div class="col-10 p-3">
-                        <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt')}}">
-                        
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Số buổi PT trên tuần') }} </label>
-                    <div class="col-10 p-3">
-                        <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt')}}">
-                       
-                    </div>
-                </div>
-                <!-- <div id="weekday_pt" class="form-group row">
+                <div id="weekday_pt">
 
-                </div> -->
+                </div>
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label"></label>
                     <div class="col-10">
@@ -155,14 +138,25 @@
         $('.select2').select2()
 
         
-        /* if ($('#pt').prop('checked') == true) {
-                content = ` <label for="example-password-input" class="col-2 col-form-label">{{ translate('Number of pt on week') }} <span class="text-danger">*</span></label>
-                        <div class="col-10 p-3">
-                            <input class="form-control" type="number" name="weekday_pt" value="{{old('weekday_pt')}}">
-                            @error('weekday_pt')
+        if ($('#pt').prop('checked') == true) {
+                content = ` <div class="form-group row">
+                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Tổng buổi tập có PT') }} </label>
+                    <div class="col-10 p-3">
+                        <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt')}}">
+                        @error('total_session_pt')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
-                        </div>`
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Số buổi PT trên tuần') }} </label>
+                    <div class="col-10 p-3">
+                        <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt')}}">
+                        @error('week_session_pt')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>`
 
                         $('#weekday_pt').html(content);
             } 
@@ -171,17 +165,24 @@
             console.log($(this).prop('checked'));
             let content = ``;
             if ($(this).prop('checked') == true) {
-                content = ` <label for="example-password-input" class="col-2 col-form-label">{{ translate('Number of pt on week') }} <span class="text-danger">*</span></label>
-                        <div class="col-10 p-3">
-                            <input class="form-control" type="number" name="weekday_pt" value="{{old('weekday_pt')}}">
-                            @error('weekday_pt')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                        </div>`
+                content = `<div class="form-group row">
+                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Tổng buổi tập có PT') }} </label>
+                    <div class="col-10 p-3">
+                        <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt')}}">
+                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Số buổi PT trên tuần') }} </label>
+                    <div class="col-10 p-3">
+                        <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt')}}">
+                       
+                    </div>
+                </div>`
             } 
 
             $('#weekday_pt').html(content);
-        }) */
+        })
     });
 </script>
 @endsection

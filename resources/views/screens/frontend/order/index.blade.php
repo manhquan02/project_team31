@@ -148,12 +148,9 @@
                     
 
                     <select name="pt_id" id="pet-select" class="fs-90 p-2-5 w-100 text-center">
-                        <option value="">--PT hướng dẫn--</option>
-                        <option value="1">Nguyễn Mạnh Quân</option>
-                        <option value="2">Nguyễn Quang Huy</option>
-                        <option value="3">Lê Văn An</option>
-                        <option value="4">Hoàng Huy Dũng</option>
-                        <option value="5">Không có PT</option>
+                      @foreach($coachs as $coach)
+                      <option value="{{$coach->id}}">{{$coach->name}}</option>
+                      @endforeach
 
                     </select>
             </section>

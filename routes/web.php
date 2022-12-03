@@ -46,7 +46,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 
     Route::prefix('package')->name('package.')->group(function () {
-        Route::get('', [\App\Http\Controllers\Admin\PackageController::class, 'index'])->name('index');
+        Route::get('primary', [\App\Http\Controllers\Admin\PackageController::class, 'index_primary'])->name('index_primary');
+        Route::get('pt', [\App\Http\Controllers\Admin\PackageController::class, 'index_pt'])->name('index_pt');
         Route::get('create', [\App\Http\Controllers\Admin\PackageController::class, 'create'])->name('create');
         Route::post('create', [\App\Http\Controllers\Admin\PackageController::class, 'store'])->name('store');
         Route::get('edit/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'edit'])->name('edit');

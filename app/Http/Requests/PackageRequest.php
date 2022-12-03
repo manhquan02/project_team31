@@ -36,13 +36,13 @@ class PackageRequest extends FormRequest
     public function messages()
     {
         return [
-            'package_name.required' => translate('Type package name, thanks'),
-            'subject_id.required' => translate('Choose a subject, thanks'),
-            'price.required' => translate('Type package price, thanks'),
-            'description.required' => translate('Type description, thanks'),
-            'short_description.required' => translate('Type short description, thanks'),
-            'type_package.required' => translate('Choose a type package, thanks'),
-            'description.max' => translate('The description must not be greater than 10000 characters, thanks'),
+            'package_name.required' => 'Không để trống tên gói tập',
+            'subject_id.required' => 'Không để trống môn tập',
+            'price.required' => 'Không để trống giá gói tập',
+            'description.required' =>'Không để trống mô tả gói tập',
+            'short_description.required' => 'Không để trống mô tả ngắn gói tập',
+            'type_package.required' => 'Không để trống kiểu gói tập',
+            'description.max' => 'Mô tả gói tập không được quá dài',
         ];
     }
 }

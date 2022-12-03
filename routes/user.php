@@ -81,7 +81,7 @@ Route::prefix('admin/')->name('admin.')->group(function () {
     //     Route::get('/', [SchedulePtController::class, 'index'])->name('list');
     // });
 
-    Route::prefix('attendance/')->name('attendance.')->group(function () {
+    Route::prefix(' /')->name('attendance.')->group(function () {
         Route::get('/{id}', [AttendanceMemberController::class, 'index'])->name('list');
         Route::get('/edit-status', [AttendanceMemberController::class, 'editStatus'])->name('editStatus');
     });

@@ -14,36 +14,61 @@ use Illuminate\Http\Request;
 
 class PackageController extends Controller
 {
-    public function index(Request $request)
+    public function index_primary(Request $request)
     {
         if (isset($request->subject_id)) {
             if (isset($request->status)) {
                 $packages = Package::select('packages.*')
                     ->where('subject_id', $request->subject_id)
                     ->where('status', $request->status)
-                    ->orderBy('created_at', 'desc')
-                    ->paginate(12);
+                    ->orderBy('created_at', 'desc');
             } else {
                 $packages = Package::select('packages.*')
                     ->where('subject_id', $request->subject_id)
-                    ->orderBy('created_at', 'desc')
-                    ->paginate(12);
+                    ->orderBy('created_at', 'desc');
             }
         } else {
             if (isset($request->status)) {
                 $packages = Package::select('packages.*')
                     ->where('status', $request->status)
-                    ->orderBy('created_at', 'desc')
-                    ->paginate(12);
+                    ->orderBy('created_at', 'desc');
             } else {
                 $packages = Package::select('packages.*')
-                    ->orderBy('created_at', 'desc')
-                    ->paginate(12);
+                    ->orderBy('created_at', 'desc');
             }
         }
-        $package_type = PackageUtility::$arrayPackage;
+$cate_package =1;
+        $packages =  $packages->where('set_pt', 0)->paginate(12);
+        return view('screens.backend.package.index', compact('packages','cate_package'));
 
-        return view('screens.backend.package.index', compact('packages', 'package_type'));
+    }
+
+    public function index_pt(Request $request)
+    {
+        if (isset($request->subject_id)) {
+            if (isset($request->status)) {
+                $packages = Package::select('packages.*')
+                    ->where('subject_id', $request->subject_id)
+                    ->where('status', $request->status)
+                    ->orderBy('created_at', 'desc');
+            } else {
+                $packages = Package::select('packages.*')
+                    ->where('subject_id', $request->subject_id)
+                    ->orderBy('created_at', 'desc');
+            }
+        } else {
+            if (isset($request->status)) {
+                $packages = Package::select('packages.*')
+                    ->where('status', $request->status)
+                    ->orderBy('created_at', 'desc');
+            } else {
+                $packages = Package::select('packages.*')
+                    ->orderBy('created_at', 'desc');
+            }
+        }
+$cate_package =2;
+        $packages =  $packages->where('set_pt', 1)->paginate(12);
+        return view('screens.backend.package.index', compact('packages', 'cate_package'));
 
     }
 
@@ -94,7 +119,6 @@ class PackageController extends Controller
 
     public function update(PackageRequest $request, $id)
     {
-
         $package = Package::where('id', $id)->first();
         if ($package != null) {
             $package->package_name = $request->package_name;
@@ -117,6 +141,8 @@ class PackageController extends Controller
                 $package->week_session_pt = $request->week_session_pt;
             } else {
                 $package->set_pt = 0;
+                $package->total_session_pt = null;
+                $package->week_session_pt = null;
             }
             $package->save();
             Toastr::success(translate('Update package successfully'));

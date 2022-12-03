@@ -114,7 +114,7 @@ function st($month, $year)
     $total_turnover = Order::where('status', 1)->get();
     $total = 0;
     foreach ($total_turnover as $item) {
-        if (date('m-Y', strtotime($item->activate_day)) == "$month" . "-" . "$year") {
+        if (date('m-Y', strtotime($item->date_start)) == "$month" . "-" . "$year") {
             $total += $item->total_money;
         }
     }

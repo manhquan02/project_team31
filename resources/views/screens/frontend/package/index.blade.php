@@ -80,16 +80,14 @@
                     $i=0;
                     @endphp
                     @foreach($packages as $item)
-                    @php
-                    $i++;
-                    @endphp
-					<div class="{{$i++ % 2 == 1 ? 'pricing-wrap-2 mb-80' : 'pricing-wrap-2 active mb-80'}}" >
+                  
+					<div class="{{$i++ % 2 == 0 ? 'pricing-wrap-2 mb-80' : 'pricing-wrap-2 active mb-80'}}" >
 						<div class="row no-gutters align-items-center">
 							<div class="col-lg-4">
 								<div class="pricing-title">
 									<h3>{{$item->package_name}}</h3>
 									<span>{{number_format($item->into_price, 0, '.','.')}} <sup>đ</sup></span>
-                                    <p>Giảm {{$item->price_sale}} %</p>
+                                    <p style="color: black;">Giảm {{$item->price_sale}} %</p>
 								</div>
 							</div>
 							<div class="col-lg-4">
