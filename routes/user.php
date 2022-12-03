@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Client\OrderController as ClientOrderController;
 use App\Http\Controllers\Client\PaymentController;
+use App\Http\Controllers\Client\ScheduleMemberController as ClientScheduleMemberController;
 use App\Http\Controllers\Client\ScheduleUsserController;
 use Illuminate\Support\Facades\Route;
 
@@ -104,10 +105,10 @@ Route::prefix('payment/')->name('payment.')->group(function () {
     Route::get('checkPayment', [PaymentController::class, 'returnUrl'])->name('returnUrl');
 });
 
-Route::prefix('account/')->name('account.')->group(function () {
-    Route::get('/', [ScheduleUserController::class, 'index'])->name('index');
+// Route::prefix('account/')->name('account.')->group(function () {
+//     Route::get('/', [ScheduleUserController::class, 'index'])->name('index');
     
-});
+// });
 
 Route::prefix('order/')->name('order.')->group(function () {
     Route::get('create/{id}', [ClientOrderController::class, 'index'])->name('index');
@@ -117,7 +118,9 @@ Route::prefix('order/')->name('order.')->group(function () {
     Route::get('create/{orderId}', [ClientOrderController::class, 'create'])->name('create');
 });
 
-
+Route::prefix('account/')->name('account.')->group(function () {
+    Route::get('schedule', [ClientScheduleMemberController::class, 'scheduleMember'])->name('index');
+});
 
 
 

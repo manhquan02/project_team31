@@ -14,7 +14,7 @@
     <div class="col-md-12 order-md-1">
         <h4 class="mb-3">Hóa đơn gói tập</h4>
         @include('screens.backend._alert')
-        <form action="{{route('order.postOrder', 2)}}" method="POST" enctype="multipart/form-data" id="wizard">
+        <form action="{{route('order.postOrder', $package->id)}}" method="POST" enctype="multipart/form-data" id="wizard">
           @csrf
             <h3>
               <div class="media">
@@ -26,6 +26,7 @@
               </div>
             </h3>
             <section>
+              @if($package->type_package == 1)
               <div class="content-wrapper">
                 <h4 class="section-heading mt-0">Thời gian đăng ký gói tập</h4>
                
@@ -46,6 +47,29 @@
                   </div>
                 </div>
               </div>
+              @elseif($package->type_package == 2)
+              <h4 class="section-heading mt-0">Chọn thời gian kích hoạt và gia hạn gói tập</h4>
+              <div class="content-wrapper">
+                <div style="width: 100%;" class="form-group">
+                  <label style="color: black" for="exampleInputEmail1">Ngày kích hoạt</label>
+                  <input  type="date" name="activate_date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                  <small id="emailHelp" class="form-text text-muted">chọn ngày kích hoạt, chúng tôi sẽ tạo lịch cho bạn.</small>
+                </div>
+                <div style="margin-top: 20px" class="input-group mb-3">
+                  <label style="color: black">Chọn số tháng gia hạn</label>
+                  <div style="width: 80%;" class="form-group">
+                    <select name="month_package" class="custom-select" id="inputGroupSelect02">
+                      <option selected>Choose...</option>
+                      <option value="1">1 Tháng</option>
+                      <option value="2">3 tháng</option>
+                      <option value="3">6 tháng</option>
+                      <option value="3">12 tháng</option>
+                    </select>
+                  </div>
+                  
+                </div>
+              </div>
+              @endif
             </section>
             <h3>
               <div class="media">
@@ -150,7 +174,7 @@
 
                   <div style="margin-top: 20px; width: 30%;" class="list-group-item d-flex justify-content-between">
                     <span>Tổng tiền</span>
-                    <strong>$20</strong>
+                    <strong id="total_money">{{$package->price}}</strong>
                   </div>
                   
                   <div style="margin-top: 20px; width: 30%; border: none" class="list-group-item d-flex justify-content-between">
@@ -168,6 +192,14 @@
 @endsection
 
 @section('js')
+
+<script>
+
+      $package_id = {{$package->id}};
+      
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js%401.16.0/dist/umd/popper.min.js"></script>
 <script src="{{asset('frontend/assets/js/jquery.steps.min.js')}}"></script>
 <script src="{{asset('frontend/assets/js/bd-wizard.js')}}"></script>

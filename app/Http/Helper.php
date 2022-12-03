@@ -111,7 +111,7 @@ function weekday($weekday)
 
 function st($month, $year)
 {  // Thống kê
-    $total_turnover = Order::where('status_contract', 1)->get();
+    $total_turnover = Order::where('status', 1)->get();
     $total = 0;
     foreach ($total_turnover as $item) {
         if (date('m-Y', strtotime($item->activate_day)) == "$month" . "-" . "$year") {
