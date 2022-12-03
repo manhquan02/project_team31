@@ -45,7 +45,7 @@ class Order extends Model
     public function users(){
         return $this->belongsToMany(
             User::class,
-            'result_contract',
+            'result_order',
             'order_id',
             'user_id'    
         );
