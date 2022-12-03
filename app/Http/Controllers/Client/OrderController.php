@@ -42,6 +42,60 @@ class OrderController extends Controller
         dd('oke');
     }
 
+    public function setPackage(Request $request){
+        // dd($request);
+        $package = Package::find($request->id);
+        if(isset($package)){
+            if($package->set_pt == 1){
+                return response()->json([
+                    'result' => 1,
+                    'package' => $package,
+                    
+                ]);
+            }
+            else{
+                return response()->json([
+                    'result' => 0,
+                    'package' => $package,
+                ]);
+            }
+            
+        }
+        return response()->json([
+            'result' => false,
+            'message' => 'Gói tập không tồn tại !'
+        ]);
+    }
+    public function setTotalMoney(Request $request){
+        $package = Package::find($request->package_id);
+        $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
+        if(isset($discount)){
+            $discount_packages =  explode('|', $discount->package_id);
+            
+            if($discount->status == 0){
+                return response()->json([
+                    'result' => false,
+                    'message' => 'Phiếu giảm giá này đã hết hạn'
+                ]);
+            }
+            if(in_array($package->id, $discount_packages)){
+                
+                return response()->json([
+                    'result' => true,
+                    'message' => 'Phiếu giảm tồn tại',
+                    'total_money' => $package->price - $package->price*$discount->price_sale/100,
+                ]);
+
+            }
+        }
+        else{
+            return response()->json([
+                'result' => false,
+                'message' => 'Phiếu giảm giá không tồn tại',
+            ]);
+        }
+    }
+
     public function store($id ,Request $request)
     {   
         // dd($request->weekday);
@@ -51,16 +105,35 @@ class OrderController extends Controller
         $training = new TrainingPackage();
         $user = User::find(Auth::id());
         $package = Package::find($id);
-        $order->date_start = $request->date_start;
-        $order->date_end = $request->date_end;
+        // dd($package->type_package);
+        if($package->type_package == 1){
+            $total_session_pt = $package->total_session_pt;
+            $week_session_pt = $package->week_session_pt;
+            $total_session = $total_session_pt/$week_session_pt*7;
+            $newdate = strtotime ( '+'.$total_session.'day' , strtotime ( $request->activate_date ) ) ;
+            $end_date = date ( 'Y-m-j' , $newdate );
+            $order->date_start = $request->activate_date;
+            $order->date_end = $end_date;
+            
+        }
+
+        elseif($package->type_package == 2) {
+            if(isset($request->month_package)){
+                $month = $request->month_package;
+                $newdate = strtotime ( '+'.$month.' month' , strtotime ( $request->activate_date ) );
+                $end_date = date ( 'Y-m-j' , $newdate );
+                $order->date_start = $request->activate_date;
+                $order->date_end = $end_date;
+            }
+        }
+        
         $order->package_id = $id;
         $order->payment_method = 2;
         if($package->set_pt == 1){
             $order->pt_id = $request->pt_id;
             
         }
-        
-        
+
         if($request->discount_code != ""){
             $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
             if(isset($discount)){
@@ -69,7 +142,7 @@ class OrderController extends Controller
                     return back()->with('msg', 'Xin lỗi. Phiếu giảm giá này đã hết hạn'); 
                 }
                 if(in_array($package->id, $discount_packages)){
-                    $order->total_money = $package->price - $package->price*$discount->price_sale/100;
+                    $order->total_money = $package->into_price*$package->total_session_pt - $package->into_price*$package->total_session_pt*$discount->price_sale/100;
                     // dd($package->price);
                     $order->discount_id = $discount->id;
                     $quantity_discount = $discount->quantity - 1;
@@ -81,14 +154,14 @@ class OrderController extends Controller
                             'status' => 0,
                         ]);
                     }
-                    $order->save();
-                    $order->users()->attach(Auth::id());
+                    // $order->save();
+                    // // $order->users()->attach(Auth::id());
                     
-                    // dd($order->id);
-                    dd($order->id);
-                    $vnp_Url = $this->vpnPayment($order->id); 
-                    $this->create($order->id);
-                    return redirect($vnp_Url);
+                    // // // dd($order->id);
+                    // // // dd($order->id);
+                    // // $vnp_Url = $this->vpnPayment($order->id); 
+                    // // $this->create($order->id);
+                    // // return redirect($vnp_Url);
                     
                     // return back()->with('success', 'Thêm Order thành công'); 
                 }
@@ -101,9 +174,11 @@ class OrderController extends Controller
                 return back()->with('msg', 'Phiếu giảm giá không đúng'); 
             }
         }
-
-        $order->discount_id = 0;
-        $order->total_money = $package->price;
+        else{
+            $order->discount_id = 0;
+            $order->total_money = $package->into_price;
+        }
+        
         
         $order->save();
         if($package->set_pt == 1){

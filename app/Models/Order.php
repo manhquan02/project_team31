@@ -13,11 +13,10 @@ class Order extends Model
     protected $fillable = [
         'discount_id',
         'package_id',
-        'time_id',
-        'activate_day',
+        'date_start',
+        'date_end',
         'pt_id',
         'total_money',
-        'weekday_name',
         'status',
         'payment_method'
     ];
@@ -46,7 +45,7 @@ class Order extends Model
     public function users(){
         return $this->belongsToMany(
             User::class,
-            'result_contract',
+            'result_order',
             'order_id',
             'user_id'    
         );

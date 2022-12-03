@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ResultContract extends Model
 {
     use HasFactory;
-    protected $table = 'result_contract';
+    protected $table = 'result_order';
 
     protected $fillable = [
         'user_id',
         'order_id',
-        'contract_id',
         'height',
         'weight',
         'bmi',

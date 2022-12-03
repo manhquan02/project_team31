@@ -124,8 +124,8 @@ class OrderController extends Controller
                 
                 return response()->json([
                     'result' => true,
-                    'message' => 'Phiếu giảm tồn tại',
-                    'total_money' => $package->price - $package->price*$discount->price_sale/100,
+                    'message' => 'Áp dụng phiếu giảm giá thành công',
+                    'total_money' => $package->into_price*$package->total_session_pt - $package->into_price*$package->total_session_pt*$discount->price_sale/100,
                 ]);
 
             }

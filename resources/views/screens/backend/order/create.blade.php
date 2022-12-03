@@ -239,7 +239,7 @@ $('.add_package').on('change',function(){
             }
           }
       });
-  });
+});
 
 
   $('.add_package').on('change',function(){
