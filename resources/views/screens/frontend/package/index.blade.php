@@ -95,7 +95,11 @@
 							<div class="col-lg-4">
 								<div class="pricing-list">
 									<ul>
-										<li><i class="far fa-check-circle"></i> {{$item->subject->subject_name}}</li>
+										<li><i class="far fa-check-circle"></i> Môn tập : {{$item->subject->subject_name}}</li>
+										@if($item->total_session_pt != null)
+										<li><i class="far fa-check-circle"></i> {{$item->total_session_pt }} buổi tập có PT </li>
+										<li><i class="far fa-check-circle"></i> {{$item->week_session_pt}} buổi PT / tuần</li>
+									@endif
 									</ul>
 								</div>
 							</div>

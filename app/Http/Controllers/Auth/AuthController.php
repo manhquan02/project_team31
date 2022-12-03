@@ -41,9 +41,10 @@ class AuthController extends Controller
         $new->address = $request->address;
         $new->gender = $request->gender;
         $new->verify_code = $code;
+        $new->assignRole('member');
         $new->save();
         Mail::to("$request->email")->send(new VeryEmail($data));
-        return redirect()->route('very_email', $request->email);
+        return redirect()->route('very_email', [$request->email, $request->password]);
     }
 
 
@@ -69,7 +70,7 @@ class AuthController extends Controller
                 $user->verify_code = $code;
                 $user->save();
                 Mail::to("$request->email")->send(new VeryEmail($data));
-                return redirect()->route('very_email', $request->email);
+                return redirect()->route('very_email', [$request->email, $request->password]);
             }
             if ($request->checkbox == 'on') {
                 Cookie::queue('em', $request->email, 44640);
@@ -86,6 +87,8 @@ class AuthController extends Controller
     public function post_very_email($email, Request $request)
     {
         $user = User::where('email', $email)->first();
+
+        
         if ($user->verify_code == $request->code) {
             $user->email_verified_at = date('Y-m-d H:i:s');
             $user->status = 1;

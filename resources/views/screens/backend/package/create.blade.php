@@ -84,9 +84,9 @@
                     <div class="col-10">
                         <select class="form-control" name="type_package">
                             <option selected disabled>{{ translate('Choose a type package') }}</option>
-                            {{-- @foreach(typePackage() as $key=>$item)
+                           @foreach(typePackage() as $key=>$item)
                             <option value="{{$key}}">{{ $item }}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                         @error('type_package')
                         <span class="text-danger">{{ $message }}</span>

@@ -164,6 +164,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User();
+        dd($request->role);
         if ($request->hasFile('avatar')) {
             // dd($request->avatar);
             $file = $request->avatar;
