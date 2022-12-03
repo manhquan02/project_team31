@@ -44,14 +44,10 @@ class UserRequest extends FormRequest
             'email.email'=>'Nhập đúng định dạng email',
             'email.max'=>':attribute tối đa 255 kí tự',
             'email.unique'=>':attribute đã tồn tại',
-            'password.min'=>':attribute nhỏ nhất là 6 kí tự',
-            'password.max'=>':attribute nhiều nhất 50 kí tự',
+           
             // 'avatar.image'=>':attribute bắt buộc là ảnh',
             // 'avatar.max'=>'Ảnh vượt quá 5mb',
             // 'avatar.mimes'=>'Phải là dạng ảnh',
-
-            'same' => 'Mật khẩu phải trùng nhau',
-            'integer' => ':attribute phải là dạng số',
             'address.required'=> "Đại chỉ không được để chống",
             'gender.required' => "Giới tính không được để chống",
         ];

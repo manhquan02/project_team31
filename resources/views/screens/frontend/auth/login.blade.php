@@ -46,13 +46,24 @@
                                 @endif
                                 <div class="col-xl-12">
                                     <div class="input-wrap input-icon icon-msg">
-                                        <input type="text" @error('email') style="border: 3px solid red" placeholder="{{$message}}" @enderror placeholder="Địa chỉ email" name="email" value="{{old('email')}}">
+                                        <input type="text" @error('email') style="border: 3px solid red" @enderror placeholder="Địa chỉ email" name="email" value="{{old('email')}}">
                                     </div>
+                                    @error('email')
+                                    <div class="col-xl-12">
+                                        <span class="text-danger">{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
+                               
                                 <div class="col-xl-12" style="margin-bottom:28px">
                                     <div class="input-wrap input-icon icon-msg">
-                                        <input type="text" @error('password') style="border: 3px solid red" placeholder="{{$message}}" @enderror placeholder="Mật khẩu" name="password" value="{{old('password')}}">
+                                        <input type="text" @error('password') style="border: 3px solid red" @enderror placeholder="Mật khẩu" name="password" value="{{old('password')}}">
                                     </div>
+                                    @error('password')
+                                    <div class="col-xl-12">
+                                        <span class="text-danger">{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
                                 <div class="col-xl-12">
                                     <a className="small text-muted" href="#!">Quên mật khẩu ?</a>

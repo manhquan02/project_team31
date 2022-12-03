@@ -128,18 +128,15 @@ function config_decode($text)
 }
 
 
-const PACKAGE_ONE_TO_ONE = 1;
-const PACKAGE_ONE_TO_TWO = 2;
-const PACKAGE_ONE_TO_THREE = 3;
-$arrayPackage = [
-
-    PACKAGE_ONE_TO_ONE => '1:1',
-    PACKAGE_ONE_TO_TWO => '1:2',
-    PACKAGE_ONE_TO_THREE => '1:3'
-]
-
-
-?>
-
-
-
+function typePackage(){
+    return [
+        '1'=>'Gói ngày',
+        '2'=> 'Gói tháng'
+    ];
+}
+function statusWage(){
+    return [
+        '0'=>'Chưa quyết toán',
+        '1'=> 'Đã quyết toán'
+    ];
+}

@@ -27,7 +27,7 @@ class AuthController extends Controller
     {
         $user = User::where('phone', $request->phone)->orWhere('email', $request->email)->first();
         if ($user != null) {
-            return redirect()->back()->with('error','Số điện thoại hoặc email đã tồn tại');
+            return redirect()->back()->with('error','Email hoặc số điện thoại bạn nhập đã tồn tại. Hãy đăng ký tài khoản khác.');
         }
         $code = rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9);
         $data = [
@@ -84,7 +84,7 @@ class AuthController extends Controller
                 Cookie::queue('ps', $request->password, 44640);
             }
             return redirect()->route('home');
-        } else return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
+        } else return redirect()->back()->with('error', 'Email bạn nhập không kết nối với tài khoản nào. Hãy tìm tài khoản của bạn và đăng nhập.');
     }
 
     public function very_email($email)

@@ -36,6 +36,7 @@ class UserSeeder extends Seeder
                 'gender' => 'nam',
                 'phone' => rand(1000000000,9999999999),
                 'avatar' => fake()->imageUrl(),
+                'wage'=>200000,
                 'email_verified_at' => '2022-09-08 15:00:14',
                 'address' => 'Hà nội',
                 'status' => 1
@@ -47,6 +48,7 @@ class UserSeeder extends Seeder
                 'gender' => 'nam',
                 'phone' => rand(1000000000,9999999999),
                 'avatar' => fake()->imageUrl(),
+                'wage'=>200000,
                 'email_verified_at' => '2022-09-08 15:00:14',
                 'address' => 'Hà nội',
                 'status' => 1
@@ -58,6 +60,7 @@ class UserSeeder extends Seeder
                 'gender' => 'nam',
                 'phone' => rand(1000000000,9999999999),
                 'avatar' => fake()->imageUrl(),
+                'wage'=>200000,
                 'email_verified_at' => '2022-09-08 15:00:14',
                 'address' => 'Hà nội',
                 'status' => 1
@@ -69,6 +72,7 @@ class UserSeeder extends Seeder
                 'gender' => 'nam',
                 'phone' => rand(1000000000,9999999999),
                 'avatar' => fake()->imageUrl(),
+                'wage'=>200000,
                 'email_verified_at' => '2022-09-08 15:00:14',
                 'address' => 'Hà nội',
                 'status' => 1

@@ -125,8 +125,9 @@ class TranslationSeeder extends Seeder
             ['lang' => 'vn','lang_in' => 'Total order','lang_key' => 'total_order','lang_value' => 'Tổng số đơn hàng'],
             ['lang' => 'vn','lang_in' => 'Total subject','lang_key' => 'total_subject','lang_value' => 'Tổng số môn tập'],
             ['lang' => 'vn','lang_in' => 'Total package','lang_key' => 'total_package','lang_value' => 'Tổng số gói tập'],
+            ['lang' => 'vn','lang_in' => 'Payroll','lang_key' => 'payroll','lang_value' => 'Bảng lương'],
 
-
+            
             
         ];
         foreach ($translations as $item) {
