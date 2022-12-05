@@ -1,13 +1,13 @@
 @extends('layouts.backend.master')
-@section('title', translate('Package Management'))
+@section('title', 'Quản lý gói tập')
 @section('content')
 
 <div>
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">{{ translate('Package Management') }}
-                    <span class="d-block text-muted pt-2 font-size-sm">{{ translate('List') }}</span>
+                <h3 class="card-label">Quản lý gói tập
+                    <span class="d-block text-muted pt-2 font-size-sm">Danh sách</span>
                 </h3>
             </div>
             <div class="card-toolbar">
@@ -23,7 +23,7 @@
                             </g>
                         </svg>
                         <!--end::Svg Icon-->
-                    </span>{{ translate('Add New Package') }}</a>
+                    </span>Thêm mới gói tập</a>
                 <!--end::Button-->
             </div>
         </div>
@@ -36,7 +36,7 @@
                             <div class="row align-items-center">
                                 <div class="col-md-6 my-2 my-md-0">
                                     <select name="subject_id" class="form-control select2 is-invalid" id="kt_select2_1_validate">
-                                        <option selected disabled>{{ translate('Choose a subject') }}</option>
+                                        <option selected disabled>Chọn môn tập</option>
                                         @php
                                         $subjects = \App\Models\Subject::all();
                                         @endphp
@@ -48,16 +48,16 @@
                                 <div class="col-md-6 my-2 my-md-0">
                                     <div class="d-flex align-items-center">
                                         <select class="form-control" name="status">
-                                            <option selected disabled>{{ translate('Choose a status') }}</option>
-                                            <option value="0" @if(request('status', -1)==0) selected @endif>{{ translate('Lock') }}</option>
-                                            <option value="1" @if(request('status', -1)==1) selected @endif>{{ translate('Active') }}</option>
+                                            <option selected disabled>Chọn trạng thái</option>
+                                            <option value="0" @if(request('status', -1)==0) selected @endif>{{ ('Lock') }}</option>
+                                            <option value="1" @if(request('status', -1)==1) selected @endif>{{ ('Active') }}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                            <button class="btn btn-light-primary px-6 font-weight-bold">{{translate('Search')}}</button>
+                            <button class="btn btn-light-primary px-6 font-weight-bold">Tìm kiếm</button>
                         </div>
                     </div>
                 </div>
@@ -104,11 +104,11 @@
                         <td>{{$item->total_session_pt}}</td>
                         <td>{{$item->week_session_pt}}</td>
                         @endif
-                        <td><span class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{ translate(config('status_package.'.$item->status) )}}</span>
+                        <td><span class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{ (config('status_package.'.$item->status) )}}</span>
                         </td>
                         <td>
-                            <a title="{{ translate('View') }}" href="{{route('admin.package.edit', $item->id)}}"><i class="flaticon-eye text-info"></i></a>
-                            <a title="{{ translate('Change Status') }}" class="btn-confirm" data-title="Are you sure you want to change the status ?" data-url="{{route('admin.package.change_status', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon-warning text-warning"></i></a>
+                            <a title="{{ ('View') }}" href="{{route('admin.package.edit', $item->id)}}"><i class="flaticon-eye text-info"></i></a>
+                            <a title="{{ ('Change Status') }}" class="btn-confirm" data-title="Are you sure you want to change the status ?" data-url="{{route('admin.package.change_status', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon-warning text-warning"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -122,7 +122,7 @@
             @if(count($packages) <= 0) <div class="card-body">
                 <div class="mb-7">
                     <div class="row align-items-center">
-                        <h2 style="color: #999999; text-align: center">{{ translate('No records found') }}</h2>
+                        <h2 style="color: #999999; text-align: center">Không tìm thấy bản ghi</h2>
                     </div>
                 </div>
         </div>

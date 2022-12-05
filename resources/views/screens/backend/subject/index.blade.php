@@ -1,12 +1,12 @@
 @extends('layouts.backend.master')
-@section('title', translate('Subject Management'))
+@section('title', ('Subject Management'))
 @section('content')
     <div>
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Subject Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('List') }}</span></h3>
+                    <h3 class="card-label">{{ ('Subject Management') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ ('List') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -24,7 +24,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{translate('Add new subject')}}</a>
+                </span>{{('Add new subject')}}</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -38,7 +38,7 @@
                                     <div class="col-md-12 my-2 my-md-0">
                                         <div class="input-icon">
                                             <input name="keyword" type="text" class="form-control" @if(request('keyword')) value="{{ request('keyword') }}" @endif
-                                                   placeholder="{{translate('Enter Subject Name')}}"/>
+                                                   placeholder="{{('Enter Subject Name')}}"/>
                                             <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                         </span>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
                                 <button
-                                   class="btn btn-light-primary px-6 font-weight-bold">{{translate('Search')}}</button>
+                                   class="btn btn-light-primary px-6 font-weight-bold">{{('Search')}}</button>
                             </div>
                         </div>
                     </div>
@@ -61,9 +61,9 @@
                     <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>{{translate('Subject name')}}</th>
-                        <th>{{translate('Image')}}</th>
-                        <th>{{translate('Actions')}}</th>
+                        <th>{{('Subject name')}}</th>
+                        <th>{{('Image')}}</th>
+                        <th>{{('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
@@ -76,10 +76,10 @@
                                     <img width="100px" height="100px" src="{{asset($item->image)}}" alt="">
                                 </td>
                                 <td>
-                                <a title="{{ translate('View') }}"
+                                <a title="{{ ('View') }}"
                                        href="{{route('admin.subject.edit', $item->id)}}"><i
                                             class="flaticon-eye text-info"></i></a>
-                                    <a title="{{translate('Delete')}}" class="btn-confirm" data-title="Are you sure you want to delete ?" data-url="{{route('admin.subject.delete', $item->id)}}"
+                                    <a title="{{('Delete')}}" class="btn-confirm" data-title="Are you sure you want to delete ?" data-url="{{route('admin.subject.delete', $item->id)}}"
                                        style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
                                 </td>
                             </tr>
@@ -96,7 +96,7 @@
                         <!--begin::Search Form-->
                         <div class="mb-7">
                             <div class="row align-items-center">
-                                <h2 style="color: #999999; text-align: center">{{ translate('No records found') }}</h2>
+                                <h2 style="color: #999999; text-align: center">{{ ('No records found') }}</h2>
                             </div>
                         </div>
                         <!--end::Search Form-->

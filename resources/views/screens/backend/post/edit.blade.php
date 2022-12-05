@@ -1,13 +1,13 @@
 @extends('layouts.backend.master')
-@section('title', translate('Post Management'))
+@section('title', ('Post Management'))
 @section('content')
     <div>
         <div class="card card-custom">
 
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Post Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('Update') }}</span></h3>
+                    <h3 class="card-label">{{ ('Post Management') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ ('Update') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -25,7 +25,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ translate('List Posts') }}</a>
+                </span>{{ ('List Posts') }}</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 @method('PATCH')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ translate('Post Title') }} <span
+                        <label class="col-2 col-form-label">{{ ('Post Title') }} <span
                                 class="text-danger">*</span></label>
                         <div class="col-10">
                             <input class="form-control" name="title" type="text"
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ translate('Subject') }} <span
+                        <label class="col-2 col-form-label">{{ ('Subject') }} <span
                                 class="text-danger">*</span></label>
                         <div class="col-10">
                             <select class="form-control" name="subject_id">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Content') }}
+                        <label for="example-password-input" class="col-2 col-form-label">{{ ('Content') }}
                             <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <textarea id="summernote" class="form-control"
@@ -77,7 +77,7 @@
                     <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
-                            <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
+                            <button type="submit" class="btn btn-success mr-2">{{ ('Save') }}</button>
                         </div>
                     </div>
                 </div>

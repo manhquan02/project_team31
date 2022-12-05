@@ -1,12 +1,12 @@
 @extends('layouts.backend.master')
-@section('title', translate('Contact Management'))
+@section('title', 'Quản lý phản hồi')
 @section('content')
     <div>
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Contact Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('List') }}</span></h3>
+                    <h3 class="card-label">Quản lý phản hồi
+                        <span class="d-block text-muted pt-2 font-size-sm">Danh sách</span></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -19,22 +19,22 @@
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
                                             <select class="form-control" name="status">
-                                                <option selected disabled>{{ translate('Choose a status') }}</option>
-                                                <option value="0" @if(request('status', -1) == 0) selected @endif>{{ translate('No response yet') }}</option>
-                                                <option value="1" @if(request('status', -1) == 1) selected @endif>{{ translate('Responded') }}</option>
+                                                <option selected disabled>Chọn trạng thái</option>
+                                                <option value="0" @if(request('status', -1) == 0) selected @endif>Chưa phản hồi</option>
+                                                <option value="1" @if(request('status', -1) == 1) selected @endif>Đã phản hồi</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('From')}}</label>
+                                            <label class="mr-3 mb-0 d-none d-md-block">Từ ngày</label>
                                             <input name="start_date" @if(request('start_date')) value="{{ request('start_date') }}" @endif type="date"
                                                    class="form-control"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('To')}}</label>
+                                            <label class="mr-3 mb-0 d-none d-md-block">Đến ngày</label>
                                             <input name="end_date" @if(request('end_date')) value="{{ request('end_date') }}" @endif type="date" class="form-control"/>
                                         </div>
                                     </div>

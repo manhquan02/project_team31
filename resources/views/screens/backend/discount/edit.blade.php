@@ -1,13 +1,13 @@
 @extends('layouts.backend.master')
 
-@section('title', translate('Coupon Management'))
+@section('title', 'Quản lý phiếu giảm giá')
 
 @section('content')
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">{{ translate('Coupon management') }}
-                    <span class="d-block text-muted pt-2 font-size-sm">{{ translate('Update') }}</span></h3>
+                <h3 class="card-label">Quản lý phiếu giảm giá
+                    <span class="d-block text-muted pt-2 font-size-sm">Cập nhật</span></h3>
             </div>
             <div class="card-toolbar">
                 <!--begin::Button-->
@@ -25,7 +25,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ translate('List Coupons') }}</a>
+                </span>Danh sách phiếu giảm giá</a>
                 <!--end::Button-->
             </div>
         </div>
@@ -38,7 +38,7 @@
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Tiêu đề</label>
                     <div class="col-10">
-                        <input class="form-control @error('discount_title') is-invalid @enderror"
+                        <input class="form-control"
                                value="{{$discount->discount_title}}" name="discount_title" type="text"
                                value="{{ old('discount_title') }}" placeholder="title" id="example-text-input"/>
                         @error('discount_title')
@@ -50,7 +50,7 @@
                 <div class="form-group row">
                     <label for="example-email-input" class="col-2 col-form-label">Code</label>
                     <div class="col-10">
-                        <input class="form-control @error('discount_code') is-invalid @enderror"
+                        <input class="form-control"
                                value="{{$discount->discount_code}}" name="discount_code" type="text"
                                value="{{ old('discount_code') }}" placeholder="dvbFGJvasjF" id="example-email-input"/>
                         @error('discount_code')
@@ -60,9 +60,9 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="example-tel-input" class="col-2 col-form-label">Sale</label>
+                    <label for="example-tel-input" class="col-2 col-form-label">% Sale</label>
                     <div class="col-10">
-                        <input class="form-control @error('price_sale') is-invalid @enderror"
+                        <input class="form-control"
                                value="{{$discount->price_sale}}" name="price_sale" type="number"
                                value="{{old('price_sale') }}" placeholder="%" id="example-tel-input"/>
                         @error('price_sale')
@@ -73,7 +73,7 @@
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label">Số lượng</label>
                     <div class="col-10">
-                        <input class="form-control @error('quantity') is-invalid @enderror"
+                        <input class="form-control"
                                value="{{$discount->quantity}}" name="quantity" type="number"
                                value="{{old('quantity') }}" placeholder="12345" id="example-password-input"/>
                         @error('quantity')
@@ -145,7 +145,7 @@
                     <div class="col-2">
                     </div>
                     <div class="col-10">
-                        <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
+                        <button type="submit" class="btn btn-success mr-2">{{ ('Save') }}</button>
                     </div>
                 </div>
 

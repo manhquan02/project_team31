@@ -256,7 +256,7 @@ class UserController extends Controller
         $bmi->bmi = $request_bmi;
         $bmi->health = test_bmi($request_bmi);
         $bmi->save();
-        Toastr::success(translate('Update BMI user successfully !'));
+        Toastr::success('Cập nhật chỉ số BMI thành công');
         return redirect()->back();
     }
 

@@ -17,11 +17,11 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{ translate('Dashboard') }}</span>
+                    <span class="menu-text">Bảng điều khiển</span>
                 </a>
             </li>
             <li class="menu-section">
-                <h4 class="menu-text">{{translate('User')}}</h4>
+                <h4 class="menu-text">Người dùng</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -37,7 +37,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{translate('Member account')}}</span>
+                    <span class="menu-text">Tài khoản hội viên</span>
                 </a>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -55,7 +55,7 @@
 
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{ translate('Staffs') }}</span>
+                    <span class="menu-text">Nhân viên</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="menu-submenu">
@@ -63,7 +63,7 @@
                     <ul class="menu-subnav">
                         <li class="menu-item menu-item-parent" aria-haspopup="true">
                             <span class="menu-link">
-                                <span class="menu-text">{{ translate('Staffs') }}</span>
+                                <span class="menu-text">Nhân viên</span>
                             </span>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -71,7 +71,7 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">{{ translate('Manage') }}</span>
+                                <span class="menu-text">Quản lý</span>
                             </a>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -79,7 +79,7 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">{{ translate('Coach') }}</span>
+                                <span class="menu-text">Huấn luyện viên</span>
                             </a>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
@@ -87,14 +87,14 @@
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">{{ translate('Payroll') }}</span>
+                                <span class="menu-text">Bảng lương</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
             <li class="menu-section">
-                <h4 class="menu-text">{{ translate('Events') }}</h4>
+                <h4 class="menu-text">Sự kiện</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -110,13 +110,13 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{ translate('Coupons') }}</span>
+                    <span class="menu-text">Phiếu giảm giá</span>
                     
                 </a>
             </li>
 
             <li class="menu-section">
-                <h4 class="menu-text">{{ translate('Handle')}}</h4>
+                <h4 class="menu-text">Xử lý</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -133,11 +133,11 @@
 
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{translate('Order')}}</span>
+                    <span class="menu-text">Đơn đặt lịch</span>
                 </a>
             </li>
             <li class="menu-section">
-                <h4 class="menu-text">{{ translate('Schedule') }}</h4>
+                <h4 class="menu-text">Lịch trình</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -154,7 +154,7 @@
 
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{ translate('Shifts') }}</span>
+                    <span class="menu-text">Ca tập</span>
                 </a>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -178,14 +178,14 @@
 
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{ translate('Schedule Coach') }}</span>
+                    <span class="menu-text">Lịch trình huấn luyện viên</span>
                 </a>
                 <div class="menu-submenu">
                     <i class="menu-arrow"></i>
                     <ul class="menu-subnav">
                         <li class="menu-item menu-item-parent" aria-haspopup="true">
                             <span class="menu-link">
-                                <span class="menu-text">{{ trans('Schedule Coach') }}</span>
+                                <span class="menu-text">Lịch trình huấn luyện viên</span>
                             </span>
                         </li>
                     </ul>
@@ -193,7 +193,7 @@
             </li>
 
             <li class="menu-section">
-                <h4 class="menu-text">{{ translate('Services') }}</h4>
+                <h4 class="menu-text">Dịch vụ</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -210,7 +210,7 @@
 
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{ translate('Subjects') }}</span>
+                    <span class="menu-text">Môn tập</span>
                 </a>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -257,7 +257,7 @@
                 </div>
             </li>
             <li class="menu-section">
-                <h4 class="menu-text">{{ translate('Interactive') }}</h4>
+                <h4 class="menu-text">Tương tác</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -272,7 +272,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{ translate('Posts') }}</span>
+                    <span class="menu-text">Bài viết</span>
                 </a>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -289,11 +289,11 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{ translate('Contacts') }}</span>
+                    <span class="menu-text">Phản hồi</span>
                 </a>
             </li>
             <li class="menu-section">
-                <h4 class="menu-text">{{ translate('Setting') }}</h4>
+                <h4 class="menu-text">Cài đặt</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -309,7 +309,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{ translate('Configuration') }}</span>
+                    <span class="menu-text">Cấu hình</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="menu-submenu">
@@ -317,23 +317,15 @@
                     <ul class="menu-subnav">
                         <li class="menu-item menu-item-parent" aria-haspopup="true">
                             <span class="menu-link">
-                                <span class="menu-text">{{ translate('Configuration') }}</span>
+                                <span class="menu-text">Cấu hình</span>
                             </span>
-                        </li>
-                        <li class="menu-item" aria-haspopup="true">
-                            <a href="{{ asset(route('admin.language.index')) }}" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot">
-                                    <span></span>
-                                </i>
-                                <span class="menu-text">{{ translate('Language') }}</span>
-                            </a>
                         </li>
                         <li class="menu-item" aria-haspopup="true">
                             <a href="layout/general/fluid-content.html" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">{{ translate('General configuration') }}</span>
+                                <span class="menu-text">Cấu hình chung</span>
                             </a>
                         </li>
                     </ul>

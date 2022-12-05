@@ -7,7 +7,7 @@
     <title>Verification Email</title>
 </head>
 <body>
-<h3>{{ 'Gym T&T'.' '. translate('Email verification letter') }}</h3>
-<span>{{ $data['code'].' '.translate('is your verification code')}}</span>
+<h3>Gym T&T xác thực email</h3>
+<span>{{ $data['code'].' '.là mã xác minh của bạn'}}</span>
 </body>
 </html>

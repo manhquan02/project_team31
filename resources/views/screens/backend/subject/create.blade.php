@@ -1,13 +1,13 @@
 @extends('layouts.backend.master')
-@section('title', translate('Subject Management'))
+@section('title', ('Subject Management'))
 @section('content')
 
     <div>
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Subject Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('Add New') }}</span></h3>
+                    <h3 class="card-label">{{ ('Subject Management') }}
+                        <span class="d-block text-muted pt-2 font-size-sm">{{ ('Add New') }}</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -25,7 +25,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ translate('List Subjects') }}</a>
+                </span>{{ ('List Subjects') }}</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 @method('POST')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ translate('Subject Name') }} <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">{{ ('Subject Name') }} <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <input class="form-control" name="subject_name" type="text"
                                    value="{{old('subject_name')}}"/>
@@ -44,14 +44,14 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Image') }} </label>
+                        <label for="example-tel-input" class="col-2 col-form-label">{{ ('Image') }} </label>
                         <div class="col-10">
                             <input type="file" class="form-control" name="image" value="{{old('image')}}"/>
                             <img id="image" src="" width="60px" height="60px">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }} <span
+                        <label for="example-password-input" class="col-2 col-form-label">{{ ('Description') }} <span
                                 class="text-danger">*</span></label>
                         <div class="col-10">
                             <textarea id="summernote" class="form-control" name="description">{{ old('description')}}</textarea>
@@ -63,8 +63,8 @@
                     <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
-                            <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
-                            <button type="reset" class="btn btn-secondary">{{ translate('Reset') }}</button>
+                            <button type="submit" class="btn btn-success mr-2">{{ ('Save') }}</button>
+                            <button type="reset" class="btn btn-secondary">{{ ('Reset') }}</button>
                         </div>
                     </div>
                 </div>

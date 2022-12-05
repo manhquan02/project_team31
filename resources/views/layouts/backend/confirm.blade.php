@@ -9,7 +9,7 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: "{{ translate('Confirm') }}",
+            confirmButtonText: "Xác nhận",
         }).then((result) => {
             if (result.isConfirmed) {
                     window.location = url

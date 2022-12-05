@@ -25,7 +25,7 @@
                             </g>
                         </svg>
                         <!--end::Svg Icon-->
-                    </span>{{translate('Payroll')}}</button>
+                    </span>{{('Payroll')}}</button>
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->

@@ -1,5 +1,5 @@
 @extends('layouts.backend.master')
-@section('title', translate('Dashboard'))
+@section('title', 'Bảng điều khiển')
 @section('content')
 @php
 $today = getdate();
@@ -14,7 +14,7 @@ $year = request('year') ? request('year') : $today['year'];
             <div class="card card-custom bg-gray-100 gutter-b card-stretch">
                 <!--begin::Header-->
                 <div class="card-header border-0 bg-danger py-5">
-                    <h3 class="card-title font-weight-bolder text-white">{{ translate('User')}}</h3>
+                    <h3 class="card-title font-weight-bolder text-white">Người dùng</h3>
                     <div class="card-toolbar">
                         <div class="dropdown dropdown-inline">
                             <a href="#" class="btn btn-transparent-white btn-sm font-weight-bolder dropdown-toggle px-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export</a>
@@ -81,11 +81,11 @@ $year = request('year') ? request('year') : $today['year'];
                         <div class="row m-0">
                             <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 mb-7">
                                 <h4 style="color: #999999;">{{$total_user}}</h4>
-                                <a href="#" class="text-warning font-weight-bold font-size-h6">{{translate('Total user')}}</a>
+                                <a href="#" class="text-warning font-weight-bold font-size-h6">Tổng số người dùng</a>
                             </div>
                             <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
                             <h4 style="color: #999999;">{{$total_order}}</h4>
-                                <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">{{translate('Total order')}}</a>
+                                <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">Tổng số đơn đặt lịch</a>
                             </div>
                         </div>
                         <!--end::Row-->
@@ -93,11 +93,11 @@ $year = request('year') ? request('year') : $today['year'];
                         <div class="row m-0">
                             <div class="col bg-light-danger px-6 py-8 rounded-xl mr-7">
                             <h4 style="color: #999999;">{{$total_subject}}</h4>
-                                <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">{{translate('Total subject')}}</a>
+                                <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Tổng số môn tập</a>
                             </div>
                             <div class="col bg-light-success px-6 py-8 rounded-xl">
                             <h4 style="color: #999999;">{{$total_package}}</h4>
-                                <a href="#" class="text-success font-weight-bold font-size-h6 mt-2">{{translate('Total package')}}</a>
+                                <a href="#" class="text-success font-weight-bold font-size-h6 mt-2">Tổng số gói tập</a>
                             </div>
                         </div>
                         <!--end::Row-->
@@ -110,8 +110,8 @@ $year = request('year') ? request('year') : $today['year'];
 												<!--begin::Title-->
 												<div class="card-title py-5">
 													<h3 class="card-label">
-														<span class="d-block text-dark font-weight-bolder">{{translate('Total revenue')}}</span>
-														<span class="d-block text-muted mt-2 font-size-sm">{{translate("Statistics data of the year")}} {{$year}}</span>
+														<span class="d-block text-dark font-weight-bolder">Doanh thu</span>
+														<span class="d-block text-muted mt-2 font-size-sm">Dữ liệu phân tích năm {{$year}}</span>
 													</h3>
 												</div>
 												<!--end::Title-->
@@ -123,7 +123,7 @@ $year = request('year') ? request('year') : $today['year'];
 															<!--begin::Naviigation-->
 															<ul class="navi">
 																<li class="navi-header font-weight-bold py-5">
-																	<span class="font-size-lg">{{translate('Select year')}}</span>
+																	<span class="font-size-lg">Chọn năm</span>
 																</li>
                                                                <form action="" id="sb">
                                                                <select class="form-control" name="year" id="year">
@@ -171,7 +171,6 @@ $year = request('year') ? request('year') : $today['year'];
         }
         var options = {
             series: [{
-                name: "{{translate('Total revenue')}}",
                 data: [{{st(1, $year)}}, {{st(2, $year)}}, {{st(3, $year)}}, {{st(4, $year)}}, {{st(5, $year)}}, {{st(6, $year)}},{{st(7, $year)}}, {{st(8, $year)}}, {{st(9, $year)}}, {{st(10, $year)}}, {{st(11, $year)}},{{st(12, $year)}}]
             }],
             chart: {

@@ -69,7 +69,7 @@ class DiscountController extends Controller
         $discount->fill($request->all());
         $discount->package_id = $package_id;
         $discount->save();
-        Toastr::success(translate('Add new coupon successfully'));
+        Toastr::success('Thêm mới phiếu giảm giá thành công');
         return redirect()->back();
     }
 
@@ -111,7 +111,7 @@ class DiscountController extends Controller
         $discount->fill($request->all());
         $discount->package_id = $package_id;
         $discount->save();
-        Toastr::success(translate('Update coupon successfully'));
+        Toastr::success('Cập nhật phiếu giảm giá thành công');
         return redirect()->back();
     }
 
