@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="example-email-input" class="col-2 col-form-label">Code</label>
+                    <label for="example-email-input" class="col-2 col-form-label">Mã code</label>
                     <div class="col-10">
                         <input class="form-control"  name="discount_code"
                                type="text" value="{{ old('discount_code') }}" 
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="example-tel-input" class="col-2 col-form-label">Sale</label>
+                    <label for="example-tel-input" class="col-2 col-form-label">% Giảm giá</label>
                     <div class="col-10">
                         <input class="form-control"  name="price_sale"
                                type="number" value="{{old('price_sale') }}" placeholder="0 %" id="example-tel-input"/>

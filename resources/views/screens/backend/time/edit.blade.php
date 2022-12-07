@@ -1,13 +1,13 @@
 @extends('layouts.backend.master')
-@section('title', ('Time Management'))
+@section('title', 'Quản lý ca tập')
 @section('content')
 
     <div>
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ ('Time Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ ('Update') }}</span></h3>
+                    <h3 class="card-label">Quản lý ca tập
+                        <span class="d-block text-muted pt-2 font-size-sm">Cập nhật</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -25,7 +25,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ ('List Times') }}</a>
+                </span>Danh sách ca tập</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 @method('PATCH')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ ('Time Name') }} <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">Tên ca tập <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <input class="form-control" name="time_name" type="text"
                                    value="{{old('time_name') ? old('time_name') : $time->time_name}}"/>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">{{ ('Start Time') }} <span
+                        <label for="example-password-input" class="col-2 col-form-label">Thời gian bắt đầu <span
                                 class="text-danger">*</span></label>
                         <div class="col-10">
                             <input type="time" class="form-control" name="start_time" value="{{old('start_time') ? old('start_time') : $time->start_time}}"/>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">{{ ('End Time') }} <span
+                        <label for="example-password-input" class="col-2 col-form-label">Thời gian kết thúc <span
                                 class="text-danger">*</span></label>
                         <div class="col-10">
                             <input type="time" class="form-control" name="end_time" value="{{old('end_time') ? old('end_time') : $time->end_time}}"/>
@@ -66,7 +66,7 @@
                     <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
-                            <button type="submit" class="btn btn-success mr-2">{{ ('Save') }}</button>
+                            <button type="submit" class="btn btn-success mr-2">Lưu</button>
                         </div>
                     </div>
                 </div>

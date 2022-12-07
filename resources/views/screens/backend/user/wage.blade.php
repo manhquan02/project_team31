@@ -1,13 +1,13 @@
 @extends('layouts.backend.master')
-@section('title', ('Payroll management'))
+@section('title', 'Quản lý bảng lương')
 @section('content')
 
 <div>
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">{{ ('Payroll management') }}
-                    <span class="d-block text-muted pt-2 font-size-sm">{{ ('Payroll for the month of ').date('m-Y')}}</span>
+                <h3 class="card-label">Quản lý bảng lương
+                    <span class="d-block text-muted pt-2 font-size-sm">Bảng lương tháng {{date('m-Y')}}</span>
                 </h3>
             </div>
         </div>
@@ -18,11 +18,11 @@
                 <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>{{ ('User Name') }}</th>
-                        <th>{{ ('Money / Session') }}</th>
-                        <th>{{ ('Number of working sessions') }}</th>
-                        <th>{{ ('Total wage') }}</th>
-                        <th>{{ ('Status') }}</th>
+                        <th>Họ và tên</th>
+                        <th>Lương / ca</th>
+                        <th>Số ca đã dạy</th>
+                        <th>Lương thực nhận</th>
+                        <th>Trạng thái</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
@@ -44,7 +44,7 @@
             @if(count($wages) <= 0) <div class="card-body">
                 <div class="mb-7">
                     <div class="row align-items-center">
-                        <h2 style="color: #999999; text-align: center">{{ ('No records found') }}</h2>
+                        <h2 style="color: #999999; text-align: center">Không tìm thấy bản ghi</h2>
                     </div>
                 </div>
         </div>

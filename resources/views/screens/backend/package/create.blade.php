@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label">{{ ('% Discount') }}</label>
+                    <label class="col-2 col-form-label">% Giảm giá</label>
                     <div class="col-10">
                         <input class="form-control" name="price_sale" type="text" value="{{old('price_sale')}}" />
                         @error('price_sale')
@@ -83,7 +83,7 @@
                     <label for="example-tel-input" class="col-2 col-form-label">Loại gói tập <span class="text-danger">*</span></label>
                     <div class="col-10">
                         <select class="form-control" name="type_package">
-                            <option selected disabled>{{ ('Choose a type package') }}</option>
+                            <option selected disabled>Chọn kiểu gói tập</option>
                            @foreach(typePackage() as $key=>$item)
                             <option @if(old('type_package') == $key) selected @endif value="{{$key}}">{{ $item }}</option>
                             @endforeach
@@ -123,7 +123,7 @@
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label"></label>
                     <div class="col-10">
-                        <button type="submit" class="btn btn-success mr-2">Tạo mới</button>
+                        <button type="submit" class="btn btn-success mr-2">Lưu</button>
                         <button type="reset" class="btn btn-secondary">Đặt lại</button>
                     </div>
                 </div>

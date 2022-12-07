@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="example-email-input" class="col-2 col-form-label">Code</label>
+                    <label for="example-email-input" class="col-2 col-form-label">Mã code</label>
                     <div class="col-10">
                         <input class="form-control"
                                value="{{$discount->discount_code}}" name="discount_code" type="text"
@@ -145,7 +145,7 @@
                     <div class="col-2">
                     </div>
                     <div class="col-10">
-                        <button type="submit" class="btn btn-success mr-2">{{ ('Save') }}</button>
+                        <button type="submit" class="btn btn-success mr-2">Lưu</button>
                     </div>
                 </div>
 

@@ -1,12 +1,12 @@
 @extends('layouts.backend.master')
-@section('title', ('Post Management'))
+@section('title', 'Quản lý bài viết')
 @section('content')
 <div>
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">{{ ('Post Management') }}
-                    <span class="d-block text-muted pt-2 font-size-sm">{{ ('List') }}</span>
+                <h3 class="card-label">Quản lý bài viết
+                    <span class="d-block text-muted pt-2 font-size-sm">Dánh sách</span>
                 </h3>
             </div>
             <div class="card-toolbar">
@@ -22,7 +22,7 @@
                             </g>
                         </svg>
                         <!--end::Svg Icon-->
-                    </span>{{ ('Add New Post') }}</a>
+                    </span>Thêm mới bài viết</a>
                 <!--end::Button-->
             </div>
         </div>
@@ -38,28 +38,28 @@
                                     <div class="d-flex align-items-center">
 
                                         <select class="form-control" name="status">
-                                            <option selected disabled>{{ ('Choose a status') }}</option>
-                                            <option value="0" @if(request('status', -1)==0) selected @endif>{{ ('Hidden') }}</option>
-                                            <option value="1" @if(request('status', -1)==1) selected @endif>{{ ('Show') }}</option>
+                                            <option selected disabled>Chọn trạng thái</option>
+                                            <option value="0" @if(request('status', -1)==0) selected @endif>Ẩn</option>
+                                            <option value="1" @if(request('status', -1)==1) selected @endif>Hiển thị</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4 my-2 my-md-0">
                                     <div class="d-flex align-items-center">
-                                        <label class="mr-3 mb-0 d-none d-md-block">{{('From')}}</label>
+                                        <label class="mr-3 mb-0 d-none d-md-block">Từ</label>
                                         <input name="start_date" @if(request('start_date')) value="{{ request('start_date') }}" @endif type="date" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="col-md-4 my-2 my-md-0">
                                     <div class="d-flex align-items-center">
-                                        <label class="mr-3 mb-0 d-none d-md-block">{{('To')}}</label>
+                                        <label class="mr-3 mb-0 d-none d-md-block">Đến</label>
                                         <input name="end_date" @if(request('end_date')) value="{{ request('end_date') }}" @endif type="date" class="form-control" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                            <button class="btn btn-light-primary px-6 font-weight-bold">{{('Search')}}</button>
+                            <button class="btn btn-light-primary px-6 font-weight-bold">Tìm kiếm</button>
                         </div>
                     </div>
                 </div>
@@ -72,12 +72,12 @@
                 <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>{{('Title')}}</th>
-                        <th>{{('Subject Name')}}</th>
-                        <th>{{('Poster')}}</th>
-                        <th>{{('Status')}}</th>
-                        <th>{{('Post date')}}</th>
-                        <th>{{('Actions')}}</th>
+                        <th>Tiêu đề</th>
+                        <th>Tên môn tập</th>
+                        <th>Người đăng bài</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày đăng bài</th>
+                        <th>Thao tác</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
@@ -92,9 +92,9 @@
                         </td>
                         <td>{{ date('d-m-Y H:i:s', strtotime($item->created_at)) }}</td>
                         <td>
-                            <a title="{{ ('View') }}" href="{{route('admin.post.edit', $item->id)}}"><i class="flaticon-eye text-info"></i></a>
-                            <a title="{{('Delete')}}" class="btn-confirm" data-title="{{ ('Are you sure you want to delete ?') }}" data-url="{{route('admin.post.delete', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
-                            <a title="{{ $item->status ==0 ? ('Show') : ('Hidden')}}" class="btn-confirm" data-title="{{ $item->status ==1 ? ('You are sure to hidden post ?') : ('You are sure to show post ?') }}" data-url="{{route('admin.post.change_status', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon-warning text-dark"></i></a>
+                            <a title="Xem chi tiết" href="{{route('admin.post.edit', $item->id)}}"><i class="flaticon-eye text-info"></i></a>
+                            <a title="Xóa" class="btn-confirm" data-title="Bạn có chắc chắn muốn xóa không ?" data-url="{{route('admin.post.delete', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
+                            <a title="{{ $item->status ==0 ? ('Show') : ('Hidden')}}" class="btn-confirm" data-title="{{ $item->status ==1 ? 'Bạn muốn ẩn bài viết này ?' : 'Bạn muốn hiển thị bài viết này ?' }}" data-url="{{route('admin.post.change_status', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon-warning text-dark"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -109,7 +109,7 @@
                 <!--begin::Search Form-->
                 <div class="mb-7">
                     <div class="row align-items-center">
-                        <h2 style="color: #999999; text-align: center">{{ ('No records found') }}</h2>
+                        <h2 style="color: #999999; text-align: center">Không tìm thấy bản ghi</h2>
                     </div>
                 </div>
                 <!--end::Search Form-->
@@ -118,6 +118,3 @@
     </div>
 </div>
 </div>
-@endsection
-@section('script')
-@endsection

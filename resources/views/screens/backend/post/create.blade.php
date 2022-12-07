@@ -1,13 +1,13 @@
 @extends('layouts.backend.master')
-@section('title', ('Post Management'))
+@section('title', 'Quản lý bài viết')
 @section('content')
     <div>
         <div class="card card-custom">
 
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ ('Post Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ ('Add new') }}</span></h3>
+                    <h3 class="card-label">Quản lý bài viết
+                        <span class="d-block text-muted pt-2 font-size-sm">Thêm mới</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -25,7 +25,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ ('List Posts') }}</a>
+                </span>Danh sách bài viết</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 @method('POST')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ ('Post Title') }} <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">Tiêu đề bài viết <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <input class="form-control" name="title" type="text"
                                    value="{{old('title')}}"/>
@@ -44,10 +44,10 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ ('Subject') }} <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">Môn tập <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <select class="form-control" name="subject_id">
-                                <option selected disabled>{{ ('Choose a subject') }} </option>
+                                <option selected disabled>Chọn môn tập </option>
                                 @if(count($subjects) >0)
                                     @foreach($subjects as $item)
                                         <option value="{{$item->id}}" >{{$item->subject_name}} </option>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">{{ ('Content') }} <span class="text-danger">*</span></label>
+                        <label for="example-password-input" class="col-2 col-form-label">Nội dung <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <textarea id="summernote" class="form-control" name="content_post">{{ old('content_post')}}</textarea>
                             @error('content_post')
@@ -71,8 +71,8 @@
                     <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
-                            <button type="submit" class="btn btn-success mr-2">{{ ('Save') }}</button>
-                            <button type="reset" class="btn btn-secondary">{{ ('Reset') }}</button>
+                            <button type="submit" class="btn btn-success mr-2">Lưu</button>
+                            <button type="reset" class="btn btn-secondary">Đặt lại</button>
                         </div>
                     </div>
                 </div>

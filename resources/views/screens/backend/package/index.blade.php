@@ -49,8 +49,8 @@
                                     <div class="d-flex align-items-center">
                                         <select class="form-control" name="status">
                                             <option selected disabled>Chọn trạng thái</option>
-                                            <option value="0" @if(request('status', -1)==0) selected @endif>{{ ('Lock') }}</option>
-                                            <option value="1" @if(request('status', -1)==1) selected @endif>{{ ('Active') }}</option>
+                                            <option value="0" @if(request('status', -1)==0) selected @endif>Khóa</option>
+                                            <option value="1" @if(request('status', -1)==1) selected @endif>Hoạt động</option>
                                         </select>
                                     </div>
                                 </div>
@@ -107,8 +107,8 @@
                         <td><span class="label label-inline {{$item->status == 1 ? 'label-light-primary': 'label-light-danger'}} font-weight-bold">{{ (config('status_package.'.$item->status) )}}</span>
                         </td>
                         <td>
-                            <a title="{{ ('View') }}" href="{{route('admin.package.edit', $item->id)}}"><i class="flaticon-eye text-info"></i></a>
-                            <a title="{{ ('Change Status') }}" class="btn-confirm" data-title="Are you sure you want to change the status ?" data-url="{{route('admin.package.change_status', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon-warning text-warning"></i></a>
+                            <a title="Xem chi tiết" href="{{route('admin.package.edit', $item->id)}}"><i class="flaticon-eye text-info"></i></a>
+                            <a title="Thay đổi trạng thái" class="btn-confirm" data-title="Bạn có chắc chắn muốn thay đổi trạng thái ?" data-url="{{route('admin.package.change_status', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon-warning text-warning"></i></a>
                         </td>
                     </tr>
                     @endforeach

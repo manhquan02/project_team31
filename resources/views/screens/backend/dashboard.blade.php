@@ -105,12 +105,13 @@ $year = request('year') ? request('year') : $today['year'];
                     <!--end::Stats-->
                 </div>
                 <div class="card card-custom card-stretch gutter-b">
+                <div class="card card-custom card-stretch gutter-b">
 											<!--begin::Header-->
 											<div class="card-header h-auto border-0">
 												<!--begin::Title-->
 												<div class="card-title py-5">
 													<h3 class="card-label">
-														<span class="d-block text-dark font-weight-bolder">Doanh thu</span>
+														<span class="d-block text-dark font-weight-bolder">Số người đăng ký gói tập mới</span>
 														<span class="d-block text-muted mt-2 font-size-sm">Dữ liệu phân tích năm {{$year}}</span>
 													</h3>
 												</div>
@@ -145,11 +146,33 @@ $year = request('year') ? request('year') : $today['year'];
 											<!--begin::Body-->
 											<div class="card-body">
 												<!--begin::Chart-->
+												<div id="kt_charts_widget_1s_chart"></div>
+												<!--end::Chart-->
+											</div>
+											<!--end::Body-->
+										</div>
+											<!--begin::Header-->
+											<div class="card-header h-auto border-0">
+												<!--begin::Title-->
+												<div class="card-title py-5">
+													<h3 class="card-label">
+														<span class="d-block text-dark font-weight-bolder">Doanh thu</span>
+														<span class="d-block text-muted mt-2 font-size-sm">Dữ liệu phân tích năm {{$year}}</span>
+													</h3>
+												</div>
+												<!--end::Title-->
+												
+											</div>
+											<!--end::Header-->
+											<!--begin::Body-->
+											<div class="card-body">
+												<!--begin::Chart-->
 												<div id="kt_charts_widget_1_chart"></div>
 												<!--end::Chart-->
 											</div>
 											<!--end::Body-->
 										</div>
+                                       
                 <!--end::Body-->
             </div>
             <!--end::Mixed Widget 1-->
@@ -272,6 +295,116 @@ $year = request('year') ? request('year') : $today['year'];
 
         var chart = new ApexCharts(element, options);
         chart.render();
+
+
+        var element2 = document.getElementById("kt_charts_widget_1s_chart");
+
+        if (!element2) {
+            return;
+        }
+        var options = {
+            series: [{
+                data: [{{sub(1, $year)}}, {{sub(2, $year)}}, {{sub(3, $year)}}, {{sub(4, $year)}}, {{sub(5, $year)}}, {{sub(6, $year)}},{{sub(7, $year)}}, {{sub(8, $year)}}, {{sub(9, $year)}}, {{sub(10, $year)}}, {{sub(11, $year)}},{{sub(12, $year)}}]
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: ['30%'],
+                    endingShape: 'rounded'
+                },
+            },
+            legend: {
+                show: false
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: ['Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Otb','Nov','Dec'],
+                axisBorder: {
+                    show: false,
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                active: {
+                    allowMultipleDataPointsSelection: false,
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                }
+            },
+            tooltip: {
+                style: {
+                    fontSize: '12px',
+                    fontFamily: KTApp.getSettings()['font-family']
+                },
+                y: {
+                    formatter: function (val) {
+                        return val + " đăng ký"
+                    }
+                }
+            },
+            colors: [KTApp.getSettings()['colors']['theme']['base']['success'], KTApp.getSettings()['colors']['gray']['gray-300']],
+            grid: {
+                borderColor: KTApp.getSettings()['colors']['gray']['gray-200'],
+                strokeDashArray: 4,
+                yaxis: {
+                    lines: {
+                        show: true
+                    }
+                }
+            }
+        };
+
+        var chart2 = new ApexCharts(element2, options);
+        chart2.render();
     }
 
     $(function(){

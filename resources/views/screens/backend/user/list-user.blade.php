@@ -1,6 +1,6 @@
 @extends('layouts.backend.master')
 
-@section('title', 'Trang người dùng')
+@section('title', 'Quản lý người dùng')
 
 @section('content')
 <div>
@@ -8,8 +8,8 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">Remote Datasource
-                <span class="d-block text-muted pt-2 font-size-sm">Sorting &amp; pagination remote datasource</span></h3>
+                <h3 class="card-label">Quản lý người dùng
+                <span class="d-block text-muted pt-2 font-size-sm">Danh sách</span></h3>
             </div>
             <div class="card-toolbar">
                 <!--begin::Dropdown-->
@@ -25,7 +25,7 @@
                             </g>
                         </svg>
                         <!--end::Svg Icon-->
-                    </span>{{('Payroll')}}</button>
+                    </span>Bảng lương</button>
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
@@ -104,12 +104,12 @@
                 <thead>
                     <tr>
                         <th>Record ID</th>
-                        <th>Name</th>
+                        <th>Họ và tên</th>
                         <th>Email</th>
-                        <th>Avatar</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th>Ảnh đại diện</th>
+                        <th>Vai trò</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
                         <th>Edit Role</th>
                         {{-- <th>Edit Permission</th> --}}
                     </tr>

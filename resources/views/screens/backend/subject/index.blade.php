@@ -1,12 +1,12 @@
 @extends('layouts.backend.master')
-@section('title', ('Subject Management'))
+@section('title', 'Quản lý môn tập')
 @section('content')
     <div>
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ ('Subject Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ ('List') }}</span></h3>
+                    <h3 class="card-label">Quản lý môn tập
+                        <span class="d-block text-muted pt-2 font-size-sm">Danh sách</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -24,7 +24,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{('Add new subject')}}</a>
+                </span>Thêm mới môn tập</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -38,7 +38,7 @@
                                     <div class="col-md-12 my-2 my-md-0">
                                         <div class="input-icon">
                                             <input name="keyword" type="text" class="form-control" @if(request('keyword')) value="{{ request('keyword') }}" @endif
-                                                   placeholder="{{('Enter Subject Name')}}"/>
+                                                   placeholder="Nhập tên môn học tìm kiếm"/>
                                             <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                         </span>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
                                 <button
-                                   class="btn btn-light-primary px-6 font-weight-bold">{{('Search')}}</button>
+                                   class="btn btn-light-primary px-6 font-weight-bold">Tìm kiếm</button>
                             </div>
                         </div>
                     </div>
@@ -61,9 +61,9 @@
                     <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>{{('Subject name')}}</th>
-                        <th>{{('Image')}}</th>
-                        <th>{{('Actions')}}</th>
+                        <th>Tên môn tập</th>
+                        <th>Ảnh đại diện</th>
+                        <th>Thao tác</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
@@ -79,7 +79,7 @@
                                 <a title="{{ ('View') }}"
                                        href="{{route('admin.subject.edit', $item->id)}}"><i
                                             class="flaticon-eye text-info"></i></a>
-                                    <a title="{{('Delete')}}" class="btn-confirm" data-title="Are you sure you want to delete ?" data-url="{{route('admin.subject.delete', $item->id)}}"
+                                    <a title="Xóa" class="btn-confirm" data-title="Bạn có chắc chắn muốn xóa không ?" data-url="{{route('admin.subject.delete', $item->id)}}"
                                        style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
                                 </td>
                             </tr>

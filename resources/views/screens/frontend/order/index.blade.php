@@ -145,10 +145,9 @@
             <section>
                 <div class="content-wrapper">
                     <h4 class="section-heading mb-5">Lựa chọn PT theo yêu cầu</h4>
-                    
-
                     <select name="pt_id" id="pet-select" class="fs-90 p-2-5 w-100 text-center">
                       @foreach($coachs as $coach)
+                      dd($coach->weekday)
                       <option value="{{$coach->id}}">{{$coach->name}}</option>
                       @endforeach
 

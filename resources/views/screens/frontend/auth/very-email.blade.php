@@ -2,24 +2,6 @@
 @section('title', 'Xác Minh')
 @section('content')
 <main>
-    <!--    breadcrumb-area start    -->
-    <section class="breadcrumb-area pt-180 pb-180 pt-md-120 pb-md-120 pt-xs-100 pb-xs-100 bg-fix" data-overlay="black" data-opacity="7" data-background="assets/img/bg/breadcrumb-bg-4.jpg">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <div class="breadcrumb-content">
-                        <h3 class="title">Đăng kí</h3>
-                        <ul>
-                            <li><a href="index.html">Trang chủ</a></li>
-                            <li class="active">Đăng kí</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--    breadcrumb-area end    -->
-
     <!-- contact-area start -->
     <div class="contact-area-2 pt-130 pb-130">
         <div class="container">
@@ -34,7 +16,7 @@
                 <div class="col-md-6 col-lg-7">
                     <div class="contact-form contact-form-2">
                         <h1 class="text-center">XÁC MINH</h1>
-                        <form action="{{route('post_very_email', $email)}}" method="post">
+                        <form action="{{route('post_very_email', [$email, $psw])}}" method="post">
                             @csrf
                             <div class="row">
                                 @if(session()->has('error'))

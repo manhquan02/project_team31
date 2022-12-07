@@ -34,6 +34,7 @@ class AuthController extends Controller
             'code' => $code
         ];
         $new = new User();
+        $new->avatar = 'https://vtv1.mediacdn.vn/thumb_w/650/2014/incognito-chrome-spicytricks-1420018283508.jpg';
         $new->name = $request->name;
         $new->email = $request->email;
         $new->phone = $request->phone;
@@ -44,20 +45,12 @@ class AuthController extends Controller
         $new->assignRole('member');
         $new->save();
         Mail::to("$request->email")->send(new VeryEmail($data));
-        return redirect()->route('very_email', [$request->email, $request->password]);
+        return redirect()->route('very_email', [$request->email, config_encode($request->password)]);
     }
 
 
     public function login()
     {
-        // if (Auth::attempt(
-        //     [
-        //         'email' => "admin@example.com",
-        //         'password' => 12345678,
-        //     ]
-        // )){
-        //     dd(Auth::id());
-        // }
         return view('screens.frontend.auth.login');
     }
 
@@ -78,7 +71,8 @@ class AuthController extends Controller
                 $user->verify_code = $code;
                 $user->save();
                 Mail::to("$request->email")->send(new VeryEmail($data));
-                return redirect()->route('very_email', [$request->email, $request->password]);
+                
+                return redirect()->route('very_email', [$request->email, config_encode($request->password)]);
             }
             if ($request->checkbox == 'on') {
                 Cookie::queue('em', $request->email, 44640);
@@ -88,15 +82,15 @@ class AuthController extends Controller
         } else return redirect()->back()->with('error', 'Email bạn nhập không kết nối với tài khoản nào. Hãy tìm tài khoản của bạn và đăng nhập.');
     }
 
-    public function very_email($email)
+    public function very_email($email, $psw)
     {
-        return view('screens.frontend.auth.very-email', compact('email'));
+        return view('screens.frontend.auth.very-email', compact('email', 'psw'));
     }
-    public function post_very_email($email, Request $request)
+    public function post_very_email($email,$psw, Request $request)
     {
+       
         $user = User::where('email', $email)->first();
 
-        
         if ($user->verify_code == $request->code) {
             $user->email_verified_at = date('Y-m-d H:i:s');
             $user->status = 1;
@@ -104,7 +98,7 @@ class AuthController extends Controller
             Auth::attempt(
                 [
                     'email' => $email,
-                    'password' => $user->password,
+                    'password' => config_decode($psw),
                 ]
             );
             return redirect()->route('home');

@@ -8,6 +8,6 @@
 </head>
 <body>
 <h3>Gym T&T xác thực email</h3>
-<span>{{ $data['code'].' '.là mã xác minh của bạn'}}</span>
+<span>{{ $data['code'].' '.'là mã xác minh của bạn'}}</span>
 </body>
 </html>

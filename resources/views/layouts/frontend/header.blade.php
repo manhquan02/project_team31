@@ -32,9 +32,7 @@
                         <li class="has">
                             <a href="">Liên Hệ</a>
                         </li>
-                        <li class="has">
-                            <a href="#">{{Auth::check() ? Auth::user()->name : 'Client'}}</a>
-                        </li>
+                       
                     </ul>
                 </nav>
                 <div class="attr-menu attr-white">

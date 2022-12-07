@@ -86,6 +86,18 @@ function st($month, $year)
     return $total;
 }
 
+function sub($month, $year)
+{  // Thống kê đăng ký mới
+    $total_sub = Order::where('status', 1)->get();
+    $total = 0;
+    foreach ($total_sub as $item) {
+        if (date('m-Y', strtotime($item->date_start)) == "$month" . "-" . "$year") {
+            $total += 1;
+        }
+    }
+    return $total;
+}
+
 function config_decode($text)
 {
     $result = substr($text, 35);

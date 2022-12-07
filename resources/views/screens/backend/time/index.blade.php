@@ -1,12 +1,12 @@
 @extends('layouts.backend.master')
-@section('title', ('Shift management'))
+@section('title', 'Quản lý ca tập')
 @section('content')
     <div>
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ ('Shift management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ ('List') }}</span></h3>
+                    <h3 class="card-label">Quản lý ca tập
+                        <span class="d-block text-muted pt-2 font-size-sm">Danh sách</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -24,7 +24,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{('Add new shift')}}</a>
+                </span>Thêm mới ca tập</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -34,10 +34,10 @@
                     <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>{{('Shift name')}}</th>
-                        <th>{{('Start time')}}</th>
-                        <th>{{('End time')}}</th>
-                        <th>{{('Actions')}}</th>
+                        <th>Tên ca tập</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Thời gian kết thúc</th>
+                        <th>Thao tác</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
@@ -52,7 +52,7 @@
                                 <a title="{{ ('View') }}"
                                        href="{{route('admin.time.edit', $item->id)}}"><i
                                             class="flaticon-eye text-info"></i></a>
-                                    <a title="{{('Delete')}}" class="btn-confirm" data-title="Are you sure you want to delete ?" data-url="{{route('admin.time.delete', $item->id)}}"
+                                    <a title="Xóa" class="btn-confirm" data-title="Bạn có chắc chắn muốn xóa không ?" data-url="{{route('admin.time.delete', $item->id)}}"
                                        style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
                                 </td>
                             </tr>
@@ -69,7 +69,7 @@
                         <!--begin::Search Form-->
                         <div class="mb-7">
                             <div class="row align-items-center">
-                                <h2 style="color: #999999; text-align: center">{{ ('No records found') }}</h2>
+                                <h2 style="color: #999999; text-align: center">Không tìm thấy bản ghi</h2>
                             </div>
                         </div>
                         <!--end::Search Form-->
