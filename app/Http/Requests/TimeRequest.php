@@ -33,9 +33,9 @@ class TimeRequest extends FormRequest
     public function messages()
     {
         return [
-            'time_name.required' => translate('Type time name, thanks'),
-            'start_time.required' => translate('Choose start time, thanks'),
-            'end_time.required' => translate('Choose end time, thanks'),
+            'time_name.required' => 'Không để trống tên ca tập',
+            'start_time.required' => 'Chọn thời gian bắt đầu ca',
+            'end_time.required' => 'Chọn thời gian kết thúc ca',
         ];
 
     }

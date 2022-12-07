@@ -28,6 +28,11 @@ Route::prefix('package')->name('package_client.')->group(function () {
     Route::get('', [\App\Http\Controllers\Client\PackageController::class, 'index'])->name('index');
     Route::get('{id}', [\App\Http\Controllers\Client\PackageController::class, 'detail'])->name('detail');
 });
+
+Route::prefix('post')->name('post_client.')->group(function () {
+    Route::get('', [\App\Http\Controllers\Client\PostController::class, 'index'])->name('index');
+    Route::get('{id}', [\App\Http\Controllers\Client\PostController::class, 'detail'])->name('detail');
+});
 Route::prefix('contact')->name('contact_client.')->group(function () {
     Route::get('', [\App\Http\Controllers\Client\ContactController::class, 'view'])->name('view');
     Route::post('', [\App\Http\Controllers\Client\ContactController::class, 'store'])->name('store');

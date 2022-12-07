@@ -27,7 +27,7 @@
                             <a href="Our-Trainer.html">Huấn Luyện Viên</a>
                         </li>
                         <li class="has">
-                            <a href="blog.html">Bài Viết</a>
+                            <a href="{{route('post_client.index')}}">Bài Viết</a>
                         </li>
                         <li class="has">
                             <a href="">Liên Hệ</a>

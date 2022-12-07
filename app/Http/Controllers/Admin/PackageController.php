@@ -37,10 +37,9 @@ class PackageController extends Controller
                     ->orderBy('created_at', 'desc');
             }
         }
-$cate_package =1;
+        $cate_package = 1;
         $packages =  $packages->where('set_pt', 0)->paginate(12);
-        return view('screens.backend.package.index', compact('packages','cate_package'));
-
+        return view('screens.backend.package.index', compact('packages', 'cate_package'));
     }
 
     public function index_pt(Request $request)
@@ -66,10 +65,9 @@ $cate_package =1;
                     ->orderBy('created_at', 'desc');
             }
         }
-$cate_package =2;
+        $cate_package = 2;
         $packages =  $packages->where('set_pt', 1)->paginate(12);
         return view('screens.backend.package.index', compact('packages', 'cate_package'));
-
     }
 
     public function create()
@@ -134,7 +132,7 @@ $cate_package =2;
             $package->into_price = $request->price - ($request->price * $package->price_sale / 100);
             $package->short_description = $request->short_description;
             $package->description = $request->description;
-           
+
             if ($request->set_pt == 'on') {
                 $package->set_pt = 1;
                 $package->total_session_pt = $request->total_session_pt;

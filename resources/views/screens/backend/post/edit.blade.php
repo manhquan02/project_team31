@@ -64,6 +64,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                    <label for="example-tel-input" class="col-2 col-form-label">Ảnh đại diện <span class="text-danger">*</span></label>
+                    <div class="col-10">
+                        <input type="file" class="form-control" name="avatar" value="{{old('avatar')}}" />
+                        <img id="image" src="" width="60px" height="60px">
+                    </div>
+                </div>
+                    <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label">Nội dung
                             <span class="text-danger">*</span></label>
                         <div class="col-10">

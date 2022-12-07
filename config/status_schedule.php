@@ -1,7 +1,7 @@
 <?php
 return [
-    0=>'Future',
-    1=>'Absent',
-    2=>'Present'
+    0=>'Sắp tới',
+    1=>'Vắng mặt',
+    2=>'Có mặt'
 ]
 ?>
