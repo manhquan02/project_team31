@@ -9,7 +9,16 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-        $post = Post::all();
-        return view('screens.frontend.post.index', compact('post'));
+        $posts = Post::all();
+        return view('screens.frontend.post.index', compact('posts'));
+    }
+
+    public function detail($id){
+        $post = Post::where('id', $id)->first();
+        if($post!=null){
+            return view('screens.frontend.post.detail', compact('post'));
+        }
+
+        return redirect()->back();
     }
 }

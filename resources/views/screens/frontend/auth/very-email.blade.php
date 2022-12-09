@@ -16,7 +16,7 @@
                 <div class="col-md-6 col-lg-7">
                     <div class="contact-form contact-form-2">
                         <h1 class="text-center">XÁC MINH</h1>
-                        <form action="{{route('post_very_email', [$email, $psw])}}" method="post">
+                        <form action="{{route('post_very_email', $email)}}" method="post">
                             @csrf
                             <div class="row">
                                 @if(session()->has('error'))

@@ -4,6 +4,7 @@
 <main>
     <div class="contact-area-2 pt-130 pb-130">
         <div class="container">
+        <h1 class="text-center">ĐĂNG NHẬP</h1>
             <div class="row justify-content-between mt-100">
                 <div class="col-md-6 col-lg-5">
                     <div class="contact-text text-left">
@@ -14,7 +15,7 @@
                 </div>
                 <div class="col-md-6 col-lg-7">
                     <div class="contact-form contact-form-2">
-                        <h1 class="text-center">ĐĂNG NHẬP</h1>
+                       
 
                         <form action="{{route('postLogin')}}" method="post">
                             @csrf

@@ -45,7 +45,7 @@ class AuthController extends Controller
         $new->assignRole('member');
         $new->save();
         Mail::to("$request->email")->send(new VeryEmail($data));
-        return redirect()->route('very_email', [$request->email, config_encode($request->password)]);
+        return redirect()->route('very_email', $request->email);
     }
 
 
@@ -72,7 +72,7 @@ class AuthController extends Controller
                 $user->save();
                 Mail::to("$request->email")->send(new VeryEmail($data));
                 
-                return redirect()->route('very_email', [$request->email, config_encode($request->password)]);
+                return redirect()->route('very_email', $request->email);
             }
             if ($request->checkbox == 'on') {
                 Cookie::queue('em', $request->email, 44640);
@@ -82,11 +82,11 @@ class AuthController extends Controller
         } else return redirect()->back()->with('error', 'Email bạn nhập không kết nối với tài khoản nào. Hãy tìm tài khoản của bạn và đăng nhập.');
     }
 
-    public function very_email($email, $psw)
+    public function very_email($email)
     {
-        return view('screens.frontend.auth.very-email', compact('email', 'psw'));
+        return view('screens.frontend.auth.very-email', compact('email'));
     }
-    public function post_very_email($email,$psw, Request $request)
+    public function post_very_email($email, Request $request)
     {
        
         $user = User::where('email', $email)->first();
@@ -98,7 +98,7 @@ class AuthController extends Controller
             Auth::attempt(
                 [
                     'email' => $email,
-                    'password' => config_decode($psw),
+                    'password'=> ''
                 ]
             );
             return redirect()->route('home');

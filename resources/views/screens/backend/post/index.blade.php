@@ -92,9 +92,11 @@
                         </td>
                         <td>{{ date('d-m-Y H:i:s', strtotime($item->created_at)) }}</td>
                         <td>
+                       
                             <a title="Xem chi tiết" href="{{route('admin.post.edit', $item->id)}}"><i class="flaticon-eye text-info"></i></a>
                             <a title="Xóa" class="btn-confirm" data-title="Bạn có chắc chắn muốn xóa không ?" data-url="{{route('admin.post.delete', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
-                            <a title="{{ $item->status ==0 ? ('Show') : ('Hidden')}}" class="btn-confirm" data-title="{{ $item->status ==1 ? 'Bạn muốn ẩn bài viết này ?' : 'Bạn muốn hiển thị bài viết này ?' }}" data-url="{{route('admin.post.change_status', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon-warning text-dark"></i></a>
+                            
+                            <a title="{{ $item->status ==0 ? 'Hiển thị bài viết' : 'Ẩn bài viết'}}" class="btn-confirm" data-title="{{ $item->status ==1 ? 'Bạn muốn ẩn bài viết này ?' : 'Bạn muốn hiển thị bài viết này ?' }}" data-url="{{route('admin.post.change_status', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon-warning text-dark"></i></a>
                         </td>
                     </tr>
                     @endforeach
