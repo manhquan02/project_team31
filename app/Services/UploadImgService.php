@@ -21,4 +21,35 @@ class UploadImgService {
         
         
     }
+
+    public static function nameWeekday($weekday_id){
+        $weekday_name = "";
+        switch ($weekday_id) {
+            case '1':
+                $weekday_name = "Monday";
+                break;
+            case '2':
+                $weekday_name = "Tuesday";
+                break;
+            case '3':
+                $weekday_name = "Wednesday";
+                break;
+            case '4':
+                $weekday_name = "Thursday";
+                break;
+            case '5':
+                $weekday_name = "Friday";
+                break;
+            case '6':
+                $weekday_name = "Saturday";
+                break;
+            case '7':
+                $weekday_name = "Sunday";
+                break;
+            default:
+                # code...
+                break;
+                return $weekday_name;
+        }
+    }
 }

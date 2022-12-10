@@ -82,9 +82,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\PostController::class, 'update'])->name('update');
     });
 
-    Route::prefix('schedule')->name('schedule.')->group(function () {
-        Route::get('list/{id}', [\App\Http\Controllers\Admin\ScheduleController::class, 'show'])->name('list');
-    });
 
     Route::prefix('time')->name('time.')->group(function () {
         Route::get('', [\App\Http\Controllers\Admin\TimeController::class, 'index'])->name('list');

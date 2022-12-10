@@ -3,14 +3,14 @@
         <div class="row align-items-center justify-content-xl-center">
             <div class="col-xl-2 col-lg-3 col-md-3 col-6">
                 <div class="logo-area">
-                    <a href="index.html"><img src="frontend/assets/img/logo/logo-white.png" alt="Logo"></a>
+                    <a href="{{route('home')}}"><img src="frontend/assets/img/logo/logo-white.png" alt="Logo"></a>
                 </div>
             </div>
             <div class="col-xl-8 d-xl-flex justify-content-center align-items-center d-none">
                 <nav class="main-menu main-menu-white">
                     <ul>
                         <li class="has">
-                            <a href="index.html">Trang Chủ</a>
+                            <a href="{{route('home')}}">Trang Chủ</a>
                         </li>
                         <li class="has-dropdown">
                             <a href="#">Trang</a>

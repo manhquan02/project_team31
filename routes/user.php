@@ -78,10 +78,14 @@ Route::prefix('admin/')->name('admin.')->group(function () {
     });
 
     // Route::prefix('schedule/')->name('schedule.')->group(function () {
-    //     Route::get('/', [SchedulePtController::class, 'index'])->name('list');
+    //     Route::get('', [SchedulePtController::class, 'index'])->name('list');
     // });
+    Route::prefix('schedule')->name('schedule.')->group(function () {
+        Route::get('list', [\App\Http\Controllers\Admin\ScheduleController::class, 'show'])->name('list');
+    });
 
-    Route::prefix(' /')->name('attendance.')->group(function () {
+
+    Route::prefix('attendance/')->name('attendance.')->group(function () {
         Route::get('/{id}', [AttendanceMemberController::class, 'index'])->name('list');
         Route::get('/edit-status', [AttendanceMemberController::class, 'editStatus'])->name('editStatus');
     });
@@ -114,6 +118,7 @@ Route::prefix('order/')->name('order.')->group(function () {
     Route::get('create/{id}', [ClientOrderController::class, 'index'])->name('index');
     Route::post('postOrder/{id}', [ClientOrderController::class, 'store'])->name('postOrder');
     Route::get('checkPayment', [ClientOrderController::class, 'returnUrl'])->name('returnUrl');
+    Route::get('checkWeekdayPt', [ClientOrderController::class, 'checkWeekdayPt'])->name('checkWeekdayPt');
     Route::get('test', [ClientOrderController::class, 'test'])->name('test');
     Route::get('create/{orderId}', [ClientOrderController::class, 'create'])->name('create');
 });

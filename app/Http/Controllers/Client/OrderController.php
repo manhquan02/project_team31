@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\Weekday;
 use App\Http\Utility\PackageUtility;
 use App\Models\TrainingPackage;
+use App\Http\Services\UploadImgService;
 use DateInterval;
 use DatePeriod;
 use DateTime;
@@ -38,9 +39,6 @@ class OrderController extends Controller
                                                 ]);
     }
 
-    public function test(){
-        dd('oke');
-    }
 
     public function setPackage(Request $request){
         // dd($request);
@@ -100,16 +98,30 @@ class OrderController extends Controller
     {   
         // dd($request->weekday);
         // dd(array_merge($request->weekday, $request->time));
+        
         $order = new Order();
         // dd($request->discount_code);
         $training = new TrainingPackage();
         $user = User::find(Auth::id());
         $package = Package::find($id);
-        // dd($package->type_package);
+        // dd($package->type_package);  
         if($package->type_package == 1){
+            $rule = [
+                'activate_date' => 'required',
+                'weekday' =>'required',
+                'pt_id' =>'required',
+            ];
+            $messages = [
+                'required' => ':attribute không được để chống',
+            ];
+            $request->validate($rule,$messages);
+            if(count($request->weekday) != $package->week_session_pt){
+                return back()->with('msg',"bạn phải chọn $package->week_session_pt buổi tập trên tuần");
+            }
             $total_session_pt = $package->total_session_pt;
             $week_session_pt = $package->week_session_pt;
             $total_session = $total_session_pt/$week_session_pt*7;
+            // dd($total_session);
             $newdate = strtotime ( '+'.$total_session.'day' , strtotime ( $request->activate_date ) ) ;
             $end_date = date ( 'Y-m-j' , $newdate );
             $order->date_start = $request->activate_date;
@@ -118,6 +130,13 @@ class OrderController extends Controller
         }
 
         elseif($package->type_package == 2) {
+            $rule = [
+                'activate_date' => 'required',
+            ];
+            $messages = [
+                'required' => ':attribute không được để chống',
+            ];
+            $request->validate($rule,$messages);
             if(isset($request->month_package)){
                 $month = $request->month_package;
                 $newdate = strtotime ( '+'.$month.' month' , strtotime ( $request->activate_date ) );
@@ -154,16 +173,6 @@ class OrderController extends Controller
                             'status' => 0,
                         ]);
                     }
-                    // $order->save();
-                    // // $order->users()->attach(Auth::id());
-                    
-                    // // // dd($order->id);
-                    // // // dd($order->id);
-                    // // $vnp_Url = $this->vpnPayment($order->id); 
-                    // // $this->create($order->id);
-                    // // return redirect($vnp_Url);
-                    
-                    // return back()->with('success', 'Thêm Order thành công'); 
                 }
                 else{
                     return back()->with('msg', 'Phiếu giảm giá không đúng'); 
@@ -439,6 +448,93 @@ class OrderController extends Controller
                     
     }
 
-    
+    public function nameWeekday($weekday_id){
+        $weekday_name = "";
+        switch ($weekday_id) {
+            case '1':
+                $weekday_name = "Monday";
+                break;
+            case '2':
+                $weekday_name = "Tuesday";
+                break;
+            case '3':
+                $weekday_name = "Wednesday";
+                break;
+            case '4':
+                $weekday_name = "Thursday";
+                break;
+            case '5':
+                $weekday_name = "Friday";
+                break;
+            case '6':
+                $weekday_name = "Saturday";
+                break;
+            case '7':
+                $weekday_name = "Sunday";
+                break;
+            default:
+                # code...
+                break;
+                
+        }
+        return $weekday_name;
+    }
+
+    public function checkWeekdayPt(Request $request){
+        $coachs = User::role('coach')->get(); 
+        $weekdayPt = $request->weekdayPt;
+        $package = Package::find($request->package_id);
+        $total_session_pt = $package->total_session_pt;
+        $week_session_pt = $package->week_session_pt;
+        $total_session = $total_session_pt/$week_session_pt*7;
+        // dd($total_session);
+        $newdate = strtotime ( '+'.$total_session.'day' , strtotime ( $request->activate_date ) ) ;
+        $end_date = date ( 'Y-m-j' , $newdate );
+        $interval = DateInterval::createFromDateString('1 day');
+        $date_start = new DateTime($request->activate_date);
+        $date_end = new DateTime($end_date);
+        $period = new DatePeriod($date_start, $interval, $date_end);
+        // dd($date_end);
+        $arrayPt = [];
+        if($package->set_pt == 1){
+           if(Schedule::count() != 0){
+            // foreach ($period as $dt) {
+                foreach ($coachs as $coach) {
+                    $count = 0;
+                    foreach ($request->weekdayPt as $addWeekdayPt => $ca) {
+                        // if ($dt->format("l") == $this->nameWeekday($addWeekdayPt)) {
+                            $schedulesPt = Schedule::where('pt_id', '=', $coach->id)
+                                                ->where('date', '>=', $request->activate_date)
+                                                ->where('weekday_name', '=', $this->nameWeekday($addWeekdayPt))
+                                                ->where('time_id', '=', $ca)
+                                                ->count();
+                            if($schedulesPt != 0){
+                                $count += 2;
+                                // dd($coach->id);
+                            }
+                        // }
+                    }
+                    if ($count == 0) {
+                        if(!in_array($coach->id, $arrayPt)){
+                            // array_push($arrayPt, $coach->id);
+                            $arrayPt[$coach->id] = $coach->name;
+                        }
+                        
+                    }
+                    
+                }
+            // }
+            }
+            else{
+                $coachs = User::role('coach')->pluck('id','name');
+                $arrayPt = $coachs;
+            }
+            
+        }
+        return response()->json([
+            'weekday' => $weekdayPt,
+            'arrayPt' => $arrayPt
+        ]);
+    }
 
 }

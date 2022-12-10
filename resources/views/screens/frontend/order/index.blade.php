@@ -53,7 +53,8 @@
                 <div class="content-wrapper">
                   <div style="width: 100%;" class="form-group">
                     <label style="color: black" for="exampleInputEmail1">Ngày kích hoạt</label>
-                    <input  type="date" name="activate_date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    {{-- <input type="date" name="activate_date" id="activate_date_input"> --}}
+                    <input  type="date" name="activate_date" class="form-control activate_date_input" id="activate_date_input" >
                     <small id="emailHelp" class="form-text text-muted">chọn ngày kích hoạt, chúng tôi sẽ tạo lịch cho bạn.</small>
                   </div>
                 </div>
@@ -62,7 +63,7 @@
                 <div class="content-wrapper">
                   <div style="width: 100%;" class="form-group">
                     <label style="color: black" for="exampleInputEmail1">Ngày kích hoạt</label>
-                    <input  type="date" name="activate_date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input  type="date" name="activate_date" class="form-control" class="activate_date" id="exampleInputEmail1 activate_date" aria-describedby="emailHelp" placeholder="Enter email">
                     <small id="emailHelp" class="form-text text-muted">chọn ngày kích hoạt, chúng tôi sẽ tạo lịch cho bạn.</small>
                   </div>
                   <div style="margin-top: 20px" class="input-group mb-3">
@@ -93,6 +94,11 @@
               <section>
                 <div class="content-wrapper">
                   <h4 class="section-heading">Lịch trình tập </h4>
+                  <div>
+                    @error('weekday')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                  </div>
                   <div class="row">
                       <div class="row">
                           <div class="col-xl-12">
@@ -112,13 +118,13 @@
                                               <td class="day">
                                                   {{$weekday}}
                                                   <div>
-                                                      <input class="checkboxclass" name="weekday[{{$key}}]" value="{{$key}}" type="checkbox">
+                                                      <input id="{{$weekday}}_pt check_weekday_pt" onclick="checkWeekday(this.id)" class="checkboxclass" name="weekday[{{$key}}]" value="{{$key}}" type="checkbox">
                                                   </div>
                                               </td>
                                               @foreach ($times as $time)
                                                 <td class="active">
                                                   <label>
-                                                      <input type="radio" class="option-input radio" name="weekday[{{$key}}]" value="{{$time->id}}" /> 
+                                                      <input id="check_weekday_pt" onclick="checkWeekdayPt({{$key}}, {{$time->id}})" type="radio"  class="option-input radio {{$weekday}}_pt" name="weekday[{{$key}}]" value="{{$time->id}}" /> 
                                                     </label>
                                                 </td>
                                               @endforeach
@@ -147,10 +153,11 @@
                     <h4 class="section-heading mb-5">Lựa chọn PT theo yêu cầu</h4>
                     
 
-                    <select name="pt_id" id="pet-select" class="fs-90 p-2-5 w-100 text-center">
-                      @foreach($coachs as $coach)
+                    {{-- <select name="pt_id" id="pet-select" class="fs-90 p-2-5 w-100 text-center"> --}}
+                    <select id="setCheckCoach" name="pt_id" class="form-select" aria-label="Default select example">
+                      {{-- @foreach($coachs as $coach)
                       <option value="{{$coach->id}}">{{$coach->name}}</option>
-                      @endforeach
+                      @endforeach --}}
 
                     </select>
             </section>
@@ -288,39 +295,94 @@
 @section('js')
 
 <script>
-      $package_id = {{$package->id}};
-      // $('#button_discount').on('click',function(){
-        function checkDiscount(){
-        console.log("quân");
-        var discount_code = $('#discount_code').val();
-      $.ajax({
-          type: 'GET',
-          url: "{{route('admin.order.setTotalMoney')}}",
-          data:{
-                package_id: $package_id,
-                discount_code: discount_code
-            },
-          
-          success:function(data){
-            console.log("abc");
-            console.log(data);
-            if(data['result'] == true){
-                
-                // console.log(data['package']);
-                // console.log(data['result']);
-                // document.querySelector(".set-coach").disabled = false;
-                document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
-                document.querySelector('#msg_package').innerHTML = `${data['message']}`;
-              }
-            else{
+
+  let weekdayPt = {}
+
+  
+
+
+  function checkWeekday(weekday_id){
+    console.log(weekday_id);
+    checkbox_weekday = document.getElementById(weekday_id);
+    console.log(checkbox_weekday.checked);
+    let value = checkbox_weekday.value
+    if(checkbox_weekday.checked == true){
+      weekdayPt[value] = null
+      // checkbox_weekday.style.background-color=#959595;
+    } else {
+      delete weekdayPt[value]
+      console.log("checked false");
+    }
+    console.log(weekdayPt)
+  }
+$package_id = {{$package->id}};
+
+// $(document).change('#activate_date_input', function (e) {
+//     console.log(document.getElementById("activate_date_input").value);
+//   })
+
+  function checkWeekdayPt(key, time){
+    console.log(document.getElementById("activate_date_input").value);
+    activate_date = document.getElementById("activate_date_input").value
+    if(weekdayPt.hasOwnProperty(key)) weekdayPt[key] = time 
+    console.log(weekdayPt);
+    $.ajax({
+        type: 'GET',
+        url: "{{route('order.checkWeekdayPt')}}",
+        data:{
+          weekdayPt: weekdayPt,
+          activate_date: activate_date,
+          package_id : {{$package->id}}
+        },
+        
+        success:function(data){
+          console.log("abc");
+          console.log(data['arrayPt']);
+          document.getElementById('setCheckCoach').innerHTML = '';
+          $.each(data['arrayPt'], function(key, pt) {
+            console.log(key);
+            document.getElementById('setCheckCoach').innerHTML += `<option value="${key}">${pt}</option>`; 
+          });
+
+        }
+    });
+  }
+
+
+    $package_id = {{$package->id}};
+    // $('#button_discount').on('click',function(){
+      function checkDiscount(){
+      console.log("quân");
+      var discount_code = $('#discount_code').val();
+    $.ajax({
+        type: 'GET',
+        url: "{{route('admin.order.setTotalMoney')}}",
+        data:{
+              package_id: $package_id,
+              discount_code: discount_code
+          },
+        
+        success:function(data){
+          console.log("abc");
+          console.log(data);
+          if(data['result'] == true){
+              
+              // console.log(data['package']);
+              // console.log(data['result']);
+              // document.querySelector(".set-coach").disabled = false;
+              document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
               document.querySelector('#msg_package').innerHTML = `${data['message']}`;
             }
+          else{
+            document.querySelector('#msg_package').innerHTML = `${data['message']}`;
           }
-      });
-    }
-    // })
+        }
+    });
+  }
+  // })
       
 </script>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js%401.16.0/dist/umd/popper.min.js"></script>

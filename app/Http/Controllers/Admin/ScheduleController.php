@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Schedule;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
@@ -47,30 +48,36 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
-    {
+    public function show(Request $request)
+    {   
+        // $schedules = Schedule::where('pt_id', Auth::id())->first();
+        // dd($schedules);
+        if(Schedule::where('pt_id', Auth::id())->first() != null){
+            
+            $date_end = Schedule::where('pt_id', Auth::id())->orderBy('id', 'desc')->first()->date;
+            // dd($date_end);
+            $schedules = Schedule::where('pt_id', Auth::id());
+            if(isset($request->status)){
+                $schedules = $schedules->where('status', $request->status);
+            }
+            if(isset($request->start_date)){
+                $schedules = $schedules->whereDate('date', '>=', $request->start_date);
+            }
+            else{
+                $schedules = $schedules->whereDate('date', '>=', date('Y-m-d'));
+            }
+            if(isset($request->end_date)){
+                $schedules = $schedules->whereDate('date', '<=', $request->end_date);
+            }
+            else{
+                $schedules = $schedules->whereDate('date', '<=', $date_end);
+            }
+            $schedules = $schedules->orderBy('date', 'asc')->paginate(12);
+            // $schedules = Schedule::where('pt_id', $id)->orderBy('date', 'asc')->paginate(12);
+            $user = \App\Models\User::where('id', Auth::id())->first();
+            return view('screens.backend.schedule.show', compact('schedules', 'user'));
+        }
 
-        $date_end = Schedule::where('pt_id', $id)->orderBy('id', 'desc')->first()->date;
-        $schedules = Schedule::where('pt_id', $id);
-        if(isset($request->status)){
-            $schedules = $schedules->where('status', $request->status);
-        }
-        if(isset($request->start_date)){
-            $schedules = $schedules->whereDate('date', '>=', $request->start_date);
-        }
-        else{
-            $schedules = $schedules->whereDate('date', '>=', date('Y-m-d'));
-        }
-        if(isset($request->end_date)){
-            $schedules = $schedules->whereDate('date', '<=', $request->end_date);
-        }
-        else{
-            $schedules = $schedules->whereDate('date', '<=', $date_end);
-        }
-        $schedules = $schedules->orderBy('date', 'asc')->paginate(12);
-        // $schedules = Schedule::where('pt_id', $id)->orderBy('date', 'asc')->paginate(12);
-        $user = \App\Models\User::where('id', $id)->first();
-        return view('screens.backend.schedule.show', compact('schedules', 'user'));
 
     }
 

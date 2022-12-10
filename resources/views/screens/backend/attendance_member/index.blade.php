@@ -3,7 +3,7 @@
 @section('content')
     <div>
         <div class="card card-custom">
-            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+            {{-- <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
                     <h3 class="card-label">{{ translate('Schedule Management') }}
                         <span class="d-block text-muted pt-2 font-size-sm"></span></h3>
@@ -27,7 +27,7 @@
                 </span>{{ translate('Add New Schedule') }}</a>
                     <!--end::Button-->
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <!--begin::Search Form-->
@@ -74,7 +74,7 @@
                     <!--end::Search Form-->
                 </form>
             </div>
-            <div class="card-body">
+            <form action="" method="POST" class="card-body">
                 <!--begin: Datatable-->
                 <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
                     <thead>
@@ -82,7 +82,6 @@
                         <th>#ID</th>
                         <th>{{translate('Name member')}}</th>
                         <th>{{translate('Day')}}</th>
-                        <th>{{translate('Package type')}}</th>
                         <th>{{translate('Shift')}}</th>
                         <th>{{translate('Time start')}}</th>
                         <th>{{translate('Time end')}}</th>
@@ -99,7 +98,6 @@
                                 <td>{{ translate(getdate(strtotime($item->date))['weekday']) }}<br>
                                     <span style="color: #999999">{{ date('d-m-Y', strtotime($item->date)) }}</span>
                                 </td>
-                                <td></td>
                                 <td>{{$item->time->time_name}}</td>
                                 <td>{{$item->time->start_time}}</td>
                                 <td>{{$item->time->end_time}}</td>
@@ -107,9 +105,12 @@
                                         <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{translate(config('status_schedule.'.$item->status))}}</span>
 
                                 </td>
-                                <td >
-                                    <div class="update_attendance" data-url="{{'admin.attendance.editStatus'}}" data-id="{{$item->id}}" style="cursor: pointer;">
+                                <td align="center">
+                                    {{-- <div class="update_attendance" data-url="{{'admin.attendance.editStatus'}}" data-id="{{$item->id}}" style="cursor: pointer;">
                                         <i style="font-size: 20px; " class="ki ki-reload text-warning"></i>
+                                    </div> --}}
+                                    <div class="form-check form-switch">
+                                        <input style="font-size: 23px" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                                     </div>
                                     
                                 </td>
@@ -133,7 +134,10 @@
                         <!--end::Search Form-->
                     </div>
                 @endif
-            </div>
+                <div align="center">
+                    <button type="button" class="btn btn-primary">Primary</button>
+                </div>
+            </form>
         </div>
     </div>
 @endsection
