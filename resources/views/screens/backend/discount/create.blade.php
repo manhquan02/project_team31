@@ -1,13 +1,13 @@
 @extends('layouts.backend.master')
 
-@section('title', translate('Coupon management') )
+@section('title', 'Quản lý phiếu giảm giá' )
 
 @section('content')
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">{{ translate('Coupon management') }}
-                    <span class="d-block text-muted pt-2 font-size-sm">{{ translate('Add new') }}</span></h3>
+                <h3 class="card-label">Quản lý phiếu giảm giá
+                    <span class="d-block text-muted pt-2 font-size-sm">Thêm mới</span></h3>
             </div>
             <div class="card-toolbar">
                 <!--begin::Button-->
@@ -25,7 +25,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ translate('List Coupons') }}</a>
+                </span>Danh sách phiếu giảm giá</a>
                 <!--end::Button-->
             </div>
         </div>
@@ -39,7 +39,7 @@
                     <label class="col-2 col-form-label">Tiêu đề</label>
                     <div class="col-10">
                         <input class="form-control @error('discount_title') is-invalid @enderror" name="discount_title"
-                               type="text" value="{{ old('discount_title') }}" placeholder="title"
+                               type="text" value="{{ old('discount_title') }}" 
                                id="example-text-input"/>
                         @error('discount_title')
                         <span class="text-danger">{{ $message }}</span>
@@ -48,10 +48,10 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="example-email-input" class="col-2 col-form-label">Code</label>
+                    <label for="example-email-input" class="col-2 col-form-label">Mã code</label>
                     <div class="col-10">
-                        <input class="form-control @error('discount_code') is-invalid @enderror" name="discount_code"
-                               type="text" value="{{ old('discount_code') }}" placeholder="dvbFGJvasjF"
+                        <input class="form-control"  name="discount_code"
+                               type="text" value="{{ old('discount_code') }}" 
                                id="example-email-input"/>
                         @error('discount_code')
                         <span class="text-danger">{{ $message }}</span>
@@ -60,10 +60,10 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="example-tel-input" class="col-2 col-form-label">Sale</label>
+                    <label for="example-tel-input" class="col-2 col-form-label">% Giảm giá</label>
                     <div class="col-10">
-                        <input class="form-control @error('price_sale') is-invalid @enderror" name="price_sale"
-                               type="number" value="{{old('price_sale') }}" placeholder="%" id="example-tel-input"/>
+                        <input class="form-control"  name="price_sale"
+                               type="number" value="{{old('price_sale') }}" placeholder="0 %" id="example-tel-input"/>
                         @error('price_sale')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -72,8 +72,8 @@
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label">Số lượng</label>
                     <div class="col-10">
-                        <input class="form-control @error('quantity') is-invalid @enderror" name="quantity"
-                               type="number" value="{{old('quantity') }}" placeholder="12345"
+                        <input class="form-control" name="quantity"
+                               type="number" value="{{old('quantity') }}" placeholder="0"
                                id="example-password-input"/>
                         @error('quantity')
                         <span class="text-danger">{{ $message }}</span>
@@ -85,10 +85,10 @@
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Chọn gói tập Sale</label>
                     <div class="col-10">
-                        <select @error('package_id') is-invalid @enderror class="form-control select2"
+                        <select class="form-control select2"
                         id="kt_select2_3" name="package_id[]"
                         placeholder="Chọn gói tập" multiple="multiple">
-                        <optgroup label="Gói tâp">
+                        <optgroup label="Chọn gói tập">
                             @foreach ($packages as $package)
                                 <option value="{{$package->id}}">{{$package->package_name}}</option>
                             @endforeach
@@ -100,7 +100,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label">{{ translate('Start Time') }}</label>
+                    <label class="col-2 col-form-label">Thời gian bắt đầu</label>
                     <div class="col-10">
                         <div class="input-group date">
                             <input @if(old('start_date')) value="{{old('start_date')}}" @endif type="date"
@@ -112,7 +112,7 @@
                     </span>
                             </div>
                         </div>
-                        <span class="form-text text-muted">{{ translate('Start Time') }}</span>
+                       
                         @error('start_date')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -121,7 +121,7 @@
 
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label">{{ translate('End Time') }}</label>
+                    <label class="col-2 col-form-label">Thời gian kết thúc</label>
                     <div class="col-10">
                         <div class="input-group date">
                             <input @if(old('end_date')) value="{{old('end_date')}}" @endif" type="date"
@@ -132,7 +132,7 @@
                     </span>
                             </div>
                         </div>
-                        <span class="form-text text-muted">{{ translate('End Time') }}</span>
+                       
                         @error('end_date')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -143,8 +143,7 @@
                     <div class="col-2">
                     </div>
                     <div class="col-10">
-                        <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
-                        {{-- <button type="reset" class="btn btn-secondary">Cancel</button> --}}
+                        <button type="submit" class="btn btn-success mr-2">Lưu</button>
                     </div>
                 </div>
 

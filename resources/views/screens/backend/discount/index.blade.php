@@ -1,6 +1,6 @@
 @extends('layouts.backend.master')
 
-@section('title', translate('Coupon Management'))
+@section('title','Quản lý phiếu giảm giá')
 
 @section('content')
     <div>
@@ -8,9 +8,9 @@
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Coupon Management') }}
+                    <h3 class="card-label">Quản lý phiếu giảm giá
                         <span
-                            class="d-block text-muted pt-2 font-size-sm">{{ translate('List') }}</span>
+                            class="d-block text-muted pt-2 font-size-sm">Danh sách</span>
                     </h3>
                 </div>
                 <div class="card-toolbar">
@@ -103,7 +103,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ translate('Add new coupon') }}</a>
+                </span>Thêm mới phiếu giảm giá</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -118,7 +118,7 @@
                                         <div class="input-icon">
                                             <input name="keyword" type="text" class="form-control"
                                                    @if(request('keyword')) value="{{ request('keyword') }}" @endif
-                                                   placeholder="{{translate('Enter coupon title')}}"/>
+                                                   placeholder="Nhập tiêu đề tìm kiếm"/>
                                             <span>
                                         <i class="flaticon2-search-1 text-muted"></i>
                                         </span>
@@ -126,7 +126,7 @@
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('From')}}</label>
+                                            <label class="mr-3 mb-0 d-none d-md-block">Từ </label>
                                             <input name="start_date"
                                                    @if(request('start_date')) value="{{ request('start_date') }}"
                                                    @endif type="date"
@@ -135,7 +135,7 @@
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('To')}}</label>
+                                            <label class="mr-3 mb-0 d-none d-md-block">Đến </label>
                                             <input name="end_date"
                                                    @if(request('end_date')) value="{{ request('end_date') }}"
                                                    @endif type="date" class="form-control"/>
@@ -145,7 +145,7 @@
                             </div>
                             <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
                                 <button
-                                    class="btn btn-light-primary px-6 font-weight-bold">{{translate('Search')}}</button>
+                                    class="btn btn-light-primary px-6 font-weight-bold">Tìm kiếm</button>
                             </div>
                         </div>
                     </div>
@@ -159,15 +159,15 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>{{translate('Title')}}</th>
-                        <th>{{translate('Code')}}</th>
-                        <th>{{translate('% Sale')}}</th>
-                        <th>{{translate('Quantity')}}</th>
-                        <th>{{translate('Package')}}</th>
-                        <th>{{translate('Start date')}}</th>
-                        <th>{{translate('End date')}}</th>
-                        <th>{{translate('Status')}}</th>
-                        <th>{{translate('Actions')}}</th>
+                        <th>Tiêu đề</th>
+                        <th>Mã code</th>
+                        <th>% Giảm giá</th>
+                        <th>Số lượng mã</th>
+                        <th>Gói tập</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Thời gian kết thúc</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -217,7 +217,7 @@
                     <div class="card-body">
                         <div class="mb-7">
                             <div class="row align-items-center">
-                                <h2 style="color: #999999; text-align: center">{{ translate('No records found') }}</h2>
+                                <h2 style="color: #999999; text-align: center">Không tìm thấy bản ghi</h2>
                             </div>
                         </div>
                     </div>

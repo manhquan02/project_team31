@@ -42,7 +42,7 @@ class ContactController extends Controller
         if ($contact != null && $contact->status == 0) {
             $contact->status = 1;
             $contact->save();
-            Toastr::success(translate('Update contact status successfully'));
+            Toastr::success('Cập nhật thành công');
             return redirect()->route('admin.contact.index');
         }
         return redirect()->route('admin.contact.index');

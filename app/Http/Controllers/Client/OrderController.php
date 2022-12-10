@@ -317,7 +317,6 @@ class OrderController extends Controller
                                 $returnData['Message'] = 'Giao dịch không thành công do: Khách hàng hủy giao dịch';
                                 $order->status=0;
                             }
-                            
                             $order->save();
                             // dd($order->id);
                             $order = Order::find($order->id);
@@ -349,7 +348,7 @@ class OrderController extends Controller
 
                                                             
                                         $attendance->create([
-                                            'user_id' => 1,
+                                            'user_id' => Auth::id(),
                                             'order_id' => $order->id,
                                             'schedule_id' =>  $schedule->id,
                                             'time_id' => $training->time_id,

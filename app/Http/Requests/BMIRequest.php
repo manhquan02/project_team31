@@ -32,8 +32,8 @@ class BMIRequest extends FormRequest
     public function messages()
     {
         return [
-            'weight.required' => translate('Type your weight, thanks'),
-            'height.required' => translate('Type your height, thanks'),
+            'weight.required' => 'Không để trống cân nặng',
+            'height.required' => 'Không để trống chiều cao',
         ];
 
     }

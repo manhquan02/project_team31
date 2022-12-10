@@ -1,6 +1,6 @@
 @extends('layouts.backend.master')
 
-@section('title', 'Trang người dùng')
+@section('title', 'Quản lý người dùng')
 
 @section('content')
 <div class="card card-custom">
@@ -16,7 +16,7 @@
         <div class="card-body">
 
             <div class="form-group row">
-                <label class="col-2 col-form-label">{{translate('Full name')}}</label>
+                <label class="col-2 col-form-label">Họ và tên </label>
                 <div class="col-10">
                     <input class="form-control @error('name') is-invalid @enderror" name="name" type="text" value="{{ old('name') }}" id="example-text-input" />
                     @error('name')
@@ -36,7 +36,7 @@
             </div>
 
             <div class="form-group row">
-                <label for="example-tel-input" class="col-2 col-form-label">{{translate('Phone number')}}</label>
+                <label for="example-tel-input" class="col-2 col-form-label">Số điện thoại</label>
                 <div class="col-10">
                     <input class="form-control @error('phone') is-invalid @enderror" name="phone" type="tel" value="{{ old('phone') }}" id="example-tel-input" />
                     @error('phone')
@@ -46,7 +46,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-lg-2 col-form-label">{{translate('Gender')}}</label>
+                <label class="col-lg-2 col-form-label">Giới tính</label>
                 <div class="col-xl-8 col-lg-8 col-sm-12 col-md-12 d-flex align-items-center">
                     <select class="form-control" name="gender">
                         <option value="1">Nam</option>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-2 col-form-label">{{translate('Address')}}</label>
+                <label class="col-2 col-form-label">Địa chỉ</label>
                 <div class="col-10">
                     <input class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" type="text" placeholder="" id="example-text-input" />
                     @error('address')
@@ -68,7 +68,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-2 col-form-label">{{translate('Role')}}</label>
+                <label class="col-2 col-form-label">Vai trò</label>
                 <div class="col-lg-4 col-md-9 col-sm-12">
                     <select name="role" class="form-control">
                         @foreach ($roles as $role)
@@ -83,8 +83,8 @@
                     <div class="col-2">
                     </div>
                     <div class="col-10">
-                        <button type="submit" class="btn btn-success mr-2">{{translate('Save')}}</button>
-                        <button type="reset" class="btn btn-secondary">{{translate('Cancel')}}</button>
+                        <button type="submit" class="btn btn-success mr-2">Lưu</button>
+                        <button type="reset" class="btn btn-secondary">Đặt lại</button>
                     </div>
                 </div>
             </div>

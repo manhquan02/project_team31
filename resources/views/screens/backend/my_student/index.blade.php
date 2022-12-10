@@ -153,12 +153,12 @@
                 <thead>
                     <tr>
                         <th>Record ID</th>
-                        <th>Name</th>
+                        <th>Họ và tên</th>
                         <th>Email</th>
-                        <th>Avatar</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th>Ảnh đại diện</th>
+                        <th>Vai trò</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
                         <th>Edit Role</th>
                         {{-- <th>Edit Permission</th> --}}
                     </tr>

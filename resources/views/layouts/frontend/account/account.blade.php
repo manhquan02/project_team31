@@ -1,266 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./profile.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"
-      
-    />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    
-  </head>
-  <style>
-    /* Profile_page */
-body {
-  background: #dcdcdc;
-  margin-top: 20px;
-}
-.profile-cover {
-  position: relative;
-  z-index: 0;
-}
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="{{asset('frontend/assets/css/account/account.css')}}">
+<body>
+  <div class="main-content">
+    <!-- Top navbar -->
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" style="color: rgb(0, 0, 0);" href="https://www.creative-tim.com/product/argon-dashboard" target="_blank">Về trang chủ</a>
+      </div>
+    </nav>
+    <!-- Header -->
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="max-height: 500px; background-image: url({{asset('frontend/assets/img/gallery/gallery-17.jpg')}}); background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <!-- <span class=" bg-gradient-default opacity-8"></span> -->
+      <span class="mask bg-gradient-default opacity-8"></span>
 
-.panel {
-  margin-bottom: 30px;
-  color: #696969;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
-}
-
-.profile-cover__action {
-  display: -ms-flexbox;
-  display: -webkit-box;
-  display: flex;
-  padding: 120px 30px 10px 153px;
-  border-radius: 5px 5px 0 0;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -ms-flex-pack: end;
-  -webkit-box-pack: end;
-  justify-content: flex-end;
-  overflow: hidden;
-  background: url(https://bootdey.com/img/Content/bg1.jpg) no-repeat;
-  background-size: cover;
-}
-
-.profile-cover__action > .btn {
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
-
-.profile-cover__img {
-  position: absolute;
-  top: 120px;
-  left: 30px;
-  text-align: center;
-  z-index: 1;
-}
-
-.profile-cover__img > img {
-  max-width: 120px;
-  border: 5px solid #fff;
-  border-radius: 50%;
-}
-
-.profile-cover__img > .h3 {
-  color: #393939;
-  font-size: 20px;
-  line-height: 30px;
-}
-
-.profile-cover__img > img + .h3 {
-  margin-top: 6px;
-}
-
-.profile-cover__info .nav {
-  margin-right: 28px;
-  padding: 15px 0 10px 170px;
-  color: #999;
-  font-size: 16px;
-  line-height: 26px;
-  font-weight: 300;
-  text-align: center;
-  text-transform: uppercase;
-  -ms-flex-pack: end;
-  -webkit-box-pack: end;
-  justify-content: flex-end;
-}
-
-/* .profile-cover__info .nav li {
-margin-top: 13px;
-margin-bottom: 13px;
-}
-
-.profile-cover__info .nav li:not(:first-child) {
-margin-left: 30px;
-padding-left: 30px;
-border-left: 1px solid #eee;
-}
-
-.profile-cover__info .nav strong {
-display: block;
-margin-bottom: 10px;
-color: #e16123;
-font-size: 34px;
-} */
-
-@media (min-width: 481px) {
-  .profile-cover__action > .btn {
-    min-width: 125px;
-  }
-
-  .profile-cover__action > .btn > span {
-    display: inline-block;
-  }
-}
-
-@media (max-width: 600px) {
-  .profile-cover__info .nav {
-    display: block;
-    margin: 90px auto 0;
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-
-  .profile-cover__info .nav li:not(:first-child) {
-    margin-top: 8px;
-    margin-left: 0;
-    padding-top: 18px;
-    padding-left: 0;
-    border-top: 1px solid #eee;
-    border-left-width: 0;
-  }
-}
-
-.panel {
-  margin-bottom: 30px;
-  color: #696969;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
-}
-
-
-/* profile  */
-        body {
-    /* background: rgb(23, 11, 27) */
-}
-
-.form-control:focus {
-    box-shadow: none;
-    border-color: #BA68C8
-}
-
-.profile-button {
-    background: rgb(99, 39, 120);
-    box-shadow: none;
-    border: none
-}
-
-.profile-button:hover {
-    background: #682773
-}
-
-.profile-button:focus {
-    background: #682773;
-    box-shadow: none
-}
-
-.profile-button:active {
-    background: #682773;
-    box-shadow: none
-}
-
-.back:hover {
-    color: #682773;
-    cursor: pointer
-}
-
-.labels {
-    font-size: 11px
-}
-
-.add-experience:hover {
-    /* background: #342836; */
-    color: #fff;
-    cursor: pointer;
-    border: solid 1px #BA68C8
-}
-  </style>
-  <body>
-    <div class="container rounded bg-white mt-5 mb-5">
-      <div class="panel profile-cover">
-        <div class="profile-cover__img">
-          <img
-            src="https://bootdey.com/img/Content/avatar/avatar6.png"
-            alt=""
-          />
-          <h3 class="h3">Nguyễn Tiến Hoàng</h3>
-        </div>
-        <div class="profile-cover__action bg--img" data-overlay="0.3">
-          <button class="btn btn-rounded btn-info">
-            <i class="fa fa-plus"></i>
-            <span>Follow</span>
-          </button>
-          <button class="btn btn-rounded btn-info">
-            <i class="fa fa-comment"></i>
-            <span>Message</span>
-          </button>
-        </div>
-        <div class="bg-light my-6">
-          <br style="padding: 30 0 30 0" />
-          <br style="padding: 30 0 30 0" />
-          <br style="padding: 30 0 30 0" />
-          <br style="padding: 30 0 30 0" />
-          <br style="padding: 30 0 30 0" />
-        </div>
-        <div class="profile-cover__info bg-dark">
-          <nav class="navbar navbar-expand-sm bg-dark text-white">
-            <div class="container-fluid">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a
-                    href="./profile.html"
-                    class="nav-link text-white text-uppercase text-bold"
-                    >Thông tin cá nhân</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a
-                    href="./schedule.html"
-                    class="nav-link text-white text-uppercase text-bold"
-                    >Lịch trinh tập luyện</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a
-                    href="./updateMK.html"
-                    class="nav-link text-white text-uppercase text-bold"
-                    >Đổi mật khẩu</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a
-                    href=""
-                    class="nav-link text-white text-uppercase text-bold"
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </nav>
+      <!-- Header container -->
+      <div style="margin-right: 300px" class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h1  class="display-2 text-white">
+                <img width="250px" src="{{asset('frontend/assets/img/logo/logo-white.png')}}" alt="">
+            </h1>
+            <p class="text-white mt-0 mb-5">Vì một sức khoẻ tốt && Vì một con người đẹp </p>
+            <!-- <a href="#!" class="btn btn-info">Edit profile</a> -->
+          </div>
         </div>
       </div>
-      <div class="container">
-        @yield('content')
-        
-      </div>
-      
     </div>
-  </body>
-</html>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+      <div class="row">
+        
+        <div class="col-xl-3 order-xl-1 mb-5 mb-xl-0">
+          <div class="card card-profile shadow">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                  <a href="#">
+                    <img src="https://demos.creative-tim.com/argon-dashboard/assets-old/img/theme/team-4.jpg" class="rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between">
+                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+              </div>
+            </div>
+            <div class="card-body pt-0 pt-md-4">
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-2">
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h3>
+                  Jessica Jones<span class="font-weight-light">, 27</span>
+                </h3>
+                <div class="h5 font-weight-300">
+                  <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                </div>
+                <div class="h5 mt-4">
+                  <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                </div>
+                <div>
+                  <i class="ni education_hat mr-2"></i>University of Computer Science
+                </div>
+                <hr class="my-4">
+                <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
+                <a href="#">Show more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-9 order-xl-2">
+          <div class="card bg-secondary shadow">
+            <div style="border: 2px dotted;" class="card-header bg-white border-0">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-profile">
+                    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link navbar-profile-li" href="#">Thông tin cá nhân</a>
+                        </li>
+                        <li class="nav-item">
+                            <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>
+                          </li>
+                        <li class="nav-item active">
+                            <a class="nav-link navbar-profile-li"  href="#">Lịch tập </a>
+                        </li>
+                        
+                      </ul>
+                    </div>
+                  </nav>
+            </div>
+            <!-- <br> -->
+             @yield('content')
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6 m-auto text-center">
+        <div class="copyright">
+          <p>Made with <a href="https://www.creative-tim.com/product/argon-dashboard" target="_blank">Argon Dashboard</a> by Creative Tim</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>

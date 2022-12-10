@@ -32,9 +32,9 @@ class SubjectRequest extends FormRequest
     public function messages()
     {
         return [
-            'subject_name.required' => translate('Type subject name, thanks'),
-            'description.required' => translate('Type description, thanks'),
-            'description.max' => translate('The description must not be greater than 10000 characters, thanks'),
+            'subject_name.required' => 'Không để trống tên môn tập',
+            'description.required' => 'Không để trống mô tả môn tập',
+            'description.max' => 'Mô tả môn tập không được quá dài',
         ];
 
     }

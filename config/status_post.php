@@ -1,6 +1,6 @@
 <?php
 return [
-    0 => 'Hidden',
-    1 => 'Show',
+    0 => 'Ẩn',
+    1 => 'Hiển thị',
 ];
 ?>

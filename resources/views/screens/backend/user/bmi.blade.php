@@ -1,13 +1,12 @@
 @extends('layouts.backend.master')
-@section('title', translate('BMI Management'))
+@section('title', 'Quản lý chỉ số BMI')
 @section('content')
 
     <div>
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('BMI Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('BMI') }}</span></h3>
+                    <h3 class="card-label">Quản lý chỉ số BMI
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -25,7 +24,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ translate('List Users') }}</a>
+                </span>Danh sách người dùng</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -34,7 +33,7 @@
                 @method('PATCH')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ translate('Weight') }} ( kg )<span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">Cân nặng ( kg )<span class="text-danger">*</span></label>
                         <div class="col-10">
                             <input class="form-control" name="weight" type="text"
                                    value="{{old('weight') ? old('weight') : $bmi->weight }}"/>
@@ -44,7 +43,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ translate('Height') }} ( cm )<span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">Chiều cao ( cm )<span class="text-danger">*</span></label>
                         <div class="col-10">
                             <input class="form-control" name="height" type="text"
                                    value="{{old('height') ? old('height') : $bmi->height }}"/>
@@ -54,7 +53,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ translate('BMI') }}</label>
+                        <label class="col-2 col-form-label">Chỉ số BMI</label>
                         <div class="col-10">
                             <input disabled class="form-control" type="text" name="bmi"
                                    value="{{ $bmi->bmi }}"/>
@@ -62,7 +61,7 @@
 
                     </div>
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ translate('Health') }}</label>
+                        <label class="col-2 col-form-label">Tình trạng sức khỏe</label>
                         <div class="col-10">
                             <input disabled class="form-control" name="health" type="text"
                             value="{{config('bmi.'.$bmi->health)}}"/>
@@ -71,7 +70,7 @@
                     <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
-                            <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
+                            <button type="submit" class="btn btn-success mr-2">Lưu</button>
                         </div>
                     </div>
                 </div>

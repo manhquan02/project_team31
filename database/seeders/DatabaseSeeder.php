@@ -29,10 +29,5 @@ class DatabaseSeeder extends Seeder
         $this->call(WeekdaySeeder::class);
 
         // $this->call(ResultContractSeeder::class);    
-
-
-        // Ngôn ngữ
-        $this->call(LanguageSeeder::class);
-        $this->call(TranslationSeeder::class);
     }
 }

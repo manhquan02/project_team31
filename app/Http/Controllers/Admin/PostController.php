@@ -49,7 +49,7 @@ class PostController extends Controller
                 $post->status = 0;
             }
             $post->save();
-            Toastr::success(translate('Update post status successfully'));
+            Toastr::success('Cập nhật trạng thái bài viết thành công');
             return redirect()->route('admin.post.index');
         }
         return redirect()->route('admin.post.index');
@@ -60,7 +60,7 @@ class PostController extends Controller
         $post = Post::where('id', $id)->first();
         if ($post != null) {
             $post->delete();
-            Toastr::success(translate('Delete post successfully'));
+            Toastr::success('Xóa bài viết thành công');
             return redirect()->route('admin.post.index');
         }
         return redirect()->route('admin.post.index');
@@ -77,10 +77,13 @@ class PostController extends Controller
         $new = new Post();
         $new->title = $request->title;
         $new->subject_id = $request->subject_id;
+        if ($request->avatar) {
+            upload_image('avatar', $request->avatar, $new, 'images/post');
+        }
         $new->content_post = $request->content_post;
-        $new->user_id = 1;
+        $new->user_id = Auth::check() ? Auth::user()->id : 1;
         $new->save();
-        Toastr::success(translate('Add new post successfully'));
+        Toastr::success('Thêm mới bài viết thành công');
         return redirect()->route('admin.post.create');
     }
 
@@ -100,11 +103,14 @@ class PostController extends Controller
         if ($post != null) {
             $post->title = $request->title;
             $post->subject_id = $request->subject_id;
+            if ($request->avatar) {
+                upload_image('avatar', $request->avatar, $post, 'images/post');
+            }
             $post->content_post = $request->content_post;
-            $post->user_id = 1;
+            $post->user_id = Auth::check() ? Auth::user()->id : 1;
             $post->save();
         }
-        Toastr::success(translate('Update post successfully'));
+        Toastr::success('Cập nhật bài viết thành công');
         return redirect()->route('admin.post.index');
     }
 }

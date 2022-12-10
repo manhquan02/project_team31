@@ -25,7 +25,6 @@ Route::get('login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])
 Route::post('/postLogin', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('very_email/{email}', [AuthController::class, 'very_email'])->name('very_email');
 Route::post('post_very_email/{email}', [AuthController::class, 'post_very_email'])->name('post_very_email');
-
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 /**

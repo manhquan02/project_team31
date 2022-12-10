@@ -27,14 +27,12 @@
                             <a href="Our-Trainer.html">Huấn Luyện Viên</a>
                         </li>
                         <li class="has">
-                            <a href="blog.html">Bài Viết</a>
+                            <a href="{{route('post_client.index')}}">Bài Viết</a>
                         </li>
                         <li class="has">
                             <a href="">Liên Hệ</a>
                         </li>
-                        <li class="has">
-                            <a href="#">{{Auth::check() ? Auth::user()->name : 'Client'}}</a>
-                        </li>
+                       
                     </ul>
                 </nav>
                 <div class="attr-menu attr-white">

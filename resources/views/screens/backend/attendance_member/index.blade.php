@@ -1,11 +1,11 @@
 @extends('layouts.backend.master')
-@section('title', translate('Schedule Management'))
+@section('title', 'Quản lý lịch trình')
 @section('content')
     <div>
         <div class="card card-custom">
             {{-- <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Schedule Management') }}
+                    <h3 class="card-label">Quản lý lịch trình
                         <span class="d-block text-muted pt-2 font-size-sm"></span></h3>
                 </div>
                 <div class="card-toolbar">
@@ -24,7 +24,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{ translate('Add New Schedule') }}</a>
+                </span>Thêm mới lịch trình</a>
                     <!--end::Button-->
                 </div>
             </div> --}}
@@ -38,28 +38,28 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('Status')}}</label>
+                                            
                                             <select class="form-control" name="status">
-                                                <option selected disabled>{{ translate('Choose a status') }}</option>
+                                                <option selected disabled>Chọn trạng thái</option>
                                                 <option value="0"
-                                                        @if(request('status', -1) == 0) selected @endif>{{ translate('Future') }}</option>
+                                                        @if(request('status', -1) == 0) selected @endif>Sắp tới</option>
                                                 <option value="1"
-                                                        @if(request('status', -1) == 1) selected @endif>{{ translate('Absent') }}</option>
+                                                        @if(request('status', -1) == 1) selected @endif>Vắng mặt</option>
                                                 <option value="2"
-                                                        @if(request('status', -1) == 2) selected @endif>{{ translate('Present') }}</option>
+                                                        @if(request('status', -1) == 2) selected @endif>Có mặt</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('From')}}</label>
+                                            <label class="mr-3 mb-0 d-none d-md-block">Từ</label>
                                             <input name="start_date" @if(request('start_date')) value="{{ request('start_date') }}" @endif type="date"
                                                    class="form-control"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">{{translate('To')}}</label>
+                                            <label class="mr-3 mb-0 d-none d-md-block">Đến</label>
                                             <input name="end_date" @if(request('end_date')) value="{{ request('end_date') }}" @endif type="date" class="form-control"/>
                                         </div>
                                     </div>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
                                 <button
-                                    class="btn btn-light-primary px-6 font-weight-bold">{{translate('Search')}}</button>
+                                    class="btn btn-light-primary px-6 font-weight-bold">Tìm kiếm</button>
                             </div>
                         </div>
                     </div>
@@ -80,13 +80,14 @@
                     <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>{{translate('Name member')}}</th>
-                        <th>{{translate('Day')}}</th>
-                        <th>{{translate('Shift')}}</th>
-                        <th>{{translate('Time start')}}</th>
-                        <th>{{translate('Time end')}}</th>
-                        <th>{{translate('Status')}}</th>
-                        <th>{{translate('Attendance')}}</th>
+                        <th>Tên hội viên</th>
+                        <th>Ngày tập</th>
+                        <th>Kiểu gói tập</th>
+                        <th>Ca tập</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Thời gian kết thúc</th>
+                        <th>Trạng thái</th>
+                        <th>Điểm danh</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
@@ -95,14 +96,14 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->user->name}}</td>
-                                <td>{{ translate(getdate(strtotime($item->date))['weekday']) }}<br>
+                                <td>{{ getdate(strtotime($item->date))['weekday'] }}<br>
                                     <span style="color: #999999">{{ date('d-m-Y', strtotime($item->date)) }}</span>
                                 </td>
                                 <td>{{$item->time->time_name}}</td>
                                 <td>{{$item->time->start_time}}</td>
                                 <td>{{$item->time->end_time}}</td>
                                 <td class="view_status">
-                                        <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{translate(config('status_schedule.'.$item->status))}}</span>
+                                        <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{config('status_schedule.'.$item->status)}}</span>
 
                                 </td>
                                 <td align="center">
@@ -128,7 +129,7 @@
                         <!--begin::Search Form-->
                         <div class="mb-7">
                             <div class="row align-items-center">
-                                <h2 style="color: #999999; text-align: center">{{ translate('No records found') }}</h2>
+                                <h2 style="color: #999999; text-align: center">Không tìm thấy bản ghi</h2>
                             </div>
                         </div>
                         <!--end::Search Form-->
@@ -157,7 +158,7 @@
             },
             success: function ()
             {
-                $('.view_status').html(` <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{translate(config('status_schedule.'.$item->status))}}</span>`);
+                $('.view_status').html(` <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{config('status_schedule.'.$item->status)}}</span>`);
             }
         });
 
@@ -176,7 +177,7 @@
     //         },
     //         success: function(data) {
     //             console.log($data);
-    //             $('.view_status').html(` <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{translate(config('status_schedule.'.$item->status))}}</span>`);
+    //             $('.view_status').html(` <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{config('status_schedule.'.$item->status)}}</span>`);
     //             if (data == '') {
     //                 window.location.reload()
     //             }

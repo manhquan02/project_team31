@@ -1,13 +1,13 @@
 @extends('layouts.backend.master')
-@section('title', translate('Package Management'))
+@section('title', 'Quản lý gói tập')
 @section('content')
 <div>
     <div class="card card-custom">
 
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">{{ translate('Package management') }}
-                    <span class="d-block text-muted pt-2 font-size-sm">{{ translate('Add new') }}</span>
+                <h3 class="card-label">Quản lý gói tập
+                    <span class="d-block text-muted pt-2 font-size-sm">Cập nhật</span>
                 </h3>
             </div>
             <div class="card-toolbar">
@@ -23,7 +23,7 @@
                             </g>
                         </svg>
                         <!--end::Svg Icon-->
-                    </span>{{ translate('List Packages') }}</a>
+                    </span>Danh sách gói tập</a>
                 <!--end::Button-->
             </div>
         </div>
@@ -32,7 +32,7 @@
             @method('PATCH')
             <div class="card-body">
                 <div class="form-group row">
-                    <label class="col-2 col-form-label">{{ translate('Package Name') }} <span class="text-danger">*</span></label>
+                    <label class="col-2 col-form-label">Tên gói tập <span class="text-danger">*</span></label>
                     <div class="col-10">
                         <input class="form-control" name="package_name" type="text" value="{{old('package_name') ? old('package_name') : $package->package_name}}" />
                         @error('package_name')
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label">{{ translate('Subject') }} <span class="text-danger">*</span></label>
+                    <label class="col-2 col-form-label">Môn tập <span class="text-danger">*</span></label>
                     <div class="col-10">
                         <select name="subject_id" class="form-control select2">
                             <option selected value="{{$package->subject_id}}">{{ $package->subject->subject_name}}</option>
@@ -55,14 +55,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Avatar') }} </label>
+                    <label for="example-tel-input" class="col-2 col-form-label">Ảnh đại diện </label>
                     <div class="col-10">
                         <input type="file" class="form-control" name="avatar" value="{{old('avatar')}}" />
                         <img id="image" src="{{asset($package->avatar)}}" width="60px" height="60px">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label">{{ translate('Price') }} <span class="text-danger">*</span></label>
+                    <label class="col-2 col-form-label">Giá niêm yiết <span class="text-danger">*</span></label>
                     <div class="col-10">
                         <input class="form-control" name="price" type="text" value="{{old('price') ? old('price') : $package->price}}" />
                         @error('price')
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label">{{ translate('% Discount') }}</label>
+                    <label class="col-2 col-form-label">̀% Giảm giá</label>
                     <div class="col-10">
                         <input class="form-control" name="price_sale" type="text" value="{{old('price_sale') ? old('price_sale') : $package->price_sale}}" />
                         @error('price_sale')
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Type Package') }} <span class="text-danger">*</span></label>
+                    <label for="example-tel-input" class="col-2 col-form-label">Loại gói tập <span class="text-danger">*</span></label>
                     <div class="col-10">
                         <select class="form-control" name="type_package">
                             <option selected value="{{$package->type_package}}">{{ typePackage()[$package->type_package] }}</option>
@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Short Description') }} <span class="text-danger">*</span></label>
+                    <label for="example-password-input" class="col-2 col-form-label">Mô tả ngắn <span class="text-danger">*</span></label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="short_description" value="{{ old('short_description') ? old('short_description') : $package->short_description}}">
                         @error('short_description')
@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }}
+                    <label for="example-password-input" class="col-2 col-form-label">Mô tả gói tập
                         <span class="text-danger">*</span></label>
                     <div class="col-10">
                         <textarea id="summernote" class="form-control" name="description">{!! old('description') ? old('description') : $package->description !!}</textarea>
@@ -116,7 +116,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Have a Coach ?') }} </label>
+                    <label for="example-password-input" class="col-2 col-form-label">Gói tập có PT ? </label>
                     <div class="col-10 p-3">
                         <input type="checkbox" id="pt" name="set_pt" @if($package->set_pt == 1 || old('set_pt') ==1) checked @endif>
                         @error('set_pt')
@@ -130,7 +130,7 @@
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label"></label>
                     <div class="col-10">
-                        <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
+                        <button type="submit" class="btn btn-success mr-2">Lưu</button>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
         
         if ($('#pt').prop('checked') == true) {
                 content = ` <div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Tổng buổi tập có PT') }} </label>
+                    <label for="example-password-input" class="col-2 col-form-label">Tổng buổi tập có PT </label>
                     <div class="col-10 p-3">
                         <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt') ? old('total_session_pt') : $package->total_session_pt}}">
                         @error('total_session_pt')
@@ -155,7 +155,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Số buổi PT trên tuần') }} </label>
+                    <label for="example-password-input" class="col-2 col-form-label">Số buổi PT trên tuần </label>
                     <div class="col-10 p-3">
                         <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt') ? old('week_session_pt') : $package->week_session_pt}}">
                         @error('week_session_pt')
@@ -172,14 +172,14 @@
             let content = ``;
             if ($(this).prop('checked') == true) {
                 content = `<div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Tổng buổi tập có PT') }} </label>
+                    <label for="example-password-input" class="col-2 col-form-label">Tổng buổi tập có PT </label>
                     <div class="col-10 p-3">
                         <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt') ? old('total_session_pt') : $package->total_session_pt}}">
                         
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">{{ translate('Số buổi PT trên tuần') }} </label>
+                    <label for="example-password-input" class="col-2 col-form-label">Số buổi PT trên tuần </label>
                     <div class="col-10 p-3">
                         <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt') ? old('week_session_pt') : $package->week_session_pt}}">
                        

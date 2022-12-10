@@ -33,10 +33,10 @@ class PostRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => translate('Type post title, thanks'),
-            'content_post.required' => translate('Type content post, thanks'),
-            'content_post.max' => translate('The content must not be greater than 10000 characters, thanks'),
-            'subject_id.required' => translate('Choose a subject, thanks'),
+            'title.required' => 'Không để trống tiêu đề bài viết',
+            'content_post.required' => 'Không để trống nội dung bài viết',
+            'content_post.max' => 'Nội dung bài viết không được quá dài',
+            'subject_id.required' => 'Chọn môn tập',
         ];
 
     }

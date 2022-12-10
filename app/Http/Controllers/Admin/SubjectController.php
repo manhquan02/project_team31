@@ -39,7 +39,7 @@ class SubjectController extends Controller
         }
         $new->description = $request->description;
         $new->save();
-        Toastr::success(translate('Add new subject successfully'));
+        Toastr::success('Thêm mới môn tập thành công');
         return redirect()->route('admin.subject.create');
     }
 
@@ -48,7 +48,7 @@ class SubjectController extends Controller
         $subject = Subject::where('id', $id)->first();
         if ($subject != null) {
             $subject->delete();
-            Toastr::success(translate('Delete subject successfully'));
+            Toastr::success('Xóa môn tập thành công');
             return redirect()->back();
         }
         return redirect()->back();
@@ -72,7 +72,7 @@ class SubjectController extends Controller
             upload_image('image',$request->image, $subject, 'images/subject');
         }
         $subject->save();
-        Toastr::success(translate('Update subject successfully'));
+        Toastr::success('Cập nhật môn tập thành công');
         return redirect()->route('admin.subject.edit', $id);
     }
 

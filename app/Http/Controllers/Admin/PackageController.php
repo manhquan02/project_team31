@@ -37,10 +37,9 @@ class PackageController extends Controller
                     ->orderBy('created_at', 'desc');
             }
         }
-$cate_package =1;
+        $cate_package = 1;
         $packages =  $packages->where('set_pt', 0)->paginate(12);
-        return view('screens.backend.package.index', compact('packages','cate_package'));
-
+        return view('screens.backend.package.index', compact('packages', 'cate_package'));
     }
 
     public function index_pt(Request $request)
@@ -66,10 +65,9 @@ $cate_package =1;
                     ->orderBy('created_at', 'desc');
             }
         }
-$cate_package =2;
+        $cate_package = 2;
         $packages =  $packages->where('set_pt', 1)->paginate(12);
         return view('screens.backend.package.index', compact('packages', 'cate_package'));
-
     }
 
     public function create()
@@ -102,7 +100,7 @@ $cate_package =2;
             $new->week_session_pt = $request->week_session_pt;
         }
         $new->save();
-        Toastr::success(translate('Add new package successfully'));
+        Toastr::success('Thêm mới gói tập thành công');
         return redirect()->route('admin.package.create');
     }
 
@@ -134,7 +132,7 @@ $cate_package =2;
             $package->into_price = $request->price - ($request->price * $package->price_sale / 100);
             $package->short_description = $request->short_description;
             $package->description = $request->description;
-           
+
             if ($request->set_pt == 'on') {
                 $package->set_pt = 1;
                 $package->total_session_pt = $request->total_session_pt;
@@ -145,7 +143,7 @@ $cate_package =2;
                 $package->week_session_pt = null;
             }
             $package->save();
-            Toastr::success(translate('Update package successfully'));
+            Toastr::success('Cập nhật gói tập thành công');
             return redirect()->back();
         }
         return redirect()->route('admin.package.index');
@@ -161,7 +159,7 @@ $cate_package =2;
                 $package->status = 0;
             }
             $package->save();
-            Toastr::success(translate('Update package status successfully'));
+            Toastr::success('Cập nhật trạng thái gói tập thành công');
             return redirect()->route('admin.package.index');
         }
         return redirect()->route('admin.package.index');

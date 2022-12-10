@@ -1,12 +1,12 @@
 @extends('layouts.backend.master')
-@section('title', translate('Subject Management'))
+@section('title', 'Quản lý môn tập')
 @section('content')
     <div>
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">{{ translate('Subject Management') }}
-                        <span class="d-block text-muted pt-2 font-size-sm">{{ translate('Update') }}</span></h3>
+                    <h3 class="card-label">Quản lý môn tập
+                        <span class="d-block text-muted pt-2 font-size-sm">Cập nhật</span></h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -24,7 +24,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{translate('List Subjects')}}</a>
+                </span>Danh sách môn tập</a>
                     <!--end::Button-->
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 @method('PATCH')
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">{{ translate('Subject name') }} <span class="text-danger">*</span></label>
+                        <label class="col-2 col-form-label">Tên môn tập <span class="text-danger">*</span></label>
                         <div class="col-10">
                             <input class="form-control" name="subject_name" type="text"
                                    value="{{old('subject_name') ? old('subject_name') : $subject->subject_name}}"/>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-tel-input" class="col-2 col-form-label">{{ translate('Image') }}</label>
+                        <label for="example-tel-input" class="col-2 col-form-label">Ảnh đại diện</label>
                         <div class="col-10">
                             <input type="file" class="form-control" name="image"
                                    value="{{old('image') ? old('image') : $subject->image}} "/>
@@ -51,9 +51,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-password-input" class="col-2 col-form-label">{{ translate('Description') }} <span class="text-danger">*</span></label>
+                        <label for="example-password-input" class="col-2 col-form-label">Mô tả <span class="text-danger">*</span></label>
                         <div class="col-10">
-                            <textarea placeholder="{{ translate('Content ...') }}" id="summernote" class="form-control" name="description">{{old('description') ? old('description') : $subject->description}}</textarea>
+                            <textarea placeholder="{{ ('Content ...') }}" id="summernote" class="form-control" name="description">{{old('description') ? old('description') : $subject->description}}</textarea>
                             @error('description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -62,7 +62,7 @@
                     <div class="form-group row">
                         <label for="example-password-input" class="col-2 col-form-label"></label>
                         <div class="col-10">
-                            <button type="submit" class="btn btn-success mr-2">{{ translate('Save') }}</button>
+                            <button type="submit" class="btn btn-success mr-2">Lưu</button>
                         </div>
                     </div>
                 </div>
