@@ -52,11 +52,11 @@ class ScheduleController extends Controller
     {   
         // $schedules = Schedule::where('pt_id', Auth::id())->first();
         // dd($schedules);
-        if(Schedule::where('pt_id', Auth::id())->first() != null){
+        if(Schedule::where('pt_id', 3)->first() != null){
             
-            $date_end = Schedule::where('pt_id', Auth::id())->orderBy('id', 'desc')->first()->date;
+            $date_end = Schedule::where('pt_id', 3)->orderBy('id', 'desc')->first()->date;
             // dd($date_end);
-            $schedules = Schedule::where('pt_id', Auth::id());
+            $schedules = Schedule::where('pt_id', 3);
             if(isset($request->status)){
                 $schedules = $schedules->where('status', $request->status);
             }
@@ -74,7 +74,7 @@ class ScheduleController extends Controller
             }
             $schedules = $schedules->orderBy('date', 'asc')->paginate(12);
             // $schedules = Schedule::where('pt_id', $id)->orderBy('date', 'asc')->paginate(12);
-            $user = \App\Models\User::where('id', Auth::id())->first();
+            $user = \App\Models\User::where('id', 3)->first();
             return view('screens.backend.schedule.show', compact('schedules', 'user'));
         }
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Client\OrderController as ClientOrderController;
 use App\Http\Controllers\Client\PaymentController;
+use App\Http\Controllers\Client\ScheduleCoachController;
 use App\Http\Controllers\Client\ScheduleMemberController as ClientScheduleMemberController;
 use App\Http\Controllers\Client\ScheduleUsserController;
 use Illuminate\Support\Facades\Route;
@@ -125,6 +126,12 @@ Route::prefix('order/')->name('order.')->group(function () {
 
 Route::prefix('account/')->name('account.')->group(function () {
     Route::get('schedule', [ClientScheduleMemberController::class, 'scheduleMember'])->name('index');
+});
+
+Route::prefix('account-pt/')->name('accountPt.')->group(function () {
+    Route::get('profile', [ScheduleCoachController::class, 'profile'])->name('profile');
+    Route::get('schedule', [ScheduleCoachController::class, 'scheduleCoach'])->name('scheduleCoach');
+    Route::get('view-member/{scheduleId}', [ScheduleCoachController::class, 'viewMember'])->name('viewMember');
 });
 
 

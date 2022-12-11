@@ -38,20 +38,20 @@
           <div class="card card-profile shadow">
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
-                <div class="card-profile-image">
+                <div  class="card-profile-image">
                   <a href="#">
-                    <img src="https://demos.creative-tim.com/argon-dashboard/assets-old/img/theme/team-4.jpg" class="rounded-circle">
+                    <img src="{{asset(Auth::check() ? Auth::user()->avatar : 'https://vtv1.mediacdn.vn/thumb_w/650/2014/incognito-chrome-spicytricks-1420018283508.jpg')}}" class="rounded-circle">
                   </a>
                 </div>
               </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
-                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                {{-- <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                <a href="#" class="btn btn-sm btn-default float-right">Message</a> --}}
               </div>
             </div>
-            <div class="card-body pt-0 pt-md-4">
+            <div style="margin-top: 20px" class="card-body pt-0 pt-md-4">
               <div class="row">
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center mt-md-2">
@@ -60,7 +60,8 @@
               </div>
               <div class="text-center">
                 <h3>
-                  Jessica Jones<span class="font-weight-light">, 27</span>
+                  {{Auth::user()->name}}
+                  {{-- <span class="font-weight-light">, 27</span> --}}
                 </h3>
                 <div class="h5 font-weight-300">
                   <i class="ni location_pin mr-2"></i>Bucharest, Romania
@@ -86,7 +87,7 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
-                  
+                    @hasrole('member')
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
@@ -98,9 +99,42 @@
                         <li class="nav-item active">
                             <a class="nav-link navbar-profile-li"  href="#">Lịch tập </a>
                         </li>
-                        
+                        <li class="nav-item">
+                          <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link navbar-profile-li"  href="#">Chỉ số cơ thể </a>
+                        </li>
                       </ul>
                     </div>
+                    @endhasrole
+                    @hasrole('coach')
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                          <li class="nav-item active">
+                            <a class="nav-link navbar-profile-li" href="#">Thông tin cá nhân</a>
+                          </li>
+                          <li class="nav-item">
+                              <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>
+                            </li>
+                          <li class="nav-item active">
+                              <a class="nav-link navbar-profile-li"  href="#">Lịch dạy </a>
+                          </li>
+                          <li class="nav-item">
+                            <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>
+                          </li>
+                          <li class="nav-item active">
+                              <a class="nav-link navbar-profile-li"  href="#">Chỉ số cơ thể </a>
+                          </li>
+                          <li class="nav-item">
+                              <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>
+                            </li>
+                          <li class="nav-item active">
+                              <a class="nav-link navbar-profile-li"  href="#">Danh sách hội viên </a>
+                          </li>
+                        </ul>
+                      </div>
+                    @endhasrole
                   </nav>
             </div>
             <!-- <br> -->

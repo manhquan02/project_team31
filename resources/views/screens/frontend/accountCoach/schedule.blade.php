@@ -39,25 +39,43 @@
         <thead>
             <tr align="center">
                 <th scope="col" class="text-center">Id</th>
-                <th scope="col" class="m-3">Tên Huấn luyện viên</th>
-                <th scope="col" class="m-3">Ca Tập</th>
-                <th scope="col" class="m-3">Ngày tập</th>
-                <th scope="col" class="m-3">Thứ tập</th>
+                <th scope="col" class="m-3">Ngày</th>
+                <th scope="col" class="m-3">Thứ</th>
+                <th scope="col" class="m-3">Ca</th>
+                <th scope="col" class="m-3">Giờ bắt đầu</th>
+                <th scope="col" class="m-3">Giờ kết thúc</th>
+                <th scope="col" class="m-3">Trạng thái</th>
                 <th scope="col" class="m-3">Thao tác</th>
             </tr>
         </thead>
         <tbody>
             <?php $i=1 ?>
             @foreach($schedules as $schedule)
+            @php
+            $shift = \App\Models\Time::where('id', $schedule->time_id)->first();
+            @endphp
             <tr class="">
                 <th scope="row" class="text-center">{{$schedule->id}}</th>
-                <td class="text-center">{{$schedule->pt->name}}</td>
+                <td class="text-center">
+                    {{ date('d-m-Y', strtotime($schedule->date)) }}
+                </td>
+                <td class="text-center">{{ (getdate(strtotime($schedule->date))['weekday']) }}</td>
                 <td class="text-center">{{$schedule->time->time_name}}</td>
-                <td class="text-center">{{$schedule->date}}</td>
-                <td class="text-center">{{$schedule->weekday_name}}</td>
+                <td class="text-center">{{$schedule->time->start_time}}</td>
+                <td class="text-center">{{$schedule->time->end_time}}</td>
+                <td class="text-center">
+                    @if($schedule->status == 0)
+                        <span
+                            class="label label-inline label-light-primary font-weight-bold"> {{ (config('status_schedule.'.$schedule->status)) }}</span>
+
+                    @else
+                            <span
+                                class="label label-inline {{$schedule->status == 1 ? 'label-light-danger': 'label-light-success'}} font-weight-bold">{{(config('status_schedule.'.$schedule->status))}}</span>
+                    @endif
+                </td>
                 {{-- <td class="text-center">tập bụng</td> --}}
                 <td class="text-center">
-                  <a href="" class="btn btn-primary">Huỷ lịch</a>
+                  <a href="" class="btn btn-primary">Xem hội viên</a>
                 </td>
               </tr>
             @endforeach
