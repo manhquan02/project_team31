@@ -45,4 +45,7 @@ class ScheduleCoachController extends Controller
                         ->paginate(12);
         return view('screens.frontend.accountCoach.attendance-member', compact('attendances'));
     }
+    public function postAttendance(Request $request){
+        
+    }
 }

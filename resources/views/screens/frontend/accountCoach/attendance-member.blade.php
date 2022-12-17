@@ -15,7 +15,8 @@
 </div>
 <hr style="background-color: rgb(71, 67, 67); margin-bottom: 0px; margin-top: 10px">
 <div class="card-body">
-    <form action="">
+    <form action="{{route('accountPt.postAttendance')}}" method="POST">
+        @csrf
         <table class="table">
             <thead>
                 <tr align="center">
@@ -59,7 +60,7 @@
                 @endif
             </tbody>
         </table> 
-    <button style="float: right" type="button" class="btn btn-primary">Lưu điểm danh</button>
+    <button style="float: right" type="submit" class="btn btn-primary">Lưu điểm danh</button>
     </form>
     {{-- <div>
         {{$attendances->appends(request()->input())->links()}}

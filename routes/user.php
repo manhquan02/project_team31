@@ -134,7 +134,7 @@ Route::prefix('account-pt/')->name('accountPt.')->group(function () {
     Route::get('profile', [ScheduleCoachController::class, 'profile'])->name('profile');
     Route::get('schedule', [ScheduleCoachController::class, 'scheduleCoach'])->name('scheduleCoach');
     Route::get('attendance-member/{scheduleId}', [ScheduleCoachController::class, 'attendanceMember'])->name('attendanceMember');
-    Route::get('postAttendance/{scheduleId}', [ScheduleCoachController::class, 'postAttendance'])->name('postAttendance');
+    Route::post('postAttendance/{scheduleId}', [ScheduleCoachController::class, 'postAttendance'])->name('postAttendance');
 });
 
 
