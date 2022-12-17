@@ -15,7 +15,7 @@
 </div>
 <hr style="background-color: rgb(71, 67, 67); margin-bottom: 0px; margin-top: 10px">
 <div class="card-body">
-    <form action="{{route('accountPt.postAttendance')}}" method="POST">
+    <form action="" method="POST">
         @csrf
         <table class="table">
             <thead>
