@@ -343,7 +343,7 @@ $package_id = {{$package->id}};
             document.getElementById('setCheckCoach').innerHTML = '';
             $.each(data['arrayPt'], function(key, pt) {
               console.log(key);
-              document.getElementById('setCheckCoach').innerHTML += `<option value="${key}">${pt}</option>`; 
+              document.getElementById('setCheckCoach').innerHTML += `<option value="${pt}">${key}</option>`; 
             });
 
           }
