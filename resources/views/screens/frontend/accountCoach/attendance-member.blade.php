@@ -15,8 +15,13 @@
 </div>
 <hr style="background-color: rgb(71, 67, 67); margin-bottom: 0px; margin-top: 10px">
 <div class="card-body">
+<<<<<<< HEAD
     <form action="{{route('accountPt.postAttendanceMember', $scheduleId)}}" method="POST">
     @csrf
+=======
+    <form action="" method="POST">
+        @csrf
+>>>>>>> 7c8897f8ec1cc8c5213165e174ac46600ee37102
         <table class="table">
             <thead>
                 <tr align="center">
