@@ -286,6 +286,7 @@
           
         </form>
         @endif
+        
     </div>
     
 </div>
@@ -293,7 +294,7 @@
 @endsection
 
 @section('js')
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 
   let weekdayPt = {}
@@ -337,12 +338,26 @@ $package_id = {{$package->id}};
         
         success:function(data){
           console.log("abc");
-          console.log(data['arrayPt']);
-          document.getElementById('setCheckCoach').innerHTML = '';
-          $.each(data['arrayPt'], function(key, pt) {
-            console.log(key);
-            document.getElementById('setCheckCoach').innerHTML += `<option value="${key}">${pt}</option>`; 
-          });
+          if(data['result'] == true){
+            console.log(data['arrayPt']);
+            document.getElementById('setCheckCoach').innerHTML = '';
+            $.each(data['arrayPt'], function(key, pt) {
+              console.log(key);
+              document.getElementById('setCheckCoach').innerHTML += `<option value="${key}">${pt}</option>`; 
+            });
+
+          }
+          else{
+            // alert('Lỗi. Vui lòng chọn ngày kích hoạt gói tập');
+            swal({
+              title: "Lỗi!",
+              text: "Vui lòng chọn ngày kích hoạt",
+              icon: "error",
+              button: "Ok!",
+            });
+
+          }
+          
 
         }
     });

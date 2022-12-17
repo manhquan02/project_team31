@@ -23,6 +23,7 @@ use DateTime;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -480,6 +481,15 @@ class OrderController extends Controller
     }
 
     public function checkWeekdayPt(Request $request){
+        $validator = Validator::make($request->all(), [
+            'activate_date' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return response()->json([
+                'result' => false,
+                'msg' => 'Vui lòng không bỏ trống'
+            ]); 
+        }
         $coachs = User::role('coach')->get(); 
         $weekdayPt = $request->weekdayPt;
         $package = Package::find($request->package_id);
@@ -531,6 +541,7 @@ class OrderController extends Controller
             
         }
         return response()->json([
+            'result' => true,
             'weekday' => $weekdayPt,
             'arrayPt' => $arrayPt
         ]);
