@@ -31,4 +31,7 @@ class ScheduleMemberController extends Controller
         $schedules = $schedules->orderBy('date', 'asc')->paginate(12);
         return view('screens.frontend.account.schedule', ['schedules' => $schedules]);
     }
+    public function profile(){
+        return view('screens.frontend.account.profile');
+    }
 }

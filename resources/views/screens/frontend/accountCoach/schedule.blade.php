@@ -69,13 +69,13 @@
                             class="label label-inline label-light-primary font-weight-bold"> {{ (config('status_schedule.'.$schedule->status)) }}</span>
 
                     @else
-                            <span
-                                class="label label-inline {{$schedule->status == 1 ? 'label-light-danger': 'label-light-success'}} font-weight-bold">{{(config('status_schedule.'.$schedule->status))}}</span>
+                          <span
+                              class="label label-inline {{$schedule->status == 1 ? 'label-light-danger': 'label-light-success'}} font-weight-bold">{{(config('status_schedule.'.$schedule->status))}}</span>
                     @endif
                 </td>
                 {{-- <td class="text-center">tập bụng</td> --}}
                 <td class="text-center">
-                  <a href="" class="btn btn-primary">Xem hội viên</a>
+                  <a href="{{route('accountPt.attendanceMember', $schedule->id)}}" class="btn btn-primary">Xem hội viên</a>
                 </td>
               </tr>
             @endforeach

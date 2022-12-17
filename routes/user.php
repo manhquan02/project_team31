@@ -125,13 +125,16 @@ Route::prefix('order/')->name('order.')->group(function () {
 });
 
 Route::prefix('account/')->name('account.')->group(function () {
-    Route::get('schedule', [ClientScheduleMemberController::class, 'scheduleMember'])->name('index');
+    Route::get('profile', [ClientScheduleMemberController::class, 'profile'])->name('profile');
+    Route::get('schedule', [ClientScheduleMemberController::class, 'scheduleMember'])->name('schedule');
 });
 
 Route::prefix('account-pt/')->name('accountPt.')->group(function () {
+    Route::get('/', [ScheduleCoachController::class, 'profile'])->name('index');
     Route::get('profile', [ScheduleCoachController::class, 'profile'])->name('profile');
     Route::get('schedule', [ScheduleCoachController::class, 'scheduleCoach'])->name('scheduleCoach');
-    Route::get('view-member/{scheduleId}', [ScheduleCoachController::class, 'viewMember'])->name('viewMember');
+    Route::get('attendance-member/{scheduleId}', [ScheduleCoachController::class, 'attendanceMember'])->name('attendanceMember');
+    Route::get('postAttendance/{scheduleId}', [ScheduleCoachController::class, 'postAttendance'])->name('postAttendance');
 });
 
 

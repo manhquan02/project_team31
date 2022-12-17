@@ -8,7 +8,7 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" style="color: rgb(0, 0, 0);" href="https://www.creative-tim.com/product/argon-dashboard" target="_blank">Về trang chủ</a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" style="color: rgb(0, 0, 0);" href="{{route('home')}}" target="_blank">Về trang chủ</a>
       </div>
     </nav>
     <!-- Header -->
@@ -91,13 +91,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                          <a class="nav-link navbar-profile-li" href="#">Thông tin cá nhân</a>
+                          <a class="nav-link navbar-profile-li" href="{{route('account.profile')}}">Thông tin cá nhân</a>
                         </li>
                         <li class="nav-item">
                             <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>
                           </li>
                         <li class="nav-item active">
-                            <a class="nav-link navbar-profile-li"  href="#">Lịch tập </a>
+                            <a class="nav-link navbar-profile-li"  href="{{route('account.schedule')}}">Lịch tập </a>
                         </li>
                         <li class="nav-item">
                           <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>
@@ -112,13 +112,13 @@
                       <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                           <li class="nav-item active">
-                            <a class="nav-link navbar-profile-li" href="#">Thông tin cá nhân</a>
+                            <a class="nav-link navbar-profile-li" href="{{route('accountPt.profile')}}">Thông tin cá nhân</a>
                           </li>
                           <li class="nav-item">
                               <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>
                             </li>
                           <li class="nav-item active">
-                              <a class="nav-link navbar-profile-li"  href="#">Lịch dạy </a>
+                              <a class="nav-link navbar-profile-li"  href="{{route('accountPt.scheduleCoach')}}">Lịch dạy </a>
                           </li>
                           <li class="nav-item">
                             <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>

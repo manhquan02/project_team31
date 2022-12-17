@@ -145,7 +145,14 @@
         @if(Auth::check())
             <div class="sidebar-widget">
                 <div class="info-wdget">
-                    <button type="button" style="background-color: #eb5b40; border-radius: 30px; padding: 15px 20px 15px 20px;" class="btn btn-primary">Tài khoản của tôi</button>
+                    @hasrole('member')
+                        <a href="{{route('account.schedule')}}" style="background-color: #eb5b40; border-radius: 30px; padding: 15px 20px 15px 20px;" class="btn btn-primary">Tài khoản của tôi</a>
+                    @endhasrole
+
+                    @hasrole('coach')
+                        <a href="{{route('accountPt.profile')}}" style="background-color: #eb5b40; border-radius: 30px; padding: 15px 20px 15px 20px;" class="btn btn-primary">Tài khoản của tôi</a>
+                    @endhasrole
+                    
                 </div>
             </div>
         @endif

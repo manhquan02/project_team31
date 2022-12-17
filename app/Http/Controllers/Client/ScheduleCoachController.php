@@ -40,7 +40,7 @@ class ScheduleCoachController extends Controller
         
     }
 
-    public function viewMember($scheduleId){
+    public function attendanceMember($scheduleId){
         $attendances = Attendance::where('schedule_id', '=', $scheduleId)
                         ->paginate(12);
         return view('screens.frontend.accountCoach.attendance-member', compact('attendances'));
