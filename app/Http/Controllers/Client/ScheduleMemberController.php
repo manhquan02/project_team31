@@ -32,7 +32,7 @@ class ScheduleMemberController extends Controller
             $schedules = $schedules->orderBy('date', 'asc')->paginate(12);
             return view('screens.frontend.account.schedule', ['schedules' => $schedules]);
         }
-        return view('screens.frontend.account.schedule')->with('Bạn không có lịch tập nào');
+        return back()->with('Bạn không có lịch tập nào');
 
     }
     public function profile(){
