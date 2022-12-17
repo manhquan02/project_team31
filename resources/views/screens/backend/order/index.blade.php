@@ -1,6 +1,6 @@
 @extends('layouts.backend.master')
 
-@section('title', translate('Order Management'))
+@section('title', 'Quản lý đơn hàng')
 
 @section('content')
 <div>
@@ -8,8 +8,8 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">{{translate('Order Management')}}
-                <span class="d-block text-muted pt-2 font-size-sm">{{translate('List')}}</span></h3>
+                <h3 class="card-label">Quản lý đơn hàng
+                <span class="d-block text-muted pt-2 font-size-sm">Danh sách</span></h3>
             </div>
             <div class="card-toolbar">
                 <!--begin::Dropdown-->
@@ -89,7 +89,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>{{translate('Add New Order')}}</a>
+                </span>Thêm mới đơn hàng</a>
                 <!--end::Button-->
             </div>
         </div>
