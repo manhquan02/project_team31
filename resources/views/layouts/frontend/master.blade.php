@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{asset('frontend/assets/css/swiper.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/spacing.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css')}}">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     @yield('style')
     <title>@yield('title')</title>
 </head>
@@ -79,7 +80,7 @@
         <!-- about-area-2 end -->
 
         <!-- service-area-2 start -->
-        
+
 
         @yield('service-area')
         {{-- @include('layouts.frontend.service-area') --}}
@@ -109,7 +110,7 @@
         {{-- @include('layouts.frontend.blog-area') --}}
         <!-- blog-area end -->
     </main>
-    
+
     <!-- //Footer -->
     @include('layouts.frontend.footer')
     <!--    search-bar End    -->
@@ -129,7 +130,8 @@
     <script src="{{asset('frontend/assets/js/tilt.jquery.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/wow.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/script.js')}}"></script>
-
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
 
     @yield('js')
 

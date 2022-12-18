@@ -9,9 +9,7 @@ class Attendance extends Model
 {
     use HasFactory;
     protected $table = 'attendance_member';
-    protected $attributes = [
-        'status' => 1
-    ];
+    
 
     protected $fillable = [
         'user_id',

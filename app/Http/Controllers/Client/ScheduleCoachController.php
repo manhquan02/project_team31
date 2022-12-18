@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\Schedule;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ScheduleCoachController extends Controller
 {
-    public function profile(){
+    public function profile()
+    {
         return view('screens.frontend.accountCoach.profile');
     }
     public function scheduleCoach (Request $request){
@@ -41,12 +43,40 @@ class ScheduleCoachController extends Controller
         return view('screens.frontend.accountCoach.schedule', ['schedules' => $schedules]);
     }
 
-    public function attendanceMember($scheduleId){
+    public function attendanceMember($scheduleId)
+    {
         $attendances = Attendance::where('schedule_id', '=', $scheduleId)
-                        ->paginate(12);
-        return view('screens.frontend.accountCoach.attendance-member', compact('attendances'));
+            ->paginate(12);
+        // dd($attendances);
+        return view('screens.frontend.accountCoach.attendance-member', compact('attendances', 'scheduleId'));
     }
-    public function postAttendance(Request $request){
 
+    public function postAttendanceMember(Request $request, $scheduleId)
+    {
+        $attendance_on = Attendance::where('schedule_id', $scheduleId)->get();
+        foreach ($attendance_on as  $item) {
+            $item->status = 1;
+            $item->save();
+        }
+        if ($request->attendance) {
+            foreach ($request->attendance as  $key => $change) {
+                foreach ($attendance_on as  $item) {
+                    if ($key == $item->id && $change == 'on') {
+                        $item->status = 2;
+                        $item->save();
+                    }
+
+                    $schedule_pt = Schedule::where('id', $scheduleId)->first();
+                    if ($schedule_pt != null) {
+                        $schedule_pt->status = 2;
+                        $schedule_pt->save();
+                    }
+                }
+            }
+        }
+        return redirect()->back();
+    }
+    public function postAttendance(Request $request)
+    {
     }
 }

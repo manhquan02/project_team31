@@ -2,12 +2,12 @@
 @section('content')
 <div class="card-header bg-white border-0">
     <div class="row align-items-center">
-      <div class="col-8">
-        <h3 style="font-size: 20px; font-weight: 900" class="mb-0">Điểm danh hội viên</h3>
-      </div>
-      <div class="col-4 text-right">
-        {{-- <a href="#!" class="btn btn-sm btn-primary">Settings</a>  --}}
-      </div>
+        <div class="col-8">
+            <h3 style="font-size: 20px; font-weight: 900" class="mb-0">Điểm danh hội viên</h3>
+        </div>
+        <div class="col-4 text-right">
+            {{-- <a href="#!" class="btn btn-sm btn-primary">Settings</a>  --}}
+        </div>
     </div>
 </div>
 <div style="padding-bottom: 0px;" class="card-body">
@@ -15,8 +15,13 @@
 </div>
 <hr style="background-color: rgb(71, 67, 67); margin-bottom: 0px; margin-top: 10px">
 <div class="card-body">
+<<<<<<< HEAD
+    <form action="{{route('accountPt.postAttendanceMember', $scheduleId)}}" method="POST">
+    @csrf
+=======
     <form action="" method="POST">
         @csrf
+>>>>>>> 7c8897f8ec1cc8c5213165e174ac46600ee37102
         <table class="table">
             <thead>
                 <tr align="center">
@@ -32,39 +37,35 @@
             </thead>
             <tbody>
                 @if(count($attendances) > 0)
-                    @foreach($attendances as $item)
-                        <tr>
-                            <td class="text-center">{{ $item->id }}</td>
-                            <td class="text-center">{{ $item->user->name}}</td>
-                            <td class="text-center">{{ getdate(strtotime($item->date))['weekday'] }}<br>
-                                <span style="color: #999999">{{ date('d-m-Y', strtotime($item->date)) }}</span>
-                            </td>
-                            <td class="text-center">{{$item->time->time_name}}</td>
-                            <td class="text-center">{{$item->time->start_time}}</td>
-                            <td class="text-center">{{$item->time->end_time}}</td>
-                            <td class="view_status text-center">
-                                    <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{config('status_schedule.'.$item->status)}}</span>
-
-                            </td>
-                            <td class="text-center">
-                                {{-- <div class="update_attendance" data-url="{{'admin.attendance.editStatus'}}" data-id="{{$item->id}}" style="cursor: pointer;">
-                                    <i style="font-size: 20px; " class="ki ki-reload text-warning"></i>
-                                </div> --}}
-                                <div class="form-check form-switch text-center" style="padding-left: 100px;">
-                                    <input style="font-size: 23px" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                </div>
-                                
-                            </td>
-                        </tr>
-                    @endforeach
+                @foreach($attendances as $item)
+                <tr>
+                    <td class="text-center">{{ $item->id }}</td>
+                    <td class="text-center">{{ $item->user->name}}</td>
+                    <td class="text-center">{{ getdate(strtotime($item->date))['weekday'] }}<br>
+                        <span style="color: #999999">{{ date('d-m-Y', strtotime($item->date)) }}</span>
+                    </td>
+                    <td class="text-center">{{$item->time->time_name}}</td>
+                    <td class="text-center">{{$item->time->start_time}}</td>
+                    <td class="text-center">{{$item->time->end_time}}</td>
+                    <td class="view_status text-center">
+                        <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{config('status_schedule.'.$item->status)}}</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="form-check form-switch text-center" style="padding-left: 100px;">
+                            <input style="font-size: 23px" name="attendance[{{$item->id}}]" class="form-check-input" type="checkbox" @if($item->status == 2) checked @endif>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
                 @endif
             </tbody>
-        </table> 
-    <button style="float: right" type="submit" class="btn btn-primary">Lưu điểm danh</button>
-    </form>
-    {{-- <div>
+        </table>
+        <div>
         {{$attendances->appends(request()->input())->links()}}
-    </div> --}}
+    </div>
+        <button style="float: right" class="btn btn-primary">Lưu điểm danh</button>
+    </form>
+   
 </div>
-     
+
 @endsection

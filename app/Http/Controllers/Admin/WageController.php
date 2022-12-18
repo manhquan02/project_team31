@@ -19,7 +19,7 @@ class WageController extends Controller
         $users = User::role(['coach'])->get();
         foreach ($users as $item) {
             $wage_user = Wage::where('user_id', $item->id)->where('month', date('m'))->where('year', date('Y'))->first();
-            $schedule = Schedule::where('pt_id', $item->id)->where('status', 1)->get();
+            $schedule = Schedule::where('pt_id', $item->id)->where('status', 2)->get();
             $session = 0;
 
             if (!$wage_user) {

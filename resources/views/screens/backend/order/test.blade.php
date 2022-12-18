@@ -1,7 +1,7 @@
 
 @extends('layouts.backend.master')
 
-@section('title', translate('Order management'))
+@section('title', 'Quản lý đơn đặt')
 @section('style')
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -38,15 +38,15 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline mr-5">
                     <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-2 mr-5">{{translate('Order')}}</h5>
+                    <h5 class="text-dark font-weight-bold my-2 mr-5">Đơn đặt</h5>
                     <!--end::Page Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                         <li class="breadcrumb-item">
-                            <a href="" class="text-muted">{{translate('Payment')}}</a>
+                            <a href="" class="text-muted">Thanh toán</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="" class="text-muted">{{translate('Finish')}}</a>
+                            <a href="" class="text-muted">Kết thúc</a>
                         </li>
                     </ul>
                     <!--end::Breadcrumb-->
@@ -147,7 +147,7 @@
                                 <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
                                     <div class="wizard-label">
                                         <h3 class="wizard-title">
-                                        <span>1.</span>{{translate('Choose a package')}}</h3>
+                                        <span>1.</span>Chọn gói tập</h3>
                                         <div class="wizard-bar"></div>
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@
                                 <div class="wizard-step" data-wizard-type="step">
                                     <div class="wizard-label">
                                         <h3 class="wizard-title">
-                                        <span>2.</span>{{translate('Enter detail')}}</h3>
+                                        <span>2.</span> Chi tiết</h3>
                                         <div class="wizard-bar"></div>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
                                 <div class="wizard-step" data-wizard-type="step">
                                     <div class="wizard-label">
                                         <h3 class="wizard-title">
-                                        <span>3.</span>{{translate('Payment and submit')}}</h3>
+                                        <span>3.</span>Thanh toán và kết thúc</h3>
                                         <div class="wizard-bar"></div>
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@
                                     @csrf
                                     @method('POST')
                                     <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                        <h4 class="mb-10 font-weight-bold text-dark">{{translate('Choose a package')}}</h4>
+                                        <h4 class="mb-10 font-weight-bold text-dark">Chọn gói tập</h4>
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             {{-- <input type="text" class="form-control" name="address1" placeholder="Address Line 1" value="Address Line 1" />
@@ -210,7 +210,7 @@
                                             <div class="col-sm-12">
                                                 {{-- <select id="add_package" placeholder="" class="form-control select2" id="kt_select2_1" > --}}
                                                    <select name="package_id" style="height: 50px"  class="form-control select2 is-invalid add_package" id="kt_select2_1_validate" >
-                                                   <option value=""><strong>{{translate('Choose a package')}}</strong></option>
+                                                   <option value=""><strong>Chọn gói tập</strong></option>
                                                    @foreach ($packages as $package)
                                                        <option  value="{{$package->id}}">{{$package->package_name}}  </option>  
                                                    @endforeach  
@@ -228,13 +228,13 @@
                                     <!--end: Wizard Step 1-->
                                     <!--begin: Wizard Step 2-->
                                     <div class="pb-5" data-wizard-type="step-content">
-                                        <h4 class="mb-10 font-weight-bold text-dark">{{translate('Enter the details of your delivery')}}</h4>
+                                        <h4 class="mb-10 font-weight-bold text-dark">Enter the details of your delivery</h4>
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label class="col-form-label">{{translate('Choose a user')}}</label>
+                                            <label class="col-form-label">Choose a user</label>
                                             <div style="width: 100%;" class="col-sm-12">
                                              <select name="user_id[]" multiple style="width: 100%;" class="form-control select2" id="kt_select2_11" multiple name="param">
-                                              <optgroup label="{{translate('Choose a user')}}">
+                                              <optgroup label="Choose a user">
                                               
                                                 @foreach ($users as $user)
                                                     <option value="{{$user->id}}">{{$user->name}}</option>
@@ -248,7 +248,7 @@
                                             </div>
                                         </div>
                                         <div id="time_package" style="display: none;" class="form-group">
-                                            <label >{{translate('Choose a shift')}}</label>
+                                            <label >Choose a shift</label>
                                             <div style="width: 100%;" class="col-sm-12">
                                                 <select name="time_id" style="width: 100%;" class="form-control select2 is-invalid" id="kt_select2_2_validate" >
                                 
@@ -265,11 +265,11 @@
                                         </div>
 
                                         <div id="coach_package" style="display: none;" class="form-group  set-coach" >
-                                            <label >{{translate('Choose a coach')}}</label>
+                                            <label >Choose a coach</label>
                                             <div class="col-sm-12">
                                                 <select style="width: 100%;" name="pt_id" class="form-control select2 is-invalid" id="kt_select2_3_validate" >
                                                     <option style="display: none;" value=""></option>
-                                                    <option value="0">{{translate('No coach')}}</option>
+                                                    <option value="0">No coach</option>
                                                     @foreach ($coachs as $coach)
                                                         <option value="{{$coach->id}}">{{$coach->name}}</option>  
                                                     @endforeach 
@@ -281,7 +281,7 @@
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label class="col-form-label">{{translate('Choose activate day')}}</label>
+                                            <label class="col-form-label">Chọn ngày kích hoạt</label>
                                                 <div class="col-sm-12">
                                                     <div class="input-group date" >
                                                         <input type="date" class="form-control" name="activate_day" placeholder="Select time" id="kt_datetimepicker_7"/>
@@ -316,11 +316,11 @@
                                         </div>
 
                                         <div id="method_pm"  class="form-group">
-                                            <label class="col-form-label">{{translate('Choose a payment method')}}</label>
+                                            <label class="col-form-label">Chọn phương thức thanh toán</label>
                                             <div class=" col-sm-12">
                                                 <select name="payment_method" style="width: 100%;" class="form-control select2" id="kt_select2_10" name="param">
-                                                    <option value="1">{{translate('Direct payment')}}</option>
-                                                    <option value="2">{{translate('Online payment')}}</option>
+                                                    <option value="1">Thanh toán trực tiếp</option>
+                                                    <option value="2">Thanh toán qua VN Pay</option>
                                                 </select>
                                                     
                                             </div>
@@ -367,10 +367,10 @@
                                     <!--end: Wizard Step 2-->
                                     <!--begin: Wizard Step 3-->
                                     <div class="pb-5" data-wizard-type="step-content">
-                                        <h4 class="mb-10 font-weight-bold text-dark">{{translate('Payment and submit')}}</h4>
+                                        <h4 class="mb-10 font-weight-bold text-dark">Payment and submit</h4>
                                         <!--begin::Select-->
                                         <div class="form-group">
-                                        <label class="col-form-label">{{translate('Enter coupon ( if have )')}}</label>
+                                        <label class="col-form-label">Enter coupon ( if have )</label>
                                             <div style="display: flex" class="col-10">
                                                 <input disabled name="discount_code" style="width: 80%" class="form-control discount_code @error('discount_title') is-invalid @enderror" name="discount_title"  type="text" value="{{ old('discount_code') }}" placeholder="title" id="example-text-input "/>
                                                 @error('discount_title')
@@ -386,7 +386,7 @@
                                         <!--end::Select-->
                                         <!--begin::Select-->
                                         <div class="form-group">
-                                            <label>{{translate('Total money')}}</label>
+                                            <label>Total money</label>
                                             <div class=" col-lg-4 col-md-9 col-sm-12">
                                                 <strong id="total_money" style="color: red"></strong>
 
@@ -394,7 +394,7 @@
                                         </div>
                                         <!--end::Select-->
                                         <button name="direct_trading" onclick="return confirm('Thanh toán và tạo ra hợp đồng luôn ?');"
-                                         class="btn btn-success font-weight-bold text-uppercase" >{{translate('Payment')}}</button>
+                                         class="btn btn-success font-weight-bold text-uppercase" >Payment</button>
                                         {{-- <button name="payUrl" class="btn btn-success font-weight-bold text-uppercase" >Thanh toán VNPAY</button> --}}
                                         
                                     </div>
@@ -678,17 +678,17 @@ var KTSelect2 = function() {
     var demos = function() {
     // basic
     $('#kt_select2_1_validate').select2({
-        placeholder: "{{translate('Choose a package')}}"
+        placeholder: "Choose a package"
     });
 
     // nested
     $('#kt_select2_2_validate').select2({
-        placeholder: "{{translate('Choose a shift')}}"
+        placeholder: "Choose a shift"
     });
 
     // multi select
     $('#kt_select2_3_validate').select2({
-        placeholder: "{{translate('Choose a coach')}}"
+        placeholder: "Choose a coach"
         });
     }
 
