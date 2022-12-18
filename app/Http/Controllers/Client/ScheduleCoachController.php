@@ -35,13 +35,10 @@ class ScheduleCoachController extends Controller
             else{
                 $schedules = $schedules->whereDate('date', '<=', $date_end);
             }
-            $schedules = $schedules->orderBy('date', 'asc')->paginate(12);
-            // $schedules = Schedule::where('pt_id', $id)->orderBy('date', 'asc')->paginate(12);
-            $user = \App\Models\User::where('id', 3)->first();
-            return view('screens.frontend.accountCoach.schedule', ['schedules' => $schedules]);
-        }
 
-        return back()->with('Bạn không có lịch tập nào');
+        }
+        $schedules = $schedules->orderBy('date', 'asc')->paginate(12);
+        return view('screens.frontend.accountCoach.schedule', ['schedules' => $schedules]);
     }
 
     public function attendanceMember($scheduleId){

@@ -127,6 +127,9 @@ Route::prefix('order/')->name('order.')->group(function () {
 Route::prefix('account/')->name('account.')->group(function () {
     Route::get('profile', [ClientScheduleMemberController::class, 'profile'])->name('profile');
     Route::get('schedule', [ClientScheduleMemberController::class, 'scheduleMember'])->name('schedule');
+    Route::get('reschedule/{attendanceId}', [ClientScheduleMemberController::class, 'reschedule'])->name('reschedule');
+    Route::post('postReschedule/{attendanceId}', [ClientScheduleMemberController::class, 'postReschedule'])->name('postReschedule');
+    Route::get('checkTimesCoach', [ClientScheduleMemberController::class, 'checkTimesCoach'])->name('checkTimesCoach');
 });
 
 Route::prefix('account-pt/')->name('accountPt.')->group(function () {

@@ -344,7 +344,7 @@ class OrderController extends Controller
                                             'time_id' => $training->time_id,
                                             'weekday_name' => $dt->format("l"),
                                             'date' => $dt->format("Y-m-d"),
-                                            'status' => 1,
+                                            'status' => 0,
                                         ]);
 
                                                             
@@ -354,7 +354,7 @@ class OrderController extends Controller
                                             'schedule_id' =>  $schedule->id,
                                             'time_id' => $training->time_id,
                                             'weekday_name' => $dt->format("l"),
-                                            'pt_id' => 1,
+                                            'pt_id' => $order->pt_id,
                                             'date' => $dt->format("Y-m-d"),
                                             'status' => 0,
                                             

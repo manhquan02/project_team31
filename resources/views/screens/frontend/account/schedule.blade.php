@@ -57,7 +57,7 @@
                 <td class="text-center">{{$schedule->weekday_name}}</td>
                 {{-- <td class="text-center">tập bụng</td> --}}
                 <td class="text-center">
-                  <a href="" class="btn btn-primary">Huỷ lịch</a>
+                  <a href="{{route('account.reschedule', $schedule->id)}}" class="btn btn-primary">Đổi lịch</a>
                 </td>
               </tr>
             @endforeach
