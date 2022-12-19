@@ -127,6 +127,7 @@ Route::prefix('order/')->name('order.')->group(function () {
 Route::prefix('account/')->name('account.')->group(function () {
     Route::get('profile', [ClientScheduleMemberController::class, 'profile'])->name('profile');
     Route::get('schedule', [ClientScheduleMemberController::class, 'scheduleMember'])->name('schedule');
+    Route::patch('save-profile', [ClientScheduleMemberController::class, 'saveProfile'])->name('saveProfile');
 });
 
 Route::prefix('account-pt/')->name('accountPt.')->group(function () {
