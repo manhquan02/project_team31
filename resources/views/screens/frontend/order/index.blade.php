@@ -366,31 +366,31 @@ $package_id = {{$package->id}};
 
     $package_id = {{$package->id}};
     // $('#button_discount').on('click',function(){
-      function checkDiscount(){
+  function checkDiscount(){
       console.log("quân");
       var discount_code = $('#discount_code').val();
-    $.ajax({
-        type: 'GET',
-        url: "{{route('admin.order.setTotalMoney')}}",
-        data:{
-              package_id: $package_id,
-              discount_code: discount_code
-          },
-        
-        success:function(data){
-          console.log("abc");
-          console.log(data);
-          if(data['result'] == true){
-              
-              // console.log(data['package']);
-              // console.log(data['result']);
-              // document.querySelector(".set-coach").disabled = false;
-              document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
+      $.ajax({
+          type: 'GET',
+          url: "{{route('admin.order.setTotalMoney')}}",
+          data:{
+                package_id: $package_id,
+                discount_code: discount_code
+            },
+          
+          success:function(data){
+            console.log("abc");
+            console.log(data);
+            if(data['result'] == true){
+                
+                // console.log(data['package']);
+                // console.log(data['result']);
+                // document.querySelector(".set-coach").disabled = false;
+                document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
+                document.querySelector('#msg_package').innerHTML = `${data['message']}`;
+              }
+            else{
               document.querySelector('#msg_package').innerHTML = `${data['message']}`;
             }
-          else{
-            document.querySelector('#msg_package').innerHTML = `${data['message']}`;
-          }
         }
     });
   }

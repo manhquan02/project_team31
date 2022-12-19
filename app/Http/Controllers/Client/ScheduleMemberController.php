@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveProfileRequest;
 use App\Models\Attendance;
 use App\Models\User;
+use App\Models\Schedule;
+use App\Models\Time;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,10 +32,10 @@ class ScheduleMemberController extends Controller
             } else {
                 $schedules = $schedules->whereDate('date', '<=', $date_end);
             }
-            $schedules = $schedules->orderBy('date', 'asc')->paginate(12);
-            return view('screens.frontend.account.schedule', ['schedules' => $schedules]);
         }
         return back()->with('Bạn không có lịch tập nào');
+        $schedules = $schedules->orderBy('date', 'asc')->paginate(12);
+        return view('screens.frontend.account.schedule', ['schedules' => $schedules]);
     }
     public function profile()
     {
@@ -46,7 +48,7 @@ class ScheduleMemberController extends Controller
         $user_ex_phone = $request->phone != null ? User::where('phone', $request->phone)->first() : null;
         $user_ex_email = $request->email != null ? User::Where('email', $request->email)->first() : null;
 
-       
+
         if ($user != null) {
             if ($request->name != null) {
                 $user->name = $request->name;
@@ -74,5 +76,51 @@ class ScheduleMemberController extends Controller
 
             return redirect()->back();
         }
+    }
+    public function reschedule($attendanceId)
+    {
+        $times = Time::all();
+
+        return view('screens.frontend.account.reschedule', ['times' => $times, 'attendanceId' => $attendanceId]);
+    }
+
+    public function postReschedule($attendanceId, Request $request)
+    {
+        $rule = [
+            'date' => 'required',
+            'time_id' => 'required',
+        ];
+        $messages = [
+            'date.required' => 'Ngày không được để chống',
+            'time_id.required' => 'Ca tập không được để chống',
+        ];
+        $request->validate($rule, $messages);
+        $attendance = Attendance::find($attendanceId);
+        $attendance->update([
+            'date' => $request->date,
+            'time_id' => $request->time_id
+        ]);
+        return redirect()->route('account.schedule');
+    }
+
+    public function checkTimesCoach(Request $request)
+    {
+
+        $attendance = Attendance::find($request->attendanceId);
+        $ptId = $attendance->pt_id;
+        $schedulesPt = Schedule::where('pt_id', '=', $ptId)->where('date', '=', $request->date)->pluck('time_id')->toArray();
+        $times = Time::get()->pluck('id')->toArray();
+        $arrayTimeId = array();
+        foreach ($times as $key => $time) {
+            if (!in_array($time, $schedulesPt)) {
+                $ca = Time::find($time);
+                $arrayTimeId[$time] = $ca->time_name . "( Từ " . $ca->start_time . " Đến " . $ca->end_time . " )";
+            }
+        }
+        // dd($arrayTimeId);
+        return response()->json([
+            'result' => true,
+            'arrayTimeId' => $arrayTimeId
+        ]);
     }
 }
