@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('wages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('wage_month');
-            $table->unsignedBigInteger('session');
-            $table->unsignedBigInteger('total_wage');
-            $table->string('month');
-            $table->string('year');
+            $table->unsignedBigInteger('wage_month')->default(0);
+            $table->unsignedBigInteger('session')->default(0);
+            $table->unsignedBigInteger('total_wage')->default(0);
+            $table->string('month')->nullable();
+            $table->string('year')->nullable();
             $table->unsignedBigInteger('status')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

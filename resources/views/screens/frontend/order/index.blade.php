@@ -348,7 +348,6 @@ $package_id = {{$package->id}};
 
           }
           else{
-            // alert('Lỗi. Vui lòng chọn ngày kích hoạt gói tập');
             swal({
               title: "Lỗi!",
               text: "Vui lòng chọn ngày kích hoạt",

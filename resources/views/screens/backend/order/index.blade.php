@@ -206,15 +206,14 @@
                         </td>
                         <td>{{$order->total_money}}</td>
                         <td>
-                            @if ($order->status_contract == 1)
-                            <span
-                                class="label label-inline label-light-primary font-weight-bold">Đã tạo</span>
-                        @else
-                            <span class="label label-inline label-light-danger font-weight-bold">Chưa tạo</span>
-                        @endif
+                            @if ($order->status == 1)
+                                <span class="label label-inline label-light-primary font-weight-bold">Đã tạo</span>
+                            @else
+                                <span class="label label-inline label-light-danger font-weight-bold">Chưa tạo</span>
+                            @endif
                         </td>
                         <td nowrap="nowrap">
-                            @if ($order->status_contract == 1)
+                            @if ($order->status == 1)
                                 <a href="" class="btn btn-primary mr-2">Xem hợp đồng</a>
                             @else
                                 <a href="{{route('admin.contract.create', [encrypt($order->id)])}}" class="btn btn-success mr-2">Tạo hợp đồng </a>

@@ -61,6 +61,13 @@ class ScheduleMemberController extends Controller
             'date' => $request->date,
             'time_id' => $request->time_id
         ]);
+        $weekday = date ( 'l' , strtotime($request->date) );
+        $schedules = Schedule::where('id' ,'=', $attendance->schedule_id);
+        $schedules->update([
+            'date' => $request->date,
+            'weekday_name' => $weekday,
+            'time_id' => $request->time_id
+        ]);
         return redirect()->route('account.schedule');
     }
 

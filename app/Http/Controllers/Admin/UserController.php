@@ -10,8 +10,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Services\UploadImgService;
+use App\Mail\VeryEmail;
 use App\Models\Schedule;
+use App\Models\Wage;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -164,13 +167,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User();
-        dd($request->role);
+        // dd($request->role);
         if ($request->hasFile('avatar')) {
             // dd($request->avatar);
             $file = $request->avatar;
             $file_name = UploadImgService::uploadImg($request->avatar, 'images/user');
         } else {
-            $file_name = 'one.jpg';
+            $file_name = 'images/user/one.jpg';
         }
 
         $user->name = $request->name;
@@ -182,7 +185,18 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->assignRole($request->role);
         $user->save();
-        dd($user->id);
+        if($user->hasRole('coach')){
+            $wage = new Wage();
+            $wage->user_id = $user->id;
+            $wage->wage_month = $request->wage;
+            $wage->save();
+        }
+        $code = rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9);
+        $data = [
+            'code' => $code
+        ];
+        Mail::to("$user->email")->send(new VeryEmail($data));
+        return redirect()->route('admin.user.listMember')->with('Thêm huấn luyện viên thành công');
     }
 
     /**

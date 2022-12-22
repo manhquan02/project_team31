@@ -11,6 +11,17 @@ class Wage extends Model
 
     protected $table = 'wages';
 
+    protected $fillable = [
+        'user_id',
+        'wage_month',
+        'session',
+        'total_wage',
+        'month',
+        'year',
+        'status',
+
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
