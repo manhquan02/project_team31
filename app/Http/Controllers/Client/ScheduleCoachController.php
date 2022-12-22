@@ -15,31 +15,27 @@ class ScheduleCoachController extends Controller
     {
         return view('screens.frontend.accountCoach.profile');
     }
-    public function scheduleCoach (Request $request){
-            
-        
-        // dd($date_end);
-        $schedules = Schedule::where('pt_id', 3);
-        if($schedules->count() != 0){
-            $date_end = Schedule::where('pt_id', 3)->orderBy('id', 'desc')->first()->date;
-            if(isset($request->status)){
-                $schedules = $schedules->where('status', $request->status);
-            }
-            if(isset($request->start_date)){
-                $schedules = $schedules->whereDate('date', '>=', $request->start_date);
-            }
-            else{
-                $schedules = $schedules->whereDate('date', '>=', date('Y-m-d'));
-            }
-            if(isset($request->end_date)){
-                $schedules = $schedules->whereDate('date', '<=', $request->end_date);
-            }
-            else{
-                $schedules = $schedules->whereDate('date', '<=', $date_end);
-            }
 
+    public function scheduleCoach(Request $request)
+    {
+        $date_end = Schedule::where('pt_id', Auth::id())->orderBy('id', 'desc')->first()->date;
+        // dd($date_end);
+        $schedules = Schedule::where('pt_id', Auth::id());
+        if (isset($request->status)) {
+            $schedules = $schedules->where('status', $request->status);
+        }
+        if (isset($request->start_date)) {
+            $schedules = $schedules->whereDate('date', '>=', $request->start_date);
+        } else {
+            $schedules = $schedules->whereDate('date', '>=', date('Y-m-d'));
+        }
+        if (isset($request->end_date)) {
+            $schedules = $schedules->whereDate('date', '<=', $request->end_date);
+        } else {
+            $schedules = $schedules->whereDate('date', '<=', $date_end);
         }
         $schedules = $schedules->orderBy('date', 'asc')->paginate(12);
+        /*  $schedules = Schedule::where('pt_id', $id)->orderBy('date', 'asc')->paginate(12); */
         return view('screens.frontend.accountCoach.schedule', ['schedules' => $schedules]);
     }
 
@@ -75,8 +71,5 @@ class ScheduleCoachController extends Controller
             }
         }
         return redirect()->back();
-    }
-    public function postAttendance(Request $request)
-    {
     }
 }
