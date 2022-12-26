@@ -299,9 +299,6 @@
 
   let weekdayPt = {}
 
-  
-
-
   function checkWeekday(weekday_id){
     console.log(weekday_id);
     checkbox_weekday = document.getElementById(weekday_id);

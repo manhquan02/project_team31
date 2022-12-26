@@ -105,6 +105,12 @@
                         <li class="nav-item active">
                             <a class="nav-link navbar-profile-li"  href="#">Chỉ số cơ thể </a>
                         </li>
+                        <li class="nav-item">
+                          <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>
+                        </li>
+                        <li class="nav-item active">
+                          <a class="nav-link navbar-profile-li"  href="#">Lịch sử gói tập </a>
+                      </li>
                       </ul>
                     </div>
                     @endhasrole

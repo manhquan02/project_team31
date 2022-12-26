@@ -44,11 +44,20 @@
                     <td class="text-center">{{$item->time->start_time}}</td>
                     <td class="text-center">{{$item->time->end_time}}</td>
                     <td class="view_status text-center">
-                        <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{config('status_schedule.'.$item->status)}}</span>
+                        @if(date('d-m-Y', strtotime($item->date)) >  date('Y-m-d'))
+                            <div style="padding: 10px" class="alert alert-primary">
+                                Sắp tới
+                            </div>
+                        @elseif($item->status == 1)
+                            <div style="padding: 10px" class="alert alert-success">
+                                Đã điểm danh
+                            </div>
+                        @endif
+                        {{-- <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{config('status_schedule.'.$item->status)}}</span> --}}
                     </td>
                     <td class="text-center">
                         <div class="form-check form-switch text-center" style="padding-left: 100px;">
-                            <input style="font-size: 23px" name="attendance[{{$item->id}}]" class="form-check-input" type="checkbox" @if($item->status == 2) checked @endif>
+                            <input style="font-size: 23px" name="attendance[{{$item->id}}]" class="form-check-input" type="checkbox" @if($item->status == 1) checked @endif>
                         </div>
                     </td>
                 </tr>
@@ -57,9 +66,9 @@
             </tbody>
         </table>
         <div>
-        {{$attendances->appends(request()->input())->links()}}
+        {{-- {{$attendances->appends(request()->input())->links()}} --}}
     </div>
-        <button style="float: right" class="btn btn-primary">Lưu điểm danh</button>
+        <button style="float: right" @if(date('Y-m-d', strtotime($date)) ==  date('Y-m-d')) @endif disabled class="btn btn-primary">Lưu điểm danh</button>
     </form>
    
 </div>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedDouble('bmi', 8, 2)->nullable();
             $table->string('comment')->nullable();
             $table->unsignedInteger('status')->nullable();
+            $table->unsignedInteger('status_package')->default(0);
             $table->timestamps();
         });
     }

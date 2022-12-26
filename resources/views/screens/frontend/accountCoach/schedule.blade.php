@@ -11,26 +11,26 @@
     </div>
 </div>
 <div style="padding-bottom: 0px;" class="card-body">
-    <form>
-        <div class="row">
-          <div class="col mx-sm-3">
-            <label for="">Date start</label>
-            <input type="date" class="form-control" placeholder="First name">
+    <form action="" method="GET">
+      <div class="row">
+        <div class="col mx-sm-3">
+          <label for="">Date start</label>
+          <input type="date" name="start_date" @if(request('start_date')) value="{{ request('start_date') }}" @endif class="form-control">
+        </div>
+        <div class="col mx-sm-3">
+          <label for="">Date end</label>
+          <input type="date" name="end_date" @if(request('end_date')) value="{{ request('end_date') }}" @endif class="form-control" placeholder="Last name">
+        </div>
+        <div class="col mx-sm-3">
+          <label for="">Submit</label>
+          <div class="col">
+              <button type="submit" style="background-color: #FF8800" class="btn btn-primary mb-2">Tìm kiếm</button>
           </div>
-          <div class="col mx-sm-3">
-            <label for="">Date end</label>
-            <input type="date" class="form-control" placeholder="Last name">
-          </div>
-          <div class="col mx-sm-3">
-            <label for="">Submit</label>
-            <div class="col">
-                <button type="submit" style="background-color: #FF8800" class="btn btn-primary mb-2">Tìm kiếm</button>
-            </div>
-          </div>
-          
         </div>
         
-      </form>
+      </div>
+      
+    </form>
 </div>
 <hr style="background-color: rgb(71, 67, 67); margin-bottom: 0px; margin-top: 10px">
 <div class="card-body">
@@ -64,14 +64,35 @@
                 <td class="text-center">{{$schedule->time->start_time}}</td>
                 <td class="text-center">{{$schedule->time->end_time}}</td>
                 <td class="text-center">
+                  @if(date('Y-m-d', strtotime($schedule->date)) ==  date('Y-m-d'))
+                      <div style="padding: 10px" class="alert alert-warning">
+                         Hôm nay
+                      </div>
+                  @elseif(date('Y-m-d', strtotime($schedule->date)) >  date('Y-m-d'))
+                      <div style="padding: 10px" class="alert alert-primary">
+                        Sắp tới  
+                      </div>
+                  @else
                     @if($schedule->status == 0)
+                      <div style="padding: 10px" class="alert alert-dark">
+                        chưa điểm danh 
+                      </div>
+                    @elseif($schedule->status == 1)
+                    
+                      <div style="padding: 10px" class="alert alert-success">
+                        Đã điểm danh
+                      </div>
+                    @endif
+
+                  @endif
+                    {{-- @if($schedule->status == 0)
                         <span
                             class="label label-inline label-light-primary font-weight-bold"> {{ (config('status_schedule.'.$schedule->status)) }}</span>
 
                     @else
                           <span
                               class="label label-inline {{$schedule->status == 1 ? 'label-light-danger': 'label-light-success'}} font-weight-bold">{{(config('status_schedule.'.$schedule->status))}}</span>
-                    @endif
+                    @endif --}}
                 </td>
                 {{-- <td class="text-center">tập bụng</td> --}}
                 <td class="text-center">

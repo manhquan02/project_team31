@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveProfileRequest;
 use App\Models\Attendance;
+use App\Models\ResultContract;
 use App\Models\User;
 use App\Models\Schedule;
 use App\Models\Time;
@@ -33,7 +34,6 @@ class ScheduleMemberController extends Controller
                 $schedules = $schedules->whereDate('date', '<=', $date_end);
             }
         }
-        return back()->with('Bạn không có lịch tập nào');
         $schedules = $schedules->orderBy('date', 'asc')->paginate(12);
         return view('screens.frontend.account.schedule', ['schedules' => $schedules]);
     }
@@ -129,5 +129,12 @@ class ScheduleMemberController extends Controller
             'result' => true,
             'arrayTimeId' => $arrayTimeId
         ]);
+    }
+
+    public function historyPackage(){
+        $user = User::find(Auth::id());
+        $orders = $user->order;
+        
+        return view('screens.frontend.account.history-package',['orders' => $orders]);
     }
 }

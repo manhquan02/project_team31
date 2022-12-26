@@ -36,6 +36,8 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::get('/list-member', [UserController::class, 'listMember'])->name('listMember');
         Route::get('/create', [UserController::class, 'create'])->name('create');
         Route::post('/post-user', [UserController::class, 'store'])->name('postUser');
+        Route::get('/very-account/{user}', [UserController::class, 'veryAccount'])->name('veryAccount');
+        Route::post('/postVeryAccount/{user}', [UserController::class, 'postVeryAccount'])->name('postVeryAccount');
         Route::get('/edit-status', [UserController::class, 'status'])->name('editStatus');
         Route::post('/edit-role', [UserController::class, 'editRole'])->name('editRole');
         Route::get('bmi/{id}', [UserController::class, 'bmi'])->name('bmi');
@@ -55,11 +57,17 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('list');
         Route::get('/create', [OrderController::class, 'create'])->name('create');
         Route::post('/post-order', [OrderController::class, 'store'])->name('postOrder');
+        Route::get('/mail-order', [OrderController::class, 'mailOrder'])->name('mailOrder');
+        Route::post('/postMailOrder', [OrderController::class, 'postMailOrder'])->name('postMailOrder');
+        Route::get('/send-mail/{order}', [OrderController::class, 'sendMail'])->name('sendMail');
+        Route::post('/postSendMail/{order}', [OrderController::class, 'postSendMail'])->name('postSendMail');
+        
+
         Route::get('/add', [OrderController::class, 'add'])->name('add');
 
         Route::get('/create-multi', [OrderController::class, 'createMulti'])->name('createMulti');
         Route::post('/post-orderMulti', [OrderController::class, 'postOrderMulti'])->name('postOrderMulti');
-
+        
         Route::get('/set-package', [OrderController::class, 'setPackage'])->name('setPackage');
         Route::get('/total-money', [OrderController::class, 'setTotalMoney'])->name('setTotalMoney');
         Route::get('/set-coach', [OrderController::class, 'setCoach'])->name('setCoach');
@@ -131,6 +139,7 @@ Route::prefix('account/')->name('account.')->group(function () {
     Route::get('reschedule/{attendanceId}', [ClientScheduleMemberController::class, 'reschedule'])->name('reschedule');
     Route::post('postReschedule/{attendanceId}', [ClientScheduleMemberController::class, 'postReschedule'])->name('postReschedule');
     Route::get('checkTimesCoach', [ClientScheduleMemberController::class, 'checkTimesCoach'])->name('checkTimesCoach');
+    Route::get('history-package', [ClientScheduleMemberController::class, 'historyPackage'])->name('historyPackage');
 });
 
 Route::prefix('account-pt/')->name('accountPt.')->group(function () {

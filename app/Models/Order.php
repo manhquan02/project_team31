@@ -53,7 +53,7 @@ class Order extends Model
 
     public function times(){
         return $this->belongsToMany(
-            User::class,
+            TrainingPackage::class,
             'training_package',
             'order_id',
             'time_id'    
@@ -63,6 +63,11 @@ class Order extends Model
     public function trainings()
     {
         return $this->hasMany(TrainingPackage::class,'order_id','id');
+    }
+
+    public function results()
+    {
+        return $this->hasMany(ResultContract::class,'order_id','id');
     }
     
 }

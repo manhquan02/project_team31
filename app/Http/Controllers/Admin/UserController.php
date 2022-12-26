@@ -11,9 +11,11 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Services\UploadImgService;
 use App\Mail\VeryEmail;
+use App\Mail\VeryMailCoach;
 use App\Models\Schedule;
 use App\Models\Wage;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
@@ -184,6 +186,8 @@ class UserController extends Controller
         $user->avatar = 'images/user/' . $file_name;
         $user->address = $request->address;
         $user->assignRole($request->role);
+        $code = rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9);
+        $user->verify_code = $code;
         $user->save();
         if($user->hasRole('coach')){
             $wage = new Wage();
@@ -191,13 +195,32 @@ class UserController extends Controller
             $wage->wage_month = $request->wage;
             $wage->save();
         }
-        $code = rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9);
+        $userId = encrypt($user->id);
         $data = [
-            'code' => $code
+            'code' => $code,
+            'userId' => $userId
         ];
-        Mail::to("$user->email")->send(new VeryEmail($data));
-        return redirect()->route('admin.user.listMember')->with('Thêm huấn luyện viên thành công');
+        Mail::to("$user->email")->send(new VeryMailCoach($data));
+        return redirect()->route('admin.user.veryAccount', $userId)->with('success','Nhập mã xác minh');
     }
+
+    public function veryAccount($user){
+
+        return view('screens.backend.user.very-account', ['user' => $user]);
+    }
+
+    public function postVeryAccount($user, Request $request){
+        $user = User::find(decrypt($user));
+        // dd($user->verify_code);
+        if ($user->verify_code == $request->code) {
+            $user->email_verified_at = date('Y-m-d H:i:s');
+            $user->status = 1;
+            $user->save();
+            return redirect()->route('admin.user.listPt')->with('success', 'Xác minh tài khoản thành công');
+        }
+        return redirect()->back()->with('msg', 'Mã xác minh không chính xác');
+    }
+
 
     /**
      * Display the specified resource.

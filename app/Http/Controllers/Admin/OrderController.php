@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
+use App\Mail\SendMailSupportOrder;
 use App\Models\Contract;
 use App\Models\Discount;
 use App\Models\Order;
@@ -21,6 +22,7 @@ use PDF;
 use DateInterval;
 use DatePeriod;
 use DateTime;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -529,7 +531,56 @@ class OrderController extends Controller
         
     }
 
+    public function mailOrder(){
+        $title = "BẠN ĐANG GẶP KHÓ KHĂN VỀ VẤN ĐỀ THANH TOÁN, HAY CÒN ĐIỀU GÌ BẠN CHƯA HÀI LÒNG VỀ CHÚNG TÔI";
+        $content = "Chào bạn Nguyễn Văn A";
+        return view('screens.backend.order.mail-order', ['title'=>$title, 'content'=>$content]);
+    }
 
+    public function postMailOrder(Request $request){
+        $orders = Order::where('status', '=', 0);
+        $data = [
+            'title' => $request->title,
+            'content' => $request->content,
+        ];
+        foreach ($orders as $order) {
+            $users = $order->users;
+            foreach ($users as $user) {
+                Mail::to("$user->email")->send(new SendMailSupportOrder($data)); 
+            }
+            $order->update([
+                'status' => 3,
+            ]);
+            
+        }
+        return redirect()->route('admin.order.list')->with('success','Gửi mail thành công');
+    }
+
+
+
+    public function sendMail($order){
+        $order = decrypt($order);
+        $title = "BẠN ĐANG GẶP KHÓ KHĂN VỀ VẤN ĐỀ THANH TOÁN, HAY CÒN ĐIỀU GÌ BẠN CHƯA HÀI LÒNG VỀ CHÚNG TÔI";
+        $content = "Chào bạn Nguyễn Văn A";
+        return view('screens.backend.order.send-mail', ['title'=>$title, 'content'=>$content, 'order' => encrypt($order)]);
+    }
+
+    public function postSendMail($order,Request $request){
+        $order = Order::find(decrypt($order));
+        $data = [
+            'title' => $request->title,
+            'content' => $request->content,
+        ];
+        // dd($data);
+        $users = $order->users;
+        foreach ($users as $email) {
+            Mail::to("legend.cay@gmail.com")->send(new SendMailSupportOrder($data));
+        }
+        $order->status = 3;
+        $order->save();
+        return redirect()->route('admin.order.list')->with('msg','Gửi mail thành công');
+        
+    }
 
 
     /**

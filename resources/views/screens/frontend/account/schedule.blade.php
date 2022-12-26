@@ -11,15 +11,15 @@
     </div>
 </div>
 <div style="padding-bottom: 0px;" class="card-body">
-    <form>
+    <form action="{{route('account.schedule')}}" method="GET">
         <div class="row">
           <div class="col mx-sm-3">
             <label for="">Date start</label>
-            <input type="date" class="form-control" placeholder="First name">
+            <input type="date" name="start_date" @if(request('start_date')) value="{{ request('start_date') }}" @endif class="form-control">
           </div>
           <div class="col mx-sm-3">
             <label for="">Date end</label>
-            <input type="date" class="form-control" placeholder="Last name">
+            <input type="date" name="end_date" @if(request('end_date')) value="{{ request('end_date') }}" @endif class="form-control" placeholder="Last name">
           </div>
           <div class="col mx-sm-3">
             <label for="">Submit</label>
