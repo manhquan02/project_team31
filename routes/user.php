@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::prefix('admin/')->name('admin.')->group(function () {
+Route::prefix('admin/')->middleware(['auth', 'verified', 'role:admin'])->name('admin.')->group(function () {
     Route::prefix('user/')->name('user.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('listUser');
         Route::get('/list-admin', [UserController::class, 'listAdmin'])->name('listAdmin');
@@ -79,8 +79,6 @@ Route::prefix('admin/')->name('admin.')->group(function () {
 
     });
 
-
-
     Route::prefix('contract/')->name('contract.')->group(function () {
         Route::get('/', [ContractController::class, 'index'])->name('list');
         Route::get('/create/{id}', [ContractController::class, 'create'])->name('create');
@@ -94,13 +92,10 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::get('list', [\App\Http\Controllers\Admin\ScheduleController::class, 'show'])->name('list');
     });
 
-
     Route::prefix('attendance/')->name('attendance.')->group(function () {
         Route::get('/{id}', [AttendanceMemberController::class, 'index'])->name('list');
         Route::get('/edit-status', [AttendanceMemberController::class, 'editStatus'])->name('editStatus');
     });
-
-
 });
 
 Route::prefix('coach/')->name('coach.')->group(function () {
@@ -133,7 +128,7 @@ Route::prefix('order/')->name('order.')->group(function () {
     Route::get('create/{orderId}', [ClientOrderController::class, 'create'])->name('create');
 });
 
-Route::prefix('account/')->name('account.')->group(function () {
+Route::prefix('account')->middleware('auth','role:member')->name('account.')->group(function () {
     Route::get('profile', [ClientScheduleMemberController::class, 'profile'])->name('profile');
     Route::get('schedule', [ClientScheduleMemberController::class, 'scheduleMember'])->name('schedule');
     Route::patch('save-profile', [ClientScheduleMemberController::class, 'saveProfile'])->name('saveProfile');
@@ -144,7 +139,7 @@ Route::prefix('account/')->name('account.')->group(function () {
     Route::get('result-package/{result}', [ResultContractController::class, 'resultPackage'])->name('resultPackage');
 });
 
-Route::prefix('account-pt/')->name('accountPt.')->group(function () {
+Route::prefix('account-pt/')->middleware('auth','role:coach')->name('accountPt.')->group(function () {
     Route::get('/', [ScheduleCoachController::class, 'profile'])->name('index');
     Route::get('profile', [ScheduleCoachController::class, 'profile'])->name('profile');
     Route::get('schedule', [ScheduleCoachController::class, 'scheduleCoach'])->name('scheduleCoach');

@@ -38,8 +38,7 @@ Route::prefix('contact')->name('contact_client.')->group(function () {
     Route::post('', [\App\Http\Controllers\Client\ContactController::class, 'store'])->name('store');
 });
 
-
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'role:admin'])->name('admin.')->group(function () {
     Route::get('', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
     Route::prefix('subject')->name('subject.')->group(function () {
         Route::get('', [\App\Http\Controllers\Admin\SubjectController::class, 'index'])->name('index');
@@ -75,7 +74,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\PostController::class, 'update'])->name('update');
     });
 
-
     Route::prefix('time')->name('time.')->group(function () {
         Route::get('', [\App\Http\Controllers\Admin\TimeController::class, 'index'])->name('list');
         Route::get('create', [\App\Http\Controllers\Admin\TimeController::class, 'create'])->name('create');
@@ -89,3 +87,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('', [\App\Http\Controllers\Admin\WageController::class, 'index'])->name('index');
     });
 });
+
+Route::get('test', function () {
+    return view('screens.frontend.test');
+})->name('test');
+Route::post('momoPayment', [\App\Http\Controllers\Client\PaymentController::class, 'momoPayment'])->name('momoPayment');
+Route::get('ipn', [\App\Http\Controllers\Client\PaymentController::class, 'ipn'])->name('ipn');

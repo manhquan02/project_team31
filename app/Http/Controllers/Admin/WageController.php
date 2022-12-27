@@ -46,7 +46,12 @@ class WageController extends Controller
             }
         }
 
-        $wages = Wage::where('month', $month)->where('year', $year)->paginate(12);
+        if($request->month && $request->year){
+            $wages = Wage::where('month', $request->month)->where('year', $request->year)->paginate(12);
+        }else{
+            $wages = Wage::where('month', $month)->where('year', $year)->paginate(12);
+        }
+        
         return view('screens.backend.user.wage', compact('wages'));
     }
 }
