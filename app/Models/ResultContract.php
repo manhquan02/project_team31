@@ -19,4 +19,10 @@ class ResultContract extends Model
         'comment',
         'status'
     ];
+
+    public function order()
+    {
+        return $this->hasMany(Order::class,'id','order_id');
+    }
+
 }

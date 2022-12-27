@@ -10,8 +10,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Services\UploadImgService;
+use App\Mail\VeryEmail;
+use App\Mail\VeryMailCoach;
 use App\Models\Schedule;
+use App\Models\Wage;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -164,13 +169,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User();
-        dd($request->role);
+        // dd($request->role);
         if ($request->hasFile('avatar')) {
             // dd($request->avatar);
             $file = $request->avatar;
             $file_name = UploadImgService::uploadImg($request->avatar, 'images/user');
         } else {
-            $file_name = 'one.jpg';
+            $file_name = 'images/user/one.jpg';
         }
 
         $user->name = $request->name;
@@ -181,9 +186,41 @@ class UserController extends Controller
         $user->avatar = 'images/user/' . $file_name;
         $user->address = $request->address;
         $user->assignRole($request->role);
+        $code = rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9);
+        $user->verify_code = $code;
         $user->save();
-        dd($user->id);
+        if($user->hasRole('coach')){
+            $wage = new Wage();
+            $wage->user_id = $user->id;
+            $wage->wage_month = $request->wage;
+            $wage->save();
+        }
+        $userId = encrypt($user->id);
+        $data = [
+            'code' => $code,
+            'userId' => $userId
+        ];
+        Mail::to("$user->email")->send(new VeryMailCoach($data));
+        return redirect()->route('admin.user.veryAccount', $userId)->with('success','Nhập mã xác minh');
     }
+
+    public function veryAccount($user){
+
+        return view('screens.backend.user.very-account', ['user' => $user]);
+    }
+
+    public function postVeryAccount($user, Request $request){
+        $user = User::find(decrypt($user));
+        // dd($user->verify_code);
+        if ($user->verify_code == $request->code) {
+            $user->email_verified_at = date('Y-m-d H:i:s');
+            $user->status = 1;
+            $user->save();
+            return redirect()->route('admin.user.listPt')->with('success', 'Xác minh tài khoản thành công');
+        }
+        return redirect()->back()->with('msg', 'Mã xác minh không chính xác');
+    }
+
 
     /**
      * Display the specified resource.

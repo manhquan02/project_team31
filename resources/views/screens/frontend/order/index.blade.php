@@ -298,7 +298,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
   let weekdayPt = {}
-  
   function checkWeekday(weekday_id){
     console.log(weekday_id);
     checkbox_weekday = document.getElementById(weekday_id);
@@ -342,7 +341,6 @@ $package_id = {{$package->id}};
             });
           }
           else{
-            // alert('Lỗi. Vui lòng chọn ngày kích hoạt gói tập');
             swal({
               title: "Lỗi!",
               text: "Vui lòng chọn ngày kích hoạt",

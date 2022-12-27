@@ -18,7 +18,7 @@
             <div class="form-group row">
                 <label class="col-2 col-form-label">Họ và tên </label>
                 <div class="col-10">
-                    <input class="form-control @error('name') is-invalid @enderror" name="name" type="text" value="{{ old('name') }}" id="example-text-input" />
+                    <input class="form-control @error('name') is-invalid @enderror" name="name" type="text" value="{{ old('name') }}" placeholder="Họ và tên" id="example-text-input" />
                     @error('name')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -28,7 +28,7 @@
             <div class="form-group row">
                 <label for="example-email-input" class="col-2 col-form-label">Email</label>
                 <div class="col-10">
-                    <input class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{ old('email') }}" id="example-email-input" />
+                    <input class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{ old('email') }}" placeholder="Email" id="example-email-input" />
                     @error('email')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -38,7 +38,7 @@
             <div class="form-group row">
                 <label for="example-tel-input" class="col-2 col-form-label">Số điện thoại</label>
                 <div class="col-10">
-                    <input class="form-control @error('phone') is-invalid @enderror" name="phone" type="tel" value="{{ old('phone') }}" id="example-tel-input" />
+                    <input class="form-control @error('phone') is-invalid @enderror" name="phone" type="tel" value="{{ old('phone') }}" placeholder="Số điẹn thoại" id="example-tel-input" />
                     @error('phone')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -60,7 +60,7 @@
             <div class="form-group row">
                 <label class="col-2 col-form-label">Địa chỉ</label>
                 <div class="col-10">
-                    <input class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" type="text" placeholder="" id="example-text-input" />
+                    <input class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" type="text" placeholder="Địa chỉ" id="example-text-input" />
                     @error('address')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -70,12 +70,16 @@
             <div class="form-group row">
                 <label class="col-2 col-form-label">Vai trò</label>
                 <div class="col-lg-4 col-md-9 col-sm-12">
-                    <select name="role" class="form-control">
+                    <select onchange="checkCoach()" id="check-role" name="role"  class="form-control">
                         @foreach ($roles as $role)
                         <option value="{{$role->name}}">{{$role->name}}</option>
                         @endforeach
                     </select>
                 </div>
+            </div>
+
+            <div id="wage-coach" class="form-group row">
+                
             </div>
 
             <div class="card-footer">
@@ -84,11 +88,31 @@
                     </div>
                     <div class="col-10">
                         <button type="submit" class="btn btn-success mr-2">Lưu</button>
-                        <button type="reset" class="btn btn-secondary">Đặt lại</button>
+                        {{-- <button type="reset" class="btn btn-secondary">Đặt lại</button> --}}
                     </div>
                 </div>
             </div>
     </form>
 </div>
 
+@endsection
+
+@section('script')
+    <script>
+        function checkCoach(){
+            var role = $('#check-role').val();
+            console.log(role);
+            if(role == 'coach'){
+                $("#wage-coach").html(`<label class="col-2 col-form-label">Lương trên 1 ca</label>
+                <div class="col-lg-4 col-md-9 col-sm-12">
+                    <input class="form-control @error('wage') is-invalid @enderror" name="wage" value="{{ old('wage') }}" type="text" placeholder="" id="example-text-input" />
+                </div>`);
+            }
+            else{
+                $("#wage-coach").html(``);
+            }
+        }
+        
+
+    </script>
 @endsection

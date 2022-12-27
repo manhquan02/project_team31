@@ -29,7 +29,7 @@ class PackageSeeder extends Seeder
                 'week_session_pt' => 4,
                 'description' => 'Đây là mô tả gói tập',
                 'status' => 1,
-                'set_pt' => 0,
+                'set_pt' => 1,
                 'type_package' => 1,
             ],
             [
@@ -59,7 +59,7 @@ class PackageSeeder extends Seeder
                 'week_session_pt' => 4,
                 'description' => 'Đây là mô tả gói tập',
                 'status' => 1,
-                'set_pt' => 1,
+                'set_pt' => 0,
                 'type_package' => 2,
             ]
         ];

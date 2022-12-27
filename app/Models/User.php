@@ -95,4 +95,18 @@ class User extends Authenticatable implements MustVerifyEmail
             $query->where('status', $request->status);
         }
     }
+
+    public function results()
+    {
+        return $this->hasMany(ResultContract::class,'user_id','id');
+    }
+
+    public function order(){
+        return $this->belongsToMany(
+            Order::class,
+            'result_order',
+            'user_id',
+            'order_id'
+        );
+    }
 }

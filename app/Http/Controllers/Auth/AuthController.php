@@ -90,6 +90,9 @@ class AuthController extends Controller
     {
        
         $user = User::where('email', $email)->first();
+        if(!$user){
+            return redirect()->back()->with('error', 'Lỗi sai đường dẫn. Vui lòng kiểm tra lại');
+        }
 
         if ($user->verify_code == $request->code) {
             $user->email_verified_at = date('Y-m-d H:i:s');
