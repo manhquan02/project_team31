@@ -1,6 +1,5 @@
 @extends('layouts.frontend.account.account')
 @section('content')
-<<<<<<< HEAD
 <div class="container-fluid mt--7">
   <div class="row">
     <div class="col-xl-3 order-xl-1 mb-5 mb-xl-0">
@@ -11,33 +10,6 @@
               <a>
                 <img height="140px" width="200px" id="avatar" src="{{asset(Auth::user()->avatar)}}" class="rounded-circle">
               </a>
-=======
-<div class="card-header bg-white border-0">
-    <div class="row align-items-center">
-      <div class="col-8">
-        <h3 style="font-size: 20px; font-weight: 900" class="mb-0">Lịch trình</h3>
-      </div>
-      <div class="col-4 text-right">
-        {{-- <a href="#!" class="btn btn-sm btn-primary">Settings</a>  --}}
-      </div>
-    </div>
-</div>
-<div style="padding-bottom: 0px;" class="card-body">
-    <form action="{{route('account.schedule')}}" method="GET">
-        <div class="row">
-          <div class="col mx-sm-3">
-            <label for="">Date start</label>
-            <input type="date" name="start_date" @if(request('start_date')) value="{{ request('start_date') }}" @endif class="form-control">
-          </div>
-          <div class="col mx-sm-3">
-            <label for="">Date end</label>
-            <input type="date" name="end_date" @if(request('end_date')) value="{{ request('end_date') }}" @endif class="form-control" placeholder="Last name">
-          </div>
-          <div class="col mx-sm-3">
-            <label for="">Submit</label>
-            <div class="col">
-                <button type="submit" style="background-color: #FF8800" class="btn btn-primary mb-2">Tìm kiếm</button>
->>>>>>> d407b9ff0bb830f0ff3af49a2c9ffbe70d4c7134
             </div>
           </div>
         </div>
