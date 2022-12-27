@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
+use App\Models\Order;
 use App\Models\Schedule;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -75,4 +76,12 @@ class ScheduleCoachController extends Controller
         }
         return redirect()->back()->with('success', 'Điểm danh thành công');
     }
+
+    public function listMember(){
+        $orders = Order::where('pt_id', '=', Auth::id())->get(); 
+        
+        return view('screens.frontend.accountCoach.list-member', ['orders' => $orders]);
+    }
+
+    
 }

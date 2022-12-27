@@ -109,7 +109,7 @@
                           <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>
                         </li>
                         <li class="nav-item active">
-                          <a class="nav-link navbar-profile-li"  href="#">Lịch sử gói tập </a>
+                          <a class="nav-link navbar-profile-li"  href="{{route('account.historyPackage')}}">Lịch sử gói tập </a>
                       </li>
                       </ul>
                     </div>
@@ -136,7 +136,7 @@
                               <div style="color: #16181b;" class="nav-link navbar-profile-li" >|</div>
                             </li>
                           <li class="nav-item active">
-                              <a class="nav-link navbar-profile-li"  href="#">Danh sách hội viên </a>
+                              <a class="nav-link navbar-profile-li"  href="{{route('accountPt.listMember')}}">Danh sách hội viên </a>
                           </li>
                           
                         </ul>

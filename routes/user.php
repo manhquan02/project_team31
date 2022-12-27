@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Client\OrderController as ClientOrderController;
 use App\Http\Controllers\Client\PaymentController;
+use App\Http\Controllers\Client\ResultContractController;
 use App\Http\Controllers\Client\ScheduleCoachController;
 use App\Http\Controllers\Client\ScheduleMemberController as ClientScheduleMemberController;
 use App\Http\Controllers\Client\ScheduleUsserController;
@@ -140,6 +141,7 @@ Route::prefix('account/')->name('account.')->group(function () {
     Route::post('postReschedule/{attendanceId}', [ClientScheduleMemberController::class, 'postReschedule'])->name('postReschedule');
     Route::get('checkTimesCoach', [ClientScheduleMemberController::class, 'checkTimesCoach'])->name('checkTimesCoach');
     Route::get('history-package', [ClientScheduleMemberController::class, 'historyPackage'])->name('historyPackage');
+    Route::get('result-package/{result}', [ResultContractController::class, 'resultPackage'])->name('resultPackage');
 });
 
 Route::prefix('account-pt/')->name('accountPt.')->group(function () {
@@ -148,6 +150,9 @@ Route::prefix('account-pt/')->name('accountPt.')->group(function () {
     Route::get('schedule', [ScheduleCoachController::class, 'scheduleCoach'])->name('scheduleCoach');
     Route::get('attendance-member/{scheduleId}', [ScheduleCoachController::class, 'attendanceMember'])->name('attendanceMember');
     Route::post('attendance-member/{scheduleId}', [ScheduleCoachController::class, 'postAttendanceMember'])->name('postAttendanceMember');
+    Route::get('list-member', [ScheduleCoachController::class, 'listMember'])->name('listMember');
+    Route::get('evaluate-member/{result}', [ResultContractController::class, 'evaluateMember'])->name('evaluateMember');
+    Route::post('postEvaluateMember/{result}', [ResultContractController::class, 'postEvaluateMember'])->name('postEvaluateMember');
 });
 
 
