@@ -17,15 +17,13 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check())
-        {
-             if(Auth::user()->getRoleNames()[0] == 'admin')
-             {
-                 return $next($request);
-             }else{
+        if (Auth::check()) {
+            if (Auth::user()->getRoleNames()[0] == 'admin') {
+                return $next($request);
+            } else {
                 return redirect()->route('home');
-             }
+            }
         }
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 }

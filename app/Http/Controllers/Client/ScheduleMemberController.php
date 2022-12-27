@@ -48,7 +48,6 @@ class ScheduleMemberController extends Controller
         $user_ex_phone = $request->phone != null ? User::where('phone', $request->phone)->first() : null;
         $user_ex_email = $request->email != null ? User::Where('email', $request->email)->first() : null;
 
-
         if ($user != null) {
             if ($request->name != null) {
                 $user->name = $request->name;
@@ -74,7 +73,14 @@ class ScheduleMemberController extends Controller
                 $user->save();
             }
 
-            return redirect()->back();
+            if ($request->avatar) {
+                $image = $request->avatar;
+                $imageName = $image->hashName();
+                $user->avatar = $image->storeAs('images/user', $imageName);
+                $user->save();
+            }
+
+            return redirect()->back()->with('success', 'Cập nhật thông tin cá nhân thành công');
         }
     }
     public function reschedule($attendanceId)

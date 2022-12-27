@@ -19,13 +19,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('signup', [AuthController::class, 'signup'])->name('signup');
-Route::post('/postSignup', [AuthController::class, 'postSignup'])->name('postSignup');
-Route::get('login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login');
-Route::post('/postLogin', [AuthController::class, 'postLogin'])->name('postLogin');
-Route::get('very_email/{email}', [AuthController::class, 'very_email'])->name('very_email');
-Route::post('post_very_email/{email}', [AuthController::class, 'post_very_email'])->name('post_very_email');
-Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('signup', [AuthController::class, 'signup'])->middleware('guest')->name('signup');
+Route::post('/postSignup', [AuthController::class, 'postSignup'])->middleware('guest')->name('postSignup');
+Route::get('login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])->middleware('guest')->name('login');
+Route::post('/postLogin', [AuthController::class, 'postLogin'])->middleware('guest')->name('postLogin');
+Route::get('very_email/{email}', [AuthController::class, 'very_email'])->middleware('guest')->name('very_email');
+Route::post('post_very_email/{email}', [AuthController::class, 'post_very_email'])->middleware('guest')->name('post_very_email');
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 /**
  * Users verify email Route

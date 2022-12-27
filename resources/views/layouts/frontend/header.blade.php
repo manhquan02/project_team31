@@ -18,6 +18,7 @@
                                 <li><a href="about.html">Thông Tin</a></li>
                                 <li><a href="bmi-calculator.html">Tính Chỉ Số IBM</a></li>
                                 <li><a href="service.html">Dịch Vụ</a></li>
+                                <li><a href="{{route('test')}}">Thanh toán Momo</a></li>
                             </ul>
                         </li>
                         <li class="has">
@@ -32,7 +33,7 @@
                         <li class="has">
                             <a href="">Liên Hệ</a>
                         </li>
-                       
+
                     </ul>
                 </nav>
                 <div class="attr-menu attr-white">
