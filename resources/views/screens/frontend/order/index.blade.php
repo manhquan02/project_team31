@@ -153,7 +153,7 @@
           <h4 class="section-heading mb-5">Lựa chọn PT theo yêu cầu</h4>
 
 
-           <select name="pt_id" id="pet-select" class="fs-90 p-2-5 w-100 text-center">
+          
           <select id="setCheckCoach" name="pt_id" class="form-select" aria-label="Default select example">
            @foreach($coachs as $coach)
                       <option value="{{$coach->id}}">{{$coach->name}}</option>
@@ -298,6 +298,11 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
   let weekdayPt = {}
+<<<<<<< HEAD
+  
+=======
+
+>>>>>>> d407b9ff0bb830f0ff3af49a2c9ffbe70d4c7134
   function checkWeekday(weekday_id){
     console.log(weekday_id);
     checkbox_weekday = document.getElementById(weekday_id);

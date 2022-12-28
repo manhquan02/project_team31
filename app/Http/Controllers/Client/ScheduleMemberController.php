@@ -16,7 +16,10 @@ class ScheduleMemberController extends Controller
 {
     public function scheduleMember(Request $request)
     {
+        $total_success = Attendance::where('user_id', '=', Auth::id())->where('status',2)->count();
+        $total_session = Attendance::where('user_id', '=', Auth::id())->count();
 
+        
         $schedules = Attendance::where('user_id', '=', Auth::id());
         if ($schedules->count() != 0) {
             $date_end = Attendance::where('user_id', '=', Auth::id())->orderBy('id', 'desc')->first()->date;
@@ -106,8 +109,8 @@ class ScheduleMemberController extends Controller
             'date' => $request->date,
             'time_id' => $request->time_id
         ]);
-        $weekday = date ( 'l' , strtotime($request->date) );
-        $schedules = Schedule::where('id' ,'=', $attendance->schedule_id);
+        $weekday = date('l', strtotime($request->date));
+        $schedules = Schedule::where('id', '=', $attendance->schedule_id);
         $schedules->update([
             'date' => $request->date,
             'weekday_name' => $weekday,
@@ -137,10 +140,11 @@ class ScheduleMemberController extends Controller
         ]);
     }
 
-    public function historyPackage(){
+    public function historyPackage()
+    {
         $user = User::find(Auth::id());
         $orders = $user->order;
-        
-        return view('screens.frontend.account.history-package',['orders' => $orders]);
+
+        return view('screens.frontend.account.history-package', ['orders' => $orders]);
     }
 }

@@ -53,21 +53,21 @@ class ScheduleCoachController extends Controller
     public function postAttendanceMember(Request $request, $scheduleId)
     {
         $attendance_on = Attendance::where('schedule_id', $scheduleId)->get();
+        $schedule_pt = Schedule::where('id', $scheduleId)->first();
         foreach ($attendance_on as  $item) {
             $item->status = 1;
             $item->save();
+            $schedule_pt->status = 1;
+            $schedule_pt->save();
         }
         if ($request->attendance) {
             foreach ($request->attendance as  $key => $change) {
                 foreach ($attendance_on as  $item) {
+                    
                     if ($key == $item->id && $change == 'on') {
-                        $item->status = 1;
+                        $item->status = 2;
                         $item->save();
-                    }
-
-                    $schedule_pt = Schedule::where('id', $scheduleId)->first();
-                    if ($schedule_pt != null) {
-                        $schedule_pt->status = 1;
+                        $schedule_pt->status = 2;
                         $schedule_pt->save();
                     }
                 }
