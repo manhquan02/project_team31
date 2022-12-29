@@ -96,5 +96,6 @@ Route::get('ipn', [\App\Http\Controllers\Client\PaymentController::class, 'ipn']
 
 
 Route::prefix('rate')->name('rate.')->group(function () {
-    Route::get('package_id', [\App\Http\Controllers\Client\RateController::class, 'index'])->name('index');
+    Route::get('evaluate/{id}', [\App\Http\Controllers\Client\ScheduleMemberController::class, 'evaluatePackage'])->name('index');
+    Route::post('evaluate', [\App\Http\Controllers\Client\ScheduleMemberController::class, 'store_evaluate'])->name('store');
 });

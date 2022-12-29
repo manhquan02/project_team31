@@ -54,7 +54,9 @@
           <div style="width: 100%;" class="form-group">
             <label style="color: black" for="exampleInputEmail1">Ngày kích hoạt</label>
             {{-- <input type="date" name="activate_date" id="activate_date_input"> --}}
-            <input type="date" name="activate_date" class="form-control activate_date_input" id="activate_date_input">
+            <input type="date" min="{{date ( 'Y-m-j' , strtotime ( '+1 day' , strtotime ( date('Y-m-d') ) ) )}}"
+              max="{{date ( 'Y-m-j' , strtotime ( '+30 day' , strtotime ( date('Y-m-d') ) ) )}}"
+             name="activate_date" class="form-control activate_date_input" id="activate_date_input">
             <small id="emailHelp" class="form-text text-muted">chọn ngày kích hoạt, chúng tôi sẽ tạo lịch cho bạn.</small>
           </div>
         </div>
@@ -153,7 +155,7 @@
           <h4 class="section-heading mb-5">Lựa chọn PT theo yêu cầu</h4>
 
 
-          
+           {{-- <select name="pt_id" id="pet-select" class="fs-90 p-2-5 w-100 text-center"> --}}
           <select id="setCheckCoach" name="pt_id" class="form-select" aria-label="Default select example">
            @foreach($coachs as $coach)
                       <option value="{{$coach->id}}">{{$coach->name}}</option>
@@ -298,11 +300,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
   let weekdayPt = {}
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> d407b9ff0bb830f0ff3af49a2c9ffbe70d4c7134
   function checkWeekday(weekday_id){
     console.log(weekday_id);
     checkbox_weekday = document.getElementById(weekday_id);
@@ -342,7 +339,7 @@ $package_id = {{$package->id}};
             document.getElementById('setCheckCoach').innerHTML = '';
             $.each(data['arrayPt'], function(key, pt) {
               console.log(key);
-              document.getElementById('setCheckCoach').innerHTML += `<option value="${pt}">${key}</option>`; 
+              document.getElementById('setCheckCoach').innerHTML += <option value="${key}">${pt}</option>; 
             });
           }
           else{
@@ -378,11 +375,11 @@ $package_id = {{$package->id}};
                 // console.log(data['package']);
                 // console.log(data['result']);
                 // document.querySelector(".set-coach").disabled = false;
-                document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
-                document.querySelector('#msg_package').innerHTML = `${data['message']}`;
+                document.querySelector('#total_money').innerHTML = ${data['total_money']};
+                document.querySelector('#msg_package').innerHTML = ${data['message']};
               }
             else{
-              document.querySelector('#msg_package').innerHTML = `${data['message']}`;
+              document.querySelector('#msg_package').innerHTML = ${data['message']};
             }
         }
     });

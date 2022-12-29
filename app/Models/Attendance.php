@@ -34,4 +34,8 @@ class Attendance extends Model
         return $this->belongsTo(Time::class,'time_id','id');
     }
 
+    public function order(){  
+        return $this->belongsTo(Order::class,'order_id','id');
+    }
+
 }

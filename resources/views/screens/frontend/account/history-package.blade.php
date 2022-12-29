@@ -23,7 +23,7 @@
                         <div class="col-sm-6 col-lg-4 col-xl-3">
                             <div class="card shadow h-100">
                                 <!-- Image -->
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRXI0gh51DSoPcJwx2EM8HSsdQM_gZ3AXGFw&usqp=CAU" class="card-img-top" alt="course image">
+                                <img src="{{asset($order->package->avatar)}}" class="card-img-top" alt="course image">
                                 <!-- Card body -->
                                 <div class="card-body pb-0">
 
@@ -39,6 +39,8 @@
                                         <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
                                         {{-- <li class="list-inline-item ms-2 h6 fw-light mb-0">4.0/5.0</li> --}}
                                     </ul>
+                                    <button style="float: right;margin-bottom: 10px;" type="button" class="btn btn-primary">Xem thêm</button>
+
                                 </div>
                                 <!-- Card footer -->
                                 {{-- <div class="card-footer pt-0 pb-3">
@@ -73,7 +75,7 @@
                         <div class="col-sm-6 col-lg-4 col-xl-3">
                             <div class="card shadow h-100">
                                 <!-- Image -->
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRXI0gh51DSoPcJwx2EM8HSsdQM_gZ3AXGFw&usqp=CAU" class="card-img-top" alt="course image">
+                                <img src="{{asset($order->package->avatar)}}" class="card-img-top" alt="course image">
                                 <!-- Card body -->
                                 <div class="card-body pb-0">
 
@@ -89,7 +91,9 @@
                                         <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
                                         {{-- <li class="list-inline-item ms-2 h6 fw-light mb-0">4.0/5.0</li> --}}
                                     </ul>
-                                    <button style="float: right;margin-bottom: 10px;" type="button" class="btn btn-primary">Xem kết quả</button>
+                                    @foreach ($order->results as $result)
+                                        <a href="{{route('account.resultPackage', $result->id)}}" style="float: right;margin-bottom: 10px;" type="button" class="btn btn-primary">Xem kết quả</a>
+                                    @endforeach
                                 </div>
                                 <!-- Card footer -->
                                 {{-- <div class="card-footer pt-0 pb-3">

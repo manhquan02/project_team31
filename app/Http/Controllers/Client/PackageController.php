@@ -29,7 +29,10 @@ class PackageController extends Controller
         foreach ($all_rate as $item) {
             $total_star += $item->star;
         }
-        $star_rate = $total_star / $all_rate->count();
+        if($all_rate->count() != 0){
+            $star_rate = $total_star / $all_rate->count();
+        }else $star_rate = 5;
+        
         return view('screens.frontend.package.detail', compact('package', 'rates', 'total_star', 'star_rate'));
     }
 }

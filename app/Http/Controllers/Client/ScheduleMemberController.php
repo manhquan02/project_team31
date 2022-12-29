@@ -145,4 +145,24 @@ class ScheduleMemberController extends Controller
 
         return view('screens.frontend.account.history-package', ['orders' => $orders]);
     }
+
+    public function evaluatePackage($id){
+        
+        return view('screens.frontend.account.evaluate', compact('id'));
+    }
+
+    public function store_evaluate(Request $request){
+        $package_id = Order::where('id', $request->order_id)->first()->package_id;
+        $rate_ex = Rate::where('user_id', Auth::id())->where('package_id',$package_id)->first();
+        if($rate_ex == null){
+            $rate = new Rate();
+            $rate->user_id =  Auth::id();
+            $rate->package_id = $package_id;
+            $rate->star = $request->cls_pack;
+            $rate->note = $request->note_pt != null ? $request->note_pt : '';
+            $rate->save();
+        }
+        
+    }
+
 }

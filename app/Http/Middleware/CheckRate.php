@@ -21,16 +21,21 @@ class CheckRate
      */
     public function handle(Request $request, Closure $next)
     {
-        $total_success = Attendance::where('user_id', '=', Auth::id())->where('status', 2)->count();
-        $total_session = Attendance::where('user_id', '=', Auth::id())->count();
-        $orderId = Attendance::where('user_id', '=', Auth::id())->first()->order_id;
+       
+        $order = Attendance::where('user_id', '=', Auth::id())->first();
+        if($order != null){
+            $total_success = Attendance::where('user_id', '=', Auth::id())->where('status', 2)->count();
+            $total_session = Attendance::where('user_id', '=', Auth::id())->count();
+            $orderId =  $order->order_id;
+            $package_id = Order::where('id', $orderId)->first()->package_id;
+          
+            $rate = Rate::where('user_id',  Auth::id())->where('package_id', $package_id)->first();
 
-        $package_id = Order::where('id', $orderId)->first()->package_id;
-
-        $rate = Rate::where('user_id',  Auth::id())->where('package_id', $package_id)->first();
-        if ($total_success / $total_session * 100 > 80 && $rate == null) {
-            return redirect()->route('rate.index', $package_id);
+            if ($total_success / $total_session * 100 > 80 && $rate == null) {
+                return redirect()->route('rate.index', $orderId);
+            }
         }
+       
         return $next($request);
     }
 }

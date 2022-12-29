@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
+use App\Models\Order;
 use App\Models\Schedule;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -47,6 +48,7 @@ class ScheduleCoachController extends Controller
             ->paginate(12);
         // dd($attendances);
         $date = Schedule::find($scheduleId)->date;
+        // $order = $attendances->order->
         return view('screens.frontend.accountCoach.attendance-member', compact('attendances', 'scheduleId', 'date'));
     }
 
@@ -75,4 +77,12 @@ class ScheduleCoachController extends Controller
         }
         return redirect()->back()->with('success', 'Điểm danh thành công');
     }
+
+    public function listMember(){
+        $orders = Order::where('pt_id', '=', Auth::id())->where('status', '=', 1)->get(); 
+        
+        return view('screens.frontend.accountCoach.list-member', ['orders' => $orders]);
+    }
+
+    
 }

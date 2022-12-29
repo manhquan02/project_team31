@@ -74,6 +74,7 @@
             color: black;
         }
     </style>
+    @yield('style')
     <title>@yield('title')</title>
 </head>
 
