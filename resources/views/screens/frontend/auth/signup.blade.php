@@ -20,9 +20,10 @@
                         <form action="{{route('postSignup')}}" method="post">
                             @csrf
                             <div class="row" style="margin-bottom: 28px">
-                                @if(session()->has('error'))
-                                <div class="col-xl-12">
-                                    <span class="text-danger"><strong>{{session()->get('error')}}</strong></span>
+                            @if(session()->has('error'))
+                                <div  style="background-color: #f44336;" class="alert">
+                                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                    <strong>Danger!</strong> {{session()->get('error')}}
                                 </div>
                                 @endif
                                 <div class="col-xl-12">

@@ -215,7 +215,7 @@
                         <th>Ngày bắt đầu</th>
                         <th>Huấn luyện viên</th>
                         <th>Tổng tiền</th>
-                        <th>Hợp đồng</th>
+                        <th>Trạng thái TT</th>
                         <th>Actions</th>
 
                         {{-- <th>Edit Permission</th> --}}
@@ -265,14 +265,14 @@
                         <td>{{$order->total_money}}</td>
                         <td>
                             @if ($order->status == 1)
-                                <span class="label label-inline label-light-success font-weight-bold">Thành công</span>
+                                <span class="label label-inline label-light-success font-weight-bold">Đã thanh toán</span>
                             @else
-                                <span class="label label-inline label-light-danger font-weight-bold">Thất bại</span>
+                                <span class="label label-inline label-light-danger font-weight-bold">Chưa thanh toán</span>
                             @endif
                         </td>
                         <td nowrap="nowrap">
                             @if ($order->status == 1)
-                                <a href="" class="btn btn-success mr-2">Xem hợp đồng</a>
+                                <a href="{{route('admin.order.contract_order', $order->id)}}" >Xem hợp đồng</a>
                             @elseif($order->status == 3)
                                 <button type="button" disabled class="btn btn-dark">Đã gửi mail</button>
                             @else

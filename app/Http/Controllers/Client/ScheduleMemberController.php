@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveProfileRequest;
 use App\Models\Attendance;
+use App\Models\Order;
+use App\Models\Rate;
 use App\Models\ResultContract;
 use App\Models\User;
 use App\Models\Schedule;
@@ -16,10 +18,6 @@ class ScheduleMemberController extends Controller
 {
     public function scheduleMember(Request $request)
     {
-        $total_success = Attendance::where('user_id', '=', Auth::id())->where('status',2)->count();
-        $total_session = Attendance::where('user_id', '=', Auth::id())->count();
-
-        
         $schedules = Attendance::where('user_id', '=', Auth::id());
         if ($schedules->count() != 0) {
             $date_end = Attendance::where('user_id', '=', Auth::id())->orderBy('id', 'desc')->first()->date;

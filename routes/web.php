@@ -93,3 +93,8 @@ Route::get('test', function () {
 })->name('test');
 Route::post('momoPayment', [\App\Http\Controllers\Client\PaymentController::class, 'momoPayment'])->name('momoPayment');
 Route::get('ipn', [\App\Http\Controllers\Client\PaymentController::class, 'ipn'])->name('ipn');
+
+
+Route::prefix('rate')->name('rate.')->group(function () {
+    Route::get('package_id', [\App\Http\Controllers\Client\RateController::class, 'index'])->name('index');
+});

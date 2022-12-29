@@ -4,7 +4,7 @@
 <main>
     <div class="contact-area-2 pt-130 pb-130">
         <div class="container">
-        <h1 class="text-center">ĐĂNG NHẬP</h1>
+            <h1 class="text-center">ĐĂNG NHẬP</h1>
             <div class="row justify-content-between mt-100">
                 <div class="col-md-6 col-lg-5">
                     <div class="contact-text text-left">
@@ -15,15 +15,16 @@
                 </div>
                 <div class="col-md-6 col-lg-7">
                     <div class="contact-form contact-form-2">
-                       
+
 
                         <form action="{{route('postLogin')}}" method="post">
                             @csrf
 
                             <div class="row">
                                 @if(session()->has('error'))
-                                <div class="col-xl-12">
-                                    <span class="text-danger"><strong>{{session()->get('error')}}</strong></span>
+                                <div  style="background-color: #f44336;" class="alert">
+                                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                    <strong>Danger!</strong> {{session()->get('error')}}
                                 </div>
                                 @endif
                                 <div class="col-xl-12">
@@ -36,7 +37,7 @@
                                     </div>
                                     @enderror
                                 </div>
-                               
+
                                 <div class="col-xl-12" style="margin-bottom:28px">
                                     <div class="input-wrap input-icon icon-msg">
                                         <input type="text" @error('password') style="border: 3px solid red" @enderror placeholder="Mật khẩu" name="password" value="{{old('password')}}">

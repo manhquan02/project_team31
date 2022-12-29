@@ -79,7 +79,7 @@ class AuthController extends Controller
                 Cookie::queue('ps', $request->password, 44640);
             }
             return redirect()->route('home');
-        } else return redirect()->back()->with('error', 'Email bạn nhập không kết nối với tài khoản nào. Hãy tìm tài khoản của bạn và đăng nhập.');
+        } else return redirect()->back()->with('error', 'Email bạn nhập không kết nối với tài khoản nào.');
     }
 
     public function very_email($email)
@@ -98,13 +98,7 @@ class AuthController extends Controller
             $user->email_verified_at = date('Y-m-d H:i:s');
             $user->status = 1;
             $user->save();
-            Auth::attempt(
-                [
-                    'email' => $email,
-                    'password'=> ''
-                ]
-            );
-            return redirect()->route('home');
+            return redirect()->route('login');
         }
         return redirect()->back()->with('error', 'Mã xác minh không chính xác');
     }

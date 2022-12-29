@@ -117,3 +117,11 @@ function statusWage(){
         '1'=> 'Đã quyết toán'
     ];
 }
+
+function gender(){
+    return [
+        '0'=>'Nữ',
+        '1'=> 'Nam',
+        '2'=>'Khác'
+    ];
+}
