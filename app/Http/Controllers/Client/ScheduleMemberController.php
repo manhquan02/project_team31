@@ -152,14 +152,17 @@ class ScheduleMemberController extends Controller
     }
 
     public function store_evaluate(Request $request){
-        $package_id = Order::where('id', $request->order_id)->first()->package_id;
-        $rate_ex = Rate::where('user_id', Auth::id())->where('package_id',$package_id)->first();
+        $order = Order::where('id', $request->order_id)->first();
+        $rate_ex = Rate::where('user_id', Auth::id())->where('package_id',$order->package_id)->where('pt_id', $order->pt_id)->first();
         if($rate_ex == null){
             $rate = new Rate();
             $rate->user_id =  Auth::id();
-            $rate->package_id = $package_id;
-            $rate->star = $request->cls_pack;
-            $rate->note = $request->note_pt != null ? $request->note_pt : '';
+            $rate->pt_id = $order->pt_id;
+            $rate->package_id = $order->package_id;
+            $rate->star_package = $request->cls_pack;
+            $rate->note_package = $request->note_pack != null ? $request->note_pack : '';
+            $rate->star_pt = $request->cls_pt;
+            $rate->note_pt = $request->note_pt != null ? $request->note_pt : '';
             $rate->save();
         }
         

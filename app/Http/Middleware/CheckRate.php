@@ -28,13 +28,15 @@ class CheckRate
             $total_session = Attendance::where('user_id', '=', Auth::id())->count();
             $orderId =  $order->order_id;
             $package_id = Order::where('id', $orderId)->first()->package_id;
-          
-            $rate = Rate::where('user_id',  Auth::id())->where('package_id', $package_id)->first();
+            $ptId = Order::where('id', $orderId)->first()->pt_id;
+            $rate = Rate::where('user_id',  Auth::id())->where('package_id', $package_id)->where('pt_id', $ptId)->first();
 
-            if ($total_success / $total_session * 100 > 80 && $rate == null) {
+            if ($total_success / $total_session * 100 >= 80 && $rate == null) {
                 return redirect()->route('rate.index', $orderId);
             }
+           
         }
+        
        
         return $next($request);
     }

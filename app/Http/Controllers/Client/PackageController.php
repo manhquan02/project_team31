@@ -23,11 +23,11 @@ class PackageController extends Controller
         if (!$package) {
             return back();
         }
-        $rates = Rate::where('package_id', $id)->orderBy('created_at','desc')->limit(3)->get();
+        $rates = Rate::where('package_id', $id)->where('note_package', '!=', '')->orderBy('created_at','desc')->limit(3)->get();
         $all_rate = Rate::where('package_id', $id)->get();
         $total_star = 0;
         foreach ($all_rate as $item) {
-            $total_star += $item->star;
+            $total_star += $item->star_package;
         }
         if($all_rate->count() != 0){
             $star_rate = $total_star / $all_rate->count();

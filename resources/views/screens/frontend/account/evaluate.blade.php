@@ -79,10 +79,11 @@
             cls_pt: cls_pt,
             note_pack: note_pack,
             note_pt: note_pt,
-            order_id: {{$id}}
+            order_id: {{$id}},
           },
           success: function(res) {
-            console.log(res.data);
+            alert('Cảm ơn bạn đã đánh giá');
+            window.location.replace("{{route('account.profile')}}");
           }
         })
       }

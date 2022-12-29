@@ -74,7 +74,7 @@
                                                 </div>
                                                 <div class="star">
                                                     <div class="star-vote">
-                                                        <div class="star-style rating" style="background-image: url(https://meter.com.vn//static/imgs/5star1.png); width:{{($item->star/5*100)*1.16}}%"></div>
+                                                        <div class="star-style rating" style="background-image: url(https://meter.com.vn//static/imgs/5star1.png); width:{{($item->star_package/5*100)*1.16}}%"></div>
                                                         <div class="star-style star_background" style="background-image: url(https://meter.com.vn//static/imgs/5star2.png);"></div>
                                                     </div>
                                                 </div>
