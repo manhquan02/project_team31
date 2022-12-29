@@ -11,7 +11,37 @@
     </div>
 </div>
 <div style="padding-bottom: 0px;" class="card-body">
+    <form>
+        <div class="row">
+          <div class="col mx-sm-3">
+            <label for="">Tên hội viên</label>
+            <input type="text" name="name" class="form-control" placeholder="Name">
+          </div>
 
+          <div class="col mx-sm-3">
+            <label for="">Trạng thái</label>
+            <div class="form-group">
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+
+          </div>
+          
+          <div class="col mx-sm-3">
+            <label for="">Tìm kiếm</label>
+            <div class="col">
+                <button type="submit" style="background-color: #FF8800" class="btn btn-primary mb-2">Tìm kiếm</button>
+            </div>
+          </div>
+          
+        </div>
+        
+      </form>
 </div>
 <hr style="background-color: rgb(71, 67, 67); margin-bottom: 0px; margin-top: 10px">
 <div class="card-body">

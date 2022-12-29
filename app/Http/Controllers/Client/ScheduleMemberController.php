@@ -144,6 +144,8 @@ class ScheduleMemberController extends Controller
         return view('screens.frontend.account.history-package',['orders' => $orders]);
     }
 
-    
+    public function evaluatePackage(){
+        return view('screens.frontend.account.evaluate-package');
+    }
 
 }

@@ -137,6 +137,8 @@ Route::prefix('account')->middleware('auth','role:member')->name('account.')->gr
     Route::get('checkTimesCoach', [ClientScheduleMemberController::class, 'checkTimesCoach'])->name('checkTimesCoach');
     Route::get('history-package', [ClientScheduleMemberController::class, 'historyPackage'])->name('historyPackage');
     Route::get('result-package/{result}', [ResultContractController::class, 'resultPackage'])->name('resultPackage');
+
+    Route::get('evaluate-package', [ClientScheduleMemberController::class, 'evaluatePackage'])->name('evaluatePackage');
 });
 
 Route::prefix('account-pt/')->middleware('auth','role:coach')->name('accountPt.')->group(function () {

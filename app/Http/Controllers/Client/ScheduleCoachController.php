@@ -48,6 +48,7 @@ class ScheduleCoachController extends Controller
             ->paginate(12);
         // dd($attendances);
         $date = Schedule::find($scheduleId)->date;
+        // $order = $attendances->order->
         return view('screens.frontend.accountCoach.attendance-member', compact('attendances', 'scheduleId', 'date'));
     }
 
@@ -78,7 +79,7 @@ class ScheduleCoachController extends Controller
     }
 
     public function listMember(){
-        $orders = Order::where('pt_id', '=', Auth::id())->get(); 
+        $orders = Order::where('pt_id', '=', Auth::id())->where('status', '=', 1)->get(); 
         
         return view('screens.frontend.accountCoach.list-member', ['orders' => $orders]);
     }

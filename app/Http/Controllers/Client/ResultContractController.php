@@ -15,6 +15,7 @@ class ResultContractController extends Controller
 
     public function evaluateMember($result){
         $result = ResultContract::find($result);
+        
         return view('screens.frontend.accountCoach.evaluate-member',['result' => $result]);
     }
 

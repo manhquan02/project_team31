@@ -3,7 +3,7 @@
 <div class="card-header bg-white border-0">
   <div class="row align-items-center">
     <div class="col-8">
-      <h3 style="font-size: 20px; font-weight: 900" class="mb-0">Thông tin cá nhân</h3>
+      <h3 style="font-size: 20px; font-weight: 900" class="mb-0">Đánh giá kết quả cuối môn</h3>
     </div>
     <div class="col-4 text-right">
       {{-- <a href="#!" class="btn btn-sm btn-primary">Settings</a>  --}}
