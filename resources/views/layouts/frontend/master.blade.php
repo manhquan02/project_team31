@@ -22,6 +22,58 @@
     <link rel="stylesheet" href="{{asset('frontend/assets/css/spacing.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css')}}">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <style>
+        .star-style {
+            background-repeat: no-repeat;
+            width: 115%;
+            height: 100%;
+            margin-left: -7px;
+        }
+
+        .rating {
+            position: absolute;
+            top: -1px;
+            left: 0;
+        }
+
+        .fa-star {
+            margin: 5px;
+            width: 20px;
+            height: 10px;
+        }
+
+        .star-vote {
+            width: 100px;
+            height: 20px;
+            position: relative;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+        .single_capt_left {
+            font-size: 20px;
+        }
+
+        .alert {
+            padding: 20px;
+            color: white;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .closebtn:hover {
+            color: black;
+        }
+    </style>
     @yield('style')
     <title>@yield('title')</title>
 </head>
@@ -130,8 +182,6 @@
     <script src="{{asset('frontend/assets/js/tilt.jquery.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/wow.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/script.js')}}"></script>
-    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-    {!! Toastr::message() !!}
 
     @yield('js')
 

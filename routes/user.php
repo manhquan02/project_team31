@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\AttendanceMemberController;
 use App\Http\Controllers\Admin\ContractController;
 use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\ExportController as AdminExportController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PtMyStudentController;
 use App\Http\Controllers\Admin\ScheduleController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Client\ResultContractController;
 use App\Http\Controllers\Client\ScheduleCoachController;
 use App\Http\Controllers\Client\ScheduleMemberController as ClientScheduleMemberController;
 use App\Http\Controllers\Client\ScheduleUsserController;
+use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::prefix('admin/')->middleware(['auth', 'verified', 'role:admin'])->name('admin.')->group(function () {
     Route::prefix('user/')->name('user.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('listUser');
@@ -62,21 +65,21 @@ Route::prefix('admin/')->middleware(['auth', 'verified', 'role:admin'])->name('a
         Route::post('/postMailOrder', [OrderController::class, 'postMailOrder'])->name('postMailOrder');
         Route::get('/send-mail/{order}', [OrderController::class, 'sendMail'])->name('sendMail');
         Route::post('/postSendMail/{order}', [OrderController::class, 'postSendMail'])->name('postSendMail');
-        
 
         Route::get('/add', [OrderController::class, 'add'])->name('add');
 
         Route::get('/create-multi', [OrderController::class, 'createMulti'])->name('createMulti');
         Route::post('/post-orderMulti', [OrderController::class, 'postOrderMulti'])->name('postOrderMulti');
-        
+
         Route::get('/set-package', [OrderController::class, 'setPackage'])->name('setPackage');
         Route::get('/total-money', [OrderController::class, 'setTotalMoney'])->name('setTotalMoney');
         Route::get('/set-coach', [OrderController::class, 'setCoach'])->name('setCoach');
-        Route::get('pdf', [OrderController::class, 'pdf'])->name('pdf');
+        Route::get('pdf', [AdminExportController::class, 'list_order_pdf'])->name('pdf');
 
         Route::post('/momo_payment', [OrderController::class, 'momoPayment'])->name('momoPayment');
         Route::get('checkPayment', [OrderController::class, 'returnUrl'])->name('returnUrl');
 
+        Route::get('contract-order/{id}', [AdminExportController::class, 'contract_order'])->name('contract_order');
     });
 
     Route::prefix('contract/')->name('contract.')->group(function () {
@@ -102,7 +105,6 @@ Route::prefix('coach/')->name('coach.')->group(function () {
     Route::prefix('my-student/')->name('my_student.')->group(function () {
         Route::get('/', [PtMyStudentController::class, 'index'])->name('list');
     });
-    
 });
 
 // client 
@@ -110,16 +112,16 @@ Route::prefix('coach/')->name('coach.')->group(function () {
 Route::prefix('payment/')->name('payment.')->group(function () {
     Route::get('/{id}', [PaymentController::class, 'index'])->name('index');
     Route::post('create/{id}', [PaymentController::class, 'store'])->name('store');
-    
+
     Route::get('checkPayment', [PaymentController::class, 'returnUrl'])->name('returnUrl');
 });
 
 // Route::prefix('account/')->name('account.')->group(function () {
 //     Route::get('/', [ScheduleUserController::class, 'index'])->name('index');
-    
+
 // });
 
-Route::prefix('order/')->name('order.')->group(function () {
+Route::prefix('order/')->middleware('checkBuyPackage','auth')->name('order.')->group(function () {
     Route::get('create/{id}', [ClientOrderController::class, 'index'])->name('index');
     Route::post('postOrder/{id}', [ClientOrderController::class, 'store'])->name('postOrder');
     Route::get('checkPayment', [ClientOrderController::class, 'returnUrl'])->name('returnUrl');
@@ -128,20 +130,20 @@ Route::prefix('order/')->name('order.')->group(function () {
     Route::get('create/{orderId}', [ClientOrderController::class, 'create'])->name('create');
 });
 
-Route::prefix('account')->middleware('auth','role:member')->name('account.')->group(function () {
+Route::prefix('account')->middleware('auth', 'role:member','checkRate')->name('account.')->group(function () {
     Route::get('profile', [ClientScheduleMemberController::class, 'profile'])->name('profile');
     Route::get('schedule', [ClientScheduleMemberController::class, 'scheduleMember'])->name('schedule');
-    Route::patch('save-profile', [ClientScheduleMemberController::class, 'saveProfile'])->name('saveProfile');
+
     Route::get('reschedule/{attendanceId}', [ClientScheduleMemberController::class, 'reschedule'])->name('reschedule');
     Route::post('postReschedule/{attendanceId}', [ClientScheduleMemberController::class, 'postReschedule'])->name('postReschedule');
     Route::get('checkTimesCoach', [ClientScheduleMemberController::class, 'checkTimesCoach'])->name('checkTimesCoach');
     Route::get('history-package', [ClientScheduleMemberController::class, 'historyPackage'])->name('historyPackage');
     Route::get('result-package/{result}', [ResultContractController::class, 'resultPackage'])->name('resultPackage');
-
-    Route::get('evaluate-package', [ClientScheduleMemberController::class, 'evaluatePackage'])->name('evaluatePackage');
 });
-
-Route::prefix('account-pt/')->middleware('auth','role:coach')->name('accountPt.')->group(function () {
+Route::prefix('account')->name('account.')->group(function () {
+    Route::patch('save-profile', [ClientScheduleMemberController::class, 'saveProfile'])->name('saveProfile');
+});
+Route::prefix('account-pt/')->middleware('auth', 'role:coach')->name('accountPt.')->group(function () {
     Route::get('/', [ScheduleCoachController::class, 'profile'])->name('index');
     Route::get('profile', [ScheduleCoachController::class, 'profile'])->name('profile');
     Route::get('schedule', [ScheduleCoachController::class, 'scheduleCoach'])->name('scheduleCoach');
@@ -151,6 +153,3 @@ Route::prefix('account-pt/')->middleware('auth','role:coach')->name('accountPt.'
     Route::get('evaluate-member/{result}', [ResultContractController::class, 'evaluateMember'])->name('evaluateMember');
     Route::post('postEvaluateMember/{result}', [ResultContractController::class, 'postEvaluateMember'])->name('postEvaluateMember');
 });
-
-
-

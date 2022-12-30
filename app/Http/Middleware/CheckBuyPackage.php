@@ -2,11 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Attendance;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CheckAdmin
+class CheckBuyPackage
 {
     /**
      * Handle an incoming request.
@@ -17,13 +18,11 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            if (Auth::user()->getRoleNames()[0] == 'admin') {
-                return $next($request);
-            } else {
-                return redirect()->route('home');
-            }
+        $ex_package = Attendance::where('status',2)->where('user_id', Auth::id())->count();
+        if ($ex_package > 0) {
+            return redirect()->back();
         }
-        return redirect()->route('home');
+
+        return $next($request);
     }
 }

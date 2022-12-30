@@ -117,3 +117,21 @@ function statusWage(){
         '1'=> 'Đã quyết toán'
     ];
 }
+
+function gender(){
+    return [
+        '0'=>'Nữ',
+        '1'=> 'Nam',
+        '2'=>'Khác'
+    ];
+}
+
+function evaluate(){
+    return [
+        '1'=>'Rất tệ',
+        '2'=> 'Tệ',
+        '3'=>'Hài lòng',
+        '4'=>'Tốt',
+        '5'=>'Rất tốt'
+    ];
+}

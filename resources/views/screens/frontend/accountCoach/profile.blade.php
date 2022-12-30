@@ -5,27 +5,23 @@
     <div class="col-8">
       <h3 style="font-size: 20px; font-weight: 900" class="mb-0">Thông tin cá nhân</h3>
     </div>
-    <div class="col-4 text-right">
-      {{-- <a href="#!" class="btn btn-sm btn-primary">Settings</a>  --}}
-    </div>
   </div>
 </div>
 <div class="card-body">
-
-  <form action="{{route('account.saveProfile')}}" method="post">
-
+  <form action="{{route('account.saveProfile')}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
-    <!--  <h6 class="heading-small text-muted mb-4">User information</h6> -->
     <div class="pl-lg-4">
       @if(session()->has('error'))
-      <div class="row">
-        <span class="text-danger">{{session()->get('error')}}</span>
+      <div class="alert" style="background-color: #f44336;">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Error!</strong> {{session()->get('error')}}
       </div>
       @endif
       @if(session()->has('success'))
-      <div class="row">
-        <span class="text-success">{{session()->get('success')}}</span>
+      <div class="alert" style="background-color: green;">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Success!</strong> {{session()->get('success')}}
       </div>
       @endif
       <div class="row">
@@ -49,7 +45,6 @@
             <input type="text" id="input-last-name" class="form-control form-control-alternative" name="address" value="{{Auth::user()->address}}">
           </div>
         </div>
-
       </div>
       <div class="row">
         <div class="col-lg-6">
@@ -64,53 +59,26 @@
             <input type="text" id="input-first-name" class="form-control form-control-alternative" name="phone" value="{{Auth::user()->phone}}">
           </div>
         </div>
-
       </div>
     </div>
     <hr class="my-4">
-    <!-- Address -->
-    <!-- <h6 class="heading-small text-muted mb-4">Contact information</h6>
-    <div class="pl-lg-4">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group focused">
-            <label class="form-control-label" for="input-address">Address</label>
-            <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="form-group focused">
-            <label class="form-control-label" for="input-city">City</label>
-            <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York">
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="form-group focused">
-            <label class="form-control-label" for="input-country">Country</label>
-            <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="form-group">
-            <label class="form-control-label" for="input-country">Postal code</label>
-            <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr class="my-4"> -->
-    <!-- Description -->
-    <!-- <h6 class="heading-small text-muted mb-4">About me</h6>
-    <div class="pl-lg-4">
-      <div class="form-group focused">
-        <label>About Me</label>
-        <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
-      </div>
-    </div> -->
     <button style="float: right" class="btn btn-primary">Lưu</button>
   </form>
 </div>
-
+@endsection
+@section('js')
+<script>
+  $(function() {
+    $("input[name = 'avatar']").on('change', function(e) {
+      e.preventDefault();
+      var input = e.target;
+      var reader = new FileReader();
+      reader.onload = function() {
+        var dataURL = reader.result;
+        var output = $('#avatar').attr('src', dataURL);
+      }
+      reader.readAsDataURL(input.files[0]);
+    })
+  });
+</script>
 @endsection

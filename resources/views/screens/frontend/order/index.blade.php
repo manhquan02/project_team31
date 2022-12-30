@@ -339,7 +339,7 @@ $package_id = {{$package->id}};
             document.getElementById('setCheckCoach').innerHTML = '';
             $.each(data['arrayPt'], function(key, pt) {
               console.log(key);
-              document.getElementById('setCheckCoach').innerHTML += `<option value="${key}">${pt}</option>`; 
+              document.getElementById('setCheckCoach').innerHTML += <option value="${key}">${pt}</option>; 
             });
           }
           else{
@@ -375,11 +375,11 @@ $package_id = {{$package->id}};
                 // console.log(data['package']);
                 // console.log(data['result']);
                 // document.querySelector(".set-coach").disabled = false;
-                document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
-                document.querySelector('#msg_package').innerHTML = `${data['message']}`;
+                document.querySelector('#total_money').innerHTML = ${data['total_money']};
+                document.querySelector('#msg_package').innerHTML = ${data['message']};
               }
             else{
-              document.querySelector('#msg_package').innerHTML = `${data['message']}`;
+              document.querySelector('#msg_package').innerHTML = ${data['message']};
             }
         }
     });

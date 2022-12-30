@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveProfileRequest;
 use App\Models\Attendance;
+use App\Models\Order;
+use App\Models\Rate;
 use App\Models\ResultContract;
 use App\Models\User;
 use App\Models\Schedule;
@@ -16,7 +18,6 @@ class ScheduleMemberController extends Controller
 {
     public function scheduleMember(Request $request)
     {
-
         $schedules = Attendance::where('user_id', '=', Auth::id());
         if ($schedules->count() != 0) {
             $date_end = Attendance::where('user_id', '=', Auth::id())->orderBy('id', 'desc')->first()->date;
@@ -107,8 +108,8 @@ class ScheduleMemberController extends Controller
             'date' => $request->date,
             'time_id' => $request->time_id
         ]);
-        $weekday = date ( 'l' , strtotime($request->date) );
-        $schedules = Schedule::where('id' ,'=', $attendance->schedule_id);
+        $weekday = date('l', strtotime($request->date));
+        $schedules = Schedule::where('id', '=', $attendance->schedule_id);
         $schedules->update([
             'date' => $request->date,
             'weekday_name' => $weekday,
@@ -143,15 +144,34 @@ class ScheduleMemberController extends Controller
         ]);
     }
 
-    public function historyPackage(){
+    public function historyPackage()
+    {
         $user = User::find(Auth::id());
         $orders = $user->order;
-        
-        return view('screens.frontend.account.history-package',['orders' => $orders]);
+
+        return view('screens.frontend.account.history-package', ['orders' => $orders]);
     }
 
-    public function evaluatePackage(){
-        return view('screens.frontend.account.evaluate-package');
+    public function evaluatePackage($id){
+        
+        return view('screens.frontend.account.evaluate', compact('id'));
+    }
+
+    public function store_evaluate(Request $request){
+        $order = Order::where('id', $request->order_id)->first();
+        $rate_ex = Rate::where('user_id', Auth::id())->where('package_id',$order->package_id)->where('pt_id', $order->pt_id)->first();
+        if($rate_ex == null){
+            $rate = new Rate();
+            $rate->user_id =  Auth::id();
+            $rate->pt_id = $order->pt_id;
+            $rate->package_id = $order->package_id;
+            $rate->star_package = $request->cls_pack;
+            $rate->note_package = $request->note_pack != null ? $request->note_pack : '';
+            $rate->star_pt = $request->cls_pt;
+            $rate->note_pt = $request->note_pt != null ? $request->note_pt : '';
+            $rate->save();
+        }
+        
     }
 
 }

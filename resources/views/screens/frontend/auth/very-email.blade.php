@@ -20,8 +20,9 @@
                             @csrf
                             <div class="row">
                                 @if(session()->has('error'))
-                                <div class="col-xl-12">
-                                    <span class="text-danger"><strong>{{session()->get('error')}}</strong></span>
+                                <div  style="background-color: #f44336;" class="alert">
+                                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                    <strong>Danger!</strong> {{session()->get('error')}}
                                 </div>
                                 @else
                                 <div class="col-xl-12">

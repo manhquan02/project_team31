@@ -93,3 +93,9 @@ Route::get('test', function () {
 })->name('test');
 Route::post('momoPayment', [\App\Http\Controllers\Client\PaymentController::class, 'momoPayment'])->name('momoPayment');
 Route::get('ipn', [\App\Http\Controllers\Client\PaymentController::class, 'ipn'])->name('ipn');
+
+
+Route::prefix('rate')->name('rate.')->group(function () {
+    Route::get('evaluate/{id}', [\App\Http\Controllers\Client\ScheduleMemberController::class, 'evaluatePackage'])->name('index');
+    Route::post('evaluate', [\App\Http\Controllers\Client\ScheduleMemberController::class, 'store_evaluate'])->name('store');
+});
