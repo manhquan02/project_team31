@@ -85,9 +85,10 @@ class ScheduleMemberController extends Controller
     }
     public function reschedule($attendanceId)
     {
+        $attendance = Attendance::find($attendanceId);
         $times = Time::all();
 
-        return view('screens.frontend.account.reschedule', ['times' => $times, 'attendanceId' => $attendanceId]);
+        return view('screens.frontend.account.reschedule', ['times' => $times,'attendance' => $attendance, 'attendanceId' => $attendanceId]);
     }
 
     public function postReschedule($attendanceId, Request $request)
@@ -120,8 +121,13 @@ class ScheduleMemberController extends Controller
     {
 
         $attendance = Attendance::find($request->attendanceId);
+        $dateAttendance = Attendance::where('date','=',$request->date)->first();
+        
         $ptId = $attendance->pt_id;
         $schedulesPt = Schedule::where('pt_id', '=', $ptId)->where('date', '=', $request->date)->pluck('time_id')->toArray();
+        if($dateAttendance){
+            array_push($schedulesPt,$dateAttendance->time_id);
+        }
         $times = Time::get()->pluck('id')->toArray();
         $arrayTimeId = array();
         foreach ($times as $key => $time) {

@@ -22,4 +22,12 @@ class Schedule extends Model
     public function time(){  
         return $this->belongsTo(Time::class,'time_id','id');
     }
+
+    public function order(){  
+        return $this->belongsTo(Order::class,'order_id','id');
+    }
+
+    public function pt(){  
+        return $this->belongsTo(User::class,'pt_id','id');
+    }
 }

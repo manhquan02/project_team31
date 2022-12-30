@@ -48,7 +48,19 @@ class ScheduleCoachController extends Controller
             ->paginate(12);
         // dd($attendances);
         $date = Schedule::find($scheduleId)->date;
-        // $order = $attendances->order->
+        
+        $schedule = Schedule::find($scheduleId);
+        $order = $schedule->order;
+        foreach ($order->results as $result) {
+            
+            if(Attendance::latest()->first()->date <= date('Y-m-d') && $result->status_package == 0){ 
+                // Attendance::latest()->first()->date <= date('Y-m-d')
+
+                return view('screens.frontend.accountCoach.evaluate-member', ['result' => $result]);
+            }  
+        }
+         
+        // dd($packageId);
         return view('screens.frontend.accountCoach.attendance-member', compact('attendances', 'scheduleId', 'date'));
     }
 

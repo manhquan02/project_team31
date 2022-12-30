@@ -11,6 +11,12 @@
     </div>
 </div>
 <div class="card-body">
+    <h4>Lịch tập theo lịch trình hiện tại</h4>
+    <span>Ngày: {{$attendance->date}}</span>
+    <br>
+    <span>Ca tập: {{$attendance->time->time_name}}</span>
+</div>
+<div class="card-body">
     <form action="{{route('account.postReschedule', $attendanceId)}}" method="POST">
         @csrf
         {{-- <h6 class="heading-small text-muted mb-4">Đổi lịch</h6> --}}
