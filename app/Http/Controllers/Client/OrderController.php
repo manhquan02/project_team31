@@ -404,6 +404,7 @@ class OrderController extends Controller
     public function momoPayment($order_Id)
     {
         $order = Order::where('id', $order_Id)->first();
+        
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
         $partnerCode = 'MOMOBQRE20220907';
@@ -411,17 +412,20 @@ class OrderController extends Controller
         $secretKey = 'LeKe8s0zVfMBSiOUzyWA3VGtmJsTSC3e';
         $orderInfo = "Đăng ký gói tập";
         $amount = $order->total_money;
-        $orderId = $order->id . '';
-        $redirectUrl = route('order.resultMomo');
-        $ipnUrl = route('order.resultMomo');
+        $orderId = time() . '';
+        $order_Id = $order->id . '';
+        $redirectUrl = route('order.resultMomo', $order->id);
+        $ipnUrl = route('order.resultMomo', $order->id);
         $extraData = "";
 
         $requestId = time() . "";
         $requestType = "captureWallet";
         $extraData = ("");
         //before sign HMAC SHA256 signature
-        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId  . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType ;
+        
         $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        // dd($signature);
         $data = array(
             'partnerCode' => $partnerCode,
             'partnerName' => "Test",
@@ -429,6 +433,7 @@ class OrderController extends Controller
             'requestId' => $requestId,
             'amount' => $amount,
             'orderId' => $orderId,
+
             'orderInfo' => $orderInfo,
             'redirectUrl' => $redirectUrl,
             'ipnUrl' => $ipnUrl,
@@ -442,15 +447,17 @@ class OrderController extends Controller
         $jsonResult = json_decode($result, true);  // decode json
         //Just a example, please check more in there
         if (isset($jsonResult['payUrl'])) {
+            // dd("if");
             header('Location: ' . $jsonResult['payUrl']);
            
             die();
         } else {
+            dd($jsonResult);
             echo json_encode($jsonResult);
         }
     }
 
-    public function resultMomo(Request $request)
+    public function resultMomo($order_Id,Request $request)
     {
         $accessKey = 'K5KI6gT11qQOvSNb';
         $secretKey = 'LeKe8s0zVfMBSiOUzyWA3VGtmJsTSC3e';
@@ -475,7 +482,7 @@ class OrderController extends Controller
                 "&resultCode=" . $resultCode . "&transId=" . $transId;
 
             $partnerSignature = hash_hmac("sha256", $rawHash, $secretKey);
-            $order = Order::where('id', $orderId)->first();
+            $order = Order::where('id', $order_Id)->first();
             if ($m2signature == $partnerSignature) {
 
                 if ($resultCode == '0') {

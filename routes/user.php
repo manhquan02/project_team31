@@ -129,7 +129,7 @@ Route::prefix('order/')->middleware('checkBuyPackage','auth')->name('order.')->g
     Route::get('test', [ClientOrderController::class, 'test'])->name('test');
     Route::get('create/{orderId}', [ClientOrderController::class, 'create'])->name('create');
 
-    Route::get('result-momo', [ClientOrderController::class, 'resultMomo'])->name('resultMomo');
+    Route::get('result-momo/{order_Id}', [ClientOrderController::class, 'resultMomo'])->name('resultMomo');
 });
 
 Route::prefix('account')->middleware('auth', 'role:member','checkRate')->name('account.')->group(function () {
