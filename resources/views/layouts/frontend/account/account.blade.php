@@ -110,6 +110,12 @@
                     <li class="nav-item active">
                       <a class="nav-link navbar-profile-li" href="#">Chỉ số cơ thể </a>
                     </li>
+                    <li class="nav-item">
+                      <div style="color: #16181b;" class="nav-link navbar-profile-li">|</div>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link navbar-profile-li" href="{{route('account.historyPackage')}}">Gói tập đã đăng ký </a>
+                    </li>
                   </ul>
                 </div>
                 @endhasrole
@@ -135,7 +141,7 @@
                       <div style="color: #16181b;" class="nav-link navbar-profile-li">|</div>
                     </li>
                     <li class="nav-item active">
-                      <a class="nav-link navbar-profile-li" href="#">Danh sách hội viên </a>
+                      <a class="nav-link navbar-profile-li" href="{{route('accountPt.listMember')}}">Danh sách hội viên </a>
                     </li>
                   </ul>
                 </div>

@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Schedule;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use PDF;
 use Illuminate\Support\Facades\Auth;
 
 class ScheduleCoachController extends Controller
@@ -96,5 +97,23 @@ class ScheduleCoachController extends Controller
         return view('screens.frontend.accountCoach.list-member', ['orders' => $orders]);
     }
 
+
+    public function contract_order($id)
+    {
+        // dd(decrypt($id));
+        try {
+            $order = Order::where('id',decrypt($id))->first();
+        if($order !=null){
+            $pdf = PDF::loadView('screens.backend.order.contract', compact('order'));
+            return $pdf->stream();
+        }
+        } catch (\Exception  $e) {
+            abort($e);
+ 
+            return ";
+        }
+        
+        
+    }
     
 }

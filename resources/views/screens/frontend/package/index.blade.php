@@ -28,15 +28,15 @@
 				<div class="col-xl-12">
 					<div class="section-title-2 bar-theme-color text-center mb-35">
 						<h3>
-							We Provide A Comfortable Pricing Plan For Our Satisfied Clients
+							Gói Tập Được Mua Nhiều Nhất
 						</h3>
-						<span>Pricing</span>
+						{{-- <span>Pricing</span> --}}
 					</div>
 				</div>
 			</div>
 			<div class="row justify-content-center">
 			<div class="popular-badge" style="text-align: center;">
-							<h2 style="color: #e63a34;">Most Popular</h2>
+							{{-- <h2 style="color: #e63a34;">Top 3</h2> --}}
 						</div>
 				
 				@foreach($popular as $i)
@@ -68,9 +68,9 @@
 				<div class="col-xl-12">
 					<div class="section-title-2 bar-theme-color text-center mb-35">
 						<h3>
-							We Provide A Comfortable Pricing Plan For Our Satisfied Clients
+							Gói Tập 
 						</h3>
-						<span>Pricing</span>
+						{{-- <span>Pricing</span> --}}
 					</div>
 				</div>
 			</div>

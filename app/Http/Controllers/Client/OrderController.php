@@ -97,9 +97,10 @@ class OrderController extends Controller
 
     public function store($id ,Request $request)
     {   
+        // dd($request->all());
         // dd($request->weekday);
         // dd(array_merge($request->weekday, $request->time));
-        
+        // dd(isset($request->payment_vnp))
         $order = new Order();
         // dd($request->discount_code);
         $training = new TrainingPackage();
@@ -202,8 +203,16 @@ class OrderController extends Controller
             
         }
         $order->users()->attach(Auth::id());
-        $vnp_Url = $this->vnpPayment($order->id); 
+        if(isset($request->payment_vnp)){
+            $vnp_Url = $this->vnpPayment($order->id); 
                         return redirect($vnp_Url);
+        }
+        elseif(isset($request->payment_momo)){
+            // dd(123);
+             $this->momoPayment($order->id); 
+                        
+        }
+        
         return back()->with('success', 'Thêm order thành công');
     }
 
@@ -365,13 +374,7 @@ class OrderController extends Controller
                                 }
                             }
 
-                    
-                            
-                            
-                            
                             // tạo lịch trình pt và điểm danh hội viên
-                            
-                    
                             // return back()->with('success', 'Mua hang thanh cong');
                         } else {
                             $returnData['RspCode'] = '02';
@@ -395,6 +398,254 @@ class OrderController extends Controller
         //Trả lại VNPAY theo định dạng JSON
 
         return view('screens.backend.order.payment',compact('returnData'));
+    }
+
+
+    public function momoPayment($order_Id)
+    {
+        $order = Order::where('id', $order_Id)->first();
+        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+
+        $partnerCode = 'MOMOBQRE20220907';
+        $accessKey = 'K5KI6gT11qQOvSNb';
+        $secretKey = 'LeKe8s0zVfMBSiOUzyWA3VGtmJsTSC3e';
+        $orderInfo = "Đăng ký gói tập";
+        $amount = $order->total_money;
+        $orderId = $order->id . '';
+        $redirectUrl = route('order.resultMomo');
+        $ipnUrl = route('order.resultMomo');
+        $extraData = "";
+
+        $requestId = time() . "";
+        $requestType = "captureWallet";
+        $extraData = ("");
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array(
+            'partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'vi',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature
+        );
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+
+        $jsonResult = json_decode($result, true);  // decode json
+        //Just a example, please check more in there
+        if (isset($jsonResult['payUrl'])) {
+            header('Location: ' . $jsonResult['payUrl']);
+           
+            die();
+        } else {
+            echo json_encode($jsonResult);
+        }
+    }
+
+    public function resultMomo(Request $request)
+    {
+        $accessKey = 'K5KI6gT11qQOvSNb';
+        $secretKey = 'LeKe8s0zVfMBSiOUzyWA3VGtmJsTSC3e';
+        $response = array();
+        try {
+            $partnerCode = $_GET["partnerCode"];
+            $orderId = $_GET["orderId"];
+            $requestId = $_GET["requestId"];
+            $amount = $_GET["amount"];
+            $orderInfo = $_GET["orderInfo"];
+            $orderType = $_GET["orderType"];
+            $transId = $_GET["transId"];
+            $resultCode = $_GET["resultCode"];
+            $message = $_GET["message"];
+            $payType = $_GET["payType"];
+            $responseTime = $_GET["responseTime"];
+            $extraData = $_GET["extraData"];
+            $m2signature = $_GET["signature"]; //MoMo signature\
+            //Checksum
+            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&message=" . $message . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo .
+                "&orderType=" . $orderType . "&partnerCode=" . $partnerCode . "&payType=" . $payType . "&requestId=" . $requestId . "&responseTime=" . $responseTime .
+                "&resultCode=" . $resultCode . "&transId=" . $transId;
+
+            $partnerSignature = hash_hmac("sha256", $rawHash, $secretKey);
+            $order = Order::where('id', $orderId)->first();
+            if ($m2signature == $partnerSignature) {
+
+                if ($resultCode == '0') {
+                    $result = 'Giao dịch thành công';
+                    // dd($result);
+                    if ($order != null) {
+                        // dd("quân");
+                        $order->status = 1;
+                        $order->save();
+                        $order = Order::find($order->id);
+                            $contract = new Contract();
+                            $attendance = new Attendance();
+                            $schedule = new Schedule();
+                            $arrayWeekdays = PackageUtility::$arrayWeekday;
+                            $trainings = $order->trainings;
+                            // $weekday 
+
+                            $begin = new DateTime($order->date_start);
+                            $end = new DateTime($order->date_end);
+                            $interval = DateInterval::createFromDateString('1 day');
+                            $period = new DatePeriod($begin, $interval, $end);
+                            
+                            foreach ($period as $dt) {
+                                
+                                foreach($trainings as $training){
+                                    // dd($training->id);
+                                    if($arrayWeekdays[$training->weekday_id] == $dt->format("l")){
+                                        $schedule = $schedule->create([
+                                            'pt_id' => $order->pt_id,
+                                            'order_id' => $order->id,
+                                            'time_id' => $training->time_id,
+                                            'weekday_name' => $dt->format("l"),
+                                            'date' => $dt->format("Y-m-d"),
+                                            'status' => 0,
+                                        ]);
+
+                                                            
+                                        $attendance->create([
+                                            'user_id' => Auth::id(),
+                                            'order_id' => $order->id,
+                                            'schedule_id' =>  $schedule->id,
+                                            'time_id' => $training->time_id,
+                                            'weekday_name' => $dt->format("l"),
+                                            'pt_id' => $order->pt_id,
+                                            'date' => $dt->format("Y-m-d"),
+                                            'status' => 0,
+                                            
+                                        ]);
+                                        
+                                    }
+
+                                }
+                            }
+                    }
+                } else {
+                    if ($order != null) {
+                        $this->resetPayment($order);
+                        $order->delete();
+                    }
+                    $result =  $message;
+                }
+            } else {
+                if ($order != null) {
+                    $this->resetPayment($order);
+                    $order->delete();
+                }
+                $result = 'Giao dịch bị nghi ngờ. Vui lòng check lại giao dịch';
+            }
+        } catch (Exception $e) {
+            echo $response['message'] = $e;
+        }
+
+        $debugger = array();
+        $debugger['rawData'] = $rawHash;
+        $debugger['momoSignature'] = $m2signature;
+        $debugger['partnerSignature'] = $partnerSignature;
+
+        if ($m2signature == $partnerSignature) {
+            $response['message'] = "Nhận kết quả thanh toán thành công";
+        } else {
+            $response['message'] = "LỖI ! Tổng kiểm tra thất bại";
+        }
+        $response['debugger'] = $debugger;
+
+        return view('screens.frontend.payment.resultPayment', compact('result', 'orderId', 'transId', 'orderInfo', 'orderType', 'resultCode', 'amount'));
+    }
+
+
+    function execPostRequest($url, $data)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data)
+            )
+        );
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        //execute post
+        $result = curl_exec($ch);
+        //close connection
+        curl_close($ch);
+        return $result;
+    }
+
+    public function createSchedule($orderId){
+        $order = Order::find($orderId);
+        $contract = new Contract();
+        $attendance = new Attendance();
+        $schedule = new Schedule();
+        $arrayWeekdays = PackageUtility::$arrayWeekday;
+        $trainings = $order->trainings;
+        // $weekday 
+
+        $begin = new DateTime($order->date_start);
+        $end = new DateTime($order->date_end);
+        $interval = DateInterval::createFromDateString('1 day');
+        $period = new DatePeriod($begin, $interval, $end);
+        
+        foreach ($period as $dt) {
+            
+            foreach($trainings as $training){
+                // dd($training->id);
+                if($arrayWeekdays[$training->weekday_id] == $dt->format("l")){
+                    $schedule = $schedule->create([
+                        'pt_id' => $order->pt_id,
+                        'order_id' => $order->id,
+                        'time_id' => $training->time_id,
+                        'weekday_name' => $dt->format("l"),
+                        'date' => $dt->format("Y-m-d"),
+                        'status' => 0,
+                    ]);
+
+                                        
+                    $attendance->create([
+                        'user_id' => Auth::id(),
+                        'order_id' => $order->id,
+                        'schedule_id' =>  $schedule->id,
+                        'time_id' => $training->time_id,
+                        'weekday_name' => $dt->format("l"),
+                        'pt_id' => $order->pt_id,
+                        'date' => $dt->format("Y-m-d"),
+                        'status' => 0,
+                        
+                    ]);
+                    
+                }
+
+            }
+        }
+    }
+
+    public function resetPayment($order)
+    {
+        $new_order = new Order();
+        $new_order->discount_id = $order->discount_id;
+        $new_order->package_id = $order->package_id;
+        $new_order->date_start = $order->date_start;
+        $new_order->date_end = $order->date_end;
+        $new_order->pt_id = $order->pt_id;
+        $new_order->total_money = $order->total_money;
+        $new_order->payment_method = $order->payment_method;
+        $new_order->status = $order->status;
+        $new_order->save();
     }
 
     public function create($orderId)
@@ -546,5 +797,7 @@ class OrderController extends Controller
             'arrayPt' => $arrayPt
         ]);
     }
+
+    
 
 }

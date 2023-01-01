@@ -272,7 +272,7 @@
                         </td>
                         <td nowrap="nowrap">
                             @if ($order->status == 1)
-                                <a href="{{route('admin.order.contract_order', $order->id)}}" >Xem hợp đồng</a>
+                                <a class="btn btn-primary" href="{{route('admin.order.contract_order', $order->id)}} " >Xem hợp đồng</a>
                             @elseif($order->status == 3)
                                 <button type="button" disabled class="btn btn-dark">Đã gửi mail</button>
                             @else

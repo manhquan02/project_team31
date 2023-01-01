@@ -197,10 +197,10 @@
           </div>
 
           <div style="margin-top: 20px; width: 30%; border: none" class="list-group-item d-flex justify-content-between">
-            <button class="btn btn-secondary btn-md waves-effect m-0" type="submit">Thanh toán</button>
+            <button name="payment_vnp" value="1" class="btn btn-secondary btn-md waves-effect m-0" type="submit">Thanh toán VNPAY</button>
           </div>
 
-          <button name="redirect" id="redirect" class="btn btn-warning">Thanh toán MoMO</button>
+          <button name="payment_momo" value="1" id="redirect" class="btn btn-warning">Thanh toán MOMO</button>
 
         </div>
       </section>
@@ -279,8 +279,10 @@
           </div>
 
           <div style="margin-top: 20px; width: 30%; border: none" class="list-group-item d-flex justify-content-between">
-            <button class="btn btn-secondary btn-md waves-effect m-0" type="submit">Thanh toán</button>
+            <button name="payment_vnp" value="1" class="btn btn-secondary btn-md waves-effect m-0" type="submit">Thanh toán VNPAY</button>
           </div>
+
+          <button name="payment_momo" value="1" id="redirect" class="btn btn-warning">Thanh toán MOMO</button>
 
 
         </div>
@@ -339,7 +341,7 @@ $package_id = {{$package->id}};
             document.getElementById('setCheckCoach').innerHTML = '';
             $.each(data['arrayPt'], function(key, pt) {
               console.log(key);
-              document.getElementById('setCheckCoach').innerHTML += <option value="${key}">${pt}</option>; 
+              document.getElementById('setCheckCoach').innerHTML += `<option value="${pt}">${key}</option>`; 
             });
           }
           else{
@@ -375,11 +377,11 @@ $package_id = {{$package->id}};
                 // console.log(data['package']);
                 // console.log(data['result']);
                 // document.querySelector(".set-coach").disabled = false;
-                document.querySelector('#total_money').innerHTML = ${data['total_money']};
-                document.querySelector('#msg_package').innerHTML = ${data['message']};
+                document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
+                document.querySelector('#msg_package').innerHTML = `${data['message']}`;
               }
             else{
-              document.querySelector('#msg_package').innerHTML = ${data['message']};
+              document.querySelector('#msg_package').innerHTML = `${data['message']}`;
             }
         }
     });

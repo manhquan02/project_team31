@@ -27,7 +27,7 @@
         <b>Thông tin cá nhân</b>
         @foreach($order->users as $user)
         <p>Họ và tên : {{$user->name}}</p>
-        <p>Giới tính : {{gender()[$user->gender]}}</p>
+        {{-- <p>Giới tính : {{gender()[$user->gender]}}</p> --}}
         <p>Điện thoại di động : +84 {{$user->phone}}</p>
         <p>Email : {{$user->email}}</p>
         <p>Địa chỉ liên hệ : {{$user->address}}</p>

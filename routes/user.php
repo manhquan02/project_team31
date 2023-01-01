@@ -128,6 +128,8 @@ Route::prefix('order/')->middleware('checkBuyPackage','auth')->name('order.')->g
     Route::get('checkWeekdayPt', [ClientOrderController::class, 'checkWeekdayPt'])->name('checkWeekdayPt');
     Route::get('test', [ClientOrderController::class, 'test'])->name('test');
     Route::get('create/{orderId}', [ClientOrderController::class, 'create'])->name('create');
+
+    Route::get('result-momo', [ClientOrderController::class, 'resultMomo'])->name('resultMomo');
 });
 
 Route::prefix('account')->middleware('auth', 'role:member','checkRate')->name('account.')->group(function () {
@@ -152,4 +154,6 @@ Route::prefix('account-pt/')->middleware('auth', 'role:coach')->name('accountPt.
     Route::get('list-member', [ScheduleCoachController::class, 'listMember'])->name('listMember');
     Route::get('evaluate-member/{result}', [ResultContractController::class, 'evaluateMember'])->name('evaluateMember');
     Route::post('postEvaluateMember/{result}', [ResultContractController::class, 'postEvaluateMember'])->name('postEvaluateMember');
+
+    Route::get('contract-order/{id}', [ScheduleCoachController::class, 'contract_order'])->name('contractOrder');
 });

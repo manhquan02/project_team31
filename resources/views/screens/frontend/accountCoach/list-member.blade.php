@@ -56,6 +56,7 @@
                 <th scope="col" class="m-3">Thời gian kết thúc</th>
                 <th scope="col" class="m-3">Trạng thái</th>
                 <th scope="col" class="m-3">Xem chỉ số</th>
+                <th scope="col" class="m-3">Xem hợp đồng</th>
             </tr>
         </thead>
         <tbody>
@@ -76,7 +77,7 @@
                         <td class="view_status text-center">
                             @foreach ($order->results as $result)
                                 @if($result->status_package == 0)
-                                    <div style="padding: 10px" class="alert alert-primary">
+                                    <div style="padding: 10px" class="alert btn-primary">
                                         Đang hoạt động
                                     </div>
                                 @elseif($result->status_package == 1)
@@ -91,11 +92,14 @@
                         </td>
                         <td class="text-center">
                             
-                            <a href="" type="button" class="btn btn-primary">Xem</a>
+                            {{-- <a href="" type="button" class="btn btn-primary">Xem</a> --}}
                             @foreach ($order->results as $result)
-                                <a href="{{route('accountPt.evaluateMember',$result->id)}}" type="button" class="btn btn-primary">cập nhật</a>
+                                <a href="{{route('accountPt.evaluateMember',$result->id)}}" type="button" class="btn btn-warning">cập nhật</a>
                             @endforeach
                             
+                        </td>
+                        <td>
+                            <a href="{{route('accountPt.contractOrder',encrypt($order->id))}}" type="button" class="btn btn-info">Xem hợp đồng</a>
                         </td>
                     </tr>
                 @endforeach
