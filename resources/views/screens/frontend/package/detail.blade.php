@@ -66,8 +66,9 @@
                                 <div class="col-sm-8 col-md-10 col-11 position-relative" style="left:30px">
                                     <div class="text-justify darker mt-4 float-right w-full">
                                         @foreach($rates as $item)
-                                        <div> <img src="{{asset($item->user->avatar)}}" alt="" class="rounded-circle" width="40" height="40" />
-                                            <div style="display: flex;justify-content:space-between">
+                                        <div>
+                                            <img src="{{asset($item->user->avatar)}}" alt="" class="rounded-circle" width="40" height="40" />
+                                            <div style="display: grid;grid-template-columns:6fr 1fr">
                                                 <div>
                                                     <b style="padding-right: 20px;">{{$item->user->name}}</b>
                                                     <span>- {{date('d/m/Y', strtotime($item->created_at))}}</span>
@@ -80,9 +81,7 @@
                                                 </div>
                                             </div>
                                             <p>
-                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus
-                                                numquam assumenda hic aliquam vero sequi velit molestias doloremque
-                                                molestiae dicta?
+                                                {{$item->note_package}}
                                             </p>
                                             <br>
                                         </div>

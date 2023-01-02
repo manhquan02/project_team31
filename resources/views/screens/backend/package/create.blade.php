@@ -12,7 +12,7 @@
             </div>
             <div class="card-toolbar">
                 <!--begin::Button-->
-                <a href="{{route('admin.package.index')}}" class="btn btn-primary font-weight-bolder">
+                <a href="{{route('admin.package.index_primary')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -81,11 +81,11 @@
                 </div>
                 <div class="form-group row">
                     <label for="example-tel-input" class="col-2 col-form-label">Loại gói tập <span class="text-danger">*</span></label>
-                    <div class="col-10">
+                    <div class="col-10" id="typePackage">
                         <select class="form-control" name="type_package">
                             <option selected disabled>Chọn kiểu gói tập</option>
-                           @foreach(typePackage() as $key=>$item)
-                            <option @if(old('type_package') == $key) selected @endif value="{{$key}}">{{ $item }}</option>
+                            @foreach(typePackage() as $key=>$item)
+                            <option @if(old('type_package')==$key) selected @endif value="{{$key}}">{{ $item }}</option>
                             @endforeach
                         </select>
                         @error('type_package')
@@ -137,9 +137,9 @@
     $(document).ready(function() {
         $('.select2').select2()
 
-        
+
         if ($('#pt').prop('checked') == true) {
-                content = ` <div class="form-group row">
+            content = ` <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label">Tổng buổi tập có PT </label>
                     <div class="col-10 p-3">
                         <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt')}}">
@@ -158,8 +158,16 @@
                     </div>
                 </div>`
 
-                        $('#weekday_pt').html(content);
-            } 
+            $('#weekday_pt').html(content);
+
+            let type = `<select class="form-control" name="type_package">
+                            <option selected value="2">Gói tháng</option>
+                        </select>
+                        @error('type_package')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror `
+            $('#typePackage').html(type);
+        }
 
         $(document).on('click', '#pt', function() {
             console.log($(this).prop('checked'));
@@ -169,19 +177,32 @@
                     <label for="example-password-input" class="col-2 col-form-label">Tổng buổi tập có PT </label>
                     <div class="col-10 p-3">
                         <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt')}}">
-                        
+                        @error('total_session_pt')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label">Số buổi PT trên tuần </label>
                     <div class="col-10 p-3">
                         <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt')}}">
-                       
+                        @error('week_session_pt')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>`
-            } 
+            }
 
             $('#weekday_pt').html(content);
+
+            let type = `<select class="form-control" name="type_package">
+                            <option selected value="2">Gói tháng</option>
+                        </select>
+                        @error('type_package')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror `
+
+            $('#typePackage').html(type);
         })
     });
 </script>

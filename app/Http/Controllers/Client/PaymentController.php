@@ -453,7 +453,7 @@ class PaymentController extends Controller
         $secretKey = 'LeKe8s0zVfMBSiOUzyWA3VGtmJsTSC3e';
         $orderInfo = "Đăng ký gói tập";
         $amount = $order->total_money;
-        $orderId = $$order->id . '';
+        $orderId = $order->id . '';
         $redirectUrl = route('ipn');
         $ipnUrl = route('ipn');
         $extraData = "";
