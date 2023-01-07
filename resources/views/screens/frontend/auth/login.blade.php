@@ -40,7 +40,7 @@
 
                                 <div class="col-xl-12" style="margin-bottom:28px">
                                     <div class="input-wrap input-icon icon-msg">
-                                        <input type="text" @error('password') style="border: 3px solid red" @enderror placeholder="Mật khẩu" name="password" value="{{old('password')}}">
+                                        <input type="password" @error('password') style="border: 3px solid red" @enderror placeholder="Mật khẩu" name="password" value="{{old('password')}}">
                                     </div>
                                     @error('password')
                                     <div class="col-xl-12">

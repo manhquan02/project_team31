@@ -4,15 +4,15 @@
 <main>
 	<!--    breadcrumb-area start    -->
 	<section class="breadcrumb-area pt-180 pb-180 pt-md-120 pb-md-120 pt-xs-100 pb-xs-100 bg-fix" data-overlay="black"
-	         data-opacity="7" data-background="assets/img/bg/breadcrumb-bg-4.jpg">
+	         data-opacity="7" data-background="{{asset('frontend/assets/img/bg/breadcrumb-bg-2.jpg')}}">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-8 text-center">
 					<div class="breadcrumb-content">
-						<h3 class="title">Pricing Plan</h3>
+						<h3 class="title">Trang gói tập</h3>
 						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li class="active">Pricing Plan</li>
+							<li><a href="{{route('home')}}">Trang chủ</a></li>
+							<li class="active">Gói tập</li>
 						</ul>
 					</div>
 				</div>
@@ -28,21 +28,16 @@
 				<div class="col-xl-12">
 					<div class="section-title-2 bar-theme-color text-center mb-35">
 						<h3>
-							Gói Tập Được Mua Nhiều Nhất
+							Top 3 Gói Tập Được Mua Nhiều Nhất
 						</h3>
-						{{-- <span>Pricing</span> --}}
 					</div>
 				</div>
 			</div>
 			<div class="row justify-content-center">
-			<div class="popular-badge" style="text-align: center;">
-							{{-- <h2 style="color: #e63a34;">Top 3</h2> --}}
-						</div>
-				
 				@foreach($popular as $i)
 				<div class="col-lg-4 col-md-7">
 					<div class="pricing-wrap mt-30 mb-30">
-						<h3>{{$i->package_name}}</h3>
+						<h3 style="color: white;">{{$i->package_name}}</h3>
 						<p style="color: white;">
 							{{$i->short_description}}
 						</p>
@@ -55,7 +50,7 @@
 						</div>
 					</div>
 				</div>
-				@endforeach	
+				@endforeach
 			</div>
 		</div>
 	</div>
@@ -68,7 +63,7 @@
 				<div class="col-xl-12">
 					<div class="section-title-2 bar-theme-color text-center mb-35">
 						<h3>
-							Gói Tập 
+							Gói Tập
 						</h3>
 						{{-- <span>Pricing</span> --}}
 					</div>
@@ -80,51 +75,53 @@
 						<div class="col-md-3 mb-50">
 							<h5 class="">Loại gói tập</h5>
 							<select class="form-control select2" aria-placeholder="Gói" aria-valuemax="gói">
-							   <option>Gói tập thường</option> 
-							   <option>Gói tập theo lộc trình (có pt)</option> 
+								<option>Gói tập thường</option>
+								<option>Gói tập theo lộc trình (có pt)</option>
 							</select>
 						</div>
 						<div class="col-md-3 mb-50">
 							<h5 class="">Bộ môn</h5>
 							<select class="form-control select2">
-							   <option>Gym</option> 
-							   <option>Boxing</option>  
+								<option>Gym</option>
+								<option>Boxing</option>
 							</select>
 						</div>
 						<div class="col-md-3 mb-50">
 							<h5 class="">Giá gói tập</h5>
 							<select class="form-control select2">
-							   <option>100 - 200 K</option> 
-							   <option>200 - 500 K</option>  
-							   <option>> 500 K</option>  
+								<option>100 - 200 K</option>
+								<option>200 - 500 K</option>
+								<option>> 500 K</option>
 							</select>
 						</div>
 						<div class="col-md-1 mb-20 mt-30">
 							<button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
 						</div>
 					</form>
-                    @php
-                    $i=0;
-                    @endphp
-                    @foreach($packages as $item)
-                  
-					<div class="{{$i++ % 2 == 0 ? 'pricing-wrap-2 mb-80' : 'pricing-wrap-2 active mb-80'}}" >
+					@php
+					$i=0;
+					@endphp
+					@foreach($packages as $item)
+
+					<div class="{{$i++ % 2 == 0 ? 'pricing-wrap-2 mb-80' : 'pricing-wrap-2 active mb-80'}}">
 						<div class="row no-gutters align-items-center">
 							<div class="col-lg-4">
 								<div class="pricing-title">
 									<h3>{{$item->package_name}}</h3>
 									<span>{{number_format($item->into_price, 0, '.','.')}} <sup>đ</sup></span>
-                                    <p style="color: black;">Giảm {{$item->price_sale}} %</p>
+									<p style="color: black;">Giảm {{$item->price_sale}} %</p>
 								</div>
 							</div>
 							<div class="col-lg-4">
 								<div class="pricing-list">
 									<ul>
 										<li><i class="far fa-check-circle"></i> Môn tập : {{$item->subject->subject_name}}</li>
-										@if($item->total_session_pt != null)
+										@if($item->set_pt == 1)
 										<li><i class="far fa-check-circle"></i> {{$item->total_session_pt }} buổi tập có PT </li>
 										<li><i class="far fa-check-circle"></i> {{$item->week_session_pt}} buổi PT / tuần</li>
-									@endif
+										@else
+										<li><i class="far fa-check-circle"></i> Gói tập không PT</li>
+										@endif
 									</ul>
 								</div>
 							</div>
@@ -137,14 +134,14 @@
 							</div>
 						</div>
 					</div>
-                    @endforeach
+					@endforeach
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- pricing-area-2 end -->
 
-	
+
 </main>
 
 @endsection
