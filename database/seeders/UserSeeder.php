@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
                 'email' => 'admin@example.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 'nam',
-                'phone' => rand(1000000000,9999999999),
+                'phone' => rand(1000000000,9999999999), 
                 'avatar' => fake()->imageUrl(),
                 'wage'=>200000,
                 'email_verified_at' => '2022-09-08 15:00:14',
@@ -154,7 +154,7 @@ class UserSeeder extends Seeder
 
         $members = User::all();
         foreach ($members as $key => $member) {
-            if(!in_array($member->email, ['admin@example.com', 'manager@example.com','coach@example.com','member@example.com'])){
+            if(!in_array($member->email, ['admin@example.com', 'manager@example.com','coach@example.com','coach2@example.com', 'coach3@example.com', 'coach4@example.com','member@example.com'])){
                 $member->assignRole('member');
             }
         }

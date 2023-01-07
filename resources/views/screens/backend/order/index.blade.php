@@ -96,7 +96,7 @@
                     <!--end::Svg Icon-->
                 </span>Gửi mail đến đơn hàng thất bại</a>
                 <!--end::Button-->
-                <a style="margin-left: 8px" href="{{route('admin.order.add')}}" class="btn btn-primary font-weight-bolder">
+                {{-- <a style="margin-left: 8px" href="{{route('admin.order.add')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -107,7 +107,7 @@
                             </g>
                         </svg>
                         <!--end::Svg Icon-->
-                </span>Thêm mới đơn hàng</a>
+                </span>Thêm mới đơn hàng</a> --}}
 
                 <div style="margin-left: 8px" class="dropdown dropdown-inline mr-2">
                     <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

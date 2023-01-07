@@ -59,8 +59,11 @@ Route::prefix('admin/')->middleware(['auth', 'verified', 'role:admin'])->name('a
 
     Route::prefix('order/')->name('order.')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('list');
-        Route::get('/create', [OrderController::class, 'create'])->name('create');
+        // Route::get('/create', [OrderController::class, 'create'])->name('create');
+        Route::get('/create-simple', [OrderController::class, 'createSimple'])->name('createSimple');
+        Route::get('/create-complex', [OrderController::class, 'createComplex'])->name('createComplex');
         Route::post('/post-order', [OrderController::class, 'store'])->name('postOrder');
+
         Route::get('/mail-order', [OrderController::class, 'mailOrder'])->name('mailOrder');
         Route::post('/postMailOrder', [OrderController::class, 'postMailOrder'])->name('postMailOrder');
         Route::get('/send-mail/{order}', [OrderController::class, 'sendMail'])->name('sendMail');
@@ -71,6 +74,7 @@ Route::prefix('admin/')->middleware(['auth', 'verified', 'role:admin'])->name('a
         Route::get('/create-multi', [OrderController::class, 'createMulti'])->name('createMulti');
         Route::post('/post-orderMulti', [OrderController::class, 'postOrderMulti'])->name('postOrderMulti');
 
+        Route::get('/set-member', [OrderController::class, 'setMember'])->name('setMember');
         Route::get('/set-package', [OrderController::class, 'setPackage'])->name('setPackage');
         Route::get('/total-money', [OrderController::class, 'setTotalMoney'])->name('setTotalMoney');
         Route::get('/set-coach', [OrderController::class, 'setCoach'])->name('setCoach');

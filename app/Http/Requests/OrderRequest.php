@@ -26,11 +26,8 @@ class OrderRequest extends FormRequest
         return [
             'user_id' => 'required',
             'package_id' => 'required',
-            // 'time_id' => 'required',
-            // 'pt_id' =>'required',
-            // 'weekday_name' =>'required',
-            'activate_day' => 'required',
-            'payment_method' =>'required',
+            'activate_date' => 'required',
+            
         ];
     }
 
