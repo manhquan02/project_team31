@@ -78,7 +78,7 @@
 				<div class="col-xl-12">
 					<form class="row m-auto">
 						<div class="col-md-3 mb-50">
-							<h5 class="">Gói tập</h5>
+							<h5 class="">Loại gói tập</h5>
 							<select class="form-control select2" aria-placeholder="Gói" aria-valuemax="gói">
 							   <option>Gói tập thường</option> 
 							   <option>Gói tập theo lộc trình (có pt)</option> 
@@ -92,8 +92,12 @@
 							</select>
 						</div>
 						<div class="col-md-3 mb-50">
-							<h5 class="">Từ khoá</h5>
-								<input class="form-control select2" type="search" aria-label="Search"> 
+							<h5 class="">Giá gói tập</h5>
+							<select class="form-control select2">
+							   <option>100 - 200 K</option> 
+							   <option>200 - 500 K</option>  
+							   <option>> 500 K</option>  
+							</select>
 						</div>
 						<div class="col-md-1 mb-20 mt-30">
 							<button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>

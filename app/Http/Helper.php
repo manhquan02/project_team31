@@ -126,6 +126,12 @@ function gender(){
     ];
 }
 
+function statusTT(){
+    return [
+        '0'=>'Chưa thanh toán',
+        '1'=> 'Đã thanh toán',
+    ];
+}
 function evaluate(){
     return [
         '1'=>'Rất tệ',

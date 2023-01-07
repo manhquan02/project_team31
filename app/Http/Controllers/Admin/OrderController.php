@@ -66,12 +66,19 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = Order::get();
+        $orders = new Order();
+        if($request->orderBy){
+            $orders = $orders->orderBy('created_at',$request->orderBy);
+        }
+        if(isset($request->status)){
+            $orders = $orders->where('status', $request->status);
+        }
         // $orders = Order::select('order.*');
         // // if(isset($request->key)){
         // //     $orders = $orders->where('package_name', 'like', '%' . $request->keyword . '%')
         // //                     ->paginate(12);
         // // }
+        $orders = $orders->paginate(12);
         return view('screens.backend.order.index', ['orders' => $orders]);
     }
 

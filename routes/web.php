@@ -91,8 +91,8 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'role:admin'])->name('ad
 Route::get('test', function () {
     return view('screens.frontend.test');
 })->name('test');
-Route::post('momoPayment', [\App\Http\Controllers\Client\PaymentController::class, 'momoPayment'])->name('momoPayment');
-Route::get('ipn', [\App\Http\Controllers\Client\PaymentController::class, 'ipn'])->name('ipn');
+Route::post('momoPayment', [\App\Http\Controllers\Client\OrderController::class, 'momoPayment'])->name('momoPayment');
+Route::get('ipn', [\App\Http\Controllers\Client\OrderController::class, 'ipn'])->name('ipn');
 
 
 Route::prefix('rate')->name('rate.')->group(function () {
