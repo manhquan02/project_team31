@@ -44,7 +44,7 @@
 								</a>
 							</h3>
 
-							<a href="blog-details.html" class="read-more">
+							<a href="{{route('post_client.detail', $item->id)}}" class="read-more">
 								Đọc thêm <i class="fas fa-angle-double-right"></i>
 							</a>
 						</div>
