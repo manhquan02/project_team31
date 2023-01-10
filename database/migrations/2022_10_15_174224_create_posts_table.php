@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('avatar')->nullable();
-            $table->string('content_post',10000);
+            $table->string('content_post',12000);
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedInteger('status')->default(1);

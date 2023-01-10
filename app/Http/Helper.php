@@ -76,6 +76,9 @@ function weekday($weekday)
 
 function st($month, $year)
 {  // Thống kê
+    if($month < 10){
+        $month = "0".$month;
+    }
     $total_turnover = Order::where('status', 1)->get();
     $total = 0;
     foreach ($total_turnover as $item) {
@@ -88,10 +91,13 @@ function st($month, $year)
 
 function sub($month, $year)
 {  // Thống kê đăng ký mới
+    if($month < 10){
+        $month = "0".$month;
+    }
     $total_sub = Order::where('status', 1)->get();
     $total = 0;
     foreach ($total_sub as $item) {
-        if (date('m-Y', strtotime($item->date_start)) == "$month" . "-" . "$year") {
+        if (date('m-Y', strtotime($item->date_start)) === "$month" . "-" . "$year") {
             $total += 1;
         }
     }

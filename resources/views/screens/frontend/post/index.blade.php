@@ -30,11 +30,11 @@
 					<div class="blog-wrap-2 mb-30">
 						<div class="blog-thumb mb-35">
 							<a href="{{route('post_client.detail', $item->id)}}">
-								<img src="{{asset($item->avatar)}}" alt="blog">
+								<img style="border: 0.5px dotted #999999;" height="400px" src="{{asset($item->avatar)}}" alt="Bài viết">
 							</a>
 						</div>
 						<div class="blog-meta">
-							<span><i class="fas fa-calendar-alt"></i> {{date('d-m-Y',strtotime($item->created_at))}}</span>
+							<span><i class="fas fa-calendar-alt"></i> {{date('d/m/Y',strtotime($item->created_at))}}</span>
 							<span><i class="far fa-user"></i>{{$item->user->name}}</span>
 						</div>
 						<div class="blog-content">

@@ -103,17 +103,19 @@ class ScheduleCoachController extends Controller
         // dd(decrypt($id));
         try {
             $order = Order::where('id',decrypt($id))->first();
-        if($order !=null){
-            $pdf = PDF::loadView('screens.backend.order.contract', compact('order'));
-            return $pdf->stream();
-        }
+            if($order !=null){
+                $pdf = PDF::loadView('screens.backend.order.contract', compact('order'));
+                return $pdf->stream();
+            }
+        
         } catch (\Exception  $e) {
             abort($e);
  
-            return ";
+            return "";
         }
         
         
     }
     
 }
+    

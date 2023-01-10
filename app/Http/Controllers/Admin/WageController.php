@@ -13,7 +13,7 @@ class WageController extends Controller
 {
     public function index(Request $request)
     {
-        $month = $request->month ? $request->month : date('m');
+        $month = $request->month ? '0'.$request->month : date('m');
         $year = $request->year ? $request->year : date('Y');
         $roles = Role::all();
         $users = User::role(['coach'])->get();
@@ -47,7 +47,7 @@ class WageController extends Controller
         }
 
         if($request->month && $request->year){
-            $wages = Wage::where('month', $request->month)->where('year', $request->year)->paginate(12);
+            $wages = Wage::where('month', '0'.$request->month)->where('year', $request->year)->paginate(12);
         }else{
             $wages = Wage::where('month', $month)->where('year', $year)->paginate(12);
         }

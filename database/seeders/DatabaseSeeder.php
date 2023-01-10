@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(OrderSeeder::class);
         $this->call(WeekdaySeeder::class);
 
+        $this->call(PostSeeder::class);
         // $this->call(ResultContractSeeder::class);    
     }
 }
