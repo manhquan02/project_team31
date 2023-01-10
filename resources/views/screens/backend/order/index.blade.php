@@ -278,6 +278,7 @@
     </table>
     <!--end: Datatable-->
 </div>
+{{$orders->appends(request()->input())->links()}}
 </div>
 
 </div>
