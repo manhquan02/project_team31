@@ -65,22 +65,15 @@
                 </div>
               </div>
               <div class="text-center">
-                <h3>
+                <h3 style="margin-top: 12px;">
                   {{Auth::user()->name}}
-                  {{-- <span class="font-weight-light">, 27</span> --}}
                 </h3>
                 <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                  <i class="ni location_pin mr-2"></i>MÃ THÀNH VIÊN: @if(Auth::user()->id < 10)  {{'00000'.Auth::user()->id}} @elseif(Auth::user()->id < 100) {{'0000'.Auth::user()->id}} @elseif(Auth::user()->id < 1000) {{'000'.Auth::user()->id}} @elseif(Auth::user()->id < 10000) {{'00'.Auth::user()->id}} @elseif(Auth::user()->id < 100000) {{'0'.Auth::user()->id}} @else {{Auth::user()->id}} @endif 
                 </div>
                 <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                  <i class="ni business_briefcase-24 mr-2"></i>Ngày gia nhập : {{date('d/m/Y', strtotime(Auth::user()->created_at))}}
                 </div>
-                <div>
-                  <i class="ni education_hat mr-2"></i>University of Computer Science
-                </div>
-                <hr class="my-4">
-                <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
-                <a href="#">Show more</a>
               </div>
             </div>
           </div>
