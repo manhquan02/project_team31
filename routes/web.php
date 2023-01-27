@@ -33,6 +33,11 @@ Route::prefix('post')->name('post_client.')->group(function () {
     Route::get('', [\App\Http\Controllers\Client\PostController::class, 'index'])->name('index');
     Route::get('{id}', [\App\Http\Controllers\Client\PostController::class, 'detail'])->name('detail');
 });
+
+Route::prefix('coach')->name('training.')->group(function () {
+    Route::get('', [\App\Http\Controllers\Client\CoachController::class, 'index'])->name('index');
+    Route::get('{id}', [\App\Http\Controllers\Client\CoachController::class, 'detail'])->name('detail');
+});
 Route::prefix('contact')->name('contact_client.')->group(function () {
     Route::get('', [\App\Http\Controllers\Client\ContactController::class, 'view'])->name('view');
     Route::post('', [\App\Http\Controllers\Client\ContactController::class, 'store'])->name('store');
@@ -88,12 +93,9 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'role:admin'])->name('ad
     });
 });
 
-Route::get('test', function () {
-    return view('screens.frontend.test');
-})->name('test');
+
 Route::post('momoPayment', [\App\Http\Controllers\Client\OrderController::class, 'momoPayment'])->name('momoPayment');
 Route::get('ipn', [\App\Http\Controllers\Client\OrderController::class, 'ipn'])->name('ipn');
-
 
 Route::prefix('rate')->name('rate.')->group(function () {
     Route::get('evaluate/{id}', [\App\Http\Controllers\Client\ScheduleMemberController::class, 'evaluatePackage'])->name('index');

@@ -17,15 +17,13 @@
                             <ul class="sub-menu">
                                 <li><a href="about.html">Thông Tin</a></li>
                                 <li><a href="bmi-calculator.html">Tính Chỉ Số IBM</a></li>
-                                <li><a href="service.html">Dịch Vụ</a></li>
-                                <li><a href="{{route('test')}}">Thanh toán Momo</a></li>
                             </ul>
                         </li>
                         <li class="has">
                             <a href="{{route('package_client.index')}}">Gói Tập</a>
                         </li>
                         <li class="has">
-                            <a href="Our-Trainer.html">Huấn Luyện Viên</a>
+                            <a href="{{route('training.index')}}">Huấn Luyện Viên</a>
                         </li>
                         <li class="has">
                             <a href="{{route('post_client.index')}}">Bài Viết</a>
