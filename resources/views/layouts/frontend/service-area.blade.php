@@ -4,7 +4,7 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-12 col-lg-12">
                         <div class="section-title-2 bar-theme-color text-white text-center mb-60">
-                            <h3>Các Gói Tập Độc Quền Về Sức Khỏe</h3>
+                            <h3>Mô Tả Dụng Cụ Tập Luyện</h3>
                             <span>GYM</span>
                         </div>
                     </div>
@@ -28,9 +28,9 @@
                                                     Việc sở hữu một thân hình đẹp trong quá trình tập gym thì chúng ta sẽ phải 
                                                     đảm bảo được các yêu cầu và một trong số đó là tập luyện, nhằm kích thích cho cơ bắp
                                                 </p>
-                                                <a href="service.html" class="read-more">
+                                                {{-- <a href="service.html" class="read-more">
                                                     <i class="fas fa-angle-double-right"></i>
-                                                </a>
+                                                </a> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -47,9 +47,9 @@
                                                 <p>
                                                     Luyện tập với máy tập hiện đại sẽ đạt hiệu quả nhanh và khoa học hơn
                                                 </p>
-                                                <a href="service.html" class="read-more">
+                                                {{-- <a href="service.html" class="read-more">
                                                     <i class="fas fa-angle-double-right"></i>
-                                                </a>
+                                                </a> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -66,9 +66,9 @@
                                                 <p>
                                                     Thể lực tốt giúp ta khỏe mạnh và hiệu quả hơn trong các bài tập cơ bắp
                                                 </p>
-                                                <a href="service.html" class="read-more">
+                                                {{-- <a href="service.html" class="read-more">
                                                     <i class="fas fa-angle-double-right"></i>
-                                                </a>
+                                                </a> --}}
                                             </div>
                                         </div>
                                     </div>

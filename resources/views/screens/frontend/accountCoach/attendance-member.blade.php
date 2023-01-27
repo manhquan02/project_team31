@@ -48,7 +48,7 @@
                     </td>
                     <td class="text-center">
                         <div class="form-check form-switch text-center" style="padding-left: 100px;">
-                            <input style="font-size: 23px" name="attendance[{{$item->id}}]" class="form-check-input" type="checkbox" @if($item->status == 2) checked @endif>
+                            <input @if(date('d-m-Y', strtotime($item->date)) != date('d-m-Y')) disabled @endif style="font-size: 23px" name="attendance[{{$item->id}}]" class="form-check-input" type="checkbox" @if($item->status == 2) checked @endif>
                         </div>
                     </td>
                 </tr>
@@ -59,7 +59,7 @@
         <div>
         {{$attendances->appends(request()->input())->links()}}
     </div>
-        <button style="float: right" class="btn btn-primary">Lưu điểm danh</button>
+        <button @if(date('d-m-Y', strtotime($attendances[0]['date']))  != date('d-m-Y')) disabled @endif style="float: right" class="btn btn-primary">Lưu điểm danh</button>
     </form>
    
 </div>

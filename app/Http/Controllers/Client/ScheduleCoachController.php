@@ -69,13 +69,15 @@ class ScheduleCoachController extends Controller
     {
         $attendance_on = Attendance::where('schedule_id', $scheduleId)->get();
         $schedule_pt = Schedule::where('id', $scheduleId)->first();
-        foreach ($attendance_on as  $item) {
-            $item->status = 1;
-            $item->save();
-            $schedule_pt->status = 1;
-            $schedule_pt->save();
-        }
+        
         if ($request->attendance) {
+            foreach ($attendance_on as  $item) {
+                $item->status = 2;
+                $item->save();
+                $schedule_pt->status = 2;
+                $schedule_pt->save();
+            }
+
             foreach ($request->attendance as  $key => $change) {
                 foreach ($attendance_on as  $item) {
                     
@@ -87,6 +89,15 @@ class ScheduleCoachController extends Controller
                     }
                 }
             }
+        }
+        else{
+            foreach ($attendance_on as  $item) {
+                $item->status = 1;
+                $item->save();
+                
+            }
+            $schedule_pt->status = 1;
+                $schedule_pt->save();
         }
         return redirect()->back()->with('success', 'Điểm danh thành công');
     }

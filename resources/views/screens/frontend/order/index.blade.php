@@ -11,6 +11,38 @@
 <br />
 <div class="container">
 
+  <div style="border: 2px solid #e63a34;margin-bottom: 30px;" class="item-gym pricing-wrap-2 mb-80">
+    <div class=" row no-gutters align-items-center pt-0">
+      <div class=" col-lg-4">
+        <div style="border-right: 2px solid #e63a34;" class="pricing-title">
+          <h3>{{$package->package_name}}</h3>
+          <span>{{number_format($package->into_price, 0, '.','.')}} <sup>đ</sup></span>
+          
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div style="border-right: 2px solid #e63a34;" class="pricing-list">
+          <ul>
+            <li><i class="far fa-check-circle"></i> Môn tập : {{$package->subject->subject_name}}</li>
+            @if($package->set_pt == 1)
+            <li><i class="far fa-check-circle"></i> {{$package->total_session_pt }} buổi tập có PT </li>
+            <li><i class="far fa-check-circle"></i> {{$package->week_session_pt}} buổi PT / tuần</li>
+            @else
+            <li><i class="far fa-check-circle"></i> Gói tập không PT</li>
+            @endif
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="pricing-content">
+          <p>
+            {{$package->short_description}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="col-md-12 order-md-1">
     <h4 class="mb-3">Hóa đơn gói tập</h4>
     @include('screens.backend._alert')
@@ -96,6 +128,9 @@
       <section>
         <div class="content-wrapper">
           <h4 class="section-heading">Lịch trình tập </h4>
+          <div>
+            Chọn {{$package->week_session_pt}} buổi tập PT / tuần 
+          </div>
           <div>
             @error('weekday')
             <span class="text-danger">{{ $message }}</span>
@@ -305,6 +340,7 @@
   function checkWeekday(weekday_id){
     console.log(weekday_id);
     checkbox_weekday = document.getElementById(weekday_id);
+    console.log(checkbox_weekday);
     console.log(checkbox_weekday.checked);
     let value = checkbox_weekday.value
     if(checkbox_weekday.checked == true){

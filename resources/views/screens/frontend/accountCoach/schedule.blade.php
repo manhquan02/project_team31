@@ -65,12 +65,20 @@
                 <td class="text-center">{{$schedule->time->end_time}}</td>
                 <td class="text-center">
                     @if($schedule->status == 0)
-                        <span
-                            class="label label-inline label-light-primary font-weight-bold"> {{ (config('status_schedule.'.$schedule->status)) }}</span>
+                        <span class="label label-inline label-light-primary font-weight-bold"> 
+                          {{-- {{ (config('status_schedule.'.$schedule->status)) }} --}}
+                          sắp tới
+                        </span>
 
+                    @elseif($schedule->status == 1)
+                      <span class="label label-inline label-light-primary font-weight-bold"> 
+                        vắng mặt
+                      </span>
                     @else
-                          <span
-                              class="label label-inline {{$schedule->status == 1 ? 'label-light-danger': 'label-light-success'}} font-weight-bold">{{(config('status_schedule.'.$schedule->status))}}</span>
+                          <span class="label label-inline {{$schedule->status == 1 ? 'label-light-danger': 'label-light-success'}} font-weight-bold">
+                            {{-- {{(config('status_schedule.'.$schedule->status))}} --}}
+                            có mặt
+                          </span>
                     @endif
                 </td>
                 {{-- <td class="text-center">tập bụng</td> --}}

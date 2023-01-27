@@ -397,7 +397,19 @@ class OrderController extends Controller
         }
         //Trả lại VNPAY theo định dạng JSON
 
-        return view('screens.backend.order.payment',compact('returnData'));
+        // return view('screens.backend.order.payment',compact('returnData'));
+        // return view('screens.frontend.order.resultPayment', compact('returnData'));
+        $returnData = array_merge($returnData, $_GET);
+        return redirect()->route('order.resultPayment', encrypt($returnData));
+    }
+
+    public function resultPayment($returnData){
+        // dd(decrypt($returnData));
+        try {
+            return view('screens.frontend.order.resultPayment', ['returnData' => decrypt($returnData)]);
+        } catch (\Throwable $th) {
+            echo "Lỗi đường dẫn";
+        }
     }
 
 
@@ -793,7 +805,7 @@ class OrderController extends Controller
             // }
             }
             else{
-                $coachs = User::role('coach')->pluck('id','name');
+                $coachs = User::role('coach')->pluck('name','id');
                 $arrayPt = $coachs;
             }
             
