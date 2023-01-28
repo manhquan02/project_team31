@@ -17,7 +17,7 @@
 @endsection
 
 @section('schedule-area')
-    @include('layouts.frontend.schedule-area')
+    {{-- @include('layouts.frontend.schedule-area') --}}
 @endsection
 
 @section('calculator-area')
@@ -29,7 +29,7 @@
 @endsection
 
 @section('testimonial-area')
-    @include('layouts.frontend.testimonial-area')
+    {{-- @include('layouts.frontend.testimonial-area') --}}
 @endsection
 
 @section('blog-area')

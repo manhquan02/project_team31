@@ -129,6 +129,7 @@ Route::prefix('order/')->middleware('checkBuyPackage','auth')->name('order.')->g
     Route::get('create/{id}', [ClientOrderController::class, 'index'])->name('index');
     Route::post('postOrder/{id}', [ClientOrderController::class, 'store'])->name('postOrder');
     Route::get('checkPayment', [ClientOrderController::class, 'returnUrl'])->name('returnUrl');
+    Route::get('resultPayment/{returnData}', [ClientOrderController::class, 'resultPayment'])->name('resultPayment');
     Route::get('checkWeekdayPt', [ClientOrderController::class, 'checkWeekdayPt'])->name('checkWeekdayPt');
     Route::get('test', [ClientOrderController::class, 'test'])->name('test');
     Route::get('create/{orderId}', [ClientOrderController::class, 'create'])->name('create');

@@ -50,7 +50,7 @@
                                 <i style="font-size: 20px; " class="ki ki-reload text-warning"></i>
                             </div> --}}
                             <div class="form-check form-switch text-center" style="padding-left: 100px;">
-                                <input style="font-size: 23px" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <input disabled style="font-size: 23px" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                             </div>
                             
                         </td>
