@@ -26,7 +26,10 @@ Route::post('/postLogin', [AuthController::class, 'postLogin'])->middleware('gue
 Route::get('very_email/{email}', [AuthController::class, 'very_email'])->middleware('guest')->name('very_email');
 Route::post('post_very_email/{email}', [AuthController::class, 'post_very_email'])->middleware('guest')->name('post_very_email');
 Route::get('logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
-
+Route::get('reset-password/{email}', [AuthController::class, 'resetPassword'])->middleware('guest')->name('resetPassword');
+Route::post('reset-password/{email}', [AuthController::class, 'postResetPassword'])->middleware('guest')->name('postResetPassword');
+Route::get('forgot-password', [AuthController::class, 'forgotPassword'])->middleware('guest')->name('forgotPassword');
+Route::post('forgot-password', [AuthController::class, 'postForgot'])->middleware('guest')->name('postForgot');
 /**
  * Users verify email Route
  */    

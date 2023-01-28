@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use App\Http\Services\UploadImgService;
+use App\Mail\forgotMail;
 use App\Models\User;
 use App\Mail\VeryEmail;
 use Illuminate\Auth\Events\Registered;
@@ -27,7 +28,7 @@ class AuthController extends Controller
     {
         $user = User::where('phone', $request->phone)->orWhere('email', $request->email)->first();
         if ($user != null) {
-            return redirect()->back()->with('error','Email hoặc số điện thoại bạn nhập đã tồn tại. Hãy đăng ký tài khoản khác.');
+            return redirect()->back()->with('error', 'Email hoặc số điện thoại bạn nhập đã tồn tại. Hãy đăng ký tài khoản khác.');
         }
         $code = rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9) . '' . rand(0, 9);
         $data = [
@@ -71,7 +72,7 @@ class AuthController extends Controller
                 $user->verify_code = $code;
                 $user->save();
                 Mail::to("$request->email")->send(new VeryEmail($data));
-                
+
                 return redirect()->route('very_email', $request->email);
             }
             if ($request->checkbox == 'on') {
@@ -88,9 +89,9 @@ class AuthController extends Controller
     }
     public function post_very_email($email, Request $request)
     {
-       
+
         $user = User::where('email', $email)->first();
-        if(!$user){
+        if (!$user) {
             return redirect()->back()->with('error', 'Lỗi sai đường dẫn. Vui lòng kiểm tra lại');
         }
 
@@ -103,12 +104,62 @@ class AuthController extends Controller
         return redirect()->back()->with('error', 'Mã xác minh không chính xác');
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         // Tạo token mới
         $request->session()->regenerateToken();
         // Quay về màn login
         return redirect()->route('login');
+    }
+
+    public function resetPassword($email)
+    {
+        return view('screens.frontend.auth.reset_password', compact('email'));
+    }
+
+    public function postResetPassword($email, Request $request)
+    {
+
+
+        if ($request->password == null || $request->re_password == null) {
+            return redirect()->back()->with('error', 'Bạn cần nhập đầy đủ thông tin');
+        }
+
+        if ($request->password != $request->re_password) {
+            return redirect()->back()->with('error', 'Nhập lại mật khẩu không khớp');
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if ($user != null) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }
+
+        return redirect()->route('login')->with('success', 'Cập nhật mật khẩu thành công');
+    }
+
+    public function forgotPassword()
+    {
+        return view('screens.frontend.auth.forgot_password');
+    }
+
+    public function postForgot(Request $request)
+    {
+        if ($request->email == null) {
+            return redirect()->back()->with('error', 'Nhập email của bạn');
+        }
+        $user = User::where('email', $request->email)->first();
+        if ($user == null) {
+            return redirect()->back()->with('error', 'Email của bạn chưa được đăng ký');
+        }
+        $data = [
+            'email' => $request->email
+        ];
+        Mail::to("$request->email")->send(new forgotMail($data));
+
+        return redirect()->back()->with('success', 'Chúng tôi đã gửi thư đến email của bạn');
     }
 }
