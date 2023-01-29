@@ -173,8 +173,14 @@ class PackageController extends Controller
             }
             $package->save();
             Toastr::success('Cập nhật trạng thái gói tập thành công');
-            return redirect()->route('admin.package.index');
+            if($request->type_package == 1){
+                return redirect()->route('admin.package.index_primary');
+            }else{
+                return redirect()->route('admin.package.index_pt');
+            }
+    
+            return redirect()->back();
         }
-        return redirect()->route('admin.package.index');
+        return redirect()->back();
     }
 }

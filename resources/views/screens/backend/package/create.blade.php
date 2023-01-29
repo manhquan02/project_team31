@@ -83,10 +83,7 @@
                     <label for="example-tel-input" class="col-2 col-form-label">Loại gói tập <span class="text-danger">*</span></label>
                     <div class="col-10" id="typePackage">
                         <select class="form-control" name="type_package">
-                            <option selected disabled>Chọn kiểu gói tập</option>
-                            @foreach(typePackage() as $key=>$item)
-                            <option @if(old('type_package')==$key) selected @endif value="{{$key}}">{{ $item }}</option>
-                            @endforeach
+                            <option selected value="1">Gói ngày</option>
                         </select>
                         @error('type_package')
                         <span class="text-danger">{{ $message }}</span>
@@ -203,7 +200,6 @@
                 $('#typePackage').html(type);
             } else {
                 let type = `<select class="form-control" name="type_package">
-                            <option selected value="2">Gói tháng</option>
                             <option selected value="1">Gói ngày</option>
                         </select>
                         @error('type_package')
