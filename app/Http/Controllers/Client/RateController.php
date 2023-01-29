@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Rate;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,16 @@ class RateController extends Controller
             $new_rate->star = $request->star;
             $new_rate->note = $request->note;
             $new_rate->save();
+        }
+        return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        $rate = Rate::where('id', $id)->first();
+        if ($rate != null) {
+            $rate->delete();
+            Toastr::success('Xóa đánh giá thành công');
         }
         return redirect()->back();
     }
