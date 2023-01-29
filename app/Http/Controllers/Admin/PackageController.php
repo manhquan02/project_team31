@@ -9,6 +9,7 @@ use App\Models\Package;
 use App\Models\Subject;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Utility\PackageUtility;
+use App\Models\Rate;
 use http\Env\Response;
 use Illuminate\Http\Request;
 
@@ -173,7 +174,7 @@ class PackageController extends Controller
             }
             $package->save();
             Toastr::success('Cập nhật trạng thái gói tập thành công');
-            if($request->type_package == 1){
+            if($package->type_package == 1){
                 return redirect()->route('admin.package.index_primary');
             }else{
                 return redirect()->route('admin.package.index_pt');
@@ -182,5 +183,10 @@ class PackageController extends Controller
             return redirect()->back();
         }
         return redirect()->back();
+    }
+
+    public function evaluate($id){
+        $evaluates = Rate::where('package_id', $id)->paginate(12);
+        return view('screens.backend.package.evaluate', compact('evaluates'));
     }
 }

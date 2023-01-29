@@ -15,8 +15,9 @@
                         <li class="has-dropdown">
                             <a href="#">Trang</a>
                             <ul class="sub-menu">
-                                <li><a href="about.html">Thông Tin</a></li>
-                                <li><a href="bmi-calculator.html">Tính Chỉ Số IBM</a></li>
+                                <li><a href="#">Thông Tin</a></li>
+                                <li><a href="#">Tính Chỉ Số IBM</a></li>
+
                             </ul>
                         </li>
                         <li class="has">

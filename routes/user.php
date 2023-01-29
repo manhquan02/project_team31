@@ -46,6 +46,7 @@ Route::prefix('admin/')->middleware(['auth', 'verified', 'role:admin'])->name('a
         Route::post('/edit-role', [UserController::class, 'editRole'])->name('editRole');
         Route::get('bmi/{id}', [UserController::class, 'bmi'])->name('bmi');
         Route::patch('bmi/{id}', [UserController::class, 'updateBMI'])->name('updateBMI');
+        Route::get('evaluate/{id}', [UserController::class, 'evaluate'])->name('evaluate');
     });
 
 

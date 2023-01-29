@@ -109,6 +109,9 @@
                         <td>
                             <a title="Xem chi tiết" href="{{route('admin.package.edit', $item->id)}}"><i class="flaticon-eye text-info"></i></a>
                             <a title="Thay đổi trạng thái" class="btn-confirm" data-title="Bạn có chắc chắn muốn thay đổi trạng thái ?" data-url="{{route('admin.package.change_status', $item->id)}}" style="margin-left: 12px; cursor: pointer"><i class="flaticon-warning text-warning"></i></a>
+                         
+                            <a title="Đánh giá" href="{{route('admin.package.evaluate', $item->id)}}" style="margin-left: 12px"><i class="flaticon-eye text-info"></i></a>
+                           
                         </td>
                     </tr>
                     @endforeach

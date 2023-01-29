@@ -62,6 +62,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'role:admin'])->name('ad
         Route::get('edit/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'edit'])->name('edit');
         Route::patch('edit/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'update'])->name('update');
         Route::get('change-status/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'change_status'])->name('change_status');
+        Route::get('evaluate/{id}', [\App\Http\Controllers\Admin\PackageController::class, 'evaluate'])->name('evaluate');
     });
 
     Route::prefix('contact')->name('contact.')->group(function () {
@@ -90,6 +91,10 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'role:admin'])->name('ad
 
     Route::prefix('wage')->name('wage.')->group(function () {
         Route::get('', [\App\Http\Controllers\Admin\WageController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('evaluate')->name('evaluate.')->group(function () {
+        Route::get('delete/{id}', [\App\Http\Controllers\Client\RateController::class, 'delete'])->name('delete');
     });
 });
 

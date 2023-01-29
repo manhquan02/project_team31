@@ -12,6 +12,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Services\UploadImgService;
 use App\Mail\VeryEmail;
 use App\Mail\VeryMailCoach;
+use App\Models\Rate;
 use App\Models\Schedule;
 use App\Models\Wage;
 use Brian2694\Toastr\Facades\Toastr;
@@ -295,6 +296,11 @@ class UserController extends Controller
         $bmi->save();
         Toastr::success('Cập nhật chỉ số BMI thành công');
         return redirect()->back();
+    }
+
+    public function evaluate($id){
+        $evaluates = Rate::where('pt_id', $id)->paginate(12);
+        return view('screens.backend.user.evaluate', compact('evaluates'));
     }
 
     
