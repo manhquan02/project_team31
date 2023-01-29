@@ -100,12 +100,12 @@
                     <li class="nav-item">
                       <div style="color: #16181b;" class="nav-link navbar-profile-li">|</div>
                     </li>
-                    <li class="nav-item active">
+                    {{-- <li class="nav-item active">
                       <a class="nav-link navbar-profile-li" href="#">Chỉ số cơ thể </a>
-                    </li>
-                    <li class="nav-item">
+                    </li> --}}
+                    {{-- <li class="nav-item">
                       <div style="color: #16181b;" class="nav-link navbar-profile-li">|</div>
-                    </li>
+                    </li> --}}
                     <li class="nav-item active">
                       <a class="nav-link navbar-profile-li" href="{{route('account.historyPackage')}}">Gói tập đã đăng ký </a>
                     </li>

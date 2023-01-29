@@ -108,7 +108,7 @@
 							<div class="col-lg-4">
 								<div class="pricing-title">
 									<h3>{{$item->package_name}}</h3>
-									<span>{{number_format($item->into_price, 0, '.','.')}} <sup>đ</sup></span>
+									<span style="font-size: 55px">{{number_format($item->into_price, 0, '.','.')}} <sup>đ</sup></span>
 									<p style="color: black;">Giảm {{$item->price_sale}} %</p>
 								</div>
 							</div>

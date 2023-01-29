@@ -52,8 +52,8 @@
                                 <a title="{{ ('View') }}"
                                        href="{{route('admin.time.edit', $item->id)}}"><i
                                             class="flaticon-eye text-info"></i></a>
-                                    <a title="Xóa" class="btn-confirm" data-title="Bạn có chắc chắn muốn xóa không ?" data-url="{{route('admin.time.delete', $item->id)}}"
-                                       style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a>
+                                    {{-- <a title="Xóa" class="btn-confirm" data-title="Bạn có chắc chắn muốn xóa không ?" data-url="{{route('admin.time.delete', $item->id)}}"
+                                       style="margin-left: 12px; cursor: pointer"><i class="flaticon2-trash text-danger"></i></a> --}}
                                 </td>
                             </tr>
                         @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveProfileRequest;
+use App\Mail\SendMailReschedule;
 use App\Models\Attendance;
 use App\Models\Order;
 use App\Models\Rate;
@@ -13,6 +14,7 @@ use App\Models\Schedule;
 use App\Models\Time;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ScheduleMemberController extends Controller
 {
@@ -104,17 +106,27 @@ class ScheduleMemberController extends Controller
         ];
         $request->validate($rule, $messages);
         $attendance = Attendance::find($attendanceId);
+        $dateOld = $attendance->date;
+        $timeOld = $attendance->time->time_name;
         $attendance->update([
             'date' => $request->date,
             'time_id' => $request->time_id
         ]);
         $weekday = date('l', strtotime($request->date));
         $schedules = Schedule::where('id', '=', $attendance->schedule_id);
+        
         $schedules->update([
             'date' => $request->date,
             'weekday_name' => $weekday,
             'time_id' => $request->time_id
         ]);
+        $data = [
+            'title' => 'Hội viên đổi lịch tập',
+            'content' => "Hội viên đã lịch tập của ngày $dateOld $timeOld thành ngày $attendance->date " . $attendance->time->time_name
+        ];
+        $emailPt = $attendance->pt->email;
+        Mail::to("legend.cay@gmail.com")->send(new SendMailReschedule($data));
+
         return redirect()->route('account.schedule');
     }
 

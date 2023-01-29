@@ -16,7 +16,7 @@
       <div class=" col-lg-4">
         <div style="border-right: 2px solid #e63a34;" class="pricing-title">
           <h3>{{$package->package_name}}</h3>
-          <span>{{number_format($package->into_price, 0, '.','.')}} <sup>đ</sup></span>
+          <span style="font-size: 55px">{{number_format($package->into_price, 0, '.','.')}} <sup>đ</sup></span>
           
         </div>
       </div>
@@ -228,7 +228,7 @@
 
           <div style="margin-top: 20px; width: 30%;" class="list-group-item d-flex justify-content-between">
             <span>Tổng tiền</span>
-            <strong id="total_money">{{$package->into_price*$package->total_session_pt}}</strong>
+            <strong id="total_money">{{$package->into_price}}</strong>
           </div>
 
           <div style="margin-top: 20px; width: 30%; border: none" class="list-group-item d-flex justify-content-between">
