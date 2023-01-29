@@ -81,7 +81,7 @@
                 </div>
                 <div class="form-group row">
                     <label for="example-tel-input" class="col-2 col-form-label">Loại gói tập <span class="text-danger">*</span></label>
-                    <div class="col-10">
+                    <div class="col-10" id="typePackage">
                         <select class="form-control" name="type_package">
                             <option selected value="{{$package->type_package}}">{{ typePackage()[$package->type_package] }}</option>
                             @foreach(typePackage() as $key=>$item)
@@ -125,7 +125,24 @@
                     </div>
                 </div>
                 <div id="weekday_pt" class="form-group row">
-
+                    <div class="form-group row">
+                        <label for="example-password-input" class="col-2 col-form-label">Tổng buổi tập có PT </label>
+                        <div class="col-10 p-3">
+                            <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt') ? old('total_session_pt') : $package->total_session_pt}}">
+                            @error('total_session_pt')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-password-input" class="col-2 col-form-label">Số buổi PT trên tuần </label>
+                        <div class="col-10 p-3">
+                            <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt') ? old('week_session_pt') : $package->week_session_pt}}">
+                            @error('week_session_pt')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label"></label>
@@ -143,51 +160,81 @@
     $(document).ready(function() {
         $('.select2').select2()
 
-        
-        if ($('#pt').prop('checked') == true) {
-                content = ` <div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">Tổng buổi tập có PT </label>
-                    <div class="col-10 p-3">
-                        <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt') ? old('total_session_pt') : $package->total_session_pt}}">
-                        @error('total_session_pt')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">Số buổi PT trên tuần </label>
-                    <div class="col-10 p-3">
-                        <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt') ? old('week_session_pt') : $package->week_session_pt}}">
-                        @error('week_session_pt')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>`
 
-                        $('#weekday_pt').html(content);
-            } 
+        if ($('#pt').prop('checked') == true) {
+            content = ` <div class="form-group row">
+                        <label for="example-password-input" class="col-2 col-form-label">Tổng buổi tập có PT </label>
+                        <div class="col-10 p-3">
+                            <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt') ? old('total_session_pt') : $package->total_session_pt}}">
+                            @error('total_session_pt')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-password-input" class="col-2 col-form-label">Số buổi PT trên tuần </label>
+                        <div class="col-10 p-3">
+                            <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt') ? old('week_session_pt') : $package->week_session_pt}}">
+                            @error('week_session_pt')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>`
+
+            $('#weekday_pt').html(content);
+
+            let type = `<select class="form-control" name="type_package">
+                            <option selected value="2">Gói tháng</option>
+                        </select>
+                        @error('type_package')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror `
+            $('#typePackage').html(type);
+        }
 
         $(document).on('click', '#pt', function() {
-            console.log($(this).prop('checked'));
+
             let content = ``;
             if ($(this).prop('checked') == true) {
                 content = `<div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">Tổng buổi tập có PT </label>
-                    <div class="col-10 p-3">
-                        <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt') ? old('total_session_pt') : $package->total_session_pt}}">
-                        
+                        <label for="example-password-input" class="col-2 col-form-label">Tổng buổi tập có PT </label>
+                        <div class="col-10 p-3">
+                            <input type="number" class="form-control"  name="total_session_pt" value="{{old('total_session_pt') ? old('total_session_pt') : $package->total_session_pt}}">
+                            @error('total_session_pt')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="example-password-input" class="col-2 col-form-label">Số buổi PT trên tuần </label>
-                    <div class="col-10 p-3">
-                        <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt') ? old('week_session_pt') : $package->week_session_pt}}">
-                       
-                    </div>
-                </div>`
-            } 
+                    <div class="form-group row">
+                        <label for="example-password-input" class="col-2 col-form-label">Số buổi PT trên tuần </label>
+                        <div class="col-10 p-3">
+                            <input type="number" class="form-control" name="week_session_pt" value="{{old('week_session_pt') ? old('week_session_pt') : $package->week_session_pt}}">
+                            @error('week_session_pt')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>`
 
+                let type = `<select class="form-control" name="type_package">
+                <option selected value="2">Gói tháng</option>
+            </select>
+            @error('type_package')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror `
+
+                $('#typePackage').html(type);
+            } else {
+                let type = `<select class="form-control" name="type_package">
+                            <option selected value="2">Gói tháng</option>
+                            <option selected value="1">Gói ngày</option>
+                        </select>
+                        @error('type_package')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror `
+                $('#typePackage').html(type);
+            }
             $('#weekday_pt').html(content);
+
         })
     });
 </script>

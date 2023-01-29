@@ -138,6 +138,7 @@
         $('.select2').select2()
 
 
+
         if ($('#pt').prop('checked') == true) {
             content = ` <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label">Tổng buổi tập có PT </label>
@@ -170,7 +171,7 @@
         }
 
         $(document).on('click', '#pt', function() {
-            console.log($(this).prop('checked'));
+
             let content = ``;
             if ($(this).prop('checked') == true) {
                 content = `<div class="form-group row">
@@ -191,19 +192,30 @@
                         @enderror
                     </div>
                 </div>`
-            }
 
-            $('#weekday_pt').html(content);
+                let type = `<select class="form-control" name="type_package">
+                <option selected value="2">Gói tháng</option>
+            </select>
+            @error('type_package')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror `
 
-            let type = `<select class="form-control" name="type_package">
+                $('#typePackage').html(type);
+            } else {
+                let type = `<select class="form-control" name="type_package">
                             <option selected value="2">Gói tháng</option>
+                            <option selected value="1">Gói ngày</option>
                         </select>
                         @error('type_package')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror `
+                $('#typePackage').html(type);
+            }
+            $('#weekday_pt').html(content);
 
-            $('#typePackage').html(type);
         })
+
+
     });
 </script>
 @endsection

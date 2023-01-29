@@ -101,7 +101,13 @@ class PackageController extends Controller
         }
         $new->save();
         Toastr::success('Thêm mới gói tập thành công');
-        return redirect()->route('admin.package.create');
+        if($request->type_package == 1){
+            return redirect()->route('admin.package.index_primary');
+        }else{
+            return redirect()->route('admin.package.index_pt');
+        }
+
+        return redirect()->back();
     }
 
     public function edit($id)
@@ -112,7 +118,7 @@ class PackageController extends Controller
             $subjects = Subject::where('id', '!=', $package->subject_id)->get();
             return view('screens.backend.package.edit', compact('package', 'subjects', 'type_package'));
         }
-        return redirect()->route('admin.package.index');
+        return redirect()->back();
     }
 
     public function update(PackageRequest $request, $id)
@@ -146,7 +152,14 @@ class PackageController extends Controller
             Toastr::success('Cập nhật gói tập thành công');
             return redirect()->back();
         }
-        return redirect()->route('admin.package.index');
+        if($request->type_package == 1){
+            return redirect()->route('admin.package.index_primary');
+        }else{
+            return redirect()->route('admin.package.index_pt');
+        }
+
+        return redirect()->back();
+       
     }
 
     public function change_status($id)

@@ -1,10 +1,9 @@
 @extends('layouts.frontend.master')
-@section('title', 'Đăng Nhập')
+@section('title', 'Quên mật khẩu')
 @section('content')
 <main>
     <div class="contact-area-2 pt-130 pb-130">
         <div class="container">
-            <h1 class="text-center">ĐĂNG NHẬP</h1>
             <div class="row justify-content-between mt-100">
                 <div class="col-md-6 col-lg-5">
                     <div class="contact-text text-left">
@@ -17,9 +16,8 @@
                     <div class="contact-form contact-form-2">
 
 
-                        <form action="{{route('postLogin')}}" method="post">
+                        <form action="{{route('postForgot')}}" method="post">
                             @csrf
-
                             <div class="row">
                                 @if(session()->has('error'))
                                 <div  style="background-color: #f44336;" class="alert">
@@ -35,33 +33,11 @@
                                 @endif
                                 <div class="col-xl-12">
                                     <div class="input-wrap input-icon icon-msg">
-                                        <input type="text" @error('email') style="border: 3px solid red" @enderror placeholder="Địa chỉ email" name="email" value="{{old('email')}}">
+                                        <input type="text"  placeholder="Nhập email của bạn" name="email" value="{{old('email')}}">
                                     </div>
-                                    @error('email')
-                                    <div class="col-xl-12">
-                                        <span class="text-danger">{{$message}}</span>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="col-xl-12" style="margin-bottom:28px">
-                                    <div class="input-wrap input-icon icon-msg">
-                                        <input type="password" @error('password') style="border: 3px solid red" @enderror placeholder="Mật khẩu" name="password" value="{{old('password')}}">
-                                    </div>
-                                    @error('password')
-                                    <div class="col-xl-12">
-                                        <span class="text-danger">{{$message}}</span>
-                                    </div>
-                                    @enderror
-                                </div>
-                                <div class="col-xl-12">
-                                    <a className="small text-muted" href="{{route('forgotPassword')}}">Quên mật khẩu ?</a>
-                                    <p className="mb-4 pb-lg-2" style="color: '#393f81'">Bạn chưa có tài khoản ? <a href="{{route('signup')}}" style="color: '#393f81'">Đăng ký</a></p>
-                                    <button type="submit" class="btn btn-gra">
-                                        ĐĂNG NHẬP <i class="fas fa-angle-double-right"></i>
-                                    </button>
                                 </div>
                             </div>
+                            <button class="btn btn-primary">Gửi Gmail</button>
                         </form>
                     </div>
                 </div>

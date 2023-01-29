@@ -9,7 +9,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 @if($resultCode == 0) style="color: green;" @else style="color: red;" @endif>{{$result}}</h2>
+                        <h2 @if($resultCode==0) style="color: green;" @else style="color: red;" @endif>{{$result}}</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <a href="/" class="btn btn-primary">Quay lại thanh toán</a>
+                            <a href="{{route('home')}}" class="btn btn-primary">Quay lại trang chủ</a>
                         </div>
                     </div>
                 </div>
@@ -68,4 +68,4 @@
         </div>
     </div>
 </div>
-    @endsection
+@endsection

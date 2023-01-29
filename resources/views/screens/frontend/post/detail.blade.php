@@ -1,8 +1,6 @@
 @extends('layouts.frontend.master')
 @section('content')
-
 <main>
-	<!--    breadcrumb-area start    -->
 	<section class="breadcrumb-area pt-180 pb-180 pt-md-120 pb-md-120 pt-xs-100 pb-xs-100 bg-fix" data-overlay="black" data-opacity="7" data-background="{{asset('frontend/assets/img/bg/breadcrumb-bg-2.jpg')}}">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -18,9 +16,6 @@
 			</div>
 		</div>
 	</section>
-	<!--    breadcrumb-area end    -->
-
-	<!-- team-area start -->
 	<div style="margin-top: 12px;">
 		<div class="row justify-content-center m-auto">
 			<div class="col-xl-8 col-lg-8">
@@ -77,7 +72,5 @@
 		</div>
 	</div>
 	</div>
-	<!-- team-area end -->
-
 </main>
 @endsection
