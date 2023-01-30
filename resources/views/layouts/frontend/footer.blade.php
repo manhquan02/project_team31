@@ -56,7 +56,7 @@
                     <div class="footer-widgets footer-about-widget">
                         <div class="footer-logo">
                             <a href="index.html">
-                                <img src="frontend/assets/img/logo/logo-white.png" alt="Logo">
+                                <img src="{{asset('frontend/assets/img/logo/logo-white.png')}}" alt="Logo">
                             </a>
                         </div>
                         <p>

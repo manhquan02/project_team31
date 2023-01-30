@@ -78,7 +78,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <a href="/" class="btn btn-primary">Quay lại thanh toán</a>
+                            <a href="{{route('home')}}" class="btn btn-primary">Quay lại trang chủ</a>
                         </div>
                     </div>
                 </div>

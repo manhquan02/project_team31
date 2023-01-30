@@ -36,7 +36,7 @@
     <script src="summernote-bs5.js"></script>
     <!--end::layouts Themes-->
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
-    <link rel="shortcut icon" href="/backend/media/logos/favicon.ico"/>
+    <link rel="shortcut icon" href="{{asset('frontend/assets/img/logo/logo-white.png')}}"/>
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
    
     @yield('style')
