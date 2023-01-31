@@ -259,7 +259,7 @@ class UserSeeder extends Seeder
 
         $members = User::all();
         foreach ($members as $key => $member) {
-            if(!in_array($member->email, ['admin@example.com', 'manager@example.com','coach@example.com','coach2@example.com', 'coach3@example.com', 'coach5@example.com', 'coach6@example.com','member@example.com'])){
+            if(!in_array($member->email, ['admin@example.com', 'manager@example.com','coach@example.com','coach2@example.com', 'coach3@example.com', 'coach4@example.com','coach5@example.com', 'coach6@example.com','member@example.com'])){
                 $member->assignRole('member');
             }
         }
