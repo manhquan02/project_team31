@@ -33,12 +33,19 @@ class OrderController extends Controller
         $arrayWeekdays = PackageUtility::$arrayWeekday;
         $package = Package::find($id);
         $times = Time::all();
-        $coachs = User::role('coach')->get();
+        if($package->subject_id == 1){
+            $coachs = User::role('coach')->get();
+        }
+        elseif($package->subject_id == 2){
+            $coachs = User::role('coachbx')->get();
+        }else{
+            $coachs = User::role('coach')->get();
+        }
         return view('screens.frontend.order.index',[
                                                     'arrayWeekdays' => $arrayWeekdays, 
                                                     'times' => $times, 
                                                     'coachs' => $coachs,
-                                                    'package' =>$package
+                                                    'package' =>$package,
                                                 ]);
     }
 
@@ -785,9 +792,18 @@ class OrderController extends Controller
                 'msg' => 'Vui lòng không bỏ trống'
             ]); 
         }
-        $coachs = User::role('coach')->get(); 
-        $weekdayPt = $request->weekdayPt;
         $package = Package::find($request->package_id);
+        if($package->subject_id == 1){
+            $coachs = User::role('coach')->get();
+        }
+        elseif($package->subject_id == 2){
+            $coachs = User::role('coachbx')->get();
+        }else{
+            $coachs = User::role('coach')->get();
+        }
+        // $coachs = User::role('coach')->get(); 
+        $weekdayPt = $request->weekdayPt;
+        
         $total_session_pt = $package->total_session_pt;
         $week_session_pt = $package->week_session_pt;
         $total_session = $total_session_pt/$week_session_pt*7;

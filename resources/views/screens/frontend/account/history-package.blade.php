@@ -39,7 +39,7 @@
                                         <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
                                         {{-- <li class="list-inline-item ms-2 h6 fw-light mb-0">4.0/5.0</li> --}}
                                     </ul>
-                                    <button style="float: right;margin-bottom: 10px;" type="button" class="btn btn-primary">Xem thêm</button>
+                                    {{-- <button style="float: right;margin-bottom: 10px;" type="button" class="btn btn-primary">Xem thêm</button> --}}
 
                                 </div>
                                 <!-- Card footer -->

@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'coach',
             'manager',
             'member',
+            'coachbx'
             
         ];
 
@@ -128,6 +129,30 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Mai Anh Tài',
                 'email' => 'coach6@example.com',
+                'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
+                'gender' => 'nam',
+                'phone' => rand(1000000000,9999999999),
+                'avatar' => fake()->imageUrl(),
+                'wage'=>200000,
+                'email_verified_at' => '2022-09-08 15:00:14',
+                'address' => 'Hà nội',
+                'status' => 1
+            ],
+            [
+                'name' => 'Tuấn Hưng',
+                'email' => 'coachbx@example.com',
+                'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
+                'gender' => 'nam',
+                'phone' => rand(1000000000,9999999999),
+                'avatar' => fake()->imageUrl(),
+                'wage'=>200000,
+                'email_verified_at' => '2022-09-08 15:00:14',
+                'address' => 'Hà nội',
+                'status' => 1
+            ],
+            [
+                'name' => 'Duy Mạnh',
+                'email' => 'coachbx1@example.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 'nam',
                 'phone' => rand(1000000000,9999999999),
@@ -247,6 +272,14 @@ class UserSeeder extends Seeder
                 case 'coach6@example.com':
                     $userSetRole = User::where('email', 'coach6@example.com')->first();
                     $userSetRole->assignRole('coach');
+                    break; 
+                case 'coachbx@example.com':
+                    $userSetRole = User::where('email', 'coachbx@example.com')->first();
+                    $userSetRole->assignRole('coachbx');
+                    break; 
+                case 'coachbx1@example.com':
+                    $userSetRole = User::where('email', 'coachbx1@example.com')->first();
+                    $userSetRole->assignRole('coachbx');
                     break;  
                 case 'member@example.com':
                     $userSetRole = User::where('email', 'member@example.com')->first();
