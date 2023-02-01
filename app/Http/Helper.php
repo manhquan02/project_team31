@@ -2,6 +2,7 @@
 
 use App\Models\Language;
 use App\Models\Order;
+use App\Models\Rate;
 use App\Models\Translation;
 
 
@@ -26,6 +27,32 @@ function test_bmi($bmi)
         $health = 8;
     }
     return $health;
+}
+
+function starPackage($id){
+    $all_rate = Rate::where('package_id', $id)->get();
+        $total_star = 0;
+        foreach ($all_rate as $item) {
+            $total_star += $item->star_package;
+        }
+        if($all_rate->count() != 0){
+            $star_rate = $total_star / $all_rate->count();
+        }else $star_rate = 5;
+
+        return $star_rate;
+}
+
+function starPt($id){
+    $all_rate = Rate::where('pt_id', $id)->get();
+        $total_star = 0;
+        foreach ($all_rate as $item) {
+            $total_star += $item->star_package;
+        }
+        if($all_rate->count() != 0){
+            $star_rate = $total_star / $all_rate->count();
+        }else $star_rate = 5;
+
+        return $star_rate;
 }
 
 function upload_image($name , $request, $new, $folder)
@@ -147,3 +174,4 @@ function evaluate(){
         '5'=>'Rất tốt'
     ];
 }
+

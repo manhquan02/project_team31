@@ -1,5 +1,61 @@
 @extends('layouts.backend.master')
 @section('title', 'Quản lý gói tập')
+@section('style')
+
+<style>
+    .star-style {
+        background-repeat: no-repeat;
+        width: 115%;
+        height: 100%;
+        margin-left: -7px;
+    }
+
+    .rating {
+        position: absolute;
+        top: -1px;
+        left: 0;
+    }
+
+    .fa-star {
+        margin: 5px;
+        width: 20px;
+        height: 10px;
+    }
+
+    .star-vote {
+        width: 100px;
+        height: 20px;
+        position: relative;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .single_capt_left {
+        font-size: 20px;
+    }
+
+    .alert {
+        padding: 20px;
+        color: white;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
+</style>
+
+@endsection
 @section('content')
 
 <div>
@@ -90,7 +146,10 @@
                     @foreach($packages as $key=>$item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->package_name}}</td>
+                        <td>{{$item->package_name}}<div class="star-vote">
+                                <div class="star-style rating" style="background-image: url({{asset('images/5star1.png')}}); width:{{(starPackage($item->id)/5*100)*1.16}}%"></div>
+                                <div class="star-style star_background" style="background-image: url({{asset('images/5star2.png')}});"></div>
+                            </div></td>
                         <td>{{$item->subject->subject_name}}</td>
                         <td>
                             <img width="100px" height="100px" src="{{asset($item->avatar)}}" alt="">

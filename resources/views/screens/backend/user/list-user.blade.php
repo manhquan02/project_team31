@@ -3,6 +3,62 @@
 @section('title', 'Quản lý người dùng')
 
 @section('content')
+@section('style')
+
+<style>
+    .star-style {
+        background-repeat: no-repeat;
+        width: 115%;
+        height: 100%;
+        margin-left: -7px;
+    }
+
+    .rating {
+        position: absolute;
+        top: -1px;
+        left: 0;
+    }
+
+    .fa-star {
+        margin: 5px;
+        width: 20px;
+        height: 10px;
+    }
+
+    .star-vote {
+        width: 100px;
+        height: 20px;
+        position: relative;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .single_capt_left {
+        font-size: 20px;
+    }
+
+    .alert {
+        padding: 20px;
+        color: white;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
+</style>
+
+@endsection
 <div>
 
     <div class="card card-custom">
@@ -112,16 +168,18 @@
                         <th>Vai trò</th>
                         <th>Trạng thái</th>
                         <th>Thao tác</th>
-                        <th>Edit Role</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
-
+                    
 
                     <tr>
                         <td>{{$user->id}}</td>
-                        <td>{{$user->name}}</td>
+                        <td>{{$user->name}} @if($user->getRoleNames() == '["coach"]') <div class="star-vote">
+                                <div class="star-style rating" style="background-image: url({{asset('images/5star1.png')}}); width:{{(starPt($user->id)/5*100)*1.16}}%"></div>
+                                <div class="star-style star_background" style="background-image: url({{asset('images/5star2.png')}});"></div>
+                            </div> @endif</td>
                         <td>{{$user->email}}</td>
                         <td>
                             <img src="{{$user->Avatar}}" width="200px" alt="">
@@ -149,11 +207,6 @@
                                         </g>
                                     </svg><!--end::Svg Icon--></span>
                             </a>
-                        </td>
-                        <td>
-                            <button onclick="javascript:name_edit_role({{ $user }})" class="btn btn-light-primary px-6 font-weight-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="flaticon2-gear text-primary"></i>
-                            </button>
                         </td>
                     </tr>
                     @endforeach
