@@ -52,8 +52,8 @@
             <tr class="">
                 <th scope="row" class="text-center">{{$schedule->id}}</th>
                 <td class="text-center">{{$schedule->pt->name}}</td>
-                <td class="text-center">{{$schedule->time->time_name}}</td>
-                <td class="text-center">{{$schedule->date}}</td>
+                <td class="text-center">{{$schedule->time->time_name}} ({{$schedule->time->start_time}} - {{$schedule->time->end_time}})</td>
+                <td class="text-center">{{date('d-m-Y', strtotime($schedule->date))}}</td>
                 <td class="text-center">{{$schedule->weekday_name}}</td>
                 {{-- <td class="text-center">tập bụng</td> --}}
                 <td class="text-center">

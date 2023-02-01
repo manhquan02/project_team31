@@ -71,33 +71,6 @@
 			</div>
 			<div class="row">
 				<div class="col-xl-12">
-					<form class="row m-auto">
-						<div class="col-md-3 mb-50">
-							<h5 class="">Loại gói tập</h5>
-							<select class="form-control select2" aria-placeholder="Gói" aria-valuemax="gói">
-								<option>Gói tập thường</option>
-								<option>Gói tập theo lộc trình (có pt)</option>
-							</select>
-						</div>
-						<div class="col-md-3 mb-50">
-							<h5 class="">Bộ môn</h5>
-							<select class="form-control select2">
-								<option>Gym</option>
-								<option>Boxing</option>
-							</select>
-						</div>
-						<div class="col-md-3 mb-50">
-							<h5 class="">Giá gói tập</h5>
-							<select class="form-control select2">
-								<option>100 - 200 K</option>
-								<option>200 - 500 K</option>
-								<option>> 500 K</option>
-							</select>
-						</div>
-						<div class="col-md-1 mb-20 mt-30">
-							<button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
-						</div>
-					</form>
 					@php
 					$i=0;
 					@endphp
@@ -108,8 +81,9 @@
 							<div class="col-lg-4">
 								<div class="pricing-title">
 									<h3>{{$item->package_name}}</h3>
-									<span style="font-size: 55px">{{number_format($item->into_price, 0, '.','.')}} <sup>đ</sup></span>
-									<p style="color: black;">Giảm {{$item->price_sale}} %</p>
+									<del style="font-size: 31px;color:black">{{number_format($item->price, 0, '.','.')}} </del> <sup style="font-size: 31px;color:black">đ</sup>
+									<span style="font-size: 55px;">{{number_format($item->into_price, 0, '.','.')}} <sup>đ</sup></span>
+									<p style="color: black;">Gảm {{$item->price_sale}} %</p>
 								</div>
 							</div>
 							<div class="col-lg-4">

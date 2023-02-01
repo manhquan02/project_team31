@@ -134,8 +134,6 @@
     $(document).ready(function() {
         $('.select2').select2()
 
-
-
         if ($('#pt').prop('checked') == true) {
             content = ` <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label">Tổng buổi tập có PT </label>
@@ -159,7 +157,7 @@
             $('#weekday_pt').html(content);
 
             let type = `<select class="form-control" name="type_package">
-                            <option selected value="2">Gói tháng</option>
+                            <option selected value="1">Gói ngày</option>
                         </select>
                         @error('type_package')
                         <span class="text-danger">{{ $message }}</span>
@@ -191,7 +189,7 @@
                 </div>`
 
                 let type = `<select class="form-control" name="type_package">
-                <option selected value="2">Gói tháng</option>
+                <option selected value="1">Gói ngày</option>
             </select>
             @error('type_package')
             <span class="text-danger">{{ $message }}</span>
@@ -200,7 +198,7 @@
                 $('#typePackage').html(type);
             } else {
                 let type = `<select class="form-control" name="type_package">
-                            <option selected value="1">Gói ngày</option>
+                            <option selected value="2">Gói tháng</option>
                         </select>
                         @error('type_package')
                         <span class="text-danger">{{ $message }}</span>
@@ -210,8 +208,6 @@
             $('#weekday_pt').html(content);
 
         })
-
-
     });
 </script>
 @endsection

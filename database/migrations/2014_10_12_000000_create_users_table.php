@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('gender');
             $table->unsignedBigInteger('phone');
             $table->unsignedBigInteger('wage')->nullable();
-            $table->string('avatar')->nullable();
+            $table->string('avatar', 1000)->nullable();
             $table->string('address');
             $table->unsignedInteger('status')->default(0);
             $table->rememberToken()->nullable();

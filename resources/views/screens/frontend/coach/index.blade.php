@@ -2,7 +2,7 @@
 @section('content')
 <main>
     <!--    breadcrumb-area start    -->
-    <section class="breadcrumb-area pt-180 pb-180 pt-md-120 pb-md-120 pt-xs-100 pb-xs-100 bg-fix" data-overlay="black" data-opacity="7" data-background="{{asset('fronted/assets/img/bg/breadcrumb-bg-3.jpg')}}">
+    <section class="breadcrumb-area pt-180 pb-180 pt-md-120 pb-md-120 pt-xs-100 pb-xs-100 bg-fix" data-overlay="black" data-opacity="7" data-background="{{asset('frontend/assets/img/bg/breadcrumb-bg-2.jpg')}}">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
@@ -34,7 +34,7 @@
                 <div class="col-lg-4 col-md-8">
                     <div class="team-wrap mb-30">
                         <div class="team-img">
-                            <img src="{{asset($item->avatar)}}" alt="">
+                            <img height="450px" src="{{asset($item->avatar)}}" alt="">
                             <div class="team-social-link">
                                 <ul>
                                     <li>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="team-content">
                             <h3><a href="{{route('training.detail',$item->id)}}">{{$item->name}}</a></h3>
-                            <span>Caradio Trainer</span>
+                            <span>Huấn luyện viên Gym</span>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
     <!-- team-area-4 start -->
     <div class="team-area-4 pt-130 pb-100">
         <div class="container">
-        <div class="row align-items-center mb-60">
+            <div class="row align-items-center mb-60">
                 <div class="col-xl-9">
                     <div class="section-title-2 bar-theme-color team-title-2">
                         <span>TOP</span>
@@ -86,20 +86,20 @@
                         </div>
                         <div class="team-content">
                             <h3><a href="{{route('training.detail',$item->id)}}">{{$item->name}}</a></h3>
-                            <span>MÃ THÀNH VIÊN: @if($item->id < 10)  {{'00000'.$item->id}} @elseif($item->id < 100) {{'0000'.$item->id}} @elseif($item->id < 1000) {{'000'.$item->id}} @elseif($item->id < 10000) {{'00'.$item->id}} @elseif($item->id < 100000) {{'0'.$item->id}} @else {{$item->id}} @endif</span>
-                            <div class="team-social-link">
-                                <ul>
-                                    <li>
-                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fab fa-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fab fa-instagram"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <span>MÃ THÀNH VIÊN: @if($item->id < 10) {{'00000'.$item->id}} @elseif($item->id < 100) {{'0000'.$item->id}} @elseif($item->id < 1000) {{'000'.$item->id}} @elseif($item->id < 10000) {{'00'.$item->id}} @elseif($item->id < 100000) {{'0'.$item->id}} @else {{$item->id}} @endif</span>
+                                                    <div class="team-social-link">
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                         </div>
                     </div>
                 </div>

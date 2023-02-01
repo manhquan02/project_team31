@@ -151,7 +151,7 @@ Route::prefix('account')->middleware('auth', 'role:member','checkRate')->name('a
 Route::prefix('account')->name('account.')->group(function () {
     Route::patch('save-profile', [ClientScheduleMemberController::class, 'saveProfile'])->name('saveProfile');
 });
-Route::prefix('account-pt/')->middleware('auth', 'role:coach')->name('accountPt.')->group(function () {
+Route::prefix('account-pt/')->middleware('auth', 'role:coach|coachbx')->name('accountPt.')->group(function () {
     Route::get('/', [ScheduleCoachController::class, 'profile'])->name('index');
     Route::get('profile', [ScheduleCoachController::class, 'profile'])->name('profile');
     Route::get('schedule', [ScheduleCoachController::class, 'scheduleCoach'])->name('scheduleCoach');

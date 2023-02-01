@@ -161,7 +161,7 @@
                         @foreach ($times as $time)
                         <td class="active">
                           <label>
-                            <input id="check_weekday_pt" onclick="checkWeekdayPt({{$key}}, {{$time->id}})" type="radio" class="option-input radio {{$weekday}}_pt" name="weekday[{{$key}}]" value="{{$time->id}}" />
+                            <input id="check_weekday_pt" onclick="checkWeekdayPt({{$key}}, {{$time->id}})" type="radio" class="option-input radio {{$weekday}}_pt" name="weekday[{{$key}}]" value="{{$time->id}}" disabled/>
                           </label>
                         </td>
                         @endforeach
@@ -338,16 +338,17 @@
 <script>
   let weekdayPt = {}
   function checkWeekday(weekday_id){
-    console.log(weekday_id);
     checkbox_weekday = document.getElementById(weekday_id);
-    console.log(checkbox_weekday);
-    console.log(checkbox_weekday.checked);
     let value = checkbox_weekday.value
     if(checkbox_weekday.checked == true){
       weekdayPt[value] = null
+      console.log($(checkbox_weekday).closest('tr').find('.active input'))
+      // return
+      $(checkbox_weekday).closest('tr').find('.active input').prop('disabled', false)
       // checkbox_weekday.style.background-color=#959595;
     } else {
       delete weekdayPt[value]
+      $(checkbox_weekday).closest('tr').find('.active input').prop('disabled', true)
       console.log("checked false");
     }
     console.log(weekdayPt)

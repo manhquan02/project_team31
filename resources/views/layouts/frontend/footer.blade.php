@@ -7,37 +7,37 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide single-slide">
                                 <div class="brand-wrap">
-                                    <img src="frontend/assets/img/brand/brand-1.png" alt="brand">
+                                    <img src="{{asset('frontend/assets/img/brand/brand-1.png')}}" alt="brand">
                                 </div>
                             </div>
                             <div class="swiper-slide single-slide">
                                 <div class="brand-wrap">
-                                    <img src="frontend/assets/img/brand/brand-2.png" alt="brand">
+                                    <img src="{{asset('frontend/assets/img/brand/brand-2.png')}}" alt="brand">
                                 </div>
                             </div>
                             <div class="swiper-slide single-slide">
                                 <div class="brand-wrap">
-                                    <img src="frontend/assets/img/brand/brand-3.png" alt="brand">
+                                    <img src="{{asset('frontend/assets/img/brand/brand-3.png')}}" alt="brand">
                                 </div>
                             </div>
                             <div class="swiper-slide single-slide">
                                 <div class="brand-wrap">
-                                    <img src="frontend/assets/img/brand/brand-4.png" alt="brand">
+                                    <img src="{{asset('frontend/assets/img/brand/brand-4.png')}}" alt="brand">
                                 </div>
                             </div>
                             <div class="swiper-slide single-slide">
                                 <div class="brand-wrap">
-                                    <img src="frontend/assets/img/brand/brand-5.png" alt="brand">
+                                    <img src="{{asset('frontend/assets/img/brand/brand-5.png')}}" alt="brand">
                                 </div>
                             </div>
                             <div class="swiper-slide single-slide">
                                 <div class="brand-wrap">
-                                    <img src="frontend/assets/img/brand/brand-6.png" alt="brand">
+                                    <img src="{{asset('frontend/assets/img/brand/brand-6.png')}}" alt="brand">
                                 </div>
                             </div>
                             <div class="swiper-slide single-slide">
                                 <div class="brand-wrap">
-                                    <img src="frontend/assets/img/brand/brand-1.png" alt="brand">
+                                    <img src="{{asset('frontend/assets/img/brand/brand-1.png')}}" alt="brand">
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                     <div class="footer-widgets footer-about-widget">
                         <div class="footer-logo">
                             <a href="index.html">
-                                <img src="frontend/assets/img/logo/logo-white.png" alt="Logo">
+                                <img src="{{asset('frontend/assets/img/logo/logo-white.png')}}" alt="Logo">
                             </a>
                         </div>
                         <p>

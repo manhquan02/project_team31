@@ -24,9 +24,9 @@
                     <h3>{{$package->package_name}}</h3>
 
                     <div class="star-vote">
-                                <div class="star-style rating" style="background-image: url({{asset('images/5star1.png')}}); width:{{($star_rate/5*100)*1.16}}%"></div>
-                                <div class="star-style star_background" style="background-image: url({{asset('images/5star2.png')}});"></div>
-                            </div>
+                        <div class="star-style rating" style="background-image: url({{asset('images/5star1.png')}}); width:{{($star_rate/5*100)*1.16}}%"></div>
+                        <div class="star-style star_background" style="background-image: url({{asset('images/5star2.png')}});"></div>
+                    </div>
 
                     <span class="price">{{number_format($package->into_price,0,'.','.')}} VND</span>
                     <p>
@@ -74,10 +74,10 @@
                                                     <span>- {{date('d/m/Y', strtotime($item->created_at))}}</span>
                                                 </div>
                                                 <div class="star">
-                                                <div class="star-vote">
-                                <div class="star-style rating" style="background-image: url({{asset('images/5star1.png')}}); width:{{($item->star_package/5*100)*1.16}}%"></div>
-                                <div class="star-style star_background" style="background-image: url({{asset('images/5star2.png')}});"></div>
-                            </div>
+                                                    <div class="star-vote">
+                                                        <div class="star-style rating" style="background-image: url({{asset('images/5star1.png')}}); width:{{($item->star_package/5*100)*1.16}}%"></div>
+                                                        <div class="star-style star_background" style="background-image: url({{asset('images/5star2.png')}});"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <p>

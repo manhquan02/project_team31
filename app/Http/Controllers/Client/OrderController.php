@@ -798,6 +798,7 @@ class OrderController extends Controller
         }
         elseif($package->subject_id == 2){
             $coachs = User::role('coachbx')->get();
+            // dd($coachs);
         }else{
             $coachs = User::role('coach')->get();
         }
@@ -821,6 +822,7 @@ class OrderController extends Controller
             // foreach ($period as $dt) {
                 foreach ($coachs as $coach) {
                     $count = 0;
+                    // dd($coach);
                     foreach ($request->weekdayPt as $addWeekdayPt => $ca) {
                         // if ($dt->format("l") == $this->nameWeekday($addWeekdayPt)) {
                             $schedulesPt = Schedule::where('pt_id', '=', $coach->id)
@@ -846,7 +848,16 @@ class OrderController extends Controller
             // }
             }
             else{
-                $coachs = User::role('coach')->pluck('name','id');
+                
+                if($package->subject_id == 1){
+                    $coachs = User::role('coach')->pluck('name','id');
+                }
+                elseif($package->subject_id == 2){
+                    $coachs = User::role('coachbx')->pluck('name','id');
+                    // dd($coachs);
+                }else{
+                    $coachs = User::role('coach')->pluck('name','id');
+                }
                 $arrayPt = $coachs;
             }
             
