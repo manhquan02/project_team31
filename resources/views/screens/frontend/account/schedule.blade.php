@@ -57,12 +57,15 @@
                 <td class="text-center">{{$schedule->weekday_name}}</td>
                 {{-- <td class="text-center">tập bụng</td> --}}
                 <td class="text-center">
-                  @if($schedule->date >= date('Y-m-d'))
+                  {{-- {{dd($schedule->status)}} --}}
+                  @if(date('Y-m-d', strtotime($schedule->date)) > date('Y-m-d'))
                     <a href="{{route('account.reschedule', $schedule->id)}}" class="btn btn-primary">Đổi lịch</a>
                   @elseif(date('Y-m-d', strtotime($schedule->date)) <= date('Y-m-d') && $schedule->status == 0)
                     <p style="color: red; font-weight: bold;">Chưa điểm danh</p>
                   @elseif(date('Y-m-d', strtotime($schedule->date)) <= date('Y-m-d') && $schedule->status == 2)
                     <p style="color: green; font-weight: bold;">Đã điểm danh</p>
+                  @else
+                    <p style="color: rgb(62, 95, 211); font-weight: bold;">Chờ cập nhật</p>
                   @endif
                 </td>
               </tr>
