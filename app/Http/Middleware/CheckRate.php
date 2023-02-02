@@ -24,7 +24,7 @@ class CheckRate
        
         $order = Attendance::where('user_id', '=', Auth::id())->first();
         if($order != null){
-            $total_success = Attendance::where('user_id', '=', Auth::id())->where('status', 2)->count();
+            $total_success = Attendance::where('user_id', '=', Auth::id())->where('status', 1)->count();
             $total_session = Attendance::where('user_id', '=', Auth::id())->count();
             $orderId =  $order->order_id;
             $package_id = Order::where('id', $orderId)->first()->package_id;

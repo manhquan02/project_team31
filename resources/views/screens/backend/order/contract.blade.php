@@ -34,7 +34,7 @@
         @endforeach
         <b>Loại gói tập</b>
         <p>Số buổi tập có huấn luyện viên : {{$order->package->total_session_pt}} buổi</p>
-        <p>Giá : {{number_format($order->package->into_price,0,'.','.')}}vnđ / Buổi</p>
+        <p>Giá gói tập : {{number_format($order->package->into_price,0,'.','.')}}vnđ</p>
         <p>Gói tập : {{$order->package->package_name}}</p>
         <p>Có hiệu lực kể từ ngày : {{date('d/m/Y', strtotime($order->date_start))}}</p>
         <b>Quyền hạn và nghĩa vụ của khách hàng</b>
