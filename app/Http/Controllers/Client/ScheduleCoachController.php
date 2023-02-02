@@ -72,9 +72,9 @@ class ScheduleCoachController extends Controller
         
         if ($request->attendance) {
             foreach ($attendance_on as  $item) {
-                $item->status = 2;
+                $item->status = 1;
                 $item->save();
-                $schedule_pt->status = 2;
+                $schedule_pt->status = 1;
                 $schedule_pt->save();
             }
 
@@ -82,9 +82,9 @@ class ScheduleCoachController extends Controller
                 foreach ($attendance_on as  $item) {
                     
                     if ($key == $item->id && $change == 'on') {
-                        $item->status = 2;
+                        $item->status = 1;
                         $item->save();
-                        $schedule_pt->status = 2;
+                        $schedule_pt->status = 1;
                         $schedule_pt->save();
                     }
                 }
@@ -92,11 +92,11 @@ class ScheduleCoachController extends Controller
         }
         else{
             foreach ($attendance_on as  $item) {
-                $item->status = 1;
+                $item->status = 0;
                 $item->save();
                 
             }
-            $schedule_pt->status = 1;
+            $schedule_pt->status = 0;
                 $schedule_pt->save();
         }
         return redirect()->back()->with('success', 'Điểm danh thành công');
