@@ -45,7 +45,33 @@
 
   <div class="col-md-12 order-md-1">
     <h4 class="mb-3">Hóa đơn gói tập</h4>
-    @include('screens.backend._alert')
+    @if(session('success'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Well done: </strong> {!! session('success') !!}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    @endif
+
+    @if(session('failed'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>Warning: </strong> {!! session('failed') !!}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if($errors->all())
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>Warning: </strong> Vui lòng kiểm tra lại. Lưu ý các trường không được để chống
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if (session('msg'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>Error: </strong> {{ session('msg') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     @if($package->type_package == 1)
     <form action="{{route('order.postOrder', $package->id)}}" method="POST" enctype="multipart/form-data" id="wizard">
       @csrf

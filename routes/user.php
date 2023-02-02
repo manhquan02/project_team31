@@ -126,7 +126,8 @@ Route::prefix('payment/')->name('payment.')->group(function () {
 
 // });
 
-Route::prefix('order/')->middleware('checkBuyPackage','auth')->name('order.')->group(function () {
+// 'checkBuyPackage'
+Route::prefix('order/')->middleware('checkAdminBuyPackage' ,'auth')->name('order.')->group(function () {
     Route::get('create/{id}', [ClientOrderController::class, 'index'])->name('index');
     Route::post('postOrder/{id}', [ClientOrderController::class, 'store'])->name('postOrder');
     Route::get('checkPayment', [ClientOrderController::class, 'returnUrl'])->name('returnUrl');

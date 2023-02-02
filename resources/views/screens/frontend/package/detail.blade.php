@@ -4,6 +4,13 @@
 
 <div class="product-area pt-130 pb-130">
     <div class="container">
+        @if(session('msg'))
+            <div class="row mb-50">
+                <div style="color: black" class="alert alert-danger alert-dismissible fade show">
+                    <strong>Error: </strong> {{ session('msg') }}
+                </div>
+            </div>
+        @endif
         <div class="row mb-50">
 
             <div class="col-md-12 col-lg-9 col-xl-6 order--1">

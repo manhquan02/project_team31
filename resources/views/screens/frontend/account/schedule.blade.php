@@ -59,9 +59,9 @@
                 <td class="text-center">
                   @if($schedule->date >= date('Y-m-d'))
                     <a href="{{route('account.reschedule', $schedule->id)}}" class="btn btn-primary">Đổi lịch</a>
-                  @elseif($schedule->date <= date('Y-m-d') && $schedule->status == 0)
+                  @elseif(date('Y-m-d', strtotime($schedule->date)) <= date('Y-m-d') && $schedule->status == 0)
                     <p style="color: red; font-weight: bold;">Chưa điểm danh</p>
-                  @elseif($schedule->date <= date('Y-m-d') && $schedule->status == 1)
+                  @elseif(date('Y-m-d', strtotime($schedule->date)) <= date('Y-m-d') && $schedule->status == 2)
                     <p style="color: green; font-weight: bold;">Đã điểm danh</p>
                   @endif
                 </td>
