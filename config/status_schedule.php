@@ -1,7 +1,6 @@
 <?php
 return [
-    0=>'Sắp tới',
-    1=>'Vắng mặt',
-    2=>'Có mặt'
+    0=>'Chưa điểm danh',
+    1=>'Đã điểm danh',
 ]
 ?>

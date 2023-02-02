@@ -44,11 +44,24 @@
                     <td class="text-center">{{$item->time->start_time}}</td>
                     <td class="text-center">{{$item->time->end_time}}</td>
                     <td class="view_status text-center">
-                        <span class="label label-inline {{$item->status == 1 ? 'label-light-success': 'label-light-danger'}} font-weight-bold">{{config('status_schedule.'.$item->status)}}</span>
+                    @if($item->status == 0)
+                        <span style="color: blue;"  class="label label-inline label-light-primary font-weight-bold"> 
+                          Chưa điểm danh
+                        </span>
+
+                    @elseif($item->status == 1)
+                      <span style="color: green;" class="label label-inline label-light-success font-weight-bold"> 
+                        Đã điểm danh
+                      </span>
+                    @else
+                          <span class="label label-inline font-weight-bold">
+                           N/A
+                          </span>
+                    @endif
                     </td>
                     <td class="text-center">
                         <div class="form-check form-switch text-center" style="padding-left: 100px;">
-                            <input @if(date('d-m-Y', strtotime($item->date)) != date('d-m-Y')) disabled @endif style="font-size: 23px" name="attendance[{{$item->id}}]" class="form-check-input" type="checkbox" @if($item->status == 2) checked @endif>
+                            <input @if(date('d-m-Y', strtotime($item->date)) != date('d-m-Y')) disabled @endif style="font-size: 23px" name="attendance[{{$item->id}}]" class="form-check-input" type="checkbox" @if($item->status == 1) checked @endif>
                         </div>
                     </td>
                 </tr>
