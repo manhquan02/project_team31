@@ -149,9 +149,10 @@
                         <a href="{{route('account.schedule')}}" style="background-color: #eb5b40; border-radius: 30px; padding: 15px 20px 15px 20px;" class="btn btn-primary">Tài khoản của tôi</a>
                     @endhasrole
 
-                    @hasrole('coach')
+                    @hasrole('coach|coachbx')
                         <a href="{{route('accountPt.profile')}}" style="background-color: #eb5b40; border-radius: 30px; padding: 15px 20px 15px 20px;" class="btn btn-primary">Tài khoản của tôi</a>
                     @endhasrole
+                    
 
                     @hasrole('admin')
                         <a href="{{route('admin.index')}}" style="background-color: #eb5b40; border-radius: 30px; padding: 15px 20px 15px 20px;" class="btn btn-primary">Đến trang quản trị</a>

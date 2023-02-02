@@ -17,12 +17,14 @@ use App\Models\Weekday;
 use App\Http\Utility\PackageUtility;
 use App\Models\TrainingPackage;
 use App\Http\Services\UploadImgService;
+use App\Mail\SendMailOrder;
 use DateInterval;
 use DatePeriod;
 use DateTime;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -31,12 +33,19 @@ class OrderController extends Controller
         $arrayWeekdays = PackageUtility::$arrayWeekday;
         $package = Package::find($id);
         $times = Time::all();
-        $coachs = User::role('coach')->get();
+        if($package->subject_id == 1){
+            $coachs = User::role('coach')->get();
+        }
+        elseif($package->subject_id == 2){
+            $coachs = User::role('coachbx')->get();
+        }else{
+            $coachs = User::role('coach')->get();
+        }
         return view('screens.frontend.order.index',[
                                                     'arrayWeekdays' => $arrayWeekdays, 
                                                     'times' => $times, 
                                                     'coachs' => $coachs,
-                                                    'package' =>$package
+                                                    'package' =>$package,
                                                 ]);
     }
 
@@ -374,6 +383,18 @@ class OrderController extends Controller
                                 }
                             }
 
+                            $data=[
+                                'title' => 'Mua gói tập thành công',
+                                'content' => 'Cảm ơn bạn đã tin tưởng GYM T&T'
+                            ];
+                            Mail::to("legend.cay@gmail.com")->send(new SendMailOrder($data));
+    
+                            $data=[
+                                'title' => 'Hội viên mới đã mua hàng và bạn là huấn luyện viên',
+                                'content' => 'Chào PT, bạn có lịch tập cho hội viên mới vui lòng truy cập tài khoản xem cụ thể'
+                            ];
+                            Mail::to("legend.cay@gmail.com")->send(new SendMailOrder($data));
+
                             // tạo lịch trình pt và điểm danh hội viên
                             // return back()->with('success', 'Mua hang thanh cong');
                         } else {
@@ -505,49 +526,60 @@ class OrderController extends Controller
                         $order->status = 1;
                         $order->save();
                         $order = Order::find($order->id);
-                            $contract = new Contract();
-                            $attendance = new Attendance();
-                            $schedule = new Schedule();
-                            $arrayWeekdays = PackageUtility::$arrayWeekday;
-                            $trainings = $order->trainings;
-                            // $weekday 
+                        $contract = new Contract();
+                        $attendance = new Attendance();
+                        $schedule = new Schedule();
+                        $arrayWeekdays = PackageUtility::$arrayWeekday;
+                        $trainings = $order->trainings;
+                        // $weekday 
 
-                            $begin = new DateTime($order->date_start);
-                            $end = new DateTime($order->date_end);
-                            $interval = DateInterval::createFromDateString('1 day');
-                            $period = new DatePeriod($begin, $interval, $end);
+                        $begin = new DateTime($order->date_start);
+                        $end = new DateTime($order->date_end);
+                        $interval = DateInterval::createFromDateString('1 day');
+                        $period = new DatePeriod($begin, $interval, $end);
+                        
+                        foreach ($period as $dt) {
                             
-                            foreach ($period as $dt) {
-                                
-                                foreach($trainings as $training){
-                                    // dd($training->id);
-                                    if($arrayWeekdays[$training->weekday_id] == $dt->format("l")){
-                                        $schedule = $schedule->create([
-                                            'pt_id' => $order->pt_id,
-                                            'order_id' => $order->id,
-                                            'time_id' => $training->time_id,
-                                            'weekday_name' => $dt->format("l"),
-                                            'date' => $dt->format("Y-m-d"),
-                                            'status' => 0,
-                                        ]);
+                            foreach($trainings as $training){
+                                // dd($training->id);
+                                if($arrayWeekdays[$training->weekday_id] == $dt->format("l")){
+                                    $schedule = $schedule->create([
+                                        'pt_id' => $order->pt_id,
+                                        'order_id' => $order->id,
+                                        'time_id' => $training->time_id,
+                                        'weekday_name' => $dt->format("l"),
+                                        'date' => $dt->format("Y-m-d"),
+                                        'status' => 0,
+                                    ]);
 
-                                                            
-                                        $attendance->create([
-                                            'user_id' => Auth::id(),
-                                            'order_id' => $order->id,
-                                            'schedule_id' =>  $schedule->id,
-                                            'time_id' => $training->time_id,
-                                            'weekday_name' => $dt->format("l"),
-                                            'pt_id' => $order->pt_id,
-                                            'date' => $dt->format("Y-m-d"),
-                                            'status' => 0,
-                                            
-                                        ]);
+                                                        
+                                    $attendance->create([
+                                        'user_id' => Auth::id(),
+                                        'order_id' => $order->id,
+                                        'schedule_id' =>  $schedule->id,
+                                        'time_id' => $training->time_id,
+                                        'weekday_name' => $dt->format("l"),
+                                        'pt_id' => $order->pt_id,
+                                        'date' => $dt->format("Y-m-d"),
+                                        'status' => 0,
                                         
-                                    }
-
+                                    ]);
+                                    
                                 }
+
                             }
+                        }
+                        $data=[
+                            'title' => 'Mua gói tập thành công',
+                            'content' => 'Cảm ơn bạn đã tin tưởng GYM T&T'
+                        ];
+                        Mail::to("legend.cay@gmail.com")->send(new SendMailOrder($data));
+
+                        $data=[
+                            'title' => 'Hội viên mới đã mua hàng và bạn là huấn luyện viên',
+                            'content' => 'Chào PT, bạn có lịch tập cho hội viên mới vui lòng truy cập tài khoản xem cụ thể'
+                        ];
+                        Mail::to("legend.cay@gmail.com")->send(new SendMailOrder($data));
                     }
                 } else {
                     if ($order != null) {
@@ -760,9 +792,19 @@ class OrderController extends Controller
                 'msg' => 'Vui lòng không bỏ trống'
             ]); 
         }
-        $coachs = User::role('coach')->get(); 
-        $weekdayPt = $request->weekdayPt;
         $package = Package::find($request->package_id);
+        if($package->subject_id == 1){
+            $coachs = User::role('coach')->get();
+        }
+        elseif($package->subject_id == 2){
+            $coachs = User::role('coachbx')->get();
+            // dd($coachs);
+        }else{
+            $coachs = User::role('coach')->get();
+        }
+        // $coachs = User::role('coach')->get(); 
+        $weekdayPt = $request->weekdayPt;
+        
         $total_session_pt = $package->total_session_pt;
         $week_session_pt = $package->week_session_pt;
         $total_session = $total_session_pt/$week_session_pt*7;
@@ -780,6 +822,7 @@ class OrderController extends Controller
             // foreach ($period as $dt) {
                 foreach ($coachs as $coach) {
                     $count = 0;
+                    // dd($coach);
                     foreach ($request->weekdayPt as $addWeekdayPt => $ca) {
                         // if ($dt->format("l") == $this->nameWeekday($addWeekdayPt)) {
                             $schedulesPt = Schedule::where('pt_id', '=', $coach->id)
@@ -805,7 +848,16 @@ class OrderController extends Controller
             // }
             }
             else{
-                $coachs = User::role('coach')->pluck('name','id');
+                
+                if($package->subject_id == 1){
+                    $coachs = User::role('coach')->pluck('name','id');
+                }
+                elseif($package->subject_id == 2){
+                    $coachs = User::role('coachbx')->pluck('name','id');
+                    // dd($coachs);
+                }else{
+                    $coachs = User::role('coach')->pluck('name','id');
+                }
                 $arrayPt = $coachs;
             }
             

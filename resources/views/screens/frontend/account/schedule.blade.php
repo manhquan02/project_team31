@@ -11,15 +11,15 @@
     </div>
 </div>
 <div style="padding-bottom: 0px;" class="card-body">
-    <form>
+    <form action="" method="GET">
         <div class="row">
           <div class="col mx-sm-3">
             <label for="">Date start</label>
-            <input type="date" class="form-control" placeholder="First name">
+            <input type="date" name="start_date" class="form-control" placeholder="First name">
           </div>
           <div class="col mx-sm-3">
             <label for="">Date end</label>
-            <input type="date" class="form-control" placeholder="Last name">
+            <input type="date" class="form-control" name="end_date" placeholder="Last name">
           </div>
           <div class="col mx-sm-3">
             <label for="">Submit</label>
@@ -57,7 +57,13 @@
                 <td class="text-center">{{$schedule->weekday_name}}</td>
                 {{-- <td class="text-center">tập bụng</td> --}}
                 <td class="text-center">
-                  <a href="{{route('account.reschedule', $schedule->id)}}" class="btn btn-primary">Đổi lịch</a>
+                  @if($schedule->date >= date('Y-m-d'))
+                    <a href="{{route('account.reschedule', $schedule->id)}}" class="btn btn-primary">Đổi lịch</a>
+                  @elseif($schedule->date <= date('Y-m-d') && $schedule->status == 0)
+                    <p style="color: red; font-weight: bold;">Chưa điểm danh</p>
+                  @elseif($schedule->date <= date('Y-m-d') && $schedule->status == 1)
+                    <p style="color: green; font-weight: bold;">Đã điểm danh</p>
+                  @endif
                 </td>
               </tr>
             @endforeach

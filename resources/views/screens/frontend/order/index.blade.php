@@ -16,7 +16,7 @@
       <div class=" col-lg-4">
         <div style="border-right: 2px solid #e63a34;" class="pricing-title">
           <h3>{{$package->package_name}}</h3>
-          <span>{{number_format($package->into_price, 0, '.','.')}} <sup>đ</sup></span>
+          <span style="font-size: 55px">{{number_format($package->into_price, 0, '.','.')}} <sup>đ</sup></span>
           
         </div>
       </div>
@@ -161,7 +161,7 @@
                         @foreach ($times as $time)
                         <td class="active">
                           <label>
-                            <input id="check_weekday_pt" onclick="checkWeekdayPt({{$key}}, {{$time->id}})" type="radio" class="option-input radio {{$weekday}}_pt" name="weekday[{{$key}}]" value="{{$time->id}}" />
+                            <input id="check_weekday_pt" onclick="checkWeekdayPt({{$key}}, {{$time->id}})" type="radio" class="option-input radio {{$weekday}}_pt" name="weekday[{{$key}}]" value="{{$time->id}}" disabled/>
                           </label>
                         </td>
                         @endforeach
@@ -228,7 +228,7 @@
 
           <div style="margin-top: 20px; width: 30%;" class="list-group-item d-flex justify-content-between">
             <span>Tổng tiền</span>
-            <strong id="total_money">{{$package->into_price*$package->total_session_pt}}</strong>
+            <strong id="total_money">{{$package->into_price}}</strong>
           </div>
 
           <div style="margin-top: 20px; width: 30%; border: none" class="list-group-item d-flex justify-content-between">
@@ -338,16 +338,17 @@
 <script>
   let weekdayPt = {}
   function checkWeekday(weekday_id){
-    console.log(weekday_id);
     checkbox_weekday = document.getElementById(weekday_id);
-    console.log(checkbox_weekday);
-    console.log(checkbox_weekday.checked);
     let value = checkbox_weekday.value
     if(checkbox_weekday.checked == true){
       weekdayPt[value] = null
+      console.log($(checkbox_weekday).closest('tr').find('.active input'))
+      // return
+      $(checkbox_weekday).closest('tr').find('.active input').prop('disabled', false)
       // checkbox_weekday.style.background-color=#959595;
     } else {
       delete weekdayPt[value]
+      $(checkbox_weekday).closest('tr').find('.active input').prop('disabled', true)
       console.log("checked false");
     }
     console.log(weekdayPt)

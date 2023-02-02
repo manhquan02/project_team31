@@ -100,12 +100,12 @@
                     <li class="nav-item">
                       <div style="color: #16181b;" class="nav-link navbar-profile-li">|</div>
                     </li>
-                    <li class="nav-item active">
+                    {{-- <li class="nav-item active">
                       <a class="nav-link navbar-profile-li" href="#">Chỉ số cơ thể </a>
-                    </li>
-                    <li class="nav-item">
+                    </li> --}}
+                    {{-- <li class="nav-item">
                       <div style="color: #16181b;" class="nav-link navbar-profile-li">|</div>
-                    </li>
+                    </li> --}}
                     <li class="nav-item active">
                       <a class="nav-link navbar-profile-li" href="{{route('account.historyPackage')}}">Gói tập đã đăng ký </a>
                     </li>
@@ -113,6 +113,33 @@
                 </div>
                 @endhasrole
                 @hasrole('coach')
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link navbar-profile-li" href="{{route('accountPt.profile')}}">Thông tin cá nhân</a>
+                    </li>
+                    <li class="nav-item">
+                      <div style="color: #16181b;" class="nav-link navbar-profile-li">|</div>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link navbar-profile-li" href="{{route('accountPt.scheduleCoach')}}">Lịch dạy </a>
+                    </li>
+                    <li class="nav-item">
+                      <div style="color: #16181b;" class="nav-link navbar-profile-li">|</div>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link navbar-profile-li" href="#">Chỉ số cơ thể </a>
+                    </li>
+                    <li class="nav-item">
+                      <div style="color: #16181b;" class="nav-link navbar-profile-li">|</div>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link navbar-profile-li" href="{{route('accountPt.listMember')}}">Danh sách hội viên </a>
+                    </li>
+                  </ul>
+                </div>
+                @endhasrole
+                @hasrole('coachbx')
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">

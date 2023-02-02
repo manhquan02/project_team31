@@ -24,8 +24,9 @@ class ResultContractController extends Controller
         $result->height = $request->height;
         $result->weight = $request->weight;
         // dd($request->weight/($request->height*$request->height));
-        $result->bmi = $request->weight/($request->height/100)*($request->height/100);
-        $result->comment = $this->test_bmi($request->weight/($request->height/100)*($request->height/100));
+        $result->bmi = $request->weight/(($request->height/100)*($request->height/100));
+        // dd($request->height/100);
+        $result->comment = $this->test_bmi($request->weight/(($request->height/100)*($request->height/100)));
         $result->save();
 
         return back()->with('msg','Cập nhật thành công');
