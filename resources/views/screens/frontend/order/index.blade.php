@@ -129,7 +129,7 @@
         <div class="content-wrapper">
           <h4 class="section-heading">Lịch trình tập </h4>
           <div>
-            Chọn {{$package->week_session_pt}} buổi tập PT / tuần 
+            <span class="text-danger"><strong>Bạn cần chọn {{$package->week_session_pt}} buổi tập PT / tuần </strong></span><br>
           </div>
           <div>
             @error('weekday')
@@ -231,12 +231,11 @@
             <strong id="total_money">{{$package->into_price}}</strong>
           </div>
 
-          <div style="margin-top: 20px; width: 30%; border: none" class="list-group-item d-flex justify-content-between">
+          <div style="margin-top: 20px; width: 60%; border: none" class="list-group-item d-flex justify-content-between">
             <button name="payment_vnp" value="1" class="btn btn-secondary btn-md waves-effect m-0" type="submit">Thanh toán VNPAY</button>
+            <button name="payment_momo" value="1" id="redirect" class="btn btn-warning">Thanh toán MOMO</button>
           </div>
-
-          <button name="payment_momo" value="1" id="redirect" class="btn btn-warning">Thanh toán MOMO</button>
-
+           
         </div>
       </section>
 
@@ -336,6 +335,7 @@
 @section('js')
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+
   let weekdayPt = {}
   function checkWeekday(weekday_id){
     checkbox_weekday = document.getElementById(weekday_id);
