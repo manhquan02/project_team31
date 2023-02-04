@@ -19,51 +19,47 @@
 			</div>
 		</div>
 	</section>
-	<!--    breadcrumb-area end    -->
+	
 
-	<!-- pricing-area start -->
-	<div class="pricing-area bg-off-white pt-130 pb-100">
-		<div class="container">
+
+		<div class="container" style="margin-top: 12px;">
 			<div class="row justify-content-center align-items-center">
-				<div class="col-xl-12">
+				
 					<div class="section-title-2 bar-theme-color text-center mb-35">
 						<h3>
-							Top 3 Gói Tập Được Mua Nhiều Nhất
+							Top 3 Gói Tập Được Ưa Thích
 						</h3>
 					</div>
-				</div>
+			
 			</div>
 			<div class="row justify-content-center">
-				@foreach($popular as $i)
+				@foreach($top as $i)
 				<div class="col-lg-4 col-md-7">
 					<div class="pricing-wrap mt-30 mb-30">
-						<h3 style="color: white;">{{$i->package_name}}</h3>
+						<h3 style="color: white;">{{$i["item"]->package_name}}</h3>
 						<p style="color: white;">
-							{{$i->short_description}}
+							{{$i["item"]->short_description}}
 						</p>
-						<span class="price">{{number_format($i->into_price,0,'.','.')}} VNĐ</span>
-						<a href="{{route('package_client.detail', $i->id)}}" class="order-btn">
+						<span class="price">{{number_format($i["item"]->into_price,0,'.','.')}} VNĐ</span>
+						<a href="{{route('package_client.detail', $i["item"]->id)}}" class="order-btn">
 							Xem gói tập <i class="fas fa-angle-double-right"></i>
 						</a>
 						<div class="shape">
-							<img src="{{asset($i->avatar)}}" alt="shape">
+							<img src="{{asset($i["item"]->avatar)}}" alt="shape">
 						</div>
 					</div>
 				</div>
 				@endforeach
 			</div>
 		</div>
-	</div>
-	<!-- pricing-area end -->
-
-	<!-- pricing-area-2 start -->
-	<div class="pricing-area-2 pt-130 pb-100">
+	
+	
 		<div class="container">
 			<div class="row justify-content-center align-items-center">
 				<div class="col-xl-12">
 					<div class="section-title-2 bar-theme-color text-center mb-35">
 						<h3>
-							Gói Tập
+							Gói Tập Đăng Ký Tập Ngay
 						</h3>
 						{{-- <span>Pricing</span> --}}
 					</div>
@@ -112,10 +108,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- pricing-area-2 end -->
-
-
+	
 </main>
 
 @endsection

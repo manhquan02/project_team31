@@ -15,27 +15,36 @@ class CoachController extends Controller
         $roles = Role::all();
         $coachs = User::role('coach')->get();
 
-        $rate = Rate::orderBy('star_pt', 'desc')->limit(3)->get();
         $top = [];
-        foreach ($rate as $item) {
-            foreach ($coachs as $item_c) {
-                if ($item->pt_id == $item_c->id) {
-                    $top[] = $item_c;
-                }
-            }
+
+        foreach ($coachs as $item) {
+            $avg_star = Rate::where('pt_id', $item->id)->avg('star_pt');
+            $avg = $avg_star == null ? 5 : $avg_star;
+            $top[] = [
+                "avg_star" => $avg,
+                "item" => $item
+            ];
         }
-        if(count($top) < 3) {
-            $top = User::role('coach')->limit(3)->get();
+        rsort($top);
+       
+       $count = count($top);
+        if ($count > 3) {
+            for ($i = 3; $i < $count; $i++) {
+                unset($top[$i]);
+            }
         }
         
         return view('screens.frontend.coach.index', compact('coachs', 'top'));
     }
 
-    public function detail($id){
+    public function detail($id)
+    {
         $coach = User::where('id', $id)->first();
         $rates = Rate::where('pt_id', $id)->orderBy('star_pt', 'desc')->limit(6)->get();
-        if($coach != null){
-            return view('screens.frontend.coach.detail', compact('coach','rates'));
+        $avg_star = Rate::where('pt_id', $id)->avg('star_pt');
+        $avg_star = $avg_star == null ? 5 : $avg_star;
+        if ($coach != null) {
+            return view('screens.frontend.coach.detail', compact('coach', 'rates', 'avg_star'));
         }
     }
 }

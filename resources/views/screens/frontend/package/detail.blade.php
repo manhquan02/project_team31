@@ -2,7 +2,7 @@
 @section('title', 'Trang chủ')
 @section('content')
 
-<div class="product-area pt-130 pb-130">
+
     <div class="container">
         <div class="row mb-50">
 
@@ -65,6 +65,7 @@
                             <div class="stars container bg-light px-3 py-2">
                                 <div class="col-sm-8 col-md-10 col-11 position-relative" style="left:30px">
                                     <div class="text-justify darker mt-4 float-right w-full">
+                                        @if(count($rates) > 0)
                                         @foreach($rates as $item)
                                         <div>
                                             <img src="{{asset($item->user->avatar)}}" alt="" class="rounded-circle" width="40" height="40" />
@@ -86,7 +87,11 @@
                                             <br>
                                         </div>
                                         @endforeach
-
+                                        @else
+                                        <div>
+                                            <span>Chưa có đánh giá nào</span>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

@@ -103,7 +103,7 @@
                         <td>{{$item->user->name}}</td>
                         <td>
                             <div class="star-vote">
-                                <div class="star-style rating" style="background-image: url({{asset('images/5star1.png')}}); width:{{($item->star_package/5*100)*1.16}}%"></div>
+                                <div class="star-style rating" style="background-image: url({{asset('images/5star1.png')}}); width:{{($item->star_pt/5*100)*1.16}}%"></div>
                                 <div class="star-style star_background" style="background-image: url({{asset('images/5star2.png')}});"></div>
                             </div>
                         </td>

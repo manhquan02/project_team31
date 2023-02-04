@@ -82,11 +82,11 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="team-wrap-4 mb-30">
                         <div class="team-img">
-                            <img src="{{asset($item->avatar)}}" alt="img">
+                            <img src="{{asset($item["item"]->avatar)}}" alt="img">
                         </div>
                         <div class="team-content">
-                            <h3><a href="{{route('training.detail',$item->id)}}">{{$item->name}}</a></h3>
-                            <span>MÃ THÀNH VIÊN: @if($item->id < 10) {{'00000'.$item->id}} @elseif($item->id < 100) {{'0000'.$item->id}} @elseif($item->id < 1000) {{'000'.$item->id}} @elseif($item->id < 10000) {{'00'.$item->id}} @elseif($item->id < 100000) {{'0'.$item->id}} @else {{$item->id}} @endif</span>
+                            <h3><a href="{{route('training.detail',$item["item"]->id)}}">{{$item["item"]->name}}</a></h3>
+                            <span>MÃ THÀNH VIÊN: @if($item["item"]->id < 10) {{'00000'.$item["item"]->id}} @elseif($item["item"]->id < 100) {{'0000'.$item["item"]->id}} @elseif($item["item"]->id < 1000) {{'000'.$item["item"]->id}} @elseif($item["item"]->id < 10000) {{'00'.$item["item"]->id}} @elseif($item["item"]->id < 100000) {{'0'.$item["item"]->id}} @else {{$item["item"]->id}} @endif</span>
                                                     <div class="team-social-link">
                                                         <ul>
                                                             <li>

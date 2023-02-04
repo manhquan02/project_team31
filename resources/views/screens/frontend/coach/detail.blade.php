@@ -30,7 +30,12 @@
                 </div>
                 <div class="col-xl-6 col-lg-5">
                     <div class="trainer-details-content">
-                        <h3>{{$coach->name}}</h3>
+                        <h3>{{$coach->name}}
+                        </h3>
+                        <div class="star-vote">
+                        <div class="star-style rating" style="background-image: url({{asset('images/5star1.png')}}); width:{{($avg_star/5*100)*1.16}}%"></div>
+                        <div class="star-style star_background" style="background-image: url({{asset('images/5star2.png')}});"></div>
+                    </div>
                         <div class="trainer-info mt-50 mb-40">
                             <div class="info-icon">
                                 <i class="flaticon-email"></i>
@@ -46,7 +51,7 @@
                             </div>
                             <div class="info-content">
                                 <h5>Số điện thoại</h5>
-                                <span class="heading-color">{{$coach->phone}}</span>
+                                <span class="heading-color">+84 {{$coach->phone}}</span>
                             </div>
                         </div>
                         <div class="trainer-info">
