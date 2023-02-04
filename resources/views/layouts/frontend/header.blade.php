@@ -3,7 +3,7 @@
         <div class="row align-items-center justify-content-xl-center">
             <div class="col-xl-2 col-lg-3 col-md-3 col-6">
                 <div class="logo-area">
-                    <a href="{{route('home')}}"><img src="{{asset('frontend/assets/img/logo/logo-white.png')}}" alt="Logo"></a>
+                    <a href="{{route('home')}}"><img src="{{asset('frontend/assets/img/logo/favicon.png')}}" alt="Logo"><strong style="color:white; font-size:30px;margin-top: -150px">GYM T&T</strong ></a>
                 </div>
             </div>
             <div class="col-xl-8 d-xl-flex justify-content-center align-items-center d-none">
@@ -17,7 +17,6 @@
                             <ul class="sub-menu">
                                 <li><a href="#">Thông Tin</a></li>
                                 <li><a href="#">Tính Chỉ Số IBM</a></li>
-
                             </ul>
                         </li>
                         <li class="has">
