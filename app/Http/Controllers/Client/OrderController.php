@@ -330,13 +330,7 @@ class OrderController extends Controller
                                 $order->status=1;
                                 $returnData['RspCode'] = '00';
                                 $returnData['Message'] = 'Giao dịch thành công';
-                            } else {
-
-                                $returnData['RspCode'] = '24';
-                                $returnData['Message'] = 'Giao dịch không thành công do: Khách hàng hủy giao dịch';
-                                $order->status=0;
-                            }
-                            $order->save();
+                                $order->save();
                             // dd($order->id);
                             $order = Order::find($order->id);
                             $contract = new Contract();
@@ -394,6 +388,16 @@ class OrderController extends Controller
                                 'content' => 'Chào PT, bạn có lịch tập cho hội viên mới vui lòng truy cập tài khoản xem cụ thể'
                             ];
                             Mail::to("legend.cay@gmail.com")->send(new SendMailOrder($data));
+
+
+                            } else {
+
+                                $returnData['RspCode'] = '24';
+                                $returnData['Message'] = 'Giao dịch không thành công do: Khách hàng hủy giao dịch';
+                                $order->status=0;
+                                $order->save();
+                            }
+                            
 
                             // tạo lịch trình pt và điểm danh hội viên
                             // return back()->with('success', 'Mua hang thanh cong');

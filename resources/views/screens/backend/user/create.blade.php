@@ -46,6 +46,17 @@
             </div>
 
             <div class="form-group row">
+                <label for="example-tel-input" class="col-2 col-form-label">Mật khẩu</label>
+                <div class="col-10">
+                    <input class="form-control @error('password') is-invalid @enderror" name="password" type="password" value="{{ old('password') }}" placeholder="Mật khẩu"/>
+                    @error('password')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
+
+            <div class="form-group row">
                 <label class="col-lg-2 col-form-label">Giới tính</label>
                 <div class="col-xl-8 col-lg-8 col-sm-12 col-md-12 d-flex align-items-center">
                     <select class="form-control" name="gender">

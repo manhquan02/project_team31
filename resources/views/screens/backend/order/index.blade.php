@@ -129,7 +129,7 @@
                         <ul class="navi flex-column navi-hover py-2">
                             <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Chọn loại gói tập</li>
                             <li style="width: 100%;" class="navi-item">
-                                <a href="{{route('admin.order.add')}}" class="navi-link">
+                                <a href="{{route('admin.order.createSimple')}}" class="navi-link">
                                     <span class="navi-icon">
                                         <i class="fa-solid fa-dumbbell"></i>
                                     </span>
@@ -137,7 +137,7 @@
                                 </a>
                             </li>
                             <li style="width: 100%;" class="navi-item">
-                                <a href="{{route('admin.order.add')}}" class="navi-link">
+                                <a href="{{route('admin.order.createComplex')}}" class="navi-link">
                                     <span class="navi-icon">
                                         <i class="fa-solid fa-dumbbell"></i>
                                     </span>

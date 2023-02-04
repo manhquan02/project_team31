@@ -62,7 +62,7 @@
                     <a href="{{route('account.reschedule', $schedule->id)}}" class="btn btn-primary">Đổi lịch</a>
                   @elseif(date('Y-m-d', strtotime($schedule->date)) <= date('Y-m-d') && $schedule->status == 0)
                     <p style="color: red; font-weight: bold;">Chưa điểm danh</p>
-                  @elseif(date('Y-m-d', strtotime($schedule->date)) <= date('Y-m-d') && $schedule->status == 2)
+                  @elseif(date('Y-m-d', strtotime($schedule->date)) <= date('Y-m-d') && $schedule->status == 1)
                     <p style="color: green; font-weight: bold;">Đã điểm danh</p>
                   @else
                     <p style="color: rgb(62, 95, 211); font-weight: bold;">Chờ cập nhật</p>

@@ -103,7 +103,7 @@
                     <label class="col-2 col-form-label">Thời gian bắt đầu</label>
                     <div class="col-10">
                         <div class="input-group date">
-                            <input @if(old('start_date')) value="{{old('start_date')}}" @endif type="date"
+                            <input min="{{date ( 'Y-m-d' , strtotime ( date('Y-m-d') ) ) }}" @if(old('start_date')) value="{{old('start_date')}}" @endif type="date"
                                    class="form-control" name="start_date" placeholder="Select time"
                                    id="kt_datetimepicker_7"/>
                             <div class="input-group-append">
@@ -124,7 +124,7 @@
                     <label class="col-2 col-form-label">Thời gian kết thúc</label>
                     <div class="col-10">
                         <div class="input-group date">
-                            <input @if(old('end_date')) value="{{old('end_date')}}" @endif" type="date"
+                            <input min="{{date ( 'Y-m-d' , strtotime ( date('Y-m-d') ) ) }}" @if(old('end_date')) value="{{old('end_date')}}" @endif" type="date"
                             class="form-control" name="end_date"/>
                             <div class="input-group-append">
                     <span class="input-group-text">
