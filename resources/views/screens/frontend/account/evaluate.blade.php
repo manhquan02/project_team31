@@ -3,7 +3,7 @@
 <div class="card-header bg-white border-0">
   <div class="row align-items-center">
     <div class="col-8">
-      <h3 style="font-size: 20px; font-weight: 900" class="mb-0">Đánh giá gói tập và huấn luyện viên</h3>
+      <h3 style="font-size: 20px; font-weight: 900" class="mb-0">Hãy cho chúng tôi biết về mức độ hài lòng của bạn</h3>
     </div>
     <div class="col-4 text-right">
 
@@ -29,7 +29,7 @@
   </div>
   <br>
   <div class="form-group">
-    <textarea id="note_pack" class="form-control" name="" id="" style="height: 120px;"></textarea>
+    <textarea placeholder="Ý kiến của bạn về gói tập này" id="note_pack" class="form-control" name="" id="" style="height: 120px;"></textarea>
   </div>
 
 
@@ -51,7 +51,7 @@
   </div>
   <br>
   <div class="form-group">
-    <textarea id="note_pt" class="form-control" name="" id="" style="height: 120px;"></textarea>
+    <textarea placeholder="Ý kiến của bạn về huấn luyện viên" id="note_pt" class="form-control" name="" id="" style="height: 120px;"></textarea>
   </div>
   <button id="btn_evaluate" style="float: right" class="btn btn-primary">Lưu</button>
 </div>
