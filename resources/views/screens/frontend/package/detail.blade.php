@@ -1,8 +1,7 @@
 @extends('layouts.frontend.master')
 @section('title', 'Trang chủ')
 @section('content')
-
-
+<div class="team-area-2 bg-off-white pt-130 pb-130">
     <div class="container">
         <div class="row mb-50">
 
@@ -101,5 +100,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

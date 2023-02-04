@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Package;
 use App\Models\Rate;
 
@@ -15,8 +16,8 @@ class PackageController extends Controller
         $top = [];
 
         foreach ($packages as $key => $item) {
-            $avg_star = Rate::where('package_id', $item->id)->avg('star_package');
-            $avg = $avg_star == null ? 5 : $avg_star;
+            $avg_star = Order::where('package_id', $item->id)->count();
+            $avg = $avg_star == null ? 0 : $avg_star;
             $top[] = [
                 "avg_star" => $avg,
                 "item" => $item

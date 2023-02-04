@@ -62,7 +62,7 @@ class PackageSeeder extends Seeder
                 
                 'status' => 1,
                 'set_pt' => 1,
-                'type_package' => 2,
+                'type_package' => 1,
             ],
             [
                 'package_name' => 'Gói Experience',
@@ -76,7 +76,7 @@ class PackageSeeder extends Seeder
                 Việc luyện tập đều đặn tại CITIGYM và đúng kỹ thuật, cùng với một chế độ dinh dưỡng hợp lý sẽ giúp cải thiện vóc dáng một cách rõ rệt. Huấn luyện viên của Citigym thiết kế chương trình luyện tập dựa trên chỉ số cơ thể, tình trạng sức khỏe của bạn nhằm giúp bạn thấy rõ sự thay đổi ngoạn mục chỉ trong khoảng trung bình từ 6-8 tuần.',
                 'status' => 1,
                 'set_pt' => 0,
-                'type_package' => 1,
+                'type_package' => 2,
             ]
         ];
 

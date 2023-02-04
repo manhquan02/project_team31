@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Rate;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,8 +19,8 @@ class CoachController extends Controller
         $top = [];
 
         foreach ($coachs as $item) {
-            $avg_star = Rate::where('pt_id', $item->id)->avg('star_pt');
-            $avg = $avg_star == null ? 5 : $avg_star;
+            $avg_star = Order::where('pt_id', $item->id)->count();
+            $avg = $avg_star == null ? 0 : $avg_star;
             $top[] = [
                 "avg_star" => $avg,
                 "item" => $item
