@@ -29,33 +29,21 @@ function test_bmi($bmi)
     return $health;
 }
 
-function starPackage($id){
-    $all_rate = Rate::where('package_id', $id)->get();
-        $total_star = 0;
-        foreach ($all_rate as $item) {
-            $total_star += $item->star_package;
-        }
-        if($all_rate->count() != 0){
-            $star_rate = $total_star / $all_rate->count();
-        }else $star_rate = 5;
-
-        return $star_rate;
+function starPackage($id)
+{
+    $avg = Rate::where('package_id', $id)->avg('star_package');
+    $star_rate = $avg == null ? 5 : $avg;
+    return $star_rate;
 }
 
-function starPt($id){
-    $all_rate = Rate::where('pt_id', $id)->get();
-        $total_star = 0;
-        foreach ($all_rate as $item) {
-            $total_star += $item->star_package;
-        }
-        if($all_rate->count() != 0){
-            $star_rate = $total_star / $all_rate->count();
-        }else $star_rate = 5;
-
-        return $star_rate;
+function starPt($id)
+{
+    $avg = Rate::where('pt_id', $id)->avg('star_pt');
+    $star_rate = $avg == null ? 5 : $avg;
+    return $star_rate;
 }
 
-function upload_image($name , $request, $new, $folder)
+function upload_image($name, $request, $new, $folder)
 {
     $image = $request;
     $imageName = $image->hashName();
@@ -103,8 +91,8 @@ function weekday($weekday)
 
 function st($month, $year)
 {  // Thống kê
-    if($month < 10){
-        $month = "0".$month;
+    if ($month < 10) {
+        $month = "0" . $month;
     }
     $total_turnover = Order::where('status', 1)->get();
     $total = 0;
@@ -118,8 +106,8 @@ function st($month, $year)
 
 function sub($month, $year)
 {  // Thống kê đăng ký mới
-    if($month < 10){
-        $month = "0".$month;
+    if ($month < 10) {
+        $month = "0" . $month;
     }
     $total_sub = Order::where('status', 1)->get();
     $total = 0;
@@ -138,40 +126,44 @@ function config_decode($text)
 }
 
 
-function typePackage(){
+function typePackage()
+{
     return [
-        '1'=>'Gói ngày',
-        '2'=> 'Gói tháng'
+        '1' => 'Gói ngày',
+        '2' => 'Gói tháng'
     ];
 }
-function statusWage(){
+function statusWage()
+{
     return [
-        '0'=>'Chưa quyết toán',
-        '1'=> 'Đã quyết toán'
-    ];
-}
-
-function gender(){
-    return [
-        '0'=>'Nữ',
-        '1'=> 'Nam',
-        '2'=>'Khác'
+        '0' => 'Chưa quyết toán',
+        '1' => 'Đã quyết toán'
     ];
 }
 
-function statusTT(){
+function gender()
+{
     return [
-        '0'=>'Chưa thanh toán',
-        '1'=> 'Đã thanh toán',
-    ];
-}
-function evaluate(){
-    return [
-        '1'=>'Rất tệ',
-        '2'=> 'Tệ',
-        '3'=>'Hài lòng',
-        '4'=>'Tốt',
-        '5'=>'Rất tốt'
+        '0' => 'Nữ',
+        '1' => 'Nam',
+        '2' => 'Khác'
     ];
 }
 
+function statusTT()
+{
+    return [
+        '0' => 'Chưa thanh toán',
+        '1' => 'Đã thanh toán',
+    ];
+}
+function evaluate()
+{
+    return [
+        '1' => 'Rất tệ',
+        '2' => 'Tệ',
+        '3' => 'Hài lòng',
+        '4' => 'Tốt',
+        '5' => 'Rất tốt'
+    ];
+}

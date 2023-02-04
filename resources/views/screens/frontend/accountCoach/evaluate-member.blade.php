@@ -4,6 +4,7 @@
   <div class="row align-items-center">
     <div class="col-8">
       <h3 style="font-size: 20px; font-weight: 900" class="mb-0">Đánh giá kết quả cuối môn</h3>
+      <p>Nay là ngày cuối khoá tập. Huấn luyện viên đánh giá kết quả cuối môn cho hội viên trước khi xem lịch tập</p>
     </div>
     <div class="col-4 text-right">
       {{-- <a href="#!" class="btn btn-sm btn-primary">Settings</a>  --}}

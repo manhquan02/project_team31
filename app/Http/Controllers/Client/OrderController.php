@@ -131,10 +131,11 @@ class OrderController extends Controller
             }
             $total_session_pt = $package->total_session_pt;
             $week_session_pt = $package->week_session_pt;
-            $total_session = $total_session_pt/$week_session_pt*7;
-            // dd($total_session);
+            $total_session = ceil($total_session_pt/$week_session_pt*7);
+            // dd(ceil($total_session));
             $newdate = strtotime ( '+'.$total_session.'day' , strtotime ( $request->activate_date ) ) ;
             $end_date = date ( 'Y-m-j' , $newdate );
+            // dd($end_date);
             $order->date_start = $request->activate_date;
             $order->date_end = $end_date;
             

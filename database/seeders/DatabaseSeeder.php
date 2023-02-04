@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(WeekdaySeeder::class);
 
         $this->call(PostSeeder::class);
-        $this->call(RateSeeder::class);
+        // $this->call(RateSeeder::class);
         // $this->call(ResultContractSeeder::class);    
     }
 }
