@@ -21,7 +21,7 @@ class CheckBuyPackage
         $ex_package = Attendance::where('status',0)->where('user_id', Auth::id())->orWhere('status', 0)->count();
         
         if ($ex_package > 0) {
-            return redirect()->back();
+            return redirect()->back()->with('msg' ,'Để đảm bảo hiệu quả tốt. Chúng tôi khuyên bạn không nên tập nhiều gói cùng lúc');
         }
 
         return $next($request);

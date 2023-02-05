@@ -18,7 +18,7 @@
             <div class="row g-4">
                 @foreach ($orders as $order)
                     @foreach($order->results as $result)
-                        @if(date('Y-m-d', strtotime($order->date_end))  >= date('Y-m-d') && $result->status_package == 0 && $order->status == 1)
+                        @if(date('Y-m-d', strtotime($order->date_end))  > date('Y-m-d') && $result->status_package == 0 && $order->status == 1)
                         <!-- Card item START -->
                         <div class="col-sm-6 col-lg-4 col-xl-3">
                             <div class="card shadow h-100">
@@ -92,10 +92,12 @@
                                         {{-- <li class="list-inline-item ms-2 h6 fw-light mb-0">4.0/5.0</li> --}}
                                     </ul>
                                     @foreach ($order->results as $result)
-                                        @if($result->status_package == 0)
-                                            <span style="color: red">Chưa có kết quả</span>
-                                        @else
-                                            <a href="{{route('account.resultPackage', $result->id)}}" style="float: right;margin-bottom: 10px;" type="button" class="btn btn-primary">Xem kết quả</a>
+                                        @if($order->package->type_package == 1)
+                                            @if($result->status_package == 0)
+                                                <span style="color: red">Chưa có kết quả</span>
+                                            @else
+                                                <a href="{{route('account.resultPackage', $result->id)}}" style="float: right;margin-bottom: 10px;" type="button" class="btn btn-primary">Xem kết quả</a>
+                                            @endif
                                         @endif
                                     @endforeach
                                 </div>

@@ -11,7 +11,7 @@
     </div>
 </div>
 <div style="padding-bottom: 0px;" class="card-body">
-    <form>
+    {{-- <form action="" method="GET">
         <div class="row">
           <div class="col mx-sm-3">
             <label for="">Tên hội viên</label>
@@ -22,11 +22,8 @@
             <label for="">Trạng thái</label>
             <div class="form-group">
                 <select class="form-control" id="exampleFormControlSelect1">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                  <option value="1">Đang hoạt động</option>
+                  <option value="2">Đã hoàn thành</option>
                 </select>
               </div>
 
@@ -41,7 +38,7 @@
           
         </div>
         
-      </form>
+    </form> --}}
 </div>
 <hr style="background-color: rgb(71, 67, 67); margin-bottom: 0px; margin-top: 10px">
 <div class="card-body">
