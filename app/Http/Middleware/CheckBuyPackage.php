@@ -18,7 +18,7 @@ class CheckBuyPackage
      */
     public function handle(Request $request, Closure $next)
     {
-        $ex_package = Attendance::where('status',0)->where('user_id', Auth::id())->orWhere('status', 0)->count();
+        $ex_package = Attendance::where('status',0)->where('user_id', Auth::id())->count();
         
         if ($ex_package > 0) {
             return redirect()->back();

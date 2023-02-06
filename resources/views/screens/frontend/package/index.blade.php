@@ -37,7 +37,7 @@
 						Xem gói tập <i class="fas fa-angle-double-right"></i>
 					</a>
 					<div class="shape">
-						<img src="{{asset($i["item"]->avatar)}}" alt="shape">
+						<img height="200px" width="500px" src="{{asset($i["item"]->avatar)}}" alt="shape">
 					</div>
 				</div>
 			</div>

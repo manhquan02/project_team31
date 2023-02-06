@@ -29,74 +29,72 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-    public function index($id){
+    public function index($id)
+    {
         $arrayWeekdays = PackageUtility::$arrayWeekday;
         $package = Package::find($id);
         $times = Time::all();
-        if($package->subject_id == 1){
+        if ($package->subject_id == 1) {
             $coachs = User::role('coach')->get();
-        }
-        elseif($package->subject_id == 2){
+        } elseif ($package->subject_id == 2) {
             $coachs = User::role('coachbx')->get();
-        }else{
+        } else {
             $coachs = User::role('coach')->get();
         }
-        return view('screens.frontend.order.index',[
-                                                    'arrayWeekdays' => $arrayWeekdays, 
-                                                    'times' => $times, 
-                                                    'coachs' => $coachs,
-                                                    'package' =>$package,
-                                                ]);
+        return view('screens.frontend.order.index', [
+            'arrayWeekdays' => $arrayWeekdays,
+            'times' => $times,
+            'coachs' => $coachs,
+            'package' => $package,
+        ]);
     }
 
 
-    public function setPackage(Request $request){
+    public function setPackage(Request $request)
+    {
         // dd($request);
         $package = Package::find($request->id);
-        if(isset($package)){
-            if($package->set_pt == 1){
+        if (isset($package)) {
+            if ($package->set_pt == 1) {
                 return response()->json([
                     'result' => 1,
                     'package' => $package,
-                    
+
                 ]);
-            }
-            else{
+            } else {
                 return response()->json([
                     'result' => 0,
                     'package' => $package,
                 ]);
             }
-            
         }
         return response()->json([
             'result' => false,
             'message' => 'Gói tập không tồn tại !'
         ]);
     }
-    public function setTotalMoney(Request $request){
+    public function setTotalMoney(Request $request)
+    {
         $package = Package::find($request->package_id);
-        $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
-        if(isset($discount)){
+        $discount = Discount::where('discount_code', '=', $request->discount_code)->first();
+        if (isset($discount)) {
             $discount_packages =  explode('|', $discount->package_id);
-            
-            if($discount->status == 0){
+
+            if ($discount->status == 0) {
                 return response()->json([
                     'result' => false,
                     'message' => 'Phiếu giảm giá này đã hết hạn'
                 ]);
             }
-            if(in_array($package->id, $discount_packages)){
-                
+            if (in_array($package->id, $discount_packages)) {
+
                 return response()->json([
                     'result' => true,
                     'message' => 'Phiếu giảm tồn tại',
-                    'total_money' => $package->price - $package->price*$discount->price_sale/100,
+                    'total_money' => $package->price - $package->price * $discount->price_sale / 100,
                 ]);
-
             }
-        }
-        else{
+        } else {
             return response()->json([
                 'result' => false,
                 'message' => 'Phiếu giảm giá không tồn tại',
@@ -104,8 +102,8 @@ class OrderController extends Controller
         }
     }
 
-    public function store($id ,Request $request)
-    {   
+    public function store($id, Request $request)
+    {
         // dd($request->all());
         // dd($request->weekday);
         // dd(array_merge($request->weekday, $request->time));
@@ -116,92 +114,84 @@ class OrderController extends Controller
         $user = User::find(Auth::id());
         $package = Package::find($id);
         // dd($package->type_package);  
-        if($package->type_package == 1){
+        if ($package->type_package == 1) {
             $rule = [
                 'activate_date' => 'required',
-                'weekday' =>'required',
-                'pt_id' =>'required',
+                'weekday' => 'required',
+                'pt_id' => 'required',
             ];
             $messages = [
                 'required' => ':attribute không được để chống',
             ];
-            $request->validate($rule,$messages);
-            if(count($request->weekday) != $package->week_session_pt){
-                return back()->with('msg',"bạn phải chọn $package->week_session_pt buổi tập trên tuần");
+            $request->validate($rule, $messages);
+            if (count($request->weekday) != $package->week_session_pt) {
+                return back()->with('msg', "bạn phải chọn $package->week_session_pt buổi tập trên tuần");
             }
             $total_session_pt = $package->total_session_pt;
             $week_session_pt = $package->week_session_pt;
-            $total_session = $total_session_pt/$week_session_pt*7;
+            $total_session = $total_session_pt / $week_session_pt * 7;
             // dd($total_session);
-            $newdate = strtotime ( '+'.$total_session.'day' , strtotime ( $request->activate_date ) ) ;
-            $end_date = date ( 'Y-m-j' , $newdate );
+            $newdate = strtotime('+' . $total_session . 'day', strtotime($request->activate_date));
+            $end_date = date('Y-m-j', $newdate);
             $order->date_start = $request->activate_date;
             $order->date_end = $end_date;
-            
-        }
-
-        elseif($package->type_package == 2) {
+        } elseif ($package->type_package == 2) {
             $rule = [
                 'activate_date' => 'required',
             ];
             $messages = [
                 'required' => ':attribute không được để chống',
             ];
-            $request->validate($rule,$messages);
-            if(isset($request->month_package)){
+            $request->validate($rule, $messages);
+            if (isset($request->month_package)) {
                 $month = $request->month_package;
-                $newdate = strtotime ( '+'.$month.' month' , strtotime ( $request->activate_date ) );
-                $end_date = date ( 'Y-m-j' , $newdate );
+                $newdate = strtotime('+' . $month . ' month', strtotime($request->activate_date));
+                $end_date = date('Y-m-j', $newdate);
                 $order->date_start = $request->activate_date;
                 $order->date_end = $end_date;
             }
         }
-        
+
         $order->package_id = $id;
         $order->payment_method = 2;
-        if($package->set_pt == 1){
+        if ($package->set_pt == 1) {
             $order->pt_id = $request->pt_id;
-            
         }
 
-        if($request->discount_code != ""){
-            $discount = Discount::where('discount_code', '=' , $request->discount_code)->first();
-            if(isset($discount)){
+        if ($request->discount_code != "") {
+            $discount = Discount::where('discount_code', '=', $request->discount_code)->first();
+            if (isset($discount)) {
                 $discount_packages =  explode('|', $discount->package_id);
-                if($discount->status == 0){
-                    return back()->with('msg', 'Xin lỗi. Phiếu giảm giá này đã hết hạn'); 
+                if ($discount->status == 0) {
+                    return back()->with('msg', 'Xin lỗi. Phiếu giảm giá này đã hết hạn');
                 }
-                if(in_array($package->id, $discount_packages)){
-                    $order->total_money = $package->into_price*$package->total_session_pt - $package->into_price*$package->total_session_pt*$discount->price_sale/100;
+                if (in_array($package->id, $discount_packages)) {
+                    $order->total_money = $package->into_price * $package->total_session_pt - $package->into_price * $package->total_session_pt * $discount->price_sale / 100;
                     // dd($package->price);
                     $order->discount_id = $discount->id;
                     $quantity_discount = $discount->quantity - 1;
                     $discount->update([
                         'quantity' => $quantity_discount,
                     ]);
-                    if($discount->quantity == 0){
+                    if ($discount->quantity == 0) {
                         $discount->update([
                             'status' => 0,
                         ]);
                     }
+                } else {
+                    return back()->with('msg', 'Phiếu giảm giá không đúng');
                 }
-                else{
-                    return back()->with('msg', 'Phiếu giảm giá không đúng'); 
-                }
-                
+            } else {
+                return back()->with('msg', 'Phiếu giảm giá không đúng');
             }
-            else{
-                return back()->with('msg', 'Phiếu giảm giá không đúng'); 
-            }
-        }
-        else{
+        } else {
             $order->discount_id = 0;
             $order->total_money = $package->into_price;
         }
-        
-        
+
+
         $order->save();
-        if($package->set_pt == 1){
+        if ($package->set_pt == 1) {
             foreach ($request->weekday as $key => $value) {
                 TrainingPackage::create([
                     'order_id' => $order->id,
@@ -209,25 +199,23 @@ class OrderController extends Controller
                     'time_id' => $value
                 ]);
             }
-            
         }
         $order->users()->attach(Auth::id());
-        if(isset($request->payment_vnp)){
-            $vnp_Url = $this->vnpPayment($order->id); 
-                        return redirect($vnp_Url);
-        }
-        elseif(isset($request->payment_momo)){
+        if (isset($request->payment_vnp)) {
+            $vnp_Url = $this->vnpPayment($order->id);
+            return redirect($vnp_Url);
+        } elseif (isset($request->payment_momo)) {
             // dd(123);
-             $this->momoPayment($order->id); 
-                        
+            $this->momoPayment($order->id);
         }
-        
+
         return back()->with('success', 'Thêm order thành công');
     }
 
-    public function vnpPayment($orderId){
+    public function vnpPayment($orderId)
+    {
         // dd($request->id);
-        $order=Order::find($orderId);
+        $order = Order::find($orderId);
         session(['cost_id' => 5]);
         session(['url_prev' => url()->previous()]);
         $vnp_TmnCode = "UDOPNWS1"; //Mã website tại VNPAY 
@@ -275,7 +263,7 @@ class OrderController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-           $vnpSecureHash = md5($vnp_HashSecret . $hashdata);
+            $vnpSecureHash = md5($vnp_HashSecret . $hashdata);
             $vnpSecureHash = hash('sha256', $vnp_HashSecret . $hashdata);
             $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
         }
@@ -283,7 +271,8 @@ class OrderController extends Controller
         // return redirect($vnp_Url);
     }
 
-    public function returnUrl(){
+    public function returnUrl()
+    {
         // dd("ok");
         $vnp_HashSecret = "EBAHADUGCOEWYXCMYZRMTMLSHGKNRPBN";   //Chuỗi bí mật
         $inputData = array();
@@ -318,101 +307,98 @@ class OrderController extends Controller
         try {
             //Check Orderid
             //Kiểm tra checksum của dữ liệu
-            $order=Order::find($orderId);
+            $order = Order::find($orderId);
             // dd($order);
             // dd($secureHash == $vnp_SecureHash);
             // if ($secureHash == $vnp_SecureHash) {
-                if ($order != NULL) {
-                        if ( $order->status == 0) {
-                            if ($inputData['vnp_ResponseCode'] == '00' 
-                            // && $inputData['vnp_TransactionStatus'] == '00'
-                            ) {
-                                $order->status=1;
-                                $returnData['RspCode'] = '00';
-                                $returnData['Message'] = 'Giao dịch thành công';
-                            } else {
+            if ($order != NULL) {
+                if ($order->status == 0) {
+                    if (
+                        $inputData['vnp_ResponseCode'] == '00'
+                        // && $inputData['vnp_TransactionStatus'] == '00'
+                    ) {
+                        $order->status = 1;
+                        $returnData['RspCode'] = '00';
+                        $returnData['Message'] = 'Giao dịch thành công';
+                    } else {
 
-                                $returnData['RspCode'] = '24';
-                                $returnData['Message'] = 'Giao dịch không thành công do: Khách hàng hủy giao dịch';
-                                $order->status=0;
+                        $returnData['RspCode'] = '24';
+                        $returnData['Message'] = 'Giao dịch không thành công do: Khách hàng hủy giao dịch';
+                        $order->status = 0;
+                    }
+                    $order->save();
+                    // dd($order->id);
+                    $order = Order::find($order->id);
+                    $contract = new Contract();
+                    $attendance = new Attendance();
+                    $schedule = new Schedule();
+                    $arrayWeekdays = PackageUtility::$arrayWeekday;
+                    $trainings = $order->trainings;
+                    // $weekday 
+
+                    $begin = new DateTime($order->date_start);
+                    $end = new DateTime($order->date_end);
+                    $interval = DateInterval::createFromDateString('1 day');
+                    $period = new DatePeriod($begin, $interval, $end);
+
+                    foreach ($period as $dt) {
+
+                        foreach ($trainings as $training) {
+                            // dd($training->id);
+                            if ($arrayWeekdays[$training->weekday_id] == $dt->format("l")) {
+                                $schedule = $schedule->create([
+                                    'pt_id' => $order->pt_id,
+                                    'order_id' => $order->id,
+                                    'time_id' => $training->time_id,
+                                    'weekday_name' => $dt->format("l"),
+                                    'date' => $dt->format("Y-m-d"),
+                                    'status' => 0,
+                                ]);
+
+
+                                $attendance->create([
+                                    'user_id' => Auth::id(),
+                                    'order_id' => $order->id,
+                                    'schedule_id' =>  $schedule->id,
+                                    'time_id' => $training->time_id,
+                                    'weekday_name' => $dt->format("l"),
+                                    'pt_id' => $order->pt_id,
+                                    'date' => $dt->format("Y-m-d"),
+                                    'status' => 0,
+
+                                ]);
                             }
-                            $order->save();
-                            // dd($order->id);
-                            $order = Order::find($order->id);
-                            $contract = new Contract();
-                            $attendance = new Attendance();
-                            $schedule = new Schedule();
-                            $arrayWeekdays = PackageUtility::$arrayWeekday;
-                            $trainings = $order->trainings;
-                            // $weekday 
-
-                            $begin = new DateTime($order->date_start);
-                            $end = new DateTime($order->date_end);
-                            $interval = DateInterval::createFromDateString('1 day');
-                            $period = new DatePeriod($begin, $interval, $end);
-                            
-                            foreach ($period as $dt) {
-                                
-                                foreach($trainings as $training){
-                                    // dd($training->id);
-                                    if($arrayWeekdays[$training->weekday_id] == $dt->format("l")){
-                                        $schedule = $schedule->create([
-                                            'pt_id' => $order->pt_id,
-                                            'order_id' => $order->id,
-                                            'time_id' => $training->time_id,
-                                            'weekday_name' => $dt->format("l"),
-                                            'date' => $dt->format("Y-m-d"),
-                                            'status' => 0,
-                                        ]);
-
-                                                            
-                                        $attendance->create([
-                                            'user_id' => Auth::id(),
-                                            'order_id' => $order->id,
-                                            'schedule_id' =>  $schedule->id,
-                                            'time_id' => $training->time_id,
-                                            'weekday_name' => $dt->format("l"),
-                                            'pt_id' => $order->pt_id,
-                                            'date' => $dt->format("Y-m-d"),
-                                            'status' => 0,
-                                            
-                                        ]);
-                                        
-                                    }
-
-                                }
-                            }
-
-                            $data=[
-                                'title' => 'Mua gói tập thành công',
-                                'content' => 'Cảm ơn bạn đã tin tưởng GYM T&T'
-                            ];
-                            Mail::to("legend.cay@gmail.com")->send(new SendMailOrder($data));
-    
-                            $data=[
-                                'title' => 'Hội viên mới đã mua hàng và bạn là huấn luyện viên',
-                                'content' => 'Chào PT, bạn có lịch tập cho hội viên mới vui lòng truy cập tài khoản xem cụ thể'
-                            ];
-                            Mail::to("legend.cay@gmail.com")->send(new SendMailOrder($data));
-
-                            // tạo lịch trình pt và điểm danh hội viên
-                            // return back()->with('success', 'Mua hang thanh cong');
-                        } else {
-                            $returnData['RspCode'] = '02';
-                            $returnData['Message'] = 'Giao dịch thất bại';
                         }
+                    }
 
+                    $data = [
+                        'title' => 'Mua gói tập thành công',
+                        'content' => 'Cảm ơn bạn đã tin tưởng GYM T&T'
+                    ];
+                    Mail::to("legend.cay@gmail.com")->send(new SendMailOrder($data));
+
+                    $data = [
+                        'title' => 'Hội viên mới đã mua hàng và bạn là huấn luyện viên',
+                        'content' => 'Chào PT, bạn có lịch tập cho hội viên mới vui lòng truy cập tài khoản xem cụ thể'
+                    ];
+                    Mail::to("legend.cay@gmail.com")->send(new SendMailOrder($data));
+
+                    // tạo lịch trình pt và điểm danh hội viên
+                    // return back()->with('success', 'Mua hang thanh cong');
                 } else {
-                    $returnData['RspCode'] = '01';
-                    $returnData['Message'] = 'Đơn hàng không tồn tại';
+                    $returnData['RspCode'] = '02';
+                    $returnData['Message'] = 'Giao dịch thất bại';
                 }
+            } else {
+                $returnData['RspCode'] = '01';
+                $returnData['Message'] = 'Đơn hàng không tồn tại';
+            }
             // }
             //  else {
             //     $returnData['RspCode'] = '97';
             //     $returnData['Message'] = 'Chữ ký không hợp lệ';
             // }
-        }
-         catch (Exception $e) {
+        } catch (Exception $e) {
             $returnData['RspCode'] = '99';
             $returnData['Message'] = 'Unknow error';
         }
@@ -424,7 +410,8 @@ class OrderController extends Controller
         return redirect()->route('order.resultPayment', encrypt($returnData));
     }
 
-    public function resultPayment($returnData){
+    public function resultPayment($returnData)
+    {
         // dd(decrypt($returnData));
         try {
             return view('screens.frontend.order.resultPayment', ['returnData' => decrypt($returnData)]);
@@ -437,7 +424,7 @@ class OrderController extends Controller
     public function momoPayment($order_Id)
     {
         $order = Order::where('id', $order_Id)->first();
-        
+
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
         $partnerCode = 'MOMOBQRE20220907';
@@ -455,8 +442,8 @@ class OrderController extends Controller
         $requestType = "captureWallet";
         $extraData = ("");
         //before sign HMAC SHA256 signature
-        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId  . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType ;
-        
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId  . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+
         $signature = hash_hmac("sha256", $rawHash, $secretKey);
         // dd($signature);
         $data = array(
@@ -482,7 +469,7 @@ class OrderController extends Controller
         if (isset($jsonResult['payUrl'])) {
             // dd("if");
             header('Location: ' . $jsonResult['payUrl']);
-           
+
             die();
         } else {
             dd($jsonResult);
@@ -490,7 +477,7 @@ class OrderController extends Controller
         }
     }
 
-    public function resultMomo($order_Id,Request $request)
+    public function resultMomo($order_Id, Request $request)
     {
         $accessKey = 'K5KI6gT11qQOvSNb';
         $secretKey = 'LeKe8s0zVfMBSiOUzyWA3VGtmJsTSC3e';
@@ -521,7 +508,8 @@ class OrderController extends Controller
                 if ($resultCode == '0') {
                     $result = 'Giao dịch thành công';
                     // dd($result);
-                    if ($order != null) {
+                    $attendanced = Attendance::where('user_id', Auth::user()->id)->where('status', 0)->get();
+                    if ($order != null && count($attendanced) == 0) {
                         // dd("quân");
                         $order->status = 1;
                         $order->save();
@@ -537,12 +525,12 @@ class OrderController extends Controller
                         $end = new DateTime($order->date_end);
                         $interval = DateInterval::createFromDateString('1 day');
                         $period = new DatePeriod($begin, $interval, $end);
-                        
+
                         foreach ($period as $dt) {
-                            
-                            foreach($trainings as $training){
+
+                            foreach ($trainings as $training) {
                                 // dd($training->id);
-                                if($arrayWeekdays[$training->weekday_id] == $dt->format("l")){
+                                if ($arrayWeekdays[$training->weekday_id] == $dt->format("l")) {
                                     $schedule = $schedule->create([
                                         'pt_id' => $order->pt_id,
                                         'order_id' => $order->id,
@@ -552,7 +540,7 @@ class OrderController extends Controller
                                         'status' => 0,
                                     ]);
 
-                                                        
+
                                     $attendance->create([
                                         'user_id' => Auth::id(),
                                         'order_id' => $order->id,
@@ -562,20 +550,18 @@ class OrderController extends Controller
                                         'pt_id' => $order->pt_id,
                                         'date' => $dt->format("Y-m-d"),
                                         'status' => 0,
-                                        
-                                    ]);
-                                    
-                                }
 
+                                    ]);
+                                }
                             }
                         }
-                        $data=[
+                        $data = [
                             'title' => 'Mua gói tập thành công',
                             'content' => 'Cảm ơn bạn đã tin tưởng GYM T&T'
                         ];
                         Mail::to("legend.cay@gmail.com")->send(new SendMailOrder($data));
 
-                        $data=[
+                        $data = [
                             'title' => 'Hội viên mới đã mua hàng và bạn là huấn luyện viên',
                             'content' => 'Chào PT, bạn có lịch tập cho hội viên mới vui lòng truy cập tài khoản xem cụ thể'
                         ];
@@ -638,7 +624,8 @@ class OrderController extends Controller
         return $result;
     }
 
-    public function createSchedule($orderId){
+    public function createSchedule($orderId)
+    {
         $order = Order::find($orderId);
         $contract = new Contract();
         $attendance = new Attendance();
@@ -651,12 +638,12 @@ class OrderController extends Controller
         $end = new DateTime($order->date_end);
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($begin, $interval, $end);
-        
+
         foreach ($period as $dt) {
-            
-            foreach($trainings as $training){
+
+            foreach ($trainings as $training) {
                 // dd($training->id);
-                if($arrayWeekdays[$training->weekday_id] == $dt->format("l")){
+                if ($arrayWeekdays[$training->weekday_id] == $dt->format("l")) {
                     $schedule = $schedule->create([
                         'pt_id' => $order->pt_id,
                         'order_id' => $order->id,
@@ -666,7 +653,7 @@ class OrderController extends Controller
                         'status' => 0,
                     ]);
 
-                                        
+
                     $attendance->create([
                         'user_id' => Auth::id(),
                         'order_id' => $order->id,
@@ -676,11 +663,9 @@ class OrderController extends Controller
                         'pt_id' => $order->pt_id,
                         'date' => $dt->format("Y-m-d"),
                         'status' => 0,
-                        
-                    ]);
-                    
-                }
 
+                    ]);
+                }
             }
         }
     }
@@ -701,7 +686,7 @@ class OrderController extends Controller
 
     public function create($orderId)
     {
-        
+
         $order = Order::find($orderId);
         $contract = new Contract();
         $attendance = new Attendance();
@@ -714,12 +699,12 @@ class OrderController extends Controller
         $end = new DateTime($order->date_end);
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($begin, $interval, $end);
-        
+
         foreach ($period as $dt) {
-            
-            foreach($trainings as $training){
+
+            foreach ($trainings as $training) {
                 // dd($training->id);
-                if($arrayWeekdays[$training->weekday_id] == $dt->format("l")){
+                if ($arrayWeekdays[$training->weekday_id] == $dt->format("l")) {
                     $schedule = $schedule->create([
                         'pt_id' => $order->pt_id,
                         'order_id' => $order->id,
@@ -729,7 +714,7 @@ class OrderController extends Controller
                         'status' => 1,
                     ]);
 
-                                           
+
                     $attendance->create([
                         'user_id' => 1,
                         'order_id' => $order->id,
@@ -739,18 +724,15 @@ class OrderController extends Controller
                         'pt_id' => 1,
                         'date' => $dt->format("Y-m-d"),
                         'status' => 0,
-                        
-                    ]);
-                    
-                }
 
+                    ]);
+                }
             }
         }
-
-                    
     }
 
-    public function nameWeekday($weekday_id){
+    public function nameWeekday($weekday_id)
+    {
         $weekday_name = "";
         switch ($weekday_id) {
             case '1':
@@ -777,12 +759,12 @@ class OrderController extends Controller
             default:
                 # code...
                 break;
-                
         }
         return $weekday_name;
     }
 
-    public function checkWeekdayPt(Request $request){
+    public function checkWeekdayPt(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'activate_date' => 'required',
         ]);
@@ -790,77 +772,71 @@ class OrderController extends Controller
             return response()->json([
                 'result' => false,
                 'msg' => 'Vui lòng không bỏ trống'
-            ]); 
+            ]);
         }
         $package = Package::find($request->package_id);
-        if($package->subject_id == 1){
+        if ($package->subject_id == 1) {
             $coachs = User::role('coach')->get();
-        }
-        elseif($package->subject_id == 2){
+        } elseif ($package->subject_id == 2) {
             $coachs = User::role('coachbx')->get();
             // dd($coachs);
-        }else{
+        } else {
             $coachs = User::role('coach')->get();
         }
         // $coachs = User::role('coach')->get(); 
         $weekdayPt = $request->weekdayPt;
-        
+
         $total_session_pt = $package->total_session_pt;
         $week_session_pt = $package->week_session_pt;
-        $total_session = $total_session_pt/$week_session_pt*7;
+        $total_session = $total_session_pt / $week_session_pt * 7;
         // dd($total_session);
-        $newdate = strtotime ( '+'.$total_session.'day' , strtotime ( $request->activate_date ) ) ;
-        $end_date = date ( 'Y-m-j' , $newdate );
+        $newdate = strtotime('+' . $total_session . 'day', strtotime($request->activate_date));
+        $end_date = date('Y-m-j', $newdate);
         $interval = DateInterval::createFromDateString('1 day');
         $date_start = new DateTime($request->activate_date);
         $date_end = new DateTime($end_date);
         $period = new DatePeriod($date_start, $interval, $date_end);
         // dd($date_end);
         $arrayPt = [];
-        if($package->set_pt == 1){
-           if(Schedule::count() != 0){
-            // foreach ($period as $dt) {
+        if ($package->set_pt == 1) {
+            if (Schedule::count() != 0) {
+                // foreach ($period as $dt) {
                 foreach ($coachs as $coach) {
                     $count = 0;
                     // dd($coach);
                     foreach ($request->weekdayPt as $addWeekdayPt => $ca) {
                         // if ($dt->format("l") == $this->nameWeekday($addWeekdayPt)) {
-                            $schedulesPt = Schedule::where('pt_id', '=', $coach->id)
-                                                ->where('date', '>=', $request->activate_date)
-                                                ->where('weekday_name', '=', $this->nameWeekday($addWeekdayPt))
-                                                ->where('time_id', '=', $ca)
-                                                ->count();
-                            if($schedulesPt != 0){
-                                $count += 2;
-                                // dd($coach->id);
-                            }
+                        $schedulesPt = Schedule::where('pt_id', '=', $coach->id)
+                            ->where('date', '>=', $request->activate_date)
+                            ->where('weekday_name', '=', $this->nameWeekday($addWeekdayPt))
+                            ->where('time_id', '=', $ca)
+                            ->count();
+                        if ($schedulesPt != 0) {
+                            $count += 2;
+                            // dd($coach->id);
+                        }
                         // }
                     }
                     if ($count == 0) {
-                        if(!in_array($coach->id, $arrayPt)){
+                        if (!in_array($coach->id, $arrayPt)) {
                             // array_push($arrayPt, $coach->id);
                             $arrayPt[$coach->id] = $coach->name;
                         }
-                        
                     }
-                    
                 }
-            // }
-            }
-            else{
-                
-                if($package->subject_id == 1){
-                    $coachs = User::role('coach')->pluck('name','id');
-                }
-                elseif($package->subject_id == 2){
-                    $coachs = User::role('coachbx')->pluck('name','id');
+                // }
+            } else {
+
+                if ($package->subject_id == 1) {
+                    $coachs = User::role('coach')->pluck('name', 'id');
+                } elseif ($package->subject_id == 2) {
+                    $coachs = User::role('coachbx')->pluck('name', 'id');
                     // dd($coachs);
-                }else{
-                    $coachs = User::role('coach')->pluck('name','id');
+                } else {
+                    $coachs = User::role('coach')->pluck('name', 'id');
                 }
                 $arrayPt = $coachs;
             }
-            
         }
         return response()->json([
             'result' => true,
@@ -868,7 +844,4 @@ class OrderController extends Controller
             'arrayPt' => $arrayPt
         ]);
     }
-
-    
-
 }

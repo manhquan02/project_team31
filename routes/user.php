@@ -134,7 +134,6 @@ Route::prefix('order/')->middleware('checkBuyPackage','auth')->name('order.')->g
     Route::get('checkWeekdayPt', [ClientOrderController::class, 'checkWeekdayPt'])->name('checkWeekdayPt');
     Route::get('test', [ClientOrderController::class, 'test'])->name('test');
     Route::get('create/{orderId}', [ClientOrderController::class, 'create'])->name('create');
-
     Route::get('result-momo/{order_Id}', [ClientOrderController::class, 'resultMomo'])->name('resultMomo');
 });
 
