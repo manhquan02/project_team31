@@ -127,17 +127,19 @@ Route::prefix('payment/')->name('payment.')->group(function () {
 // });
 
 // 'checkBuyPackage'
-Route::prefix('order/')->middleware('checkAdminBuyPackage', 'checkBuyPackage' ,'auth')->name('order.')->group(function () {
+Route::prefix('order/')->middleware('checkAdminBuyPackage','checkBuyPackage' ,'auth')->name('order.')->group(function () {
     Route::get('create/{id}', [ClientOrderController::class, 'index'])->name('index');
     Route::post('postOrder/{id}', [ClientOrderController::class, 'store'])->name('postOrder');
-    Route::get('checkPayment', [ClientOrderController::class, 'returnUrl'])->name('returnUrl');
-    Route::get('resultPayment/{returnData}', [ClientOrderController::class, 'resultPayment'])->name('resultPayment');
+    Route::get('checkPayment/{idOrder}', [ClientOrderController::class, 'returnUrl'])->name('returnUrl');
+    // Route::get('resultPayment/{returnData}', [ClientOrderController::class, 'resultPayment'])->name('resultPayment');
     Route::get('checkWeekdayPt', [ClientOrderController::class, 'checkWeekdayPt'])->name('checkWeekdayPt');
     Route::get('test', [ClientOrderController::class, 'test'])->name('test');
     Route::get('create/{orderId}', [ClientOrderController::class, 'create'])->name('create');
 
     Route::get('result-momo/{order_Id}', [ClientOrderController::class, 'resultMomo'])->name('resultMomo');
 });
+Route::get('resultPayment/{returnData}', [ClientOrderController::class, 'resultPayment'])->name('order.resultPayment');
+Route::get('resultMomo/{dataOrder}', [ClientOrderController::class, 'returnMomo'])->name('order.returnMomo');
 
 Route::prefix('account')->middleware('auth', 'role:member','checkRate')->name('account.')->group(function () {
     Route::get('profile', [ClientScheduleMemberController::class, 'profile'])->name('profile');

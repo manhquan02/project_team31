@@ -234,7 +234,7 @@ class OrderController extends Controller
         $vnp_TmnCode = "UDOPNWS1"; //Mã website tại VNPAY 
         $vnp_HashSecret = "EBAHADUGCOEWYXCMYZRMTMLSHGKNRPBN"; //Chuỗi bí mật
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = route('order.returnUrl');
+        $vnp_Returnurl = route('order.returnUrl', $order->id);
         $vnp_TxnRef = date("YmdHis"); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toán hóa đơn phí dich vụ";
         $vnp_OrderType = 'billpayment';
@@ -254,7 +254,7 @@ class OrderController extends Controller
             "vnp_OrderInfo" => $vnp_OrderInfo,
             "vnp_OrderType" => $vnp_OrderType,
             "vnp_ReturnUrl" => $vnp_Returnurl,
-            "vnp_TxnRef" => $orderId,
+            "vnp_TxnRef" => time() . '',
         );
 
         if (isset($vnp_BankCode) && $vnp_BankCode != "") {
@@ -284,7 +284,7 @@ class OrderController extends Controller
         // return redirect($vnp_Url);
     }
 
-    public function returnUrl(){
+    public function returnUrl($idOrder){
         // dd("ok");
         $vnp_HashSecret = "EBAHADUGCOEWYXCMYZRMTMLSHGKNRPBN";   //Chuỗi bí mật
         $inputData = array();
@@ -314,7 +314,8 @@ class OrderController extends Controller
         $vnp_BankCode = $inputData['vnp_BankCode']; //Ngân hàng thanh toán
         $vnp_Amount = $inputData['vnp_Amount'] / 100; // Số tiền thanh toán VNPAY phản hồi
         $Status = 0; // Là trạng thái thanh toán của giao dịch chưa có IPN lưu tại hệ thống của merchant chiều khởi tạo URL thanh toán.
-        $orderId = $inputData['vnp_TxnRef'];
+        // $orderId = $inputData['vnp_TxnRef'];
+        $orderId = $idOrder;
 
         try {
             //Check Orderid
@@ -615,10 +616,35 @@ class OrderController extends Controller
             $response['message'] = "LỖI ! Tổng kiểm tra thất bại";
         }
         $response['debugger'] = $debugger;
-
-        return view('screens.frontend.payment.resultPayment', compact('result', 'orderId', 'transId', 'orderInfo', 'orderType', 'resultCode', 'amount'));
+        $dataOrder = [
+            'result' => $result,
+            'orderId' => $orderId,
+            'transId' => $transId,
+            'orderInfo' => $orderInfo,
+            'orderType' => $orderType,
+            'resultCode' => $resultCode,
+            'amount' => $amount
+        ];
+        return redirect()->route('order.returnMomo', encrypt($dataOrder));
     }
 
+    public function returnMomo($dataOrder){
+        try {
+            $dataOrder = decrypt($dataOrder);
+            $result = $dataOrder['result'];
+            $orderId = $dataOrder['orderId'];
+            $transId = $dataOrder['transId'];
+            $orderInfo = $dataOrder['orderInfo'];
+            $orderType = $dataOrder['orderType'];
+            $resultCode = $dataOrder['resultCode'];
+            $amount = $dataOrder['amount'];
+    
+            return view('screens.frontend.payment.resultPayment', compact('result', 'orderId', 'transId', 'orderInfo', 'orderType', 'resultCode', 'amount'));
+            } catch (\Throwable $th) {
+            echo "Lỗi đường dẫn";
+        }
+        
+    }
 
     function execPostRequest($url, $data)
     {

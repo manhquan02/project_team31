@@ -18,8 +18,8 @@ class CheckBuyPackage
      */
     public function handle(Request $request, Closure $next)
     {
-        $ex_package = Attendance::where('status',0)->where('user_id', Auth::id())->orWhere('status', 0)->count();
-        
+        $ex_package = Attendance::where('status',0)->where('user_id', Auth::id())->count();
+        // dd($ex_package);
         if ($ex_package > 0) {
             return redirect()->back()->with('msg' ,'Để đảm bảo hiệu quả tốt. Chúng tôi khuyên bạn không nên tập nhiều gói cùng lúc');
         }

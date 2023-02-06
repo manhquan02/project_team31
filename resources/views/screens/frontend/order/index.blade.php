@@ -112,8 +112,8 @@
           <div style="width: 100%;" class="form-group">
             <label style="color: black" for="exampleInputEmail1">Ngày kích hoạt</label>
             {{-- <input type="date" name="activate_date" id="activate_date_input"> --}}
-            <input type="date" min="{{date ( 'Y-m-j' , strtotime ( '+1 day' , strtotime ( date('Y-m-d') ) ) )}}"
-              max="{{date ( 'Y-m-j' , strtotime ( '+30 day' , strtotime ( date('Y-m-d') ) ) )}}"
+            <input type="date" min="{{date ( 'Y-m-d' , strtotime ( '+1 day' , strtotime ( date('Y-m-d') ) ) )}}"
+              max="{{date ( 'Y-m-d' , strtotime ( '+30 day' , strtotime ( date('Y-m-d') ) ) )}}"
              name="activate_date" class="form-control activate_date_input" id="activate_date_input">
             <small id="emailHelp" class="form-text text-muted">chọn ngày kích hoạt, chúng tôi sẽ tạo lịch cho bạn.</small>
           </div>
