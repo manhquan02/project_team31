@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'name' => 'Nguyễn Văn A',
-                'email' => 'admin@example.com',
+                'email' => 'admin@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999), 
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Huy Hoàng',
-                'email' => 'manager@example.com',
+                'email' => 'manager@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Văn Quân',
-                'email' => 'coach@example.com',
+                'email' => 'coach@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -68,7 +68,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Mạnh Quân',
-                'email' => 'member@example.com',
+                'email' => 'member@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -80,7 +80,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Tiến Hoàng',
-                'email' => 'coach2@example.com',
+                'email' => 'coach2@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -92,7 +92,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Quang Huy',
-                'email' => 'coach3@example.com',
+                'email' => 'coach3@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -104,7 +104,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Mai Văn Minh',
-                'email' => 'coach4@example.com',
+                'email' => 'coach4@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -116,7 +116,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Đõ Minh Mạnh',
-                'email' => 'coach5@example.com',
+                'email' => 'coach5@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -128,7 +128,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Mai Anh Tài',
-                'email' => 'coach6@example.com',
+                'email' => 'coach6@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -140,7 +140,7 @@ class UserSeeder extends Seeder
             ],
             // [
             //     'name' => 'Tuấn Hưng',
-            //     'email' => 'coachbx@example.com',
+            //     'email' => 'coachbx@gmail.com',
             //     'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
             //     'gender' => 1,
             //     'phone' => rand(1000000000,9999999999),
@@ -152,7 +152,7 @@ class UserSeeder extends Seeder
             // ],
             // [
             //     'name' => 'Duy Mạnh',
-            //     'email' => 'coachbx1@example.com',
+            //     'email' => 'coachbx1@gmail.com',
             //     'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
             //     'gender' => 1,
             //     'phone' => rand(1000000000,9999999999),
@@ -164,7 +164,7 @@ class UserSeeder extends Seeder
             // ],
             [
                 'name' => 'Nguyễn Văn C',
-                'email' => 'member1@example.com',
+                'email' => 'member1@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -176,7 +176,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Văn Trường',
-                'email' => 'member2@example.com',
+                'email' => 'member2@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -188,7 +188,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Văn Khải',
-                'email' => 'member3@example.com',
+                'email' => 'member3@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -200,7 +200,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Văn Long',
-                'email' => 'member4@example.com',
+                'email' => 'member4@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -212,7 +212,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Văn Huy',
-                'email' => 'member5@example.com',
+                'email' => 'member5@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -224,7 +224,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Văn Hùng',
-                'email' => 'member6@example.com',
+                'email' => 'member6@gmail.com',
                 'password' => '$2a$12$onNtXT7kF7Iw4LA7nw8kFOBfMMl8kMC4qxb850m6Vg6e9ZNrfnVw2',
                 'gender' => 1,
                 'phone' => rand(1000000000,9999999999),
@@ -241,48 +241,48 @@ class UserSeeder extends Seeder
             $user = User::create($user);
             $email = $user['email'];
             switch ($email) {
-                case 'admin@example.com':
-                    $userSetRole = User::where('email', 'admin@example.com')->first();
+                case 'admin@gmail.com':
+                    $userSetRole = User::where('email', 'admin@gmail.com')->first();
                     $userSetRole->assignRole('admin');
                     break;
-                case 'manager@example.com':
-                    $userSetRole = User::where('email', 'manager@example.com')->first();
+                case 'manager@gmail.com':
+                    $userSetRole = User::where('email', 'manager@gmail.com')->first();
                     $userSetRole->assignRole('manager');
                     break;
-                case 'coach@example.com':
-                    $userSetRole = User::where('email', 'coach@example.com')->first();
+                case 'coach@gmail.com':
+                    $userSetRole = User::where('email', 'coach@gmail.com')->first();
                     $userSetRole->assignRole('coach');
                     break;
-                case 'coach2@example.com':
-                    $userSetRole = User::where('email', 'coach2@example.com')->first();
+                case 'coach2@gmail.com':
+                    $userSetRole = User::where('email', 'coach2@gmail.com')->first();
                     $userSetRole->assignRole('coach');
                     break;
-                case 'coach3@example.com':
-                    $userSetRole = User::where('email', 'coach3@example.com')->first();
+                case 'coach3@gmail.com':
+                    $userSetRole = User::where('email', 'coach3@gmail.com')->first();
                     $userSetRole->assignRole('coach');
                     break;
-                case 'coach4@example.com':
-                    $userSetRole = User::where('email', 'coach4@example.com')->first();
+                case 'coach4@gmail.com':
+                    $userSetRole = User::where('email', 'coach4@gmail.com')->first();
                     $userSetRole->assignRole('coach');
                     break;
-                case 'coach5@example.com':
-                    $userSetRole = User::where('email', 'coach5@example.com')->first();
+                case 'coach5@gmail.com':
+                    $userSetRole = User::where('email', 'coach5@gmail.com')->first();
                     $userSetRole->assignRole('coach');
                     break;
-                case 'coach6@example.com':
-                    $userSetRole = User::where('email', 'coach6@example.com')->first();
+                case 'coach6@gmail.com':
+                    $userSetRole = User::where('email', 'coach6@gmail.com')->first();
                     $userSetRole->assignRole('coach');
                     break; 
-                // case 'coachbx@example.com':
-                //     $userSetRole = User::where('email', 'coachbx@example.com')->first();
+                // case 'coachbx@gmail.com':
+                //     $userSetRole = User::where('email', 'coachbx@gmail.com')->first();
                 //     $userSetRole->assignRole('coachbx');
                 //     break; 
-                // case 'coachbx1@example.com':
-                //     $userSetRole = User::where('email', 'coachbx1@example.com')->first();
+                // case 'coachbx1@gmail.com':
+                //     $userSetRole = User::where('email', 'coachbx1@gmail.com')->first();
                 //     $userSetRole->assignRole('coachbx');
                 //     break;  
-                case 'member@example.com':
-                    $userSetRole = User::where('email', 'member@example.com')->first();
+                case 'member@gmail.com':
+                    $userSetRole = User::where('email', 'member@gmail.com')->first();
                     $userSetRole->assignRole('member');
                     break;
             }
@@ -292,7 +292,7 @@ class UserSeeder extends Seeder
 
         $members = User::all();
         foreach ($members as $key => $member) {
-            if(!in_array($member->email, ['admin@example.com', 'manager@example.com','coach@example.com','coach2@example.com', 'coach3@example.com', 'coach4@example.com','coach5@example.com', 'coach6@example.com','member@example.com'])){
+            if(!in_array($member->email, ['admin@gmail.com', 'manager@gmail.com','coach@gmail.com','coach2@gmail.com', 'coach3@gmail.com', 'coach4@gmail.com','coach5@gmail.com', 'coach6@gmail.com','member@gmail.com'])){
                 $member->assignRole('member');
             }
         }

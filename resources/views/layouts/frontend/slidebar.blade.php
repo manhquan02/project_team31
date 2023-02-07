@@ -165,14 +165,14 @@
         <div class="sidebar-widget">
             <div class="info-wdget">
                 <h4 class="widget-title">Số Điện Thoại</h4>
-                <p> +0989 7876 9865 9 </p>
+                <p> +09772 745 638 </p>
             </div>
         </div>
 
         <div class="sidebar-widget">
             <div class="info-wdget">
                 <h4 class="widget-title">Email Liên Hệ</h4>
-                <p> example.mail@hum.com </p>
+                <p>admin@example.com</p>
             </div>
         </div>
 
