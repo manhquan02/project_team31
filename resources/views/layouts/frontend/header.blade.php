@@ -29,19 +29,19 @@
                             <a href="{{route('post_client.index')}}">Bài Viết</a>
                         </li>
                         <li class="has">
-                            <a href="">Liên Hệ</a>
+                            <a href="{{route('contact_client.view')}}">Liên Hệ</a>
                         </li>
 
                     </ul>
                 </nav>
                 <div class="attr-menu attr-white">
                     <ul>
-                        <li>
+                        {{-- <li>
                             <a href="#" class="open-search"><i class="far fa-search"></i></a>
                         </li>
                         <li>
                             <a href="cart-page.html"><i class="far fa-shopping-bag"></i></a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>

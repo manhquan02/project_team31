@@ -18,7 +18,7 @@ class PackageSeeder extends Seeder
 
         $packages = [
             [
-                'package_name' => 'Gói New',
+                'package_name' => 'Gói Gym Basic Level 1',
                 'subject_id' => 1,
                 'avatar' => 'https://goldsgym.in/uploads/blog/compress-strong-man-training-gym-min.jpg',
                 'price' => 4500000,
@@ -33,7 +33,7 @@ class PackageSeeder extends Seeder
                 'type_package' => 1,
             ],
             [
-                'package_name' => 'Gói Return',
+                'package_name' => 'Gói Gym GainMass Premium',
                 'subject_id' => 1,
                 'avatar' => 'https://www.ihrsa.org/uploads/Articles/Column-Width/industry-news_muscular-bicep-dumbbell-stock_column.jpg',
                 'price' => 3200000,
@@ -48,14 +48,14 @@ class PackageSeeder extends Seeder
                 'type_package' => 1,
             ],
             [
-                'package_name' => 'Gói New But',
+                'package_name' => 'Gói Gym Training',
                 'subject_id' => 1,
                 'avatar' => 'https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2021-12/211208-working-out-stock-mn-1310-55e1c7.jpg',
-                'price' => 1100000,
-                'price_sale' => 100000/1100000*100,
+                'price' => 2000000,
+                'price_sale' => 25,
                 'short_description' => "Gói tập dành cho người cần PT nhưng không có nhiều thời gian tập",
-                'into_price' => 1000000,
-                'total_session_pt' => 4,
+                'into_price' => 1500000,
+                'total_session_pt' => 6,
                 'week_session_pt' =>1,
                 'description' => 'Tập luyện tại CITIGYM để có cơ hội thay đổi ngoại hình một cách ngoạn mục
                 Việc luyện tập đều đặn tại CITIGYM và đúng kỹ thuật, cùng với một chế độ dinh dưỡng hợp lý sẽ giúp cải thiện vóc dáng một cách rõ rệt. Huấn luyện viên của Citigym thiết kế chương trình luyện tập dựa trên chỉ số cơ thể, tình trạng sức khỏe của bạn nhằm giúp bạn thấy rõ sự thay đổi ngoạn mục chỉ trong khoảng trung bình từ 6-8 tuần.',

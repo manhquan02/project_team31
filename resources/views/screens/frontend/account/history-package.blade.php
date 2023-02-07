@@ -18,7 +18,8 @@
             <div class="row g-4">
                 @foreach ($orders as $order)
                     @foreach($order->results as $result)
-                        @if(date('Y-m-d', strtotime($order->date_end))  > date('Y-m-d') && $result->status_package == 0 && $order->status == 1)
+                    {{-- date('Y-m-d', strtotime($order->date_end))  > date('Y-m-d') && --}}
+                        @if(  $result->status_package == 0 && $order->status == 1)
                         <!-- Card item START -->
                         <div class="col-sm-6 col-lg-4 col-xl-3">
                             <div class="card shadow h-100">
@@ -70,7 +71,8 @@
             <div class="row g-4">
                 @foreach ($orders as $order)
                     @foreach($order->results as $result)
-                        @if(date('Y-m-d', strtotime($order->date_end))  <= date('Y-m-d') && $order->status == 1)
+                    {{-- date('Y-m-d', strtotime($order->date_end))  <= date('Y-m-d') && --}}
+                        @if($result->status_package == 1 && $order->status == 1)
                         <!-- Card item START -->
                         <div class="col-sm-6 col-lg-4 col-xl-3">
                             <div class="card shadow h-100">

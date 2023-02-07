@@ -1,5 +1,5 @@
 @extends('layouts.frontend.master')
-@section('title', translate('Contact'))
+@section('title', 'Contact')
 @section('content')
 <main>
         <!--    breadcrumb-area start    -->
@@ -31,8 +31,8 @@
                                 <i class="flaticon-whatsapp"></i>
                             </div>
                             <div class="info-content">
-                                <h4>Contact me</h4>
-                                <span>+012 (345) 6789</span>
+                                <h4>Liên hệ</h4>
+                                <span>0353510247</span>
                             </div>
                         </div>
                     </div>
@@ -42,8 +42,8 @@
                                 <i class="flaticon-email"></i>
                             </div>
                             <div class="info-content">
-                                <h4>Email us</h4>
-                                <span>suport@gmail.com</span>
+                                <h4>Email</h4>
+                                <span>gymt&t@gmail.com</span>
                             </div>
                         </div>
                     </div>
@@ -53,8 +53,8 @@
                                 <i class="flaticon-pin"></i>
                             </div>
                             <div class="info-content">
-                                <h4>Location</h4>
-                                <span>670 New Road, USA</span>
+                                <h4>Đại chỉ</h4>
+                                <span>Cao đẳng FPT Poly</span>
                             </div>
                         </div>
                     </div>
@@ -63,15 +63,12 @@
                     <div class="col-md-6 col-lg-5">
                         <div class="contact-text text-left">
                             <div class="section-title-2 bar-theme-color contact-title">
-                                <h3>Feel Feel Don't Hesitate To Contact With Us Or Email Us</h3>
+                                <h3>Bạn có thể để lại thông tin và liên hệ với chúng tôi</h3>
                             </div>
                             <p>
-                                Sed ut perspiciatis unde omnis iste natus erro sit voluptatem accusantium dolorem datotamc
-                                rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
+                                GYM T&T luôn sẵn lòng phục vụ các bạn
                             </p>
-                            <a href="#" class="read-more">
-                                Get started <i class="fas fa-angle-double-right"></i>
-                            </a>
+                        
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-7">
@@ -80,27 +77,27 @@
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="input-wrap input-icon icon-name">
-                                            <input type="text" placeholder="Full name">
+                                            <input type="text" placeholder="Họ tên">
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="input-wrap input-icon icon-phone">
-                                            <input type="text" placeholder="Phone number">
+                                            <input type="text" placeholder="Số điện thoại">
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                     <div class="input-wrap input-icon icon-email">
-                                            <input type="text" placeholder="Email address">
+                                            <input type="text" placeholder="Email">
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                         <div class="input-wrap input-icon icon-msg">
-                                            <textarea rows="5" placeholder="Write Message" spellcheck="false"></textarea>
+                                            <textarea rows="5" placeholder="Nội dung" spellcheck="false"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                         <button type="submit" class="btn btn-gra">
-                                            Send message <i class="fas fa-angle-double-right"></i>
+                                            Gửi <i class="fas fa-angle-double-right"></i>
                                         </button>
                                     </div>
                                 </div>

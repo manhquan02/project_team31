@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('auto:sendMailSchedule')->everyMinute();
+        $schedule->command('auto:sendMailSchedule')->dailyAt('13:15');;
         // $schedule->command('inspire')->hourly();
     }
 

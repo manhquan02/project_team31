@@ -40,7 +40,7 @@ Route::prefix('coach')->name('training.')->group(function () {
 });
 Route::prefix('contact')->name('contact_client.')->group(function () {
     Route::get('', [\App\Http\Controllers\Client\ContactController::class, 'view'])->name('view');
-    Route::post('', [\App\Http\Controllers\Client\ContactController::class, 'store'])->name('store');
+    // Route::post('', [\App\Http\Controllers\Client\ContactController::class, 'store'])->name('store');
 });
 
 Route::prefix('admin')->middleware(['auth', 'verified', 'role:admin'])->name('admin.')->group(function () {
