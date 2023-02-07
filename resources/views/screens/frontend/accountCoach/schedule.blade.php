@@ -11,26 +11,26 @@
     </div>
 </div>
 <div style="padding-bottom: 0px;" class="card-body">
-    <form>
-        <div class="row">
-          <div class="col mx-sm-3">
-            <label for="">Date start</label>
-            <input type="date" class="form-control" placeholder="First name">
-          </div>
-          <div class="col mx-sm-3">
-            <label for="">Date end</label>
-            <input type="date" class="form-control" placeholder="Last name">
-          </div>
-          <div class="col mx-sm-3">
-            <label for="">Submit</label>
-            <div class="col">
-                <button type="submit" style="background-color: #FF8800" class="btn btn-primary mb-2">Tìm kiếm</button>
-            </div>
-          </div>
-          
+  <form action="" method="GET">
+    <div class="row">
+      <div class="col mx-sm-3">
+        <label for="">Date start</label>
+        <input type="date" name="start_date" class="form-control" placeholder="First name">
+      </div>
+      <div class="col mx-sm-3">
+        <label for="">Date end</label>
+        <input type="date" class="form-control" name="end_date" placeholder="Last name">
+      </div>
+      <div class="col mx-sm-3">
+        <label for="">Submit</label>
+        <div class="col">
+            <button type="submit" style="background-color: #FF8800" class="btn btn-primary mb-2">Tìm kiếm</button>
         </div>
-        
-      </form>
+      </div>
+      
+    </div>
+    
+  </form>
 </div>
 <hr style="background-color: rgb(71, 67, 67); margin-bottom: 0px; margin-top: 10px">
 <div class="card-body">
