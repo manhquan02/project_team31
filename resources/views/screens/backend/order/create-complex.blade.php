@@ -374,7 +374,7 @@
                                         <div class="form-group">
                                             <label>Total money</label>
                                             <div class=" col-lg-4 col-md-9 col-sm-12">
-                                                <strong id="total_money" style="color: red"> 600</strong>
+                                                <strong id="total_money" style="color: red">0</strong>
 
                                             </div>
                                         </div>
@@ -508,12 +508,12 @@ $package_id = {{$package->id}};
                                                                                 </div>`;
 
     
-                    document.querySelector('#total_money').innerHTML = `${data['package'].price}`;
+                    document.querySelector('#total_money').innerHTML = `${data['package'].into_price}`;
                 }
                 if(data['result'] == 0){
                     console.log("bằng 0");
 
-                    document.querySelector('#total_money').innerHTML = `${data['package'].price}`;
+                    document.querySelector('#total_money').innerHTML = `${data['package'].into_price}`;
     
                 }
                 }

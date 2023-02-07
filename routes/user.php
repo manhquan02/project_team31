@@ -114,6 +114,8 @@ Route::prefix('coach/')->name('coach.')->group(function () {
 
 // client 
 
+Route::get('/total-money', [OrderController::class, 'setTotalMoney'])->name('order.setTotalMoneyClient');
+
 Route::prefix('payment/')->name('payment.')->group(function () {
     Route::get('/{id}', [PaymentController::class, 'index'])->name('index');
     Route::post('create/{id}', [PaymentController::class, 'store'])->name('store');

@@ -426,7 +426,7 @@ $package_id = {{$package->id}};
       var discount_code = $('#discount_code').val();
       $.ajax({
           type: 'GET',
-          url: "{{route('admin.order.setTotalMoney')}}",
+          url: "{{route('order.setTotalMoneyClient')}}",
           data:{
                 package_id: $package_id,
                 discount_code: discount_code
@@ -445,6 +445,7 @@ $package_id = {{$package->id}};
               }
             else{
               document.querySelector('#msg_package').innerHTML = `${data['message']}`;
+              document.querySelector('#total_money').innerHTML = `${data['total_money']}`;
             }
         }
     });

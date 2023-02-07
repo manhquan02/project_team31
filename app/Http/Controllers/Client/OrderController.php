@@ -173,7 +173,7 @@ class OrderController extends Controller
                     return back()->with('msg', 'Xin lỗi. Phiếu giảm giá này đã hết hạn'); 
                 }
                 if(in_array($package->id, $discount_packages)){
-                    $order->total_money = $package->into_price*$package->total_session_pt - $package->into_price*$package->total_session_pt*$discount->price_sale/100;
+                    $order->total_money = $package->into_price - $package->into_price*$discount->price_sale/100;
                     // dd($package->price);
                     $order->discount_id = $discount->id;
                     $quantity_discount = $discount->quantity - 1;
