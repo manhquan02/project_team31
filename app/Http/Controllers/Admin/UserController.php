@@ -169,6 +169,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $rule = [
+            'name' => 'required|max:255|min:5',
+            'email' =>'required|email|max:255|unique:users',
+            'gender' => 'required',
+            'address' =>'required',
+            'role' =>'required',
+            'phone' =>'required|integer',
+            'password' => 'required'
+        ];
+        $messages = [
+            'required' => ':attribute không được để chống',
+            'unique' =>':attribute đã tồn tại',
+            'name.max'=>':attribute tối đa 255 kí tự',
+            'name.min'=>':attribute tối thiểu 5 kí tự',
+            'integer' => ':attribute phải là dạng số',
+        ];
+        $request->validate($rule,$messages);
+        
         $user = new User();
         // dd($request->role);
         if ($request->hasFile('avatar')) {
@@ -181,7 +199,7 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = bcrypt('12345678');
+        $user->password = bcrypt($request->password);
         $user->gender = $request->gender;
         $user->phone = $request->phone;
         $user->avatar = 'images/user/' . $file_name;

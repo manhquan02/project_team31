@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Attendance;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CheckBuyPackage
+class CheckAdminBuyPackage
 {
     /**
      * Handle an incoming request.
@@ -18,10 +17,9 @@ class CheckBuyPackage
      */
     public function handle(Request $request, Closure $next)
     {
-        $ex_package = Attendance::where('status',0)->where('user_id', Auth::id())->count();
-        // dd($ex_package);
-        if ($ex_package > 0) {
-            return redirect()->back()->with('msg' ,'Để đảm bảo hiệu quả tốt. Chúng tôi khuyên bạn không nên tập nhiều gói cùng lúc');
+        // dd(Auth::user()->hasRole('admin'));
+        if (Auth::user()->hasRole('admin') == true) {
+            return redirect()->back()->with('msg' ,'Đừng đùa thế chứ. Bạn là Admin mà');
         }
 
         return $next($request);

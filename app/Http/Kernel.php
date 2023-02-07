@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
 
         'checkBuyPackage'=>\App\Http\Middleware\CheckBuyPackage::class,
         'checkRate'=>\App\Http\Middleware\CheckRate::class,
+        'checkAdminBuyPackage' => \App\Http\Middleware\CheckAdminBuyPackage::class,
     ];
 }

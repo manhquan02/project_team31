@@ -45,7 +45,33 @@
 
   <div class="col-md-12 order-md-1">
     <h4 class="mb-3">Hóa đơn gói tập</h4>
-    @include('screens.backend._alert')
+    @if(session('success'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Well done: </strong> {!! session('success') !!}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    @endif
+
+    @if(session('failed'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>Warning: </strong> {!! session('failed') !!}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if($errors->all())
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>Warning: </strong> Vui lòng kiểm tra lại. Lưu ý các trường không được để chống
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if (session('msg'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>Error: </strong> {{ session('msg') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     @if($package->type_package == 1)
     <form action="{{route('order.postOrder', $package->id)}}" method="POST" enctype="multipart/form-data" id="wizard">
       @csrf
@@ -86,8 +112,8 @@
           <div style="width: 100%;" class="form-group">
             <label style="color: black" for="exampleInputEmail1">Ngày kích hoạt</label>
             {{-- <input type="date" name="activate_date" id="activate_date_input"> --}}
-            <input type="date" min="{{date ( 'Y-m-j' , strtotime ( '+1 day' , strtotime ( date('Y-m-d') ) ) )}}"
-              max="{{date ( 'Y-m-j' , strtotime ( '+30 day' , strtotime ( date('Y-m-d') ) ) )}}"
+            <input type="date" min="{{date ( 'Y-m-d' , strtotime ( '+1 day' , strtotime ( date('Y-m-d') ) ) )}}"
+              max="{{date ( 'Y-m-d' , strtotime ( '+30 day' , strtotime ( date('Y-m-d') ) ) )}}"
              name="activate_date" class="form-control activate_date_input" id="activate_date_input">
             <small id="emailHelp" class="form-text text-muted">chọn ngày kích hoạt, chúng tôi sẽ tạo lịch cho bạn.</small>
           </div>

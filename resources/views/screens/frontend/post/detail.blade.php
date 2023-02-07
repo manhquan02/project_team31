@@ -1,15 +1,16 @@
 @extends('layouts.frontend.master')
 @section('content')
 <main>
-	<section class="breadcrumb-area pt-180 pb-180 pt-md-120 pb-md-120 pt-xs-100 pb-xs-100 bg-fix" data-overlay="black" data-opacity="7" data-background="{{asset('frontend/assets/img/bg/breadcrumb-bg-2.jpg')}}">
+<section class="breadcrumb-area pt-180 pb-180 pt-md-120 pb-md-120 pt-xs-100 pb-xs-100 bg-fix" data-overlay="black"
+	         data-opacity="7" data-background="{{asset('frontend/assets/img/bg/breadcrumb-bg-2.jpg')}}">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-8 text-center">
 					<div class="breadcrumb-content">
-						<h3 class="title">Blog Details</h3>
+						<h3 class="title">Trang bài viết</h3>
 						<ul>
-							<li><a href="{{route('home')}}">Home</a></li>
-							<li class="active">Blog Details</li>
+							<li><a href="{{route('home')}}">Trang chủ</a></li>
+							<li class="active">Bài viết</li>
 						</ul>
 					</div>
 				</div>

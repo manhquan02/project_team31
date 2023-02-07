@@ -198,7 +198,16 @@
                             <a class="btn btn-light  btn-sm mr-2" id="change_status">
                                 <i class="ki ki-reload text-warning"></i>
                             </a>
+                        <button  
+                            onclick="javascript:name_edit_role({{ $user }})"             
+                                class="btn btn-light-primary px-6 font-weight-bold"
+    
+                                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                >
+                                <i class="flaticon2-gear text-primary"></i>
+                            </button>
                              @if($user->getRoleNames() == '["coach"]')
+
                             <a href="{{route('admin.user.evaluate', $user->id)}}" title="Đánh giá" class="btn btn-light  btn-sm mr-2">
                             <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Flag.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
