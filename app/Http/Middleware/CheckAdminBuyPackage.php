@@ -21,7 +21,9 @@ class CheckAdminBuyPackage
         if (Auth::user()->hasRole('admin') == true) {
             return redirect()->back()->with('msg' ,'Đừng đùa thế chứ. Bạn là Admin mà');
         }
-
+        if (Auth::user()->hasRole('coach') == true) {
+            return redirect()->back()->with('msg' ,'Đừng đùa thế chứ. Bạn là huấn luyện viên mà');
+        }
         return $next($request);
     }
 }

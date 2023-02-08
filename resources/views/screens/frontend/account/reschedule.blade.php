@@ -22,7 +22,7 @@
         {{-- <h6 class="heading-small text-muted mb-4">Đổi lịch</h6> --}}
         <div class="form-group">
             <h4>Chọn ngày bạn muốn tập bù</h4>
-            <input min="{{date('Y-m-d')}}" name="date" style="margin-bottom: 10px;" onchange="checkTimesCoach(this.value)" type="date" class="form-control" id="check-time" aria-describedby="emailHelp" placeholder="Enter email">
+            <input min="{{strtotime($attendance->order->date_start) > strtotime(date('Y-m-d')) ? date ( 'Y-m-d' , strtotime ( $attendance->order->date_start ) ) : date('Y-m-d')}}" name="date" style="margin-bottom: 10px;" onchange="checkTimesCoach(this.value)" type="date" class="form-control" id="check-time" aria-describedby="emailHelp" placeholder="Enter email">
             @error('date')
                 <span class="text-danger">{{ $message }}</span>    
             @enderror

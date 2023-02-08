@@ -704,7 +704,7 @@ class OrderController extends Controller
         }
         $order->status = 3;
         $order->save();
-        return redirect()->route('admin.order.list')->with('msg','Gửi mail thành công');
+        return redirect()->route('admin.order.list')->with('success','Gửi mail thành công');
         
     }
 }
